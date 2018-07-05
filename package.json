@@ -1,0 +1,24 @@
+{
+  "name": "good-js",
+  "version": "1.0.0",
+  "description": "A library of fixes for the giant mistake that is Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeff-hykin/good-js.git"
+  },
+  "keywords": [
+    "javascript",
+    "toolkit",
+    "library"
+  ],
+  "author": "Jeff Hykin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeff-hykin/good-js/issues"
+  },
+  "homepage": "https://github.com/jeff-hykin/good-js#readme"
+}
