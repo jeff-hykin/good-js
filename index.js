@@ -4,13 +4,13 @@
 // 
 // 
 //  allow "for(let each of a)" when a is an object
-Object.prototype[Symbol.iterator] = function* () 
-    {
-        for (let each of Object.keys(this))
-            {
-                yield this[each]
-            }
-    }
+// Object.prototype[Symbol.iterator] = function* () 
+//     {
+//         for (let each of Object.keys(this))
+//             {
+//                 yield this[each]
+//             }
+//     }
 
 
 
@@ -21,7 +21,7 @@ Object.prototype[Symbol.iterator] = function* ()
 // 
 // 
 module.exports.log          = console.log
-module.exports.valueIs      = function valueIs (typeOrClass, aValue) => {
+module.exports.valueIs      = (typeOrClass, aValue) => {
         // 
         // Check typeOrClass
         // 
@@ -167,7 +167,7 @@ module.exports.valueIs      = function valueIs (typeOrClass, aValue) => {
             console.error("when you call isValue(), I'm not recoginizing the type or class:", typeOrClass)
         }
     }
-module.exports.info         = function info (value) => {
+module.exports.info         = (value) => {
         var valueIsFalsey = value ? true : false
         var valueEquivFalse = value == false
         var valueEquivNull = value == null
@@ -209,23 +209,60 @@ module.exports.info         = function info (value) => {
         }
 
     }
-module.exports.get          = function get (obj,keyList) => 
-    {
-        for(var each of keyList) 
-            {
-                try { obj = obj[each] }
-                catch (e) { return null }
-            }
-        return obj == null ? null : obj
+module.exports.get          = (obj, keyList, failValue = null) => {
+        // convert string values into lists
+        if (typeof keyList == 'string') {
+            keyList = keyList.split('.')
+        }
+        // iterate over nested values
+        for (var each of keyList) {
+            try { obj = obj[each] } catch (e) { return failValue }
+        }
+        // if null or undefined return failValue
+        if (obj == null) {
+            return failValue
+        } else {
+            return obj
+        }
     }
-module.exports.copyFunc     = function copyFunc (someFunction,the_context=this) => (...args) => someFunction.apply(the_context,args)
-module.exports.currentTime  = function currentTime() { return new Date().getTime() }
-module.exports.sleepSyncly  = function sleepSyncly(miliseconds) 
+module.exports.set          = function (obj, attributeList, value) {
+        // convert string values into lists
+        if (typeof attributeList == 'string') {
+            attributeList = attributeList.split('.')
+        }
+        if (attributeList instanceof Array) {
+            try {
+                var lastAttribute = attributeList.pop()
+                for (var elem of attributeList) {
+                    // create each parent if it doesnt exist
+                    if (!(obj[elem] instanceof Object)) {
+                        obj[elem] = {}
+                    }
+                    // change the object reference be the nested element
+                    obj = obj[elem]
+                }
+                obj[lastAttribute] = value
+            } catch (error) {
+                console.warn("the set function was unable to set the value for some reason, here is the original error message",error)
+                console.warn(`the set obj was:`,obj)
+                console.warn(`the set attributeList was:`,attributeList)
+                console.warn(`the set value was:`,value)
+            }
+        } else {
+            console.log(`obj is:`,obj)
+            console.log(`attributeList is:`,attributeList)
+            console.log(`value is:`,value)
+            console.error(`There is a 'set' function somewhere being called and its second argument isn't a string or a list (see values above)`);
+        }
+    }
+module.exports.copyFunc     = (someFunction,the_context=this) => (...args) => someFunction.apply(the_context,args)
+module.exports.currentTime  = function () { return new Date().getTime() }
+module.exports.sleepSyncly  = function (miliseconds)
     {
         var currentTime = new Date().getTime();
         while (currentTime + miliseconds >= new Date().getTime()) {}
     }
-module.exports.sleepAsyncly = function sleepAsyncly(miliseconds)
+module.exports.sleepAsyncly = function (miliseconds)
     {
         return new Promise(resolve => 
             {
@@ -236,7 +273,7 @@ module.exports.sleepAsyncly = function sleepAsyncly(miliseconds)
 // 
 // String manipulation
 // 
-module.exports.findall     function findall(regex_pattern, string_)
+module.exports.findall     = function (regex_pattern, string_)
     {
         var output_list = [];
         while (true) 
@@ -256,11 +293,11 @@ module.exports.findall     function findall(regex_pattern, string_)
             } 
         return output_list;
     }
-module.exports.capitalize  function capitalize(string) 
+module.exports.capitalize  = function (string)
     {
         return string.replace(/\b\w/g, chr=>chr.toUpperCase())
     }
-module.exports.indent      function indent(input,the_indent='    ')
+module.exports.indent      = function (input,the_indent='    ')
     {
         try 
             {
@@ -275,47 +312,4 @@ module.exports.indent      function indent(input,the_indent='    ')
 module.exports.curl = async url=> new Promise(resolve => { 
                 fetch(url).then(res=>res.text()).then(body=>resolve(body))
             })
-module.exports.post = function post({data=null, to=null}) 
-    {
-        return new Promise
-            (
-                function (resolve, reject) 
-                    {
-                        let the_request = new XMLHttpRequest()
-                        the_request.onload = function () 
-                            {
-                                if (this.status >= 200 && this.status < 300) 
-                                    {
-                                        try { var output_ = JSON.parse(the_request.responseText) }
-                                        catch (error) { var output_ = the_request.responseText }
-                                        resolve(output_)
-                                    }
-                                else 
-                                    {
-                                    reject
-                                        (
-                                            {
-                                                status: this.status,
-                                                statusText: the_request.statusText
-                                            }
-                                        )
-                                }
-                            }
-                        the_request.onerror = function () 
-                            {
-                                reject
-                                    (
-                                        {
-                                            status: this.status,
-                                            statusText: the_request.statusText
-                                        }
-                                    )
-                            }
-                        the_request.open("POST", to, true)
-                        the_request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-                        the_request.send(JSON.stringify({data}))
-                    }
-            )
-    }
-
-
+module.exports.post = function ({data=null, to=null}) 
