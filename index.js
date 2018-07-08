@@ -14,7 +14,6 @@
 
 
 
-
 // 
 // 
 // Useful functions
@@ -312,4 +311,32 @@ module.exports.indent      = function (input,the_indent='    ')
 module.exports.curl = async url=> new Promise(resolve => { 
                 fetch(url).then(res=>res.text()).then(body=>resolve(body))
             })
-module.exports.post = function ({data=null, to=null}) 
+module.exports.post= ({data=null, to=null}) => {
+    return new Promise(
+        function (resolve, reject) {
+            let the_request = new XMLHttpRequest()
+            the_request.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    try { var output_ = JSON.parse(the_request.responseText) }
+                    catch (error) { var output_ = the_request.responseText }
+                    resolve(output_)
+                }
+                else {
+                    reject({
+                            status: this.status,
+                            statusText: the_request.statusText
+                        })
+                }
+            }
+            the_request.onerror = function () {
+                reject({
+                        status: this.status,
+                        statusText: the_request.statusText
+                    })
+            }
+            the_request.open("POST", to, true)
+            the_request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+            the_request.send(JSON.stringify(data))
+        }
+        ) // end promise
+    }
