@@ -1,3 +1,129 @@
+// if node/serverside
+if (typeof document == 'undefined')
+    {
+        fetch = require("node-fetch");
+        XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    }
+// if browswer/clientside
+else
+    {
+        module.exports.New = New;
+        var New = _=>document.createElement(_)
+        var valueIsObject   = (aValue)=>aValue instanceof Object && !(aValue instanceof Function) && !(aValue instanceof Array)
+        var valueIsArray    = (aValue)=>aValue instanceof Array
+        var valueIsEmptyish = (aValue)=>
+            {
+                if ((aValue instanceof Array && aValue.length == 0) || aValue === "" || aValue == null) {
+                    return true
+                }
+                else if (aValue instanceof Object) {
+                    return Object.keys(aValue).length == 0
+                }
+                else {
+                    return false
+                }
+            }
+        // 
+        // Create a function for viewing any object
+        // 
+        var objectContainerStyle = {
+            boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)",
+            display: "grid",
+            gridTemplateColumns: "min-content min-content",
+            padding: "5px",
+            marginBottom: "10px",
+            borderRadius: "11px",
+            width: "min-intrinsic",
+        }
+        var normalKeyNameStyle = {
+            padding: "0px 10px",
+            justifySelf: "self-end",
+        }
+        var objectKeyNameStyle = {
+            padding: "0px 10px",
+            fontWeight: "bold",
+            justifySelf: "self-end",
+        }
+        var keyValueStyle = {
+            justifySelf: "flex-start",
+            paddingRight: "5px",
+        }
+        module.exports.objectAsHtml = (object) => 
+            {
+                var container = New("div")
+                container.classList.add("object-container")
+                Object.assign(container.style, objectContainerStyle);
+                if (valueIsObject( object) && !valueIsEmptyish(object)) 
+                    {
+                        var object_names = []
+                        for (var each of Object.keys(object))
+                            {
+                                // check if child is an object or not 
+                                if ((valueIsObject(object[each]) || valueIsArray(object[each])) && !valueIsEmptyish(object[each]))
+                                    {
+                                        object_names.push(each)
+                                    }
+                                // if not an object, go ahead and add it
+                                else
+                                    {
+                                        var key_name = New("div")
+                                        key_name.classList.add("normal-key-name")
+                                        Object.assign(key_name.style, normalKeyNameStyle);
+                                        key_name.innerText = `${each}: `
+                                        container.appendChild(key_name)
+                                        container.appendChild(objectAsHtml(object[each]))
+                                    }
+                            }
+                        // now add all the child-objects to the bottom
+                        for (var each of object_names)
+                            {
+                                var key_name = New("div")
+                                key_name.classList.add("object-key-name")
+                                Object.assign(key_name.style, objectKeyNameStyle);
+                                key_name.innerText = `${each}: `
+                                container.appendChild(key_name)
+                                container.appendChild(objectAsHtml(object[each]))
+                            }
+                        return container
+                    }
+                // if array
+                else if (valueIsArray( object) && !valueIsEmptyish(object))
+                    {
+                        for (var each of object)
+                            {
+                                var key_name = New("div")
+                                key_name.classList.add("normal-key-name")
+                                Object.assign(key_name.style, normalKeyNameStyle);
+                                key_name.innerText = `-`
+                                container.appendChild(key_name)
+                                container.appendChild(objectAsHtml(each))
+                            }
+                        return container
+                    }
+                // if not an object, or if empty
+                else
+                    {
+                        var key_value = New("div")
+                        key_value.classList.add("key-value")
+                        Object.assign(key_value.style, keyValueStyle);
+                        if (valueIsObject(object))
+                            {
+                                key_value.innerText = `{ }`
+                            }
+                        else if (valueIsArray(object))
+                            {
+                                key_value.innerText = `[ ]`
+                            }
+                        else
+                            {
+                                key_value.innerText = `${object}`
+                            }
+                        return key_value
+                    }
+            }
+
+    }
+
 // 
 // 
 // Changes to prototypes
@@ -307,36 +433,74 @@ module.exports.indent      = function (input,the_indent='    ')
     }
 // 
 // network
-// 
-module.exports.curl = async url=> new Promise(resolve => { 
-                fetch(url).then(res=>res.text()).then(body=>resolve(body))
-            })
-module.exports.post= ({data=null, to=null}) => {
-    return new Promise(
-        function (resolve, reject) {
-            let the_request = new XMLHttpRequest()
-            the_request.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    try { var output_ = JSON.parse(the_request.responseText) }
-                    catch (error) { var output_ = the_request.responseText }
-                    resolve(output_)
+//
+module.exports.network = {
+        curl: async url=> new Promise(resolve => fetch(url).then(res=>res.text()).then(body=>resolve(body))),
+        get: async (url)=> new Promise((resolve, reject) =>
+                fetch(url).then(function(response) {
+                        return response.json();
+                    }).then(function(data) {
+                        resolve(data);
+                    }).catch(function() {
+                        reject()
+                    })
+                ),
+        post: ({data=null, to=null}) => new Promise(
+            function (resolve, reject) {
+                let the_request = new XMLHttpRequest()
+                the_request.onload = function () {
+                    if (this.status >= 200 && this.status < 300) {
+                        try { var output_ = JSON.parse(the_request.responseText) }
+                        catch (error) { var output_ = the_request.responseText }
+                        resolve(output_)
+                    }
+                    else {
+                        reject({
+                                status: this.status,
+                                statusText: the_request.statusText
+                            })
+                    }
                 }
-                else {
+                the_request.onerror = function () {
                     reject({
                             status: this.status,
                             statusText: the_request.statusText
                         })
                 }
+                the_request.open("POST", to, true)
+                the_request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+                the_request.send(JSON.stringify(data))
             }
-            the_request.onerror = function () {
-                reject({
-                        status: this.status,
-                        statusText: the_request.statusText
-                    })
+            ) // end promise
+    }
+Object.defineProperty(module.exports, "baseUrl", {
+    get: function baseUrl() {
+        var pathArray = location.href.split( '/' );
+        var protocol = pathArray[0];
+        var host = pathArray[2];
+        var url = protocol + '//' + host;
+        return url
+    }
+});
+
+
+
+// 
+// global init
+//
+module.exports.global = _=> 
+    {
+        for (var each of Object.keys(module.exports)) 
+            {
+                window[each] = module.exports[each]
             }
-            the_request.open("POST", to, true)
-            the_request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-            the_request.send(JSON.stringify(data))
-        }
-        ) // end promise
+        Object.defineProperty(window, "baseUrl", {
+            get: function baseUrl() {
+                var pathArray = location.href.split( '/' );
+                var protocol = pathArray[0];
+                var host = pathArray[2];
+                var url = protocol + '//' + host;
+                return url
+            }
+        });
     }
