@@ -494,13 +494,15 @@ module.exports.global = _=>
             {
                 window[each] = module.exports[each]
             }
-        Object.defineProperty(window, "baseUrl", {
-            get: function baseUrl() {
-                var pathArray = location.href.split( '/' );
-                var protocol = pathArray[0];
-                var host = pathArray[2];
-                var url = protocol + '//' + host;
-                return url
-            }
-        });
+        if (!window.baseUrl) {
+            Object.defineProperty(window, "baseUrl", {
+                get: function baseUrl() {
+                    var pathArray = location.href.split( '/' );
+                    var protocol = pathArray[0];
+                    var host = pathArray[2];
+                    var url = protocol + '//' + host;
+                    return url
+                }
+            });
+        }
     }
