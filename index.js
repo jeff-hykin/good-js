@@ -1,14 +1,10 @@
 // if node/serverside
 if (typeof document == 'undefined')
     {
-        fetch = require("node-fetch");
-        XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     }
 // if browswer/clientside
 else
     {
-        module.exports.New = New;
-        var New = _=>document.createElement(_)
         var valueIsObject   = (aValue)=>aValue instanceof Object && !(aValue instanceof Function) && !(aValue instanceof Array)
         var valueIsArray    = (aValue)=>aValue instanceof Array
         var valueIsEmptyish = (aValue)=>
@@ -394,10 +390,58 @@ module.exports.sleepAsyncly = function (miliseconds)
                 setTimeout(()=>{ resolve(null) }, miliseconds)
             })
     }
-
+module.exports.debounce = (func, wait, immediate) => 
+    {
+        var timeout
+        return () => {
+            const context = this, args = arguments
+            const later = function() 
+                {
+                    timeout = null
+                    if (!immediate) 
+                        {
+                            func.apply(context, args)
+                        }
+                }
+            const callNow = immediate && !timeout
+            clearTimeout(timeout)
+            timeout = setTimeout(later, wait)
+            if (callNow) 
+                {
+                    func.apply(context, args)
+                }
+        }
+    }
+module.exports.recursivelyAllAttributesOf = (obj) => 
+    {
+        // if not an object then add no attributes
+        if (!(obj instanceof Object)) 
+            {
+                return []
+            }
+        // else check all keys for sub-attributes
+        var output = []
+        for (let eachKey of Object.keys(obj)) 
+            {
+                // add the key itself (alone)
+                output.push([eachKey])
+                // add all of its children
+                let newAttributes = recursivelyAllAttributesOf(obj[eachKey])
+                // if nested
+                for (let eachNewAttributeList of newAttributes) 
+                    {
+                        // add the parent key
+                        eachNewAttributeList.unshift(eachKey)
+                        output.push(eachNewAttributeList)
+                    }
+            }
+        return output
+    }
 // 
 // String manipulation
 // 
+module.exports.snakeToCamelCase = (baseName) => (baseName.toLowerCase().replace(/_/," ")).replace(/.\b\w/g, aChar=>aChar.toUpperCase()).replace(" ","")
+module.exports.varnameToTitle = (string) => (string.replace(/_/," ")).replace(/\b\w/g, chr=>chr.toUpperCase())
 module.exports.findall     = function (regex_pattern, string_)
     {
         var output_list = [];
