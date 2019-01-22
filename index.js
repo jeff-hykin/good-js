@@ -426,7 +426,7 @@ module.exports.recursivelyAllAttributesOf = (obj) =>
                 // add the key itself (alone)
                 output.push([eachKey])
                 // add all of its children
-                let newAttributes = recursivelyAllAttributesOf(obj[eachKey])
+                let newAttributes = module.exports.recursivelyAllAttributesOf(obj[eachKey])
                 // if nested
                 for (let eachNewAttributeList of newAttributes) 
                     {
@@ -437,6 +437,29 @@ module.exports.recursivelyAllAttributesOf = (obj) =>
             }
         return output
     }
+module.exports.unevalStringify = (obj) => JSON.stringify(obj, (key,value) => 
+    {
+        if (typeof value == 'string') 
+            {
+                return `'${value}'`
+            } 
+        else if (value instanceof Function || !(value instanceof Object)) 
+            {
+                return value.toString()
+            }
+        return value
+    })
+module.exports.evalParse = (obj) => JSON.parse(obj, (key, value) => 
+    {
+        if (typeof value === 'string') 
+            {
+                return eval(value)
+            } 
+        else 
+            {
+                return value
+            }
+    })
 // 
 // String manipulation
 // 
