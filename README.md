@@ -1,2 +1,2 @@
 # good-js
-A library of fixes for the giant mistake that is Javascript 
+Currently this is a mix of unstandardized tools, come back in a year or two once things are organized.
