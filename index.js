@@ -200,7 +200,7 @@ module.exports.valueIs      = (typeOrClass, aValue) => {
             return typeof aValue == "function"
         }
         // number
-        else if (typeOrClass == "number") {
+        else if (typeOrClass == "number" || typeOrClass == Number) {
             if (aValue !== aValue) {
                 return false
             }
@@ -375,6 +375,26 @@ module.exports.set          = function (obj, attributeList, value) {
             console.log(`value is:`,value)
             console.error(`There is a 'set' function somewhere being called and its second argument isn't a string or a list (see values above)`);
         }
+    }
+module.exports.merge        = (obj, overwritingObj) => {
+        // if its not an object, then it immediately overwrites the value
+        if (!(overwritingObj instanceof Object) || !(obj instanceof Object)) {
+            return overwritingObj
+        }
+        // default value for all keys is the original object
+        let output = {}
+        overwritingObj instanceof Array && (output = [])
+        Object.assign(output, obj)
+        for (const key in overwritingObj) {
+            // if no conflict, then assign as normal
+            if (!(key in output)) {
+                output[key] = overwritingObj[key]
+            // if there is a conflict, then be recursive
+            } else {
+                output[key] = module.exports.merge(obj[key], overwritingObj[key])
+            }
+        }
+        return output
     }
 module.exports.copyFunc     = (someFunction,the_context=this) => (...args) => someFunction.apply(the_context,args)
 module.exports.currentTime  = function () { return new Date().getTime() }
