@@ -142,6 +142,27 @@ else
 // 
 // 
 module.exports.log          = console.log
+/**
+ * Checks value type properly
+ *
+ * @param {Object} typeOrClass - ex: Object, Array, null, "nullish", "number", Number, Boolean, Function
+ * @return {Boolean} the legitmate/intuitive answer
+ *
+ * @example
+ *     valueIs(Number, Nan)                        // false!
+ *     valueIs('nullish', null)                    // true
+ *     valueIs('nullish', Nan)                     // true
+ *     valueIs('nullish', undefined)               // true
+ *     valueIs(null, undefined)                    // false
+ *     valueIs(Object, null)                       // false
+ *     valueIs(Object, ()=>{return "imma func"})   // false
+ *     valueIs(Object, ["I", "am", "an", "array"]) // false
+ *     valueIs(Object, ("string"))                 // false
+ *     valueIs(Object, {blah: 10})                 // true!
+ *     valueIs(Object, new Date())                 // true!
+ *     valueIs(Object, new CustomClass())          // true!
+ *     valueIs(Date, new CustomClass())            // false
+ */
 module.exports.valueIs      = (typeOrClass, aValue) => {
         // 
         // Check typeOrClass
@@ -410,7 +431,7 @@ module.exports.sleepAsyncly = function (miliseconds)
                 setTimeout(()=>{ resolve(null) }, miliseconds)
             })
     }
-module.exports.debounce = (func, wait, immediate) => 
+module.exports.debounce = function (wait, immediate, func) // only calls the function after a period of inactivity
     {
         var timeout
         return () => {
@@ -432,6 +453,60 @@ module.exports.debounce = (func, wait, immediate) =>
                 }
         }
     }
+module.exports.rateLimit = function (coolDown, func) // call the returned func often as you like, it'll only run once per coolDown time
+    {
+        let mostRecentArgs
+        // an analogy
+        let triggerWasPulledButNotReleased = false
+        let barrelTooHot = false
+        let shoot
+        shoot = () => {
+            // run the function
+            func.apply(this, mostRecentArgs)
+            // meaning trigger was just released
+            triggerWasPulledButNotReleased = false
+            // barrel is now hot
+            barrelTooHot = true
+            // barrel will cool down though
+            setTimeout(() => {
+                // if trigger was pulled in the meantime
+                if (triggerWasPulledButNotReleased) {
+                    // then shoot again (which will cause a recursive settimeout)
+                    shoot()
+                // if the trigger wasn't pulled
+                } else {
+                    // the the barrel has successfully cooled off
+                    barrelTooHot = false
+                }
+            }, coolDown)
+        }
+        let pullTrigger = (...args) => {
+            mostRecentArgs = args
+            if (barrelTooHot) {
+                // tell the shooter to que a shot (function execution)
+                triggerWasPulledButNotReleased = true
+            // if its not too hot then just shoot immediately!
+            } else {
+                shoot()
+            }
+        }
+        return pullTrigger
+    }
+
+/**
+ * Deep iterate objects
+ *
+ * @param {Object} obj - Any object
+ * @return {Array} A good string
+ *
+ * @example
+ *
+ *     recursivelyAllAttributesOf({ a: { b: 1} })
+ *     >>> [
+ *         [ 'a', ],
+ *         [ 'a', 'b' ],
+ *     ]
+ */
 module.exports.recursivelyAllAttributesOf = (obj) => 
     {
         // if not an object then add no attributes
