@@ -492,7 +492,7 @@ module.exports.get          = (obj, keyList=undefined, failValue=null) => {
  * Forcefully set nested values
  *
  * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
- * @param {string[]} obj.to - what the new value should be
+ * @param {any} obj.to - what the new value should be
  * @param {any} obj.on - what object/value you're modifying
  * @return {Object} - the object given (object is still mutated)
  * @error
@@ -561,7 +561,7 @@ module.exports.set          = function (obj, keyList=undefined, value=undefined)
  *
  * @param {any} obj.from - what object/value you're extracting from
  * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
- * @return {null}
+ * @return {undefined}
  *
  * @example
  *     let obj = { key1: {} }
