@@ -439,7 +439,7 @@ module.exports.info         = (value) => {
  *
  * @param {any} obj.from - what object/value you're extracting from
  * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
- * @param {string[]} obj.failValue - what to return in the event of an error
+ * @param {any} obj.failValue - what to return in the event of an error
  * @return {any} either the failValue or the actual value
  *
  * @example
