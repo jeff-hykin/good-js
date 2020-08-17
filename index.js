@@ -463,7 +463,7 @@ module.exports.get          = (obj, keyList=undefined, failValue=null) => {
         // process args
         let from
         if (keyList == undefined) {
-            { from, keyList, failValue } = obj
+            ({ from, keyList, failValue } = obj)
             obj = from
         }
         // convert string values into lists
