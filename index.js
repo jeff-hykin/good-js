@@ -143,7 +143,36 @@ else
 // 
 module.exports.log          = console.log
 /**
- * Checks value type properly
+ * Checks type according to English
+ *
+ * @param {Object} args.value - any possible value 
+ * @param {Object} args.is - a class or string-description Object, Array, null, "nullish", "number", Number, Boolean, Function
+ * @return {Boolean} the legitmate/intuitive answer
+ * 
+ * @note
+ *     Object means can-be-a JSON-object
+ * 
+ * @example
+ *     checkIf({value: undefined , is: null     }) // false
+ *     checkIf({value: undefined , is: 'nullish'}) // true
+ *     checkIf({value: null      , is: 'nullish'}) // true
+ *     checkIf({value: Nan       , is: 'nullish'}) // true
+ *     checkIf({value: null      , is: Object   }) // false
+ *     checkIf({value: Nan       , is: Nan      }) // true!
+ *     checkIf({value: Nan       , is: Number   }) // false!
+ *     checkIf({value: ("string"), is: Object   }) // false
+ *     checkIf({value: {blah: 10}, is: Object   }) // true!
+ *     checkIf({value: new Date(), is: Object   }) // false!
+ *     checkIf({value: new CustomClass()         , is: Object}) // true!
+ *     checkIf({value: ()=>{return "imma func"}  , is: Object}) // false
+ *     checkIf({value: ["I", "am", "an", "array"], is: Object}) // false
+ *     checkIf({value: new CustomClass()         , is: Date})   // false
+ */
+module.exports.checkIf = ({ value, is }) => {
+    return module.exports.valueIs(is, value)
+}
+/**
+ * Checks type properly
  *
  * @param {Object} typeOrClass - ex: Object, Array, null, "nullish", "number", Number, Boolean, Function
  * @return {Boolean} the legitmate/intuitive answer
@@ -159,7 +188,7 @@ module.exports.log          = console.log
  *     valueIs(Object, ["I", "am", "an", "array"]) // false
  *     valueIs(Object, ("string"))                 // false
  *     valueIs(Object, {blah: 10})                 // true!
- *     valueIs(Object, new Date())                 // true!
+ *     valueIs(Object, new Date())                 // false!
  *     valueIs(Object, new CustomClass())          // true!
  *     valueIs(Date, new CustomClass())            // false
  */
@@ -182,7 +211,23 @@ module.exports.valueIs      = (typeOrClass, aValue) => {
         //
         // object (non-null, non-function, non-array)
         if (typeOrClass === "object") {
-            return aValue instanceof Object && !(aValue instanceof Function) && !(aValue instanceof Array)
+            if (!(aValue instanceof Object)) {
+                return false
+            } else if (aValue instanceof Array || aValue instanceof Function || aValue instanceof Date) {
+                return false
+            // check if its stringified+parsed form is also an object 
+            // (this is to remove things like BigInt and BigInt64Array and other built-in pseudo-primitives)
+            } else {
+                let stringified = JSON.stringify(aValue)
+                // note that this is not == '"undefined"'
+                if (stringified === 'undefined') {
+                    return false
+                } else if (JSON.parse(stringified) instanceof Object) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         }
         // undefined
         else if (typeof typeOrClass === 'undefined' || typeOrClass == 'undefined') {
@@ -309,6 +354,44 @@ module.exports.valueIs      = (typeOrClass, aValue) => {
             console.error("when you call isValue(), I'm not recoginizing the type or class:", typeOrClass)
         }
     }
+
+//
+/**
+ * Indent logging lines
+ *
+ * @param {string} args.name - name to be printed at the start/end of block
+ * @param {Object} args.context - the context (e.g. this) to be given to the block
+ * @return {Boolean} the output is a
+ *
+ * @example
+ *     debugBlock({name: "call API"}, ()=>{
+ *         api.call('thing')
+ *     })
+ */
+module.exports.logBlock   = ({name, context}, codeBlock,) => {
+    if (!name) {
+        console.group()
+    } else {
+        console.group(`[starting: ${name}]`)
+    }
+    if (context) {
+        codeBlock.apply(context, [])
+    } else {
+        codeBlock()
+    }
+    console.groupEnd()
+    if (name) {
+        console.log(`[finished: ${name}]`)
+    }
+}
+/**
+ * Print tons of info about a value
+ *
+ * @param {Object} value - any possible value
+ *
+ * @example
+ *     info(anUnknownThing)
+ */
 module.exports.info         = (value) => {
         var valueIsFalsey = value ? true : false
         var valueEquivFalse = value == false
@@ -417,7 +500,7 @@ module.exports.merge        = (obj, overwritingObj) => {
         }
         return output
     }
-module.exports.copyFunc     = (someFunction,the_context=this) => (...args) => someFunction.apply(the_context,args)
+module.exports.copyFunc     = (someFunction,theContext=this) => (...args) => someFunction.apply(theContext,args)
 module.exports.currentTime  = function () { return new Date().getTime() }
 module.exports.sleepSyncly  = function (miliseconds)
     {
@@ -497,7 +580,7 @@ module.exports.rateLimit = function (coolDown, func) // call the returned func o
  * Deep iterate objects
  *
  * @param {Object} obj - Any object
- * @return {Array} A good string
+ * @return {string[][]} lists of key-lists
  *
  * @example
  *
@@ -560,7 +643,7 @@ module.exports.evalParse = (obj) => JSON.parse(obj, (key, value) =>
 // 
 module.exports.snakeToCamelCase = (baseName) => (baseName.toLowerCase().replace(/_/," ")).replace(/.\b\w/g, aChar=>aChar.toUpperCase()).replace(" ","")
 module.exports.varnameToTitle = (string) => (string.replace(/_/," ")).replace(/\b\w/g, chr=>chr.toUpperCase())
-module.exports.findall     = function (regex_pattern, string_)
+module.exports.findAll     = function (regex_pattern, string_)
     {
         var output_list = [];
         while (true) 
