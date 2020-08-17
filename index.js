@@ -156,10 +156,10 @@ module.exports.log          = console.log
  *     checkIf({value: undefined , is: null     }) // false
  *     checkIf({value: undefined , is: 'nullish'}) // true
  *     checkIf({value: null      , is: 'nullish'}) // true
- *     checkIf({value: Nan       , is: 'nullish'}) // true
+ *     checkIf({value: NaN       , is: 'nullish'}) // true
  *     checkIf({value: null      , is: Object   }) // false
- *     checkIf({value: Nan       , is: Nan      }) // true!
- *     checkIf({value: Nan       , is: Number   }) // false!
+ *     checkIf({value: NaN       , is: NaN      }) // true!
+ *     checkIf({value: NaN       , is: Number   }) // false!
  *     checkIf({value: ("string"), is: Object   }) // false
  *     checkIf({value: {blah: 10}, is: Object   }) // true!
  *     checkIf({value: new Date(), is: Object   }) // false!
@@ -178,9 +178,9 @@ module.exports.checkIf = ({ value, is }) => {
  * @return {Boolean} the legitmate/intuitive answer
  *
  * @example
- *     valueIs(Number, Nan)                        // false!
+ *     valueIs(Number, NaN)                        // false!
  *     valueIs('nullish', null)                    // true
- *     valueIs('nullish', Nan)                     // true
+ *     valueIs('nullish', NaN)                     // true
  *     valueIs('nullish', undefined)               // true
  *     valueIs(null, undefined)                    // false
  *     valueIs(Object, null)                       // false
