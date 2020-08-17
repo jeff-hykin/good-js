@@ -434,21 +434,59 @@ module.exports.info         = (value) => {
         }
 
     }
-module.exports.get          = (obj, keyList, failValue = null) => {
+/**
+ * Safely get nested values
+ *
+ * @param {any} obj.from - what object/value you're extracting from
+ * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
+ * @param {string[]} obj.failValue - what to return in the event of an error
+ * @return {any} either the failValue or the actual value
+ *
+ * @example
+ *     let obj = { key1: {} }
+ *     // equivlent to obj.key1.subKey.subSubKey
+ *     get({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         from: obj,
+ *     })
+ *     get({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         from: null,
+ *     })
+ *     get({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         from: null,
+ *         failValue: 0
+ *     })
+ */
+module.exports.get          = (obj, keyList=undefined, failValue=null) => {
+        // process args
+        let from
+        if (keyList == undefined) {
+            { from, keyList, failValue } = obj
+            obj = from
+        }
         // convert string values into lists
         if (typeof keyList == 'string') {
-            keyList = keyList.split('.')
+            if (keyList.length == 0) {
+                keyList = []
+            } else {
+                keyList = keyList.split('.')
+            }
         }
         // iterate over nested values
-        for (var each of keyList) {
-            try { obj = obj[each] } catch (e) { return failValue }
-        }
-        // if null or undefined return failValue
-        if (obj == null) {
+        try {
+            for (var each of keyList) {
+                if (obj instanceof Object && (each in obj)) {
+                    obj = obj[each]
+                } else {
+                    return failValue
+                }
+            }
+        } catch (error) {
             return failValue
-        } else {
-            return obj
         }
+        return obj
     }
 module.exports.set          = function (obj, attributeList, value) {
         // convert string values into lists
