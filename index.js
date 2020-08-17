@@ -488,15 +488,52 @@ module.exports.get          = (obj, keyList=undefined, failValue=null) => {
         }
         return obj
     }
-module.exports.set          = function (obj, attributeList, value) {
-        // convert string values into lists
-        if (typeof attributeList == 'string') {
-            attributeList = attributeList.split('.')
+/**
+ * Forcefully set nested values
+ *
+ * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
+ * @param {string[]} obj.to - what the new value should be
+ * @param {any} obj.on - what object/value you're modifying
+ * @return {Object} - the object given (object is still mutated)
+ * @error
+ * only if the argument is not an object
+ * 
+ * @example
+ *     let obj = { key1: {} }
+ *     // equivlent to obj.key1.subKey.subSubKey
+ *     set({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         to: 10,
+ *         on: obj,
+ *     })
+ *     set({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         to: 10,
+ *         on: obj,
+ *     })
+ */
+module.exports.set          = function (obj, keyList=undefined, value=undefined) {
+        // process args
+        let on
+        if (keyList == undefined) {
+            ({ on, keyList, to } = obj)
+            obj = on
+            value = to
         }
-        if (attributeList instanceof Array) {
+
+        // convert string values into lists
+        if (typeof keyList == 'string') {
+            if (keyList.length == 0) {
+                keyList = []
+            } else {
+                keyList = keyList.split('.')
+            }
+        }
+        
+        if (keyList instanceof Array) {
             try {
-                var lastAttribute = attributeList.pop()
-                for (var elem of attributeList) {
+                var lastAttribute = keyList.pop()
+                for (var elem of keyList) {
                     // create each parent if it doesnt exist
                     if (!(obj[elem] instanceof Object)) {
                         obj[elem] = {}
@@ -508,15 +545,16 @@ module.exports.set          = function (obj, attributeList, value) {
             } catch (error) {
                 console.warn("the set function was unable to set the value for some reason, here is the original error message",error)
                 console.warn(`the set obj was:`,obj)
-                console.warn(`the set attributeList was:`,attributeList)
+                console.warn(`the set keyList was:`,keyList)
                 console.warn(`the set value was:`,value)
             }
         } else {
             console.log(`obj is:`,obj)
-            console.log(`attributeList is:`,attributeList)
+            console.log(`keyList is:`,keyList)
             console.log(`value is:`,value)
             console.error(`There is a 'set' function somewhere being called and its second argument isn't a string or a list (see values above)`);
         }
+        return obj
     }
 module.exports.merge        = (obj, overwritingObj) => {
         // if its not an object, then it immediately overwrites the value
