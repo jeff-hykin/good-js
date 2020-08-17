@@ -556,6 +556,44 @@ module.exports.set          = function (obj, keyList=undefined, value=undefined)
         }
         return obj
     }
+/**
+ * Safely delete nested values
+ *
+ * @param {any} obj.from - what object/value you're extracting from
+ * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
+ * @return {null}
+ *
+ * @example
+ *     let obj = { key1: {} }
+ *     // equivlent to obj.key1.subKey.subSubKey
+ *     delete({
+ *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
+ *         from: obj,
+ *     })
+ */
+module.exports.delete       = function ({ keyList, from }) {
+        // convert string values into lists
+        if (typeof keyList == 'string') {
+            if (keyList.length == 0) {
+                keyList = []
+            } else {
+                keyList = keyList.split('.')
+            }
+        }
+
+        if (keyList.length == 1) {
+            try {
+                delete from[keyList[0]]
+            } catch (error) {
+                return false
+            }
+        } else if (keyList.length > 1) {
+            keyList = [...keyList]
+            let last = keyList.pop()
+            let parentObj = module.exports.get({keyList, from})
+            return module.exports.delete({ keyList: [last], from: parentObj })
+        }
+    }
 module.exports.merge        = (obj, overwritingObj) => {
         // if its not an object, then it immediately overwrites the value
         if (!(overwritingObj instanceof Object) || !(obj instanceof Object)) {
@@ -827,3 +865,9 @@ module.exports.global = _=>
             });
         }
     }
+
+
+let thing = {}
+
+let b = module.exports.delete({ keyList: ["blah"], from: thing })
+console.log(`b is:`,b)
