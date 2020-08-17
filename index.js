@@ -865,9 +865,3 @@ module.exports.global = _=>
             });
         }
     }
-
-
-let thing = {}
-
-let b = module.exports.delete({ keyList: ["blah"], from: thing })
-console.log(`b is:`,b)
