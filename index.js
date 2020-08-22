@@ -374,15 +374,17 @@ module.exports.logBlock   = ({name, context}, codeBlock,) => {
     } else {
         console.group(`[starting: ${name}]`)
     }
+    let output
     if (context) {
-        codeBlock.apply(context, [])
+        output = codeBlock.apply(context, [])
     } else {
-        codeBlock()
+        output = codeBlock()
     }
     console.groupEnd()
     if (name) {
         console.log(`[finished: ${name}]`)
     }
+    return output
 }
 /**
  * Print tons of info about a value
