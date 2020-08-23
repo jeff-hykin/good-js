@@ -596,6 +596,32 @@ module.exports.delete       = function ({ keyList, from }) {
             return module.exports.delete({ keyList: [last], from: parentObj })
         }
     }
+/**
+ * Function to sort alphabetically an array of objects by some specific key.
+ * 
+ * @param {String} property Key of the object to sort.
+ */
+module.exports.dynamicSort        = function (property, reverse=false) {
+    if (reverse) {
+        return (b,a) => {
+            let type = typeof a
+            if (type == 'number') {
+                return b[property] - a[property]
+            } else if (type == 'string') {
+                return b[property].localeCompare(a[property])
+            }
+        }
+    } else {
+        return (a,b) => {
+            let type = typeof a
+            if (type == 'number') {
+                return b[property] - a[property]
+            } else if (type == 'string') {
+                return b[property].localeCompare(a[property])
+            }
+        }
+    }
+}
 module.exports.merge        = (obj, overwritingObj) => {
         // if its not an object, then it immediately overwrites the value
         if (!(overwritingObj instanceof Object) || !(obj instanceof Object)) {
