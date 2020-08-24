@@ -433,8 +433,20 @@ module.exports.info         = (value) => {
                 }
 
             }
-        }
+            console.log(`     Object.getOwnPropertySymbols`)
+            for (var each of Object.getOwnPropertySymbols(value)) {
+                try {
+                    if (value != null && each != null) {
+                        var descriptor = Object.getOwnPropertyDescriptor(value, each)
+                        console.log(`        `, each, descriptor)
+                    }
+                }
+                catch (e) {
 
+                }
+
+            }
+        }
     }
 /**
  * Safely get nested values
@@ -599,12 +611,37 @@ module.exports.delete       = function ({ keyList, from }) {
 /**
  * Function to sort alphabetically an array of objects by some specific key.
  * 
- * @param {String} property Key of the object to sort.
+ * @param {String|Symbol|string[]} property Key of the object to sort.
  */
 module.exports.dynamicSort        = function (property, reverse=false) {
+    if (property instanceof Array) {
+        if (reverse) {
+            return (a,b) => {
+                let aValue = module.exports.get(a,property,-Infinity)
+                let bValue = module.exports.get(b,property,-Infinity)
+                let type = typeof bValue
+                if (type == 'number') {
+                    return bValue - aValue
+                } else if (type == 'string') {
+                    return bValue.localeCompare(aValue)
+                }
+            }
+        } else {
+            return (b,a) => {
+                let aValue = module.exports.get(a,property,-Infinity)
+                let bValue = module.exports.get(b,property,-Infinity)
+                let type = typeof bValue
+                if (type == 'number') {
+                    return bValue - aValue
+                } else if (type == 'string') {
+                    return bValue.localeCompare(aValue)
+                }
+            }
+        }
+    }
     if (reverse) {
-        return (b,a) => {
-            let type = typeof a
+        return (a,b) => {
+            let type = typeof a[property]
             if (type == 'number') {
                 return b[property] - a[property]
             } else if (type == 'string') {
@@ -612,8 +649,8 @@ module.exports.dynamicSort        = function (property, reverse=false) {
             }
         }
     } else {
-        return (a,b) => {
-            let type = typeof a
+        return (b,a) => {
+            let type = typeof a[property]
             if (type == 'number') {
                 return b[property] - a[property]
             } else if (type == 'string') {
