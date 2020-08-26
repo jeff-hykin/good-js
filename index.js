@@ -172,6 +172,44 @@ module.exports.checkIf = ({ value, is }) => {
     return module.exports.valueIs(is, value)
 }
 /**
+ * Throws error if type requirement isn't met
+ *
+ * @param {Object} args.value - any possible value 
+ * @param {Object} args.is - a class or string-description Object, Array, null, "nullish", "number", Number, Boolean, Function
+ * @param {Object} args.failMessage - a string to be added to the top of the error message
+ * 
+ * 
+ * @example
+ * // see checkIf() for more argument examples
+ * requireThat({
+ *     value: arg1.size,
+ *     is: Number,
+ *     failMessage: "The size of the first argument needs to be a number"
+ * })
+ */
+module.exports.requireThat({ value, is, failMessage }={}) => {
+    if (!module.exports.checkIf({ value, is})) {
+        let requiredType = (is instanceof Object) ? is.prototype.constructor.name : is
+        // 
+        // figure out the real type of the object
+        // 
+        let actualType
+        if (value instanceof Object) {
+            actualType = value.constructor.prototype.constructor.name
+        } else {
+            if (value !== value) {
+                actualType = "NaN"
+            } else if (value === null) {
+                actualType = "null"
+            } else {
+                actualType = typeof value
+            }
+        }
+        failMessage = failMessage ? `Error Message: ${failMessage}` : ""
+        throw Error(`Failed to pass a type check created by requireThat()\n    the value is considered to be: ${actualType}\n    which fails to meet the requirement of: ${requiredType}\n    the failing value is: ${value}\n\n${failMessage}`)
+    }
+}
+/**
  * Checks type properly
  *
  * @param {Object} typeOrClass - ex: Object, Array, null, "nullish", "number", Number, Boolean, Function
