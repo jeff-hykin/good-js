@@ -187,7 +187,7 @@ module.exports.checkIf = ({ value, is }) => {
  *     failMessage: "The size of the first argument needs to be a number"
  * })
  */
-module.exports.requireThat({ value, is, failMessage }={}) => {
+module.exports.requireThat = ({ value, is, failMessage }={}) => {
     if (!module.exports.checkIf({ value, is})) {
         let requiredType = (is instanceof Object) ? is.prototype.constructor.name : is
         // 
