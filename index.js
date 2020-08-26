@@ -177,6 +177,7 @@ module.exports.checkIf = ({ value, is }) => {
  * @param {Object} args.value - any possible value 
  * @param {Object} args.is - a class or string-description Object, Array, null, "nullish", "number", Number, Boolean, Function
  * @param {Object} args.failMessage - a string to be added to the top of the error message
+ * @return {undefined}
  * 
  * 
  * @example
