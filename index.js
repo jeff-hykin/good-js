@@ -176,7 +176,7 @@ module.exports.checkIf = ({ value, is }) => {
  *
  * @param {Object} args.value - any possible value 
  * @param {Object} args.is - a class or string-description Object, Array, null, "nullish", "number", Number, Boolean, Function
- * @param {Object} args.failMessage - a string to be added to the top of the error message
+ * @param {string} args.failMessage - a string to be added to the top of the error message
  * @return {undefined}
  * 
  * 
@@ -419,11 +419,22 @@ module.exports.logBlock   = ({name, context}, codeBlock,) => {
     } else {
         output = codeBlock()
     }
-    console.groupEnd()
-    if (name) {
-        console.log(`[finished: ${name}]`)
+    if (output instanceof Promise) {
+        return new Promise(async (resolve, reject)=>{
+            let awaitedOutput = await output
+            console.groupEnd()
+            if (name) {
+                console.log(`[finished: ${name}]`)
+            }
+            resolve(awaitedOutput)
+        })
+    } else {
+        console.groupEnd()
+        if (name) {
+            console.log(`[finished: ${name}]`)
+        }
+        return output
     }
-    return output
 }
 /**
  * Print tons of info about a value
