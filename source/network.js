@@ -1,3 +1,7 @@
+if (typeof document == 'undefined') {
+    var fetch = require("node-fetch")
+}
+
 module.exports = {
     curl(url) {
         return new Promise((resolve) =>
@@ -6,7 +10,7 @@ module.exports = {
                 .then((body) => resolve(body))
         )
     },
-    get(url) {
+    getJson(url) {
         return new Promise((resolve, reject) =>
             fetch(url)
                 .then(function (response) {
@@ -20,7 +24,7 @@ module.exports = {
                 })
         )
     },
-    post({ data = null, to = null }) {
+    postJson({ data = null, to = null }) {
         return new Promise((resolve, reject) => {
             let theRequest = new XMLHttpRequest()
             theRequest.onload = function () {
