@@ -21,38 +21,19 @@ module.exports = {
                 .then(function (data) {
                     resolve(data)
                 })
-                .catch(function () {
-                    reject()
+                .catch(function (err) {
+                    reject(err)
                 })
         )
     },
-    postJson({ data = null, to = null }) {
-        return new Promise((resolve, reject) => {
-            let theRequest = new XMLHttpRequest()
-            theRequest.onload = function () {
-                if (this.status >= 200 && this.status < 300) {
-                    try {
-                        var output = JSON.parse(theRequest.responseText)
-                    } catch (error) {
-                        var output = theRequest.responseText
-                    }
-                    resolve(output)
-                } else {
-                    reject({
-                        status: this.status,
-                        statusText: theRequest.statusText,
-                    })
-                }
-            }
-            theRequest.onerror = function () {
-                reject({
-                    status: this.status,
-                    statusText: theRequest.statusText,
-                })
-            }
-            theRequest.open("POST", to, true)
-            theRequest.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
-            theRequest.send(JSON.stringify(data))
-        })
+    async postJson({ data = null, to = null }) {
+        return (await fetch(to, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })).json()
     },
 }
