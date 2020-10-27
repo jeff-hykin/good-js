@@ -1,5 +1,7 @@
+// use libs since node doesn't have fetch or XMLHttpRequest
 if (typeof document == 'undefined') {
     var fetch = require("node-fetch")
+    var XMLHttpRequest = require("xmlhttprequest")
 }
 
 module.exports = {
