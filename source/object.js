@@ -64,6 +64,7 @@ module.exports = {
      *     })
      */
     set({ keyList, on, to }) {
+        let originalKeyList = keyList
         try {
             keyList = [...keyList]
             let lastAttribute = keyList.pop()
@@ -75,9 +76,9 @@ module.exports = {
                 // change the object reference be the nested element
                 on = on[key]
             }
-            on[lastAttribute] = value
+            on[lastAttribute] = to
         } catch (error) {
-            throw new Error(`\nthe set function was unable to set the value for some reason\n    the set obj was: ${JSON.stringify(on)}\n    the keyList was: ${JSON.stringify(keyList)}\n    the value was: ${JSON.stringify(to)}\nthe original error message was:\n\n`, error)
+            throw new Error(`\nthe set function was unable to set the value for some reason\n    the set obj was: ${JSON.stringify(on)}\n    the keyList was: ${JSON.stringify(originalKeyList)}\n    the value was: ${JSON.stringify(to)}\nthe original error message was:\n\n`, error)
         }
         return on
     },
