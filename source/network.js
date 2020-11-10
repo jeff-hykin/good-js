@@ -1,7 +1,6 @@
-// use libs since node doesn't have fetch or XMLHttpRequest
+// use libs since node doesn't have fetch
 if (typeof document == 'undefined') {
     var fetch = require("node-fetch")
-    var XMLHttpRequest = require("xmlhttprequest")
 }
 
 module.exports = {
@@ -21,8 +20,8 @@ module.exports = {
                 .then(function (data) {
                     resolve(data)
                 })
-                .catch(function (err) {
-                    reject(err)
+                .catch(function () {
+                    reject()
                 })
         )
     },
