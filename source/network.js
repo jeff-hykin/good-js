@@ -1,6 +1,6 @@
 // use libs since node doesn't have fetch
 if (typeof document == 'undefined') {
-    var fetch = require("node-fetch")
+    fetch = require("node-fetch")
 }
 
 module.exports = {
