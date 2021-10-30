@@ -45,13 +45,12 @@ function walkObject(obj) {
 }
 
 function camelCase(str) {
-    return str.replace(
-        // capatalize almost all chars
-        /[ _.-](\w|$)/g, (everything, group1) => group1.toUpperCase()
-    ).replace(
-        // make first one(s) lowercase
-        /\b\w/g, (group1) => group1.toLowerCase()
-    )
+    const addedSeperator = str.replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/[^a-zA-Z0-9 _.-]/,"_").toLowerCase()
+    const words = addedSeperator.split(/[ _.-]+/g)
+    const capatalizedWords = words.map(each=>each.replace(/^\w/, (group0)=>group0.toUpperCase()))
+    // make the first one lowercase
+    capatalizedWords[0] = capatalizedWords[0].toLowerCase()
+    return capatalizedWords.join('')
 }
 
 const isArray =
