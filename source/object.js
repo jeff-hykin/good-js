@@ -64,8 +64,8 @@ const isIntendedSelfReferenceableContainer = (item) => (
     && !(item instanceof Error)
     && primitiveArrayClasses.includes(item)
 )
-const numberToSelfReferenceSymbol = new DefaultMap(()=>new Symbol())
-const numberToArrayIndexSymbol = new DefaultMap(()=>new Symbol())
+const numberToSelfReferenceSymbol = new DefaultMap(()=>Symbol())
+const numberToArrayIndexSymbol = new DefaultMap(()=>Symbol())
 const theEmptyList = Object.freeze([])
 const theEmptyObject = Object.freeze({})
 
@@ -88,7 +88,7 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
         const classOfObject = Object.getPrototypeOf(item)
         // get the map corrisponding to the class
         const classSpecificHashToKeyValue = keyifyStore.objectLookup.get(classOfObject)
-
+        
         // RegExp and Date are basically treated like primitives
         if (item instanceof RegExp || item instanceof Date) {
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
@@ -105,7 +105,8 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
             return classSpecificHashToKeyValue.weaklySet(hash, [ Symbol(), item ])
         // Array (the main challenge)
-        } else if (classOfObject === Array) {
+        } else if (item.constructor === Array) {
+
             // basecase, length 0
             if (item.length == 0) {
                 return [ Symbol.for("[]"), theEmptyList ]
@@ -155,7 +156,7 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
             while (symbols.length) {
                 const endElement = symbols.pop()
                 if (symbols.length == 0) {
-                    // if we've never seen this array before, then create a new symbol for it
+                    // if we've never seen this array before, then create a symbol for it
                     if (!(endElement in table)) {
                         table[endElement] = Symbol()
                     }
@@ -200,8 +201,8 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
     }
 }
 
-var [_, a] = keyValueify(new Date("2/2/2022"))
-var [_, b] = keyValueify(new Date("2/2/2022"))
+var [_, a] = keyValueify([1])
+var [_, b] = keyValueify([1])
 console.debug(`a is:`,a)
 console.debug(`b is:`,b)
 console.debug(`a == b is:`,a == b)
