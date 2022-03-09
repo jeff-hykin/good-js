@@ -160,8 +160,8 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
                     if (!(endElement in table)) {
                         table[endElement] = Symbol()
                     }
-                    const key = table[endElement]
-                    return [ key, item ]
+                    const keyAsHash = table[endElement]
+                    return classSpecificHashToKeyValue.weaklySet(keyAsHash, [ Symbol(), item ])
                 }
                 // drill down into a value-specific table until we hit the last element
                 if (!(endElement in table)) {
@@ -201,8 +201,8 @@ function keyValueify(item, itemToSelfReferenceSymbol=(new Map())) {
     }
 }
 
-var [_, a] = keyValueify([1])
-var [_, b] = keyValueify([1])
+var [_, a] = keyValueify([1,2])
+var [_, b] = keyValueify([1,2])
 console.debug(`a is:`,a)
 console.debug(`b is:`,b)
 console.debug(`a == b is:`,a == b)
