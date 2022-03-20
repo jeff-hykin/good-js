@@ -12,7 +12,7 @@ export const toRepresentation = (item)=>{
                 case '\r': return '\\r'
                 case '\\': return '\\\\'
             }
-        })}`
+        })}"`
     }
     if (item instanceof Array) {
         return `[${item.map(each=>toRepresentation(each)).join(",")}]`
