@@ -1,0 +1,20 @@
+aDate.day: 31
+aDate.month: 12
+aDate.year: 1999
+aDate.date: 12/31/1999
+aDate.millisecond: 500
+aDate.second: 20
+aDate.minute: 30
+aDate.amPm: am
+aDate.hour12: 1
+aDate.hour24: 1
+aDate.toArray(): 1999,12,31,1,30,20
+aDate.monthName: December
+aDate.dayName: Friday
+aDate.weekIndex: 5
+aDate.unix: 946625420500
+Error: Invalid Date format: Blah, please use one of: 
+    12/31/1999
+    2011-09-24
+    2011-09-24T00:00:00
+    2011-09-24T00:00:00Z

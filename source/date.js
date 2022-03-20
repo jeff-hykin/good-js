@@ -44,7 +44,7 @@ const createDateArguments = (...args) => {
     }
 }
 
-const inspectSymbol = (require && require('util').inspect.custom) || Symbol.for('inspect')
+const inspectSymbol = (typeof require !== 'undefined' && require('util').inspect.custom) || Symbol.for('inspect')
 
 class DateTimeError extends Error {
     constructor(message) {
@@ -237,7 +237,7 @@ class DateTime extends Date {
     }
     toArray() {
         if (this.isInvalid) {return null}
-        return [this.year, this.month, this.day, this.hour24, this.minute, this.second ]
+        return [this.year, this.month, this.day, this.hour24, this.minute, this.second, this.millisecond ]
     }
     toString() {
         if (this.isInvalid) {return null}
@@ -266,7 +266,7 @@ DateTime.uncheckedParseTimeString = (time) => {
         let checkForSeconds = everythingElse.match(/:(\d+)(?:\.(\d+))?(.*)/)
         if (checkForSeconds) {
             second = checkForSeconds[1]
-            checkForSeconds[2] && (milisecond = checkForSeconds[2])
+            checkForSeconds[2] && (milisecond = checkForSeconds[2]*100)
             everythingElse = checkForSeconds[3]
         }
         // check for am/pm
