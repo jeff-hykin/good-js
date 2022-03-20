@@ -74,8 +74,6 @@ const isIntendedSelfReferenceableContainer = (item) => (
     && !(item instanceof RegExp)
     && !(item instanceof Function)
     && !(item instanceof Promise)
-    && !(item instanceof classesWithoutGlobalNames.Generator)
-    && !(item instanceof classesWithoutGlobalNames.AsyncGenerator)
     && !(item instanceof Error)
     && primitiveArrayClasses.includes(item)
 )
