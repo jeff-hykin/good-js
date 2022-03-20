@@ -1,6 +1,54 @@
 
 export const capitalize = (string) => string.replace(/\b\w/g, (chr) => chr.toUpperCase())
-export const indent = ({ string, by = "    " }) => by + string.replace(/\n/g, "\n" + by)
+export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + string.replace(/\n/g, "\n" + by)
+
+export const toRepresentation = (item)=>{
+    if (typeof item == 'string') {
+        return `"${string.replace(/"|\n|\t|\r|\\/g, (char)=>{
+            switch (char) {
+                case '"': return '\\"'
+                case '\n': return '\\n'
+                case '\t': return '\\t'
+                case '\r': return '\\r'
+                case '\\': return '\\\\'
+            }
+        })}`
+    }
+    if (item instanceof Array) {
+        return `[${item.map(each=>toRepresentation(each)).join(",")}]`
+    }
+    if (item instanceof Set) {
+        return `{${item.map(each=>toRepresentation(each)).join(",")}}`
+    }
+    // pure object
+    if (item instanceof Object && item.constructor == Object) {
+        let string = "{"
+        for (const [key, value] of Object.entries(item)) {
+            const stringKey = toRepresentation(key)
+            const stringValue = toRepresentation(value)
+            string += `\n  ${stringKey}: ${indent({string:stringValue, by:"  ", noLead:true})},`
+        }
+        string += "\n}"
+        return string
+    }
+    // map
+    if (item instanceof Map) {
+        let string = "Map {"
+        for (const [key, value] of item.entries()) {
+            const stringKey = toRepresentation(key)
+            const stringValue = toRepresentation(value)
+            if (!stringKey.match(/\n/g)) {
+                string += `\n  ${stringKey} => ${indent({string:stringValue, by:"  ", noLead:true})},`
+            // multiline key
+            } else {
+                string += `\n  ${indent({string:stringKey, by:"  ", noLead:true})}\n    => ${indent({string:stringValue, by:"    ", noLead:true})},`
+            }
+        }
+        string += "\n}"
+        return string
+    }
+    return item ? item.toString() : `${item}`
+}
 
 export const wordList = (str) => {
     const addedSeperator = str.replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/[^a-zA-Z0-9 _.-]/,"_").toLowerCase()

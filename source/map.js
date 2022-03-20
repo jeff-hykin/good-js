@@ -1,3 +1,6 @@
+import { toRepresentation } from "./string.js"
+
+const RealMap = globalThis.Map
 
 /**
  * hash
@@ -13,7 +16,7 @@ export const hashJsonPrimitive = (value) => JSON.stringify(value).split("").redu
     0
 )
 
-export class DefaultMap extends Map {
+export class DefaultMap extends RealMap {
     constructor(defaultFunction) {
         super()
         this.default = defaultFunction
@@ -37,7 +40,7 @@ export class DefaultMap extends Map {
 }
 
 const classesWithoutGlobalNames = {
-    MapIterator: Object.getPrototypeOf((new Map()).keys()),
+    MapIterator: Object.getPrototypeOf((new RealMap()).keys()),
     SetIterator: Object.getPrototypeOf((new Set()).keys()),
     GeneratorFunction: ((function*(){})()).constructor,
     AsyncGeneratorFunction: ((async function*(){})()).constructor,
@@ -45,7 +48,7 @@ const classesWithoutGlobalNames = {
 const primitiveArrayClasses = Object.freeze([Uint16Array, Uint32Array, Uint8Array, Uint8ClampedArray, Int16Array, Int32Array, Int8Array, Float32Array, Float64Array, BigInt64Array, BigUint64Array])
 const recursivelyDefaultFunction = ()=>new DefaultMap(recursivelyDefaultFunction)
 const keyifyStore = {
-    primitiveLookup: new Map(),  // all keys are primitives, all values are Symbols
+    primitiveLookup: new RealMap(),  // all keys are primitives, all values are Symbols
     objectLookup: new DefaultMap(recursivelyDefaultFunction), // classes are keys
     namedSymbols: {
         undefined: Symbol.for("undefined"),
@@ -61,8 +64,8 @@ const isDirectlyComparable = (item) => (
     !(item instanceof Object)   // if primitive
     || item instanceof Function // if unique (includes classes)
     || item instanceof Promise  // another class where are values are treated unique
-    || item.constrctor == classesWithoutGlobalNames.GeneratorFunction
-    || item.constrctor == classesWithoutGlobalNames.AsyncGeneratorFunction
+    || item.constructor == classesWithoutGlobalNames.GeneratorFunction
+    || item.constructor == classesWithoutGlobalNames.AsyncGeneratorFunction
 )
 const technicallyIsContainer = (item) => item instanceof Object
 const isIntendedSelfReferenceableContainer = (item) => (
@@ -81,18 +84,14 @@ const numberToArrayIndexSymbol = new DefaultMap(()=>Symbol())
 const theEmptyList = Object.freeze([])
 const theEmptyObject = Object.freeze({})
 
-export const keyValueify = (item, itemToSelfReferenceSymbol=(new Map())) => {
+let symbolCount = 0
+export const keyValueify = (item, itemToSelfReferenceSymbol=(new RealMap())) => {
     if (itemToSelfReferenceSymbol.has(item)) {
         return [itemToSelfReferenceSymbol.get(item), item]
     }
     if (isDirectlyComparable(item)) {
-        // if it hasn't been keyified yet, create a key for it
-        if (!keyifyStore.primitiveLookup.has(item)) {
-            keyifyStore.primitiveLookup.set(item, Symbol(`${item}`))
-        }
-        const symbolForPrimitive = keyifyStore.primitiveLookup.get(item)
-        // get the key, and for these, the value 
-        return [symbolForPrimitive, item]
+        // the item is its own key if its directly comparable
+        return [item, item]
     // 
     // if truely an object
     // 
@@ -104,18 +103,18 @@ export const keyValueify = (item, itemToSelfReferenceSymbol=(new Map())) => {
         // RegExp and Date are basically treated like primitives
         if (item instanceof RegExp || item instanceof Date) {
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
-            return classSpecificHashToKeyValue.weaklySet(`${item}`, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(`${item}`, [ Symbol(`${++symbolCount}`), item ])
         // All forms of errors
         } else if (item instanceof Error) {
             // same if they have the same class and callstack
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
-            return classSpecificHashToKeyValue.weaklySet(`${item.stack}`, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(`${item.stack}`, [ Symbol(`${++symbolCount}`), item ])
         // Uint16Array, Uint32Array, Uint8Array, Uint8ClampedArray, Int16Array, Int32Array, Int8Array, Float32Array, Float64Array, BigInt64Array, BigUint64Array
         } else if (primitiveArrayClasses.includes(classOfObject)) {
             // this could be a really long string which is why were only saving the hash # and not the string itself
             const hash = hashJsonPrimitive(`${item}`)
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
-            return classSpecificHashToKeyValue.weaklySet(hash, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(hash, [ Symbol(`${++symbolCount}`), item ])
         // Array (the main challenge)
         } else if (item.constructor === Array) {
 
@@ -170,10 +169,10 @@ export const keyValueify = (item, itemToSelfReferenceSymbol=(new Map())) => {
                 if (symbols.length == 0) {
                     // if we've never seen this array before, then create a symbol for it
                     if (!(endElement in table)) {
-                        table[endElement] = Symbol()
+                        table[endElement] = Symbol(`${++symbolCount}`)
                     }
                     const keyAsHash = table[endElement]
-                    return classSpecificHashToKeyValue.weaklySet(keyAsHash, [ Symbol(), item ])
+                    return classSpecificHashToKeyValue.weaklySet(keyAsHash, [ Symbol(`${++symbolCount}`), item ])
                 }
                 // drill down into a value-specific table until we hit the last element
                 if (!(endElement in table)) {
@@ -189,29 +188,88 @@ export const keyValueify = (item, itemToSelfReferenceSymbol=(new Map())) => {
         ) {
             const asArray = [...item]
             const [ keyIfWasArray, _ ] = keyValueify(asArray, itemToSelfReferenceSymbol)
-            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(`${++symbolCount}`), item ])
         // Map
-        } else if (item instanceof Map) {
-            const asArray = item.entries().flat(1)
+        } else if (item instanceof RealMap) {
+            const asArray = [...item.entries()].flat(1)
             const [ keyIfWasArray, _ ] = keyValueify(asArray, itemToSelfReferenceSymbol)
-            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(`${++symbolCount}`), item ])
         // generic Object or custom class
         } else {
             const asArray = Object.entries(item).flat(1)
             const [ keyIfWasArray, _ ] = keyValueify(asArray, itemToSelfReferenceSymbol)
-            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(), item ])
+            return classSpecificHashToKeyValue.weaklySet(keyIfWasArray, [ Symbol(`${++symbolCount}`), item ])
         }
-        // TODO: handle the following somehow
-            // ArrayBuffer
-            // SharedArrayBuffer
-            // DataView
-            // FinalizationRegistry
-            // WeakMap
-            // WeakRef
-            // WeakSet
 
     }
 }
 
-export const keyify = (value) => keyValueify(key)[0]
-export const valueify = (value) => keyValueify(key)[1]
+export const keyify = (value) => keyValueify(value)[0]
+export const valueify = (value) => keyValueify(value)[1]
+
+const realKeysSymbol = Symbol()
+export class Map extends RealMap {
+    constructor(keyValuePairs=[], defaultValue) {
+        super(keyValuePairs)
+        this[realKeysSymbol] = new Set(keyValuePairs.map(([key, value])=>valueify(key)))
+        if (defaultValue instanceof Function) {
+            this.defaultValue = defaultValue.bind(this)
+        }
+    }
+    clear() {
+        super.clear()
+        this[realKeysSymbol] = new Set()
+    }
+    keys() {
+        return new Set(this[realKeysSymbol])
+    }
+    hashes() {
+        return super.keys()
+    }
+    values() {
+        return super.values()
+    }
+    get size() {
+        return this[realKeysSymbol].size
+    }
+    get length() {
+        return this.size
+    }
+    has(key) {
+        const hashed = keyify(key)
+        return super.has(hashed)
+    }
+    get(key) {
+        const hashed = keyify(key)
+        if (this.defaultValue && !super.has(hashed)) {
+            return this.defaultValue(key)
+        }
+        const value = super.get(hashed)
+        return value
+    }
+    set(key, value) {
+        const hashed = keyify(key)
+        return super.set(hashed, value)
+    }
+    delete(key) {
+        const hashed = keyify(key)
+        this[realKeysSymbol].delete(key)
+        return super.delete(hashed)
+    }
+    *entries() {
+        for (const eachRealKey of this[realKeysSymbol]) {
+            yield [eachRealKey, this.get(eachRealKey)]
+        }
+    }
+    forEach(func) {
+        for (const [key, value] of this.entries()) {
+            func(value, key, this)
+        }
+    }
+    toString() {
+        return toRepresentation(this)
+    }
+    toJSON() {
+        return this.entries().map(([key, value])=>({key, value}))
+    }
+}

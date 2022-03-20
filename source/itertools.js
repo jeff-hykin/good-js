@@ -112,3 +112,5 @@ export const enumerateIter = function*(...iterables) {
 export const enumerate = function(...iterables) {
     return [...enumerateIter(...iterables)]
 }
+
+// TODO: flatIterator
