@@ -1,8 +1,8 @@
 {
-  "min: 1,
-  "max: 2342,
-  "range: 2341,
-  "average: 592.75,
-  "median: 24,
-  "sum: 2371,
+  "min": 1,
+  "max": 2342,
+  "range": 2341,
+  "average": 592.75,
+  "median": 24,
+  "sum": 2371,
 }
