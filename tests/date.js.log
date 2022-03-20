@@ -8,7 +8,7 @@ aDate.minute: 30
 aDate.amPm: am
 aDate.hour12: 1
 aDate.hour24: 1
-aDate.toArray(): 1999,12,31,1,30,20
+aDate.toArray(): 1999,12,31,1,30,20,500
 aDate.monthName: December
 aDate.dayName: Friday
 aDate.weekIndex: 5

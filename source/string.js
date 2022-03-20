@@ -4,7 +4,7 @@ export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + 
 
 export const toRepresentation = (item)=>{
     if (typeof item == 'string') {
-        return `"${string.replace(/"|\n|\t|\r|\\/g, (char)=>{
+        return `"${item.replace(/"|\n|\t|\r|\\/g, (char)=>{
             switch (char) {
                 case '"': return '\\"'
                 case '\n': return '\\n'
