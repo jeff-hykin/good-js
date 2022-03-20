@@ -60,7 +60,7 @@ export const wordList = (str) => {
     return capatalizedWords.join('')
 }
 
-export const camelCase = (str) => {
+export const toCamelCase = (str) => {
     const words = wordList(str)
     const capatalizedWords = words.map(each=>each.replace(/^\w/, (group0)=>group0.toUpperCase()))
     // make the first one lowercase
@@ -68,28 +68,28 @@ export const camelCase = (str) => {
     return capatalizedWords.join('')
 }
 
-export const pascalCase = (str) => {
+export const toPascalCase = (str) => {
     const words = wordList(str)
     const capatalizedWords = words.map(each=>each.replace(/^\w/, (group0)=>group0.toUpperCase()))
     return capatalizedWords.join('')
 }
 
-export const kebabCase = (str) => {
+export const toKebabCase = (str) => {
     const words = wordList(str)
     return words.map(each=>each.toLowerCase()).join('-')
 }
 
-export const snakeCase = (str) => {
+export const toSnakeCase = (str) => {
     const words = wordList(str)
     return words.map(each=>each.toLowerCase()).join('_')
 }
 
-export const screamingKebabCase = (str) => {
+export const toScreamingtoKebabCase = (str) => {
     const words = wordList(str)
     return words.map(each=>each.toUpperCase()).join('-')
 }
 
-export const screamingSnakeCase = (str) => {
+export const toScreamingtoSnakeCase = (str) => {
     const words = wordList(str)
     return words.map(each=>each.toUpperCase()).join('_')
 }
@@ -106,60 +106,4 @@ export const findAll = (regexPattern, sourceString) => {
         output.push(match)
     }
     return output
-}
-
-// 
-// 
-// below code is modified from: https://www.npmjs.com/package/camelize
-// 
-// 
-// TODO: verify this then clean it up and export part of it
-function walkObject(obj) {
-    if (!obj || typeof obj !== "object") return obj
-    if (isDate(obj) || isRegex(obj)) return obj
-    if (isArray(obj)) return map(obj, walkObject)
-    return reduce(
-        objectKeys(obj),
-        function (acc, key) {
-            const camel = camelCase(key)
-            acc[camel] = walkObject(obj[key])
-            return acc
-        },
-        {}
-    )
-}
-const isArray =
-    Array.isArray ||
-    function (obj) {
-        return Object.prototype.toString.call(obj) === "[object Array]"
-    }
-const isDate = function (obj) {
-    return Object.prototype.toString.call(obj) === "[object Date]"
-}
-const isRegex = function (obj) {
-    return Object.prototype.toString.call(obj) === "[object RegExp]"
-}
-const objectKeys =
-    Object.keys ||
-    function (obj) {
-        const keys = []
-        for (const key in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, key)) keys.push(key)
-        }
-        return keys
-    }
-function map(xs, f) {
-    if (xs.map) return xs.map(f)
-    const res = []
-    for (const i = 0; i < xs.length; i++) {
-        res.push(f(xs[i], i))
-    }
-    return res
-}
-function reduce(xs, f, acc) {
-    if (xs.reduce) return xs.reduce(f, acc)
-    for (const i = 0; i < xs.length; i++) {
-        acc = f(acc, xs[i], i)
-    }
-    return acc
 }

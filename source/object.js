@@ -237,3 +237,60 @@ export const recursivelyAllKeysOf = (obj) => {
  *     // obj == { "thing1": undefined, "thing2": undefined }
  */
 export const arrayOfKeysToObject = (array, defaultValue)=>array.reduce((acc,curr)=> (acc[curr]=defaultValue,acc),{})
+
+
+// 
+// 
+// below code is modified from: https://www.npmjs.com/package/camelize
+// 
+// 
+// TODO: verify this then clean it up and export part of it
+function walkObject(obj) {
+    if (!obj || typeof obj !== "object") return obj
+    if (isDate(obj) || isRegex(obj)) return obj
+    if (isArray(obj)) return map(obj, walkObject)
+    return reduce(
+        objectKeys(obj),
+        function (acc, key) {
+            const camel = toCamelCase(key)
+            acc[camel] = walkObject(obj[key])
+            return acc
+        },
+        {}
+    )
+}
+const isArray =
+    Array.isArray ||
+    function (obj) {
+        return Object.prototype.toString.call(obj) === "[object Array]"
+    }
+const isDate = function (obj) {
+    return Object.prototype.toString.call(obj) === "[object Date]"
+}
+const isRegex = function (obj) {
+    return Object.prototype.toString.call(obj) === "[object RegExp]"
+}
+const objectKeys =
+    Object.keys ||
+    function (obj) {
+        const keys = []
+        for (const key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key)) keys.push(key)
+        }
+        return keys
+    }
+function map(xs, f) {
+    if (xs.map) return xs.map(f)
+    const res = []
+    for (const i = 0; i < xs.length; i++) {
+        res.push(f(xs[i], i))
+    }
+    return res
+}
+function reduce(xs, f, acc) {
+    if (xs.reduce) return xs.reduce(f, acc)
+    for (const i = 0; i < xs.length; i++) {
+        acc = f(acc, xs[i], i)
+    }
+    return acc
+}

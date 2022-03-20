@@ -1,14 +1,14 @@
 // 
-// statsSummary
+// stats
 // 
 /**
  * @param {Array} listOfNumbers - yup
- * @return {Array} [min,max,range,average,median,sum]
+ * @return {Object} {min,max,range,average,median,sum}
  *
  * @example
- *     const [min,max,range,average,median,sum] = stats([1,50352,3,4,5555234])
+ *     const { min,max,range,average,median,sum } = stats([1,50352,3,4,5555234])
  */
-export const statsSummary = (listOfNumbers) => {
+export const stats = (listOfNumbers) => {
     const median = listOfNumbers[Math.floor(listOfNumbers.length/2)]
     let min=Infinity, max=-Infinity, sum=0
     for (const each of listOfNumbers) {
@@ -20,7 +20,14 @@ export const statsSummary = (listOfNumbers) => {
             min = each
         }
     }
-    return [ min, max, max-min, sum/listOfNumbers.length, median, sum ]
+    return {
+        min,
+        max,
+        range: max-min,
+        average: sum/listOfNumbers.length,
+        median: median,
+        sum: sum,
+    }
 }
 
 export const sum = (list) => list.reduce((a, b) => (a-0) + (b-0), 0)
