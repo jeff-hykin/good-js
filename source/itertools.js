@@ -82,7 +82,7 @@ export const countIter = function*({start=0, end=Infinity, step=1}) {
  *     count({start: 0, end: array.length-1, step: 1})
  */
 export const count = function({start=0, end=Infinity, step=1}) {
-    return [...countIter({start=0, end=Infinity, step=1})]
+    return [...countIter({start, end, step})]
 }
 
 /**
@@ -99,6 +99,7 @@ export const enumerateIter = function*(...iterables) {
     for (const each of zipIter(...iterables)) {
         yield [index, ...each]
     }
+}
 
 /**
  * Enumerate like python
