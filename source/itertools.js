@@ -54,7 +54,7 @@ export const zipIter = function*(...iterables) {
  *     // [  [1,1], [2,2], [3,undefined]  ]
  */
 export const zip = function(...iterables) {
-    return [...zipIter(iterables)]
+    return [...zipIter(...iterables)]
 }
 
 /**
