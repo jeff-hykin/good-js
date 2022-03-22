@@ -18,7 +18,7 @@ export const toRepresentation = (item)=>{
         return `[${item.map(each=>toRepresentation(each)).join(",")}]`
     }
     if (item instanceof Set) {
-        return `{${item.map(each=>toRepresentation(each)).join(",")}}`
+        return `{${([...item]).map(each=>toRepresentation(each)).join(",")}}`
     }
     // pure object
     if (item instanceof Object && item.constructor == Object) {

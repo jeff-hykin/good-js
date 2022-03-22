@@ -1,0 +1,5 @@
+toRepresentation(a) is: {1,2}
+toRepresentation(b) is: {1,2,{1,2},99,3}
+intersection(a, b) {1,2}
+subtract({value:a, from:b}) {{1,2},99,3}
+subtract({value:[...a,a], from:b}) {99,3}
