@@ -122,11 +122,13 @@ export const enumerate = function (...iterables) {
  *     [...permuteIter([1,2,3])]
  *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
  */
-export const permuteIter = function*(elements) {
+export const permuteIter = function* (elements) {
     yield elements.slice()
     const length = elements.length
     const c = new Array(length).fill(0)
-    let i = 1, k, p
+    let i = 1,
+        k,
+        p
 
     while (i < length) {
         if (c[i] < i) {
@@ -151,6 +153,40 @@ export const permuteIter = function*(elements) {
  *     permute([1,2,3])
  *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
  */
-export const permute = function(elements) {
-    [...permuteIter(elements)]
+export const permute = function (elements) {
+    ;[...permuteIter(elements)]
+}
+
+/**
+ * Combinations
+ *
+ * @example
+ *     combinations([1,2,3])
+ *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
+ */
+export const combinationsIter = function* (elements, length) {
+    if (length == null) {
+        yield elements
+    }
+    // derived from: https://lowrey.me/es6-javascript-combination-generator/
+    if (length === 1) {
+        yield* elements.map(each=>[each])
+    } else {
+        for (let i = 0; i < elements.length; i++) {
+            for (const next of combinations(elements.slice(i + 1, elements.length), length - 1)) {
+                yield [elements[i], ...next]
+            }
+        }
+    }
+}
+
+/**
+ * Combinations
+ *
+ * @example
+ *     combinations([1,2,3],2)
+ *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
+ */
+export const combinations = function(elements, length) {
+    return [...combinationsIter(elements, length)]
 }
