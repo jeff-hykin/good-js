@@ -210,6 +210,82 @@ export const combinationsIter = function* (elements, maxLength, minLength) {
  *     combinations([1,2,3], 3, 2)
  *     // [[1,2],[1,3],[2,3],[1,2,3]]
  */
+export const combinationsIter2 = function(elements, maxLength) {
+    let iterator = {
+        state: {
+            index: 0,
+            secondIndex: 0,
+            iterator: null,
+        },
+        [deepCopySymbol]() {
+            const theClone = {
+                ...this,
+                state: {...this.state},
+            }
+            if (this.state.iterator != null) {
+                theClone.state.iterator = this.state.iterator[deepCopySymbol]()
+            }
+            theClone.next   = function(...args){ return this.next.apply(theClone, args) }
+            theClone.return = function(...args){ return this.return.apply(theClone, args) }
+            theClone.throw  = function(...args){ return this.throw.apply(theClone, args) }
+            theClone[deepCopySymbol] = function(...args){ return this[deepCopySymbol].apply(theClone, args) }
+            return theClone
+        },
+        return() {
+            
+        },
+        catch() {
+            
+        },
+        next() {
+            if (this.state.index >= elements.length) {
+                return {
+                    done: true
+                }
+            }
+
+            if (maxLength === 1) {
+                return [ elements[this.state.index++] ]
+            }
+            
+            const index = this.state.index
+            this.state.index += 1
+            // if first time, then we need to create the secondary iterator
+            if (index === 0) {
+                this.state.iterator = combinationsIter2(elements.slice(index + 1, elements.length), maxLength - 1, maxLength - 1)
+            }
+            const next = this.state.iterator.next()
+            if (next.done) {
+                return next
+            } else {
+                return {
+                    value: [ elements[index], ...next.value ],
+                    done: false,
+                }
+            }
+        },
+    }
+    iterator.next.bind(iterator)
+    iterator.return.bind(iterator)
+    iterator.throw.bind(iterator)
+    iterator.clone.bind(iterator)
+    return iterator
+}
+
+
+/**
+ * Combinations
+ *
+ * @example
+ *     combinations([1,2,3])
+ *     // [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]
+ * 
+ *     combinations([1,2,3], 2)
+ *     // [[1,2],[1,3],[2,3]]
+ * 
+ *     combinations([1,2,3], 3, 2)
+ *     // [[1,2],[1,3],[2,3],[1,2,3]]
+ */
 export const combinations = function(elements, maxLength, minLength) {
     return [...combinationsIter(elements, maxLength, minLength)]
 }
