@@ -1,3 +1,5 @@
+import { deepCopySymbol } from "./value.js"
+
 /**
  * wrapAroundGet
  *
@@ -189,7 +191,7 @@ export const combinationsIter = function* (elements, maxLength, minLength) {
             yield* elements.map(each=>[each])
         } else {
             for (let i = 0; i < elements.length; i++) {
-                for (const next of combinations(elements.slice(i + 1, elements.length), maxLength - 1, maxLength - 1)) {
+                for (const next of combinationsIter(elements.slice(i + 1, elements.length), maxLength - 1, maxLength - 1)) {
                     yield [elements[i], ...next]
                 }
             }
