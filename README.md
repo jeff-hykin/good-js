@@ -3,7 +3,7 @@
 My Generic Javascript Toolbox
 
 ```
-import {zip, enumerate, count, wrapAroundGet} from "https://deno.land/x/good@0.3.7/itertools.js"
+import {zip, enumerate, count, permute, combinations, wrapAroundGet} from "https://deno.land/x/good@0.3.7/itertools.js"
 import DateTime from "https://deno.land/x/good@0.3.7/date.js"
 import { recursivelyAllKeysOf, get, set, remove, merge } from "https://deno.land/x/good@0.3.7/object.js"
 import { Map } from "https://deno.land/x/good@0.3.7/map.js"

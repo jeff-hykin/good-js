@@ -154,7 +154,7 @@ export const permuteIter = function* (elements) {
  *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
  */
 export const permute = function (elements) {
-    ;[...permuteIter(elements)]
+    return [...permuteIter(elements)]
 }
 
 /**
