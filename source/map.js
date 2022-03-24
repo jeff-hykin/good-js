@@ -1,5 +1,5 @@
 import { toRepresentation } from "./string.js"
-import { primitiveArrayClasses } from "./value"
+import { primitiveArrayClasses } from "./value.js"
 
 const RealMap = globalThis.Map
 

@@ -199,20 +199,7 @@ export const combinationsIter = function* (elements, maxLength, minLength) {
     }
 }
 
-/**
- * Combinations
- *
- * @example
- *     combinations([1,2,3])
- *     // [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]
- * 
- *     combinations([1,2,3], 2)
- *     // [[1,2],[1,3],[2,3]]
- * 
- *     combinations([1,2,3], 3, 2)
- *     // [[1,2],[1,3],[2,3],[1,2,3]]
- */
-export const combinationsIter2 = function(elements, maxLength) {
+const copyableInnerCombinations = function(elements, maxLength) {
     let iterator = {
         state: {
             index: 0,
@@ -254,7 +241,7 @@ export const combinationsIter2 = function(elements, maxLength) {
             this.state.index += 1
             // if first time, then we need to create the secondary iterator
             if (index === 0) {
-                this.state.iterator = combinationsIter2(elements.slice(index + 1, elements.length), maxLength - 1, maxLength - 1)
+                this.state.iterator = copyableInnerCombinations(elements.slice(index + 1, elements.length), maxLength - 1, maxLength - 1)
             }
             const next = this.state.iterator.next()
             if (next.done) {
@@ -272,6 +259,24 @@ export const combinationsIter2 = function(elements, maxLength) {
     iterator.throw.bind(iterator)
     iterator.clone.bind(iterator)
     return iterator
+}
+const copyableCombinationsIter = function* (elements, maxLength, minLength) {
+    // derived loosely from: https://lowrey.me/es6-javascript-combination-generator/
+    if (maxLength === minLength && minLength === undefined) {
+        minLength = 1
+        maxLength = elements.length
+    } else {
+        maxLength = maxLength || elements.length
+        minLength = minLength === undefined ? maxLength : minLength
+    }
+
+    if (minLength !== maxLength) {
+        for (let i = minLength; i <= maxLength; i++) {
+            yield* copyableInnerCombinations(elements, i, i)
+        }
+    } else {
+        yield* copyableInnerCombinations(elements, maxLength, minLength)
+    }
 }
 
 
@@ -291,3 +296,119 @@ export const combinationsIter2 = function(elements, maxLength) {
 export const combinations = function(elements, maxLength, minLength) {
     return [...combinationsIter(elements, maxLength, minLength)]
 }
+
+
+/**
+ * All Possible Slices
+ *
+ * @example
+ *     slices([1,2,3])
+ *     // [
+ *     //   [[1],[2],[3]],
+ *     //   [[1],[2,3]],
+ *     //   [[1,2],[3]],
+ *     //   [[1,2,3]],
+ *     // ]
+ *     // note: doesnt contain [[1,3], [2]]
+ */
+export const slices = function*(elements) {
+    const slicePoints = count({ start: 1, end: numberOfPartitions.length-1 })
+    for (const combination of combinations(slicePoints)) {
+        combination.sort()
+        let prev = 0
+        const slices = []
+        for (const eachEndPoint of [...combination, elements.length]) {
+            slices.push(elements.slice(prev, eachEndPoint))
+            prev = eachEndPoint
+        }
+        yield slices
+    }
+}
+
+export const everythingExceptIter = function*({iterable, indicies}) {
+    indicies = new Set(indicies)
+    let index = 0
+    for (const each of iterable) {
+        if (!indicies.has(index++)) {
+            yield each
+        }
+    }
+}
+
+export const combinationCutsIter = function* (elements, maxLength, minLength) {
+    // derived loosely from: https://lowrey.me/es6-javascript-combination-generator/
+    if (maxLength === minLength && minLength === undefined) {
+        minLength = 1
+        maxLength = elements.length
+    } else {
+        maxLength = maxLength || elements.length
+        minLength = minLength === undefined ? maxLength : minLength
+    }
+    if (minLength !== maxLength) {
+        for (let i = minLength; i <= maxLength; i++) {
+            yield* combinationCutsIter(elements, i, i)
+        }
+    } else {
+        if (maxLength === 1) {
+            for (const i in elements) {
+                console.debug(`i is: ${i}`,)
+                yield [ [elements[i]], [...everythingExceptIter({iterable: elements, indicies:[i-0]})] ]
+            }
+        } else {
+            for (const i in elements) {
+                for (const [next, cutOut] of combinationCutsIter(elements.slice(i + 1, elements.length), maxLength - 1, maxLength - 1)) {
+                    yield [ [elements[i], ...next], [...elements.slice(0,i), ...cutOut] ]
+                }
+            }
+        }
+    }
+}
+
+export const partitionsIter = function* (elements) {
+    for (const [eachCombination, remaining] of combinationCutsIter(elements)) {
+        if (remaining.length > 0) {
+            for (const eachPossiblePartition of partitionsIter(remaining)) {
+                yield [ eachCombination, ...eachPossiblePartition]
+            }
+        } else {
+            yield [ eachCombination ]
+        }
+    }
+}
+
+
+
+// if (length == 1) {
+//     yield [elements]
+// } else if (length == 2) {
+//     yield [ [elements[0]], [elements[1]] ]
+// } else if (length == 3) {
+//     for (let index = minLength; index <= maxLength; index++) {
+//         for (const eachCombination of combinations(elements,index,index)) {
+//             let remaining = [...elements]
+//             for (const eachElement of eachCombination) {
+//                 const index = remaining.indexOf(eachElement)
+//                 delete remaining[index]
+//             }
+//         }
+//     }
+//     yield [ [elements[0]], [elements[1]], [elements[2]] ]
+//     yield [ [elements[0]], [elements[1], elements[2]] ]
+//     yield [ [elements[0], elements[1]], [elements[2]] ]
+//     yield [ [elements[0], elements[2]], [elements[1]] ]
+//     yield [ [elements[0], elements[1], elements[2]] ]
+// }
+
+
+
+
+// function(elements) {
+//     const combinations = []
+//     for (let index in elements) {
+//         index-=0 // convert to number
+//         combinations.push(combinationsIter(elements, index, index))
+//     }
+
+
+
+// }

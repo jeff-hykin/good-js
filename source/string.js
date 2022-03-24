@@ -3,6 +3,7 @@ export const capitalize = (string) => string.replace(/\b\w/g, (chr) => chr.toUpp
 export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + string.replace(/\n/g, "\n" + by)
 
 export const toRepresentation = (item)=>{
+    // FIXME: doesnt handle recursive objects
     if (typeof item == 'string') {
         return `"${item.replace(/"|\n|\t|\r|\\/g, (char)=>{
             switch (char) {
