@@ -229,5 +229,3 @@ export const requireThat = ({ value, is, failMessage }) => {
         throw Error(`Failed to pass a type check created by requireThat()\n    the value is considered to be: ${actualType}\n    which fails to meet the requirement of: ${requiredType}\n    the failing value is: ${value}\n\n${failMessage}`)
     }
 }
-
-export const log = (...args)=>console.log(args.map(toRepresentation))
