@@ -1,12 +1,30 @@
-import {partitionsIter, combinationCutsIter, zip, enumerate, count, wrapAroundGet, permuteIter, combinationsIter, combinations } from "../source/itertools.js"
+import { copyableInnerCombinations, zip, enumerate, count, wrapAroundGet, permuteIter, combinationsIter, combinations } from "../source/itertools.js"
+import { deepCopySymbol, allKeys } from "../source/value.js"
 
-var a,b,c,d
+console.log((enumerate(['a','b'], ['A', 'B'])))
+console.log((zip(['a','b'], ['A', 'B'])))
+console.log(`permuteIter([1,2,3])`, ([...permuteIter([1,2,3])]))
+console.log(`combinations([1,2,3], 2)`, (combinations([1,2,3],2)))
+console.log(`combinations([1,2,3], 3, 2)`, (combinations([1,2,3],3,2)))
+console.log(`combinations([1,2,3])`, (combinations([1,2,3])))
 
-console.log(JSON.stringify(enumerate(['a','b'], ['A', 'B'])))
-console.log(JSON.stringify(zip(['a','b'], ['A', 'B'])))
-console.log(`permuteIter([1,2,3])`, JSON.stringify([...permuteIter([1,2,3])]))
-console.log(`combinations([1,2,3], 2)`, JSON.stringify(combinations([1,2,3],2)))
-console.log(`combinations([1,2,3], 3, 2)`, JSON.stringify(combinations([1,2,3],3,2)))
-console.log(`combinations([1,2,3])`, JSON.stringify(combinations([1,2,3])))
-console.log(`combinationCutsIter([1,2,3])`, JSON.stringify([...combinationCutsIter([1,2,3])]))
-console.log(`partitionsIter([1,2,3])`, JSON.stringify([...partitionsIter([1,2,3])]))
+
+// 
+// for partitionsIter
+// 
+console.log(`copyableInnerCombinations([1,2,3,4,5,6],2)`)
+const iterator = copyableInnerCombinations([1,2,3,4,5,6], 2)
+let copy
+let firstPart = 0
+for (let each of iterator) {
+    console.debug(`each is:`,each)
+    firstPart++
+    if (firstPart == 3) {
+        console.log(`make copy`)
+        copy = iterator[deepCopySymbol]()
+    }
+}
+console.log(`copy`)
+for (let each of copy) {
+    console.debug(`copy is:`,each)
+}

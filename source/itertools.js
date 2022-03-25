@@ -165,10 +165,10 @@ export const permute = function (elements) {
  * @example
  *     combinations([1,2,3])
  *     // [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]
- * 
+ *
  *     combinations([1,2,3], 2)
  *     // [[1,2],[1,3],[2,3]]
- * 
+ *
  *     combinations([1,2,3], 3, 2)
  *     // [[1,2],[1,3],[2,3],[1,2,3]]
  */
@@ -188,7 +188,7 @@ export const combinationsIter = function* (elements, maxLength, minLength) {
         }
     } else {
         if (maxLength === 1) {
-            yield* elements.map(each=>[each])
+            yield* elements.map((each) => [each])
         } else {
             for (let i = 0; i < elements.length; i++) {
                 for (const next of combinationsIter(elements.slice(i + 1, elements.length), maxLength - 1, maxLength - 1)) {
@@ -199,104 +199,22 @@ export const combinationsIter = function* (elements, maxLength, minLength) {
     }
 }
 
-const copyableInnerCombinations = function(elements, maxLength) {
-    let iterator = {
-        state: {
-            index: 0,
-            secondIndex: 0,
-            iterator: null,
-        },
-        [deepCopySymbol]() {
-            const theClone = {
-                ...this,
-                state: {...this.state},
-            }
-            if (this.state.iterator != null) {
-                theClone.state.iterator = this.state.iterator[deepCopySymbol]()
-            }
-            theClone.next   = function(...args){ return this.next.apply(theClone, args) }
-            theClone.return = function(...args){ return this.return.apply(theClone, args) }
-            theClone.throw  = function(...args){ return this.throw.apply(theClone, args) }
-            theClone[deepCopySymbol] = function(...args){ return this[deepCopySymbol].apply(theClone, args) }
-            return theClone
-        },
-        return() {
-            
-        },
-        catch() {
-            
-        },
-        next() {
-            if (this.state.index >= elements.length) {
-                return {
-                    done: true
-                }
-            }
-
-            if (maxLength === 1) {
-                return [ elements[this.state.index++] ]
-            }
-            
-            const index = this.state.index
-            this.state.index += 1
-            // if first time, then we need to create the secondary iterator
-            if (index === 0) {
-                this.state.iterator = copyableInnerCombinations(elements.slice(index + 1, elements.length), maxLength - 1, maxLength - 1)
-            }
-            const next = this.state.iterator.next()
-            if (next.done) {
-                return next
-            } else {
-                return {
-                    value: [ elements[index], ...next.value ],
-                    done: false,
-                }
-            }
-        },
-    }
-    iterator.next.bind(iterator)
-    iterator.return.bind(iterator)
-    iterator.throw.bind(iterator)
-    iterator.clone.bind(iterator)
-    return iterator
-}
-const copyableCombinationsIter = function* (elements, maxLength, minLength) {
-    // derived loosely from: https://lowrey.me/es6-javascript-combination-generator/
-    if (maxLength === minLength && minLength === undefined) {
-        minLength = 1
-        maxLength = elements.length
-    } else {
-        maxLength = maxLength || elements.length
-        minLength = minLength === undefined ? maxLength : minLength
-    }
-
-    if (minLength !== maxLength) {
-        for (let i = minLength; i <= maxLength; i++) {
-            yield* copyableInnerCombinations(elements, i, i)
-        }
-    } else {
-        yield* copyableInnerCombinations(elements, maxLength, minLength)
-    }
-}
-
-
 /**
  * Combinations
  *
  * @example
  *     combinations([1,2,3])
  *     // [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]
- * 
+ *
  *     combinations([1,2,3], 2)
  *     // [[1,2],[1,3],[2,3]]
- * 
+ *
  *     combinations([1,2,3], 3, 2)
  *     // [[1,2],[1,3],[2,3],[1,2,3]]
  */
-export const combinations = function(elements, maxLength, minLength) {
+export const combinations = function (elements, maxLength, minLength) {
     return [...combinationsIter(elements, maxLength, minLength)]
 }
-
 
 /**
  * All Possible Slices
@@ -311,8 +229,8 @@ export const combinations = function(elements, maxLength, minLength) {
  *     // ]
  *     // note: doesnt contain [[1,3], [2]]
  */
-export const slices = function*(elements) {
-    const slicePoints = count({ start: 1, end: numberOfPartitions.length-1 })
+export const slices = function* (elements) {
+    const slicePoints = count({ start: 1, end: numberOfPartitions.length - 1 })
     for (const combination of combinations(slicePoints)) {
         combination.sort()
         let prev = 0
@@ -325,7 +243,7 @@ export const slices = function*(elements) {
     }
 }
 
-export const everythingExceptIter = function*({iterable, indicies}) {
+export const everythingExceptIter = function* ({ iterable, indicies }) {
     indicies = new Set(indicies)
     let index = 0
     for (const each of iterable) {
@@ -364,51 +282,100 @@ export const combinationCutsIter = function* (elements, maxLength, minLength) {
     }
 }
 
-export const partitionsIter = function* (elements) {
-    for (const [eachCombination, remaining] of combinationCutsIter(elements)) {
-        if (remaining.length > 0) {
-            for (const eachPossiblePartition of partitionsIter(remaining)) {
-                yield [ eachCombination, ...eachPossiblePartition]
+// exported only for testing reasons
+export const copyableInnerCombinations = function (elements, maxLength) {
+    let iterator = {
+        [Symbol.iterator]: function() { return this; },
+        state: {
+            index: 0,
+            iterator: null,
+            maxLength,
+        },
+        set maxLength(value) {
+            this.state.maxLength = value
+            if (this.state.iterator) {
+                this.state.iterator.maxLength = this.state.maxLength-1
             }
-        } else {
-            yield [ eachCombination ]
-        }
+        },
+        [deepCopySymbol]() {
+
+            const theClone = {
+                ...this,
+                state: { ...this.state },
+            }
+            if (this.state.iterator != null) {
+                theClone.state.iterator = this.state.iterator[deepCopySymbol]()
+            }
+            theClone.next = (...args) => this.next.apply(theClone, args)
+            theClone.return = (...args) => this.return.apply(theClone, args)
+            theClone.throw = (...args) => this.throw.apply(theClone, args)
+            theClone[deepCopySymbol] = (...args) => this[deepCopySymbol].apply(theClone, args)
+            return theClone
+        },
+        return() {},
+        throw() {},
+        next() {
+            top: while(1){ // create goto label
+            
+            const index = this.state.index
+
+            if (index >= elements.length || this.state.maxLength < 1) {
+                return {
+                    done: true,
+                }
+            }
+
+            if (this.state.maxLength === 1) {
+                return {
+                    value: [elements[this.state.index++]],
+                    done: false,
+                }
+            }
+
+            // if first time, then we need to create the secondary iterator
+            if (!this.state.iterator) {
+                this.state.iterator = copyableInnerCombinations(elements.slice(index + 1, elements.length), this.state.maxLength - 1)
+            }
+
+            const next = this.state.iterator.next()
+            
+            if (next.done) {
+                this.state.index += 1
+                continue top;
+            } else {
+                return {
+                    value: [elements[index], ...next.value],
+                    done: false,
+                }
+            }
+            
+            break}//other part of top:while(1){
+        },
     }
+    return iterator
 }
+// TODO: create copyableCombinationsIter (not just the inner part)
+// TODO: create copyableCombinationCutsIter (what we really need for partitionsIter)
 
-
-
-// if (length == 1) {
-//     yield [elements]
-// } else if (length == 2) {
-//     yield [ [elements[0]], [elements[1]] ]
-// } else if (length == 3) {
-//     for (let index = minLength; index <= maxLength; index++) {
-//         for (const eachCombination of combinations(elements,index,index)) {
-//             let remaining = [...elements]
-//             for (const eachElement of eachCombination) {
-//                 const index = remaining.indexOf(eachElement)
-//                 delete remaining[index]
+// export const partitionsInnerIter = function* (elements, iterator) {
+//     if (!iterator) {
+//         iterator = copyableCombinationCutsIter(elements)
+//     }
+//     const stopPoint = Math.ceil(elements.length/2)
+//     for (const [eachCombination, remaining] of iterator) {
+//         // only do the first half of the combinations, because the other half will have already been done
+//         if (eachCombination.length >= stopPoint) {
+//             break
+//         }
+//         if (remaining.length > 0) {
+//             // will not choose any of the already-chosen items
+//             const iterClone = iterator[deepCopySymbol]()
+//             iterClone.maxLength = remaining.length
+//             for (const eachPossiblePartition of iterClone) {
+//                 yield [ eachCombination, ...eachPossiblePartition]
 //             }
+//         } else {
+//             yield [ eachCombination ]
 //         }
 //     }
-//     yield [ [elements[0]], [elements[1]], [elements[2]] ]
-//     yield [ [elements[0]], [elements[1], elements[2]] ]
-//     yield [ [elements[0], elements[1]], [elements[2]] ]
-//     yield [ [elements[0], elements[2]], [elements[1]] ]
-//     yield [ [elements[0], elements[1], elements[2]] ]
-// }
-
-
-
-
-// function(elements) {
-//     const combinations = []
-//     for (let index in elements) {
-//         index-=0 // convert to number
-//         combinations.push(combinationsIter(elements, index, index))
-//     }
-
-
-
 // }
