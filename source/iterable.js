@@ -1,6 +1,7 @@
 import { deepCopySymbol } from "./value.js"
 
 // ideas
+    // reduce
     // flatten(array,depth=Infinity)
     // subtract (different from set subtraction)
 
@@ -40,16 +41,6 @@ export const filter = function* (iterable, func) {
         }
     }
 }
-
-export const reduce = function* (iterable, func) {
-    iterable = makeIterable(iterable)
-    for (const each of iterable) {
-        if (func(each)) {
-            yield each
-        }
-    }
-}
-
 
 /**
  * zip similar to python
