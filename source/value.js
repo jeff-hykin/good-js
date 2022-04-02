@@ -63,8 +63,13 @@ export const allKeyDescriptions = function(obj) {
 
 const MapIterator = Object.getPrototypeOf((new Map()).keys())
 const SetIterator = Object.getPrototypeOf((new Set()).keys())
-const GeneratorFunction = ((function*(){})()).constructor
-const AsyncGeneratorFunction = ((async function*(){})()).constructor
+let GeneratorFunction = class {}
+let AsyncGeneratorFunction = class {}
+try {
+    // this is in a try-catch so that it plays nice with babel transpiling
+    GeneratorFunction = eval("((function*(){})()).constructor")
+    AsyncGeneratorFunction = eval("((async function*(){})()).constructor")
+} catch (error) {}
 export const isGeneratorType = (value) => {
     if (value instanceof Object) {
         // look weird and convoluted? welcome to the nonsensical edgecases of JavaScript
