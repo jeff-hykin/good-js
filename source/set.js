@@ -1,17 +1,28 @@
-export function *subtractIter({value, from}) {
+export function* subtractIter({value, from}) {
     // modified from: https://stackoverflow.com/questions/1723168/what-is-the-fastest-or-most-elegant-way-to-compute-a-set-difference-using-javasc
     const setA = new Set([...from])
-    const setB = new Set([...value])
-
-    for (const v of setB.values()) {
-        if (!setA.delete(v)) {
-            yield v
+    if (value instanceof Set) {
+        for (const eachValue of value) {
+            // if was not in A, remove it
+            if (!setA.delete(eachValue)) {
+                yield eachValue
+            }
+        }
+    } else {
+        const alreadyYielded = new Set()
+        for (const eachValue of value) {
+            // if was not in A, remove it
+            if (!setA.delete(eachValue)) {
+                if (!alreadyYielded.has(eachValue)) {
+                    yield eachValue
+                    alreadyYielded.add(eachValue)
+                }
+            }
         }
     }
-
-    for (const v of setA.values()) {
-        yield v
-    }
+    
+    // everything remaining in setA is not in "value"
+    yield* setA
 }
 
 export function subtract({value, from}) {
