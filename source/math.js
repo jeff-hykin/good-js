@@ -31,6 +31,7 @@ export const stats = (listOfNumbers) => {
 }
 
 export const sum = (list) => list.reduce((a, b) => (a-0) + (b-0), 0)
+export const product = (list) => list.reduce((a, b) => (a-0) * (b-0), 1)
 
 // 
 // spread
