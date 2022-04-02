@@ -55,10 +55,6 @@ export const wordList = (str) => {
     const addedSeperator = str.replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/[^a-zA-Z0-9 _.-]/,"_").toLowerCase()
     const words = addedSeperator.split(/[ _.-]+/g)
     return words
-    const capatalizedWords = words.map(each=>each.replace(/^\w/, (group0)=>group0.toUpperCase()))
-    // make the first one lowercase
-    capatalizedWords[0] = capatalizedWords[0].toLowerCase()
-    return capatalizedWords.join('')
 }
 
 export const toCamelCase = (str) => {
