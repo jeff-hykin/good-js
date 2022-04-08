@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-all
 import DateTime from "../source/date.js"
 
 // a valid date with no time

@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-all
 import { Map } from "../source/map.js"
 
 var a,b,c,d

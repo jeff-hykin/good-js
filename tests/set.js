@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-all
 import { intersection, subtract } from "../source/set.js"
 import { toRepresentation } from "../source/string.js"
 

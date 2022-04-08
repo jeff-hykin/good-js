@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-all
 import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase } from "../source/string.js"
 
 console.log(`${capitalize("howdy_howdy_howdy")}`)

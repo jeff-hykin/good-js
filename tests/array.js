@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-all
 import { zip, enumerate, count, wrapAroundGet, combinations } from "../source/array.js"
 import { deepCopySymbol, allKeys } from "../source/value.js"
 
