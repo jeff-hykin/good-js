@@ -1,15 +1,15 @@
 export class Event extends Set {}
-export const trigger = async (event)=>Promise.all([...event].map(each=>each()))
+export const trigger = async (event, ...args)=>Promise.all([...event].map(each=>each(...args)))
 export const everyTime = (event)=>({ then:(action)=>event.add(action) })
 export const once = (event)=>({ then:(action)=>{
     let selfRemovingRanFirst = false
     let output, error
     let resolve, reject
     const handleReturn = ()=> error ? reject(error) : resolve(output)
-    const selfRemoving = async ()=>{
+    const selfRemoving = async (...args)=>{
         event.delete(selfRemoving)
         try {
-            output = await action()
+            output = await action(...args)
         } catch (err) {
             error = err
         }
