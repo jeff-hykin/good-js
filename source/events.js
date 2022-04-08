@@ -1,34 +1,28 @@
 export class Event extends Set {}
 export const trigger = async (event, ...args)=>Promise.all([...event].map(each=>each(...args)))
 export const everyTime = (event)=>({ then:(action)=>event.add(action) })
-export const once = (event)=>({ then:(action)=>{
+export const once = (event)=>{
     let selfRemovingRanFirst = false
-    let output, error
-    let resolve, reject
-    const handleReturn = ()=> error ? reject(error) : resolve(output)
+    let output
+    let resolve
     const selfRemoving = async (...args)=>{
         event.delete(selfRemoving)
-        try {
-            output = await action(...args)
-        } catch (err) {
-            error = err
-        }
+        output = args
         selfRemovingRanFirst = true
-        // if promise ran before it had access to output/error
+        // if promise ran before it had access to output
         // (and therefore couldnt handle the return)
         // then this function needs to handle the return
         if (resolve) {
-            handleReturn()
+            resolve(output)
         }
     }
     event.add(selfRemoving)
-    return new Promise((res, rej)=> {
+    return new Promise(res=>{
         resolve = res
-        reject = rej
         // if selfRemoving finished before it had access to resolve/reject
         // then the promise needs to handle the return
         if (selfRemovingRanFirst) {
-            handleReturn()
+            resolve(output)
         }
     })
-}})
+}
