@@ -2,53 +2,78 @@
 export const capitalize = (string) => string.replace(/\b\w/g, (chr) => chr.toUpperCase())
 export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + string.replace(/\n/g, "\n" + by)
 
+export const toString = (value)=>{
+    // no idea why `${Symbol("blah")}` throws an error (and is the only primitive that throws)
+    if (typeof value == 'symbol') {
+        return `Symbol(${toRepresentation(value.description)})`
+    // all other primitives
+    } else if (!(value instanceof Object)) {
+        return item != null ? item.toString() : `${item}`
+    // instead of [Object object]
+    } else {
+        return toRepresentation(value)
+    }
+}
+
 export const toRepresentation = (item)=>{
-    // FIXME: doesnt handle recursive objects
-    if (typeof item == 'string') {
-        return `"${item.replace(/"|\n|\t|\r|\\/g, (char)=>{
-            switch (char) {
-                case '"': return '\\"'
-                case '\n': return '\\n'
-                case '\t': return '\\t'
-                case '\r': return '\\r'
-                case '\\': return '\\\\'
-            }
-        })}"`
-    }
-    if (item instanceof Array) {
-        return `[${item.map(each=>toRepresentation(each)).join(",")}]`
-    }
-    if (item instanceof Set) {
-        return `{${([...item]).map(each=>toRepresentation(each)).join(",")}}`
-    }
-    // pure object
-    if (item instanceof Object && item.constructor == Object) {
-        let string = "{"
-        for (const [key, value] of Object.entries(item)) {
-            const stringKey = toRepresentation(key)
-            const stringValue = toRepresentation(value)
-            string += `\n  ${stringKey}: ${indent({string:stringValue, by:"  ", noLead:true})},`
-        }
-        string += "\n}"
-        return string
-    }
-    // map
-    if (item instanceof Map) {
-        let string = "Map {"
-        for (const [key, value] of item.entries()) {
-            const stringKey = toRepresentation(key)
-            const stringValue = toRepresentation(value)
-            if (!stringKey.match(/\n/g)) {
-                string += `\n  ${stringKey} => ${indent({string:stringValue, by:"  ", noLead:true})},`
-            // multiline key
+    const alreadySeen = new Set()
+    const recursionWrapper = (item)=>{
+        // prevent infinite recursion
+        if (item instanceof Object) {
+            if (alreadySeen.has(item)) {
+                return `[Self Reference]`
             } else {
-                string += `\n  ${indent({string:stringKey, by:"  ", noLead:true})}\n    => ${indent({string:stringValue, by:"    ", noLead:true})},`
+                alreadySeen.add(item)
             }
         }
-        string += "\n}"
-        return string
+
+        let output
+        if (typeof item == 'string') {
+            output = `"${item.replace(/"|\n|\t|\r|\\/g, (char)=>{
+                switch (char) {
+                    case '"': return '\\"'
+                    case '\n': return '\\n'
+                    case '\t': return '\\t'
+                    case '\r': return '\\r'
+                    case '\\': return '\\\\'
+                }
+            })}"`
+        } else if (item instanceof Array) {
+            output = `[${item.map(each=>recursionWrapper(each)).join(",")}]`
+        } else if (item instanceof Set) {
+            output = `{${([...item]).map(each=>recursionWrapper(each)).join(",")}}`
+        // pure object
+        } else if (item instanceof Object && item.constructor == Object) {
+            let string = "{"
+            for (const [key, value] of Object.entries(item)) {
+                const stringKey = recursionWrapper(key)
+                const stringValue = recursionWrapper(value)
+                string += `\n  ${stringKey}: ${indent({string:stringValue, by:"  ", noLead:true})},`
+            }
+            string += "\n}"
+            output = string
+        // map
+        } else if (item instanceof Map) {
+            let string = "Map {"
+            for (const [key, value] of item.entries()) {
+                const stringKey = recursionWrapper(key)
+                const stringValue = recursionWrapper(value)
+                if (!stringKey.match(/\n/g)) {
+                    string += `\n  ${stringKey} => ${indent({string:stringValue, by:"  ", noLead:true})},`
+                // multiline key
+                } else {
+                    string += `\n  ${indent({string:stringKey, by:"  ", noLead:true})}\n    => ${indent({string:stringValue, by:"    ", noLead:true})},`
+                }
+            }
+            string += "\n}"
+            output = string
+        } else {
+            output = item != null ? item.toString() : `${item}`
+        }
+        
+        return output
     }
-    return item ? item.toString() : `${item}`
+    return recursionWrapper(item)
 }
 
 export const wordList = (str) => {
