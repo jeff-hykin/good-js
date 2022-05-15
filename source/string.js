@@ -8,7 +8,7 @@ export const toString = (value)=>{
         return `Symbol(${toRepresentation(value.description)})`
     // all other primitives
     } else if (!(value instanceof Object)) {
-        return item != null ? item.toString() : `${item}`
+        return value != null ? value.toString() : `${value}`
     // instead of [Object object]
     } else {
         return toRepresentation(value)
