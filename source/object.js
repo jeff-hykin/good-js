@@ -193,7 +193,7 @@ export const compareProperty = ({ keyList, largestFirst = false }) => {
         }
     }
     if (largestFirst) {
-        oldComparison = comparison
+        let oldComparison = comparison
         comparison = (b, a) => oldComparison(a, b)
     }
     return comparison
@@ -230,7 +230,7 @@ export const compare = ({ elementToNumber, largestFirst = false }) => {
         }
     }
     if (largestFirst) {
-        oldComparison = comparison
+        let oldComparison = comparison
         comparison = (b, a) => oldComparison(a, b)
     }
     return comparison
