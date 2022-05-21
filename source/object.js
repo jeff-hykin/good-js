@@ -199,6 +199,23 @@ export const compareProperty = ({ keyList, largestFirst = false }) => {
     return comparison
 }
 
+export const compare = ({ elementToNumber, largestFirst = false }) => {
+    let comparison = (a, b) => {
+        const aValue = elementToNumber(a)
+        const bValue = elementToNumber(b)
+        if (typeof aValue == "number") {
+            return aValue - bValue
+        } else {
+            return aValue.localeCompare(bValue)
+        }
+    }
+    if (largestFirst) {
+        oldComparison = comparison
+        comparison = (b, a) => oldComparison(a, b)
+    }
+    return comparison
+}
+
 /**
  * Deep iterate objects
  *
