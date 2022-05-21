@@ -166,7 +166,7 @@ export const merge = ({ oldData, newData }) => {
  * Function to sort alphabetically an array of objects by some specific key.
  *
  * @param {string[]} obj.keyList list of keys of which property to sort by
- * @param {string[]} [obj.largestFirst=false] decending order
+ * @param {Boolean} [obj.largestFirst=false] decending order
  * @example
  * let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
  * listOfObjects.sort(
@@ -199,6 +199,26 @@ export const compareProperty = ({ keyList, largestFirst = false }) => {
     return comparison
 }
 
+/**
+ * Function to sort alphabetically an array of objects by some specific key.
+ *
+ * @param {Function} obj.elementToNumber list of keys of which property to sort by
+ * @param {Boolean} [obj.largestFirst=false] decending order
+ * @example
+ * let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
+ * listOfObjects.sort(
+ *     compare({elementToNumber:each=>each.a })
+ * )
+ * //  [ { a: 1 }, { a: 2 }, { a: 3 } ]
+ *
+ * listOfObjects.sort(
+ *   compare({
+ *     elementToNumber:each=>each.a,
+ *     largestFirst:true
+ *   })
+ * )
+ * //  [ { a: 3 }, { a: 2 }, { a: 1 } ]
+ */
 export const compare = ({ elementToNumber, largestFirst = false }) => {
     let comparison = (a, b) => {
         const aValue = elementToNumber(a)
