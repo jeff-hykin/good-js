@@ -55,11 +55,11 @@ export const zip = function* (...iterables) {
     iterables = iterables.map((each) => makeIterable(each))
     while (true) {
         const nexts = iterables.map((each) => each.next())
+        yield* nexts.map((each) => each.value)
         // if all are done then stop
         if (nexts.every((each) => each.done)) {
             break
         }
-        yield nexts.map((each) => each.value)
     }
 }
 
