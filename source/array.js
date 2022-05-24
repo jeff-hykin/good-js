@@ -39,6 +39,9 @@ export const reverse = function (object) {
  *     // [  [1,1], [2,2], [3,undefined]  ]
  */
 export const zip = function (...iterables) {
+    for (let each of zipIter(...iterables)) {
+        console.debug(`each is:`,each)
+    }
     return [...zipIter(...iterables)]
 }
 

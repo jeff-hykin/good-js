@@ -8,7 +8,7 @@ import { deepCopySymbol } from "./value.js"
 export const makeIterable = function* (object) {
     // if already iterable
     if (object instanceof Array || object instanceof Set) {
-        return object
+        yield* object
     }
     // map edgecase
     if (object instanceof Map) {
@@ -55,11 +55,11 @@ export const zip = function* (...iterables) {
     iterables = iterables.map((each) => makeIterable(each))
     while (true) {
         const nexts = iterables.map((each) => each.next())
-        yield* nexts.map((each) => each.value)
         // if all are done then stop
         if (nexts.every((each) => each.done)) {
             break
         }
+        yield nexts.map((each) => each.value)
     }
 }
 
