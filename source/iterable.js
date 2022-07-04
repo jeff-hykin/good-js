@@ -9,12 +9,9 @@ export const makeIterable = function* (object) {
     // if already iterable
     if (object instanceof Array || object instanceof Set) {
         yield* object
-    }
-    // map edgecase
-    if (object instanceof Map) {
+    } else if (object instanceof Map) {
         yield* object.entries()
-    }
-    if (object instanceof Object) {
+    } else if (object instanceof Object) {
         // Array, Set, string, custom classes, etc
         if (object[Symbol.iterator] instanceof Function) {
             yield* object
