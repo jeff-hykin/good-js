@@ -55,7 +55,7 @@ export const allKeyDescriptions = function(obj) {
     }
     let prevObj = obj
     while (obj && obj != prevObj) {
-        keys = keys.concat(allKeyDescriptions(obj))
+        keys = keys.concat(ownKeyDescriptions(obj))
         obj = Object.getPrototypeOf(obj)
     }
     return keys

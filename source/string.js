@@ -15,12 +15,12 @@ export const toString = (value)=>{
     }
 }
 
-export const numberToEnglishArray = (value)=>{
+export const digitsToEnglishArray = (value)=>{
     // digits
     value = toString(value)
     if (value.length > 1) {
         // split into digits then put back together
-        return [].concat(...[...value].map(each=>numberToEnglishArray(each)))
+        return [].concat(...[...value].map(each=>digitsToEnglishArray(each)))
     }
     if (value === "-") {
         return [ "negative" ]
