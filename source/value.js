@@ -40,7 +40,8 @@ export const allKeys = function(obj) {
 
 export const ownKeyDescriptions = Object.getOwnPropertyDescriptors
 
-export const allKeyDescriptions = function({value, includingBuiltin=false}) {
+export const allKeyDescriptions = function(value, options={includingBuiltin:false}) {
+    var { includingBuiltin } = {...options}
     // from: https://stackoverflow.com/questions/8024149/is-it-possible-to-get-the-non-enumerable-inherited-property-names-of-an-object/70629468?noredirect=1#comment126513832_70629468
     let descriptions = []
     // super-primitives have no attributes

@@ -10,5 +10,5 @@ const a = new Thing()
 a.howdy = "HOWDY!"
 
 console.log(deepCopy(10))
-console.log(allKeyDescriptions({value: a, includingBuiltin:false}))
-console.log(allKeyDescriptions({value: a, includingBuiltin:true}))
+console.log(allKeyDescriptions(a, {includingBuiltin:false}))
+console.log(allKeyDescriptions(a, {includingBuiltin:true}))
