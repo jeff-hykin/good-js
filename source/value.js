@@ -38,29 +38,31 @@ export const allKeys = function(obj) {
     return keys
 }
 
-export const ownKeyDescriptions = function(obj) {
-    return Reflect.ownKeys(obj).map(eachKey=>[eachKey, Reflect.getOwnPropertyDescriptor(obj, eachKey)])
-}
+export const ownKeyDescriptions = Object.getOwnPropertyDescriptors
 
-export const allKeyDescriptions = function(obj) {
+export const allKeyDescriptions = function({value, includingBuiltin=false}) {
     // from: https://stackoverflow.com/questions/8024149/is-it-possible-to-get-the-non-enumerable-inherited-property-names-of-an-object/70629468?noredirect=1#comment126513832_70629468
-    let descriptions = []
+    const descriptions = []
     // super-primitives have no attributes
-    if (obj == null) {
+    if (value == null) {
         return {}
     }
     // normal primitives still have descriptions, just skip the first iteration
-    if (!(obj instanceof Object)) {
-        obj = Object.getPrototypeOf(obj)
+    if (!(value instanceof Object)) {
+        value = Object.getPrototypeOf(value)
     }
+    const rootPrototype = Object.getPrototypeOf({})
     let prevObj
-    while (obj && obj != prevObj) {
-        descriptions = descriptions.concat(Object.entries(Object.getOwnPropertyDescriptors(obj)))
-        prevObj = obj
-        obj = Object.getPrototypeOf(obj)
+    while (value && value != prevObj) {
+        if (!includingBuiltin && value == rootPrototype) {
+            break
+        }
+        descriptions = descriptions.concat(Object.entries(Object.getOwnPropertyDescriptors(value)))
+        prevObj = value
+        value = Object.getPrototypeOf(value)
     }
     descriptions.reverse()
-    return Object.fromEntries(keys)
+    return Object.fromEntries(descriptions)
 }
 
 const MapIterator = Object.getPrototypeOf((new Map()).keys())
