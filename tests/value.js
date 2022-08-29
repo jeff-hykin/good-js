@@ -1,4 +1,14 @@
 #!/usr/bin/env -S deno run --allow-all
-import { deepCopy } from "../source/value.js"
+import { deepCopy, allKeyDescriptions } from "../source/value.js"
+
+class Thing {
+    doStuff() {
+        return 10
+    }
+}
+const a = new Thing()
+a.howdy = "HOWDY!"
 
 console.log(deepCopy(10))
+console.log(allKeyDescriptions({value: a, includingBuiltin:false}))
+console.log(allKeyDescriptions({value: a, includingBuiltin:true}))

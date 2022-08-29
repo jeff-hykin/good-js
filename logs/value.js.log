@@ -1,1 +1,66 @@
 10
+{
+  doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
+  constructor: { value: [Function: Thing], writable: true, enumerable: false, configurable: true },
+  howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
+}
+{
+  toLocaleString: {
+    value: [Function: toLocaleString],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  valueOf: { value: [Function: valueOf], writable: true, enumerable: false, configurable: true },
+  toString: {
+    value: [Function: toString],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  propertyIsEnumerable: {
+    value: [Function: propertyIsEnumerable],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  isPrototypeOf: {
+    value: [Function: isPrototypeOf],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  __lookupSetter__: {
+    value: [Function: __lookupSetter__],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  __lookupGetter__: {
+    value: [Function: __lookupGetter__],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  hasOwnProperty: {
+    value: [Function: hasOwnProperty],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  __defineSetter__: {
+    value: [Function: __defineSetter__],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  __defineGetter__: {
+    value: [Function: __defineGetter__],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  constructor: { value: [Function: Thing], writable: true, enumerable: false, configurable: true },
+  doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
+  howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
+}
