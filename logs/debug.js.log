@@ -21,5 +21,43 @@
   iterableUsingForof: false,
   keys: [],
   getOwnPropertyNames: [],
-  allPropertyDescriptions: []
+  allPropertyDescriptions: {
+    toLocaleString: {
+      value: [Function: toLocaleString],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    valueOf: {
+      value: [Function: valueOf],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    toString: {
+      value: [Function: toString],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    toPrecision: {
+      value: [Function: toPrecision],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    toFixed: {
+      value: [Function: toFixed],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    toExponential: {
+      value: [Function: toExponential],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    },
+    constructor: { value: [Function: Number], writable: true, enumerable: false, configurable: true }
+  }
 }

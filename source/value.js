@@ -195,4 +195,44 @@ function deepCopyInner(value, valueChain=[], originalToCopyMap=new Map()) {
     Object.defineProperties(output, propertyDefinitions)
     return output
 }
-export const deepCopy = (value)=>deepCopyInner(value)
+export const deepCopy = (value)=>deepCopyInner(value) // hides/disables the additional arguments that deepCopyInner utilizes
+
+
+export const shallowSortObject = (obj) => {
+    return Object.keys(obj).sort().reduce(
+        (newObj, key) => { 
+            newObj[key] = obj[key]; 
+            return newObj
+        }, 
+        {}
+    )
+}
+
+export const deepSortObject = (obj, seen=new Map()) => {
+    if (!(obj instanceof Object)) {
+        return obj
+    } else if (seen.has(obj)) {
+        // return the being-sorted object
+        return seen.get(obj)
+    } else {
+        if (obj instanceof Array) {
+            const sortedChildren = []
+            seen.set(obj, sortedChildren)
+            for (const each of obj) {
+                sortedChildren.push(deepSortObject(each, seen))
+            }
+            return sortedChildren
+        } else {
+            const sorted = {}
+            seen.set(obj, sorted)
+            for (const eachKey of Object.keys(obj).sort()) {
+                sorted[eachKey] = deepSortObject(obj[eachKey], seen)
+            }
+            return sorted
+        }
+    }
+}
+
+export const stableStringify = (value, ...args) => {
+    return JSON.stringify(deepSortObject(value), ...args)
+}

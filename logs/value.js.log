@@ -64,3 +64,6 @@
   doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
   howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
 }
+object is: { b: 10, a: 11, c: [ "howdy", { d: 9999, aye: 1 } ] }
+deepSortObjectResult is: { a: 11, b: 10, c: [ "howdy", { aye: 1, d: 9999 } ] }
+shallowSortObjectResult is: { a: 11, b: 10, c: [ "howdy", { d: 9999, aye: 1 } ] }

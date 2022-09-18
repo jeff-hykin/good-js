@@ -1,5 +1,5 @@
 import { toRepresentation } from "./string.js"
-import { primitiveArrayClasses } from "./value.js"
+import { primitiveArrayClasses, stableStringify } from "./value.js"
 
 const RealMap = globalThis.Map
 
@@ -12,7 +12,7 @@ const RealMap = globalThis.Map
  * @example
  *     does something
  */
-export const hashJsonPrimitive = (value) => JSON.stringify(value).split("").reduce(
+export const hashJsonPrimitive = (value) => stableStringify(value).split("").reduce(
     (hashCode, currentVal) => (hashCode = currentVal.charCodeAt(0) + (hashCode << 6) + (hashCode << 16) - hashCode),
     0
 )

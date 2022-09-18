@@ -64,7 +64,6 @@ export const toRepresentation = (item)=>{
         }
 
         let output
-        console.debug(`item is:`,item)
         if (typeof item == 'string') {
             output = `"${item.replace(/"|\n|\t|\r|\\/g, (char)=>{
                 switch (char) {
