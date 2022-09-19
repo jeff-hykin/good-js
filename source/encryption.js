@@ -117,9 +117,9 @@ export async function sign({ text, privateKey, options }) {
             ...options,
         },
         signatureKey,
-        decodeBase64(text),
+        new TextEncoder().encode(text),
     ))
-    return new TextDecoder().decode(new Uint8Array(signedData))
+    return encodeBase64(signedData)
 }
 
 export async function verify({ signedMessage, whatMessageShouldBe, publicKey, options }) {
@@ -147,7 +147,7 @@ export async function verify({ signedMessage, whatMessageShouldBe, publicKey, op
         },
         verificationKey,
         decodeBase64(signedMessage),
-        new TextEncoder().encode(whatMessageShouldBe)
+        new TextEncoder().encode(whatMessageShouldBe),
     )
 }
 
