@@ -12,4 +12,5 @@ import { generateKeys, encrypt, decrypt } from "https://deno.land/x/good@0.7.3/e
 import { Event, trigger, everyTime, once } from "https://deno.land/x/good@0.7.3/events.js"
 import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@0.7.3/object.js"
 import { deepCopy, allKeyDescriptions, deepSortObject, shallowSortObject } from "https://deno.land/x/good@0.7.3/value.js"
+import {makeIterable, map, filter, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform} from "https://deno.land/x/good@0.7.3/iterable.js"
 ```
