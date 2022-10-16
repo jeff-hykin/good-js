@@ -1,36 +1,48 @@
-export function* subtractIter({value, from}) {
-    // modified from: https://stackoverflow.com/questions/1723168/what-is-the-fastest-or-most-elegant-way-to-compute-a-set-difference-using-javasc
-    const setA = new Set([...from])
-    if (value instanceof Set) {
-        for (const eachValue of value) {
-            // if was not in A, remove it
-            if (!setA.delete(eachValue)) {
-                yield eachValue
-            }
-        }
-    } else {
-        const alreadyYielded = new Set()
-        for (const eachValue of value) {
-            // if was not in A, remove it
-            if (!setA.delete(eachValue)) {
-                if (!alreadyYielded.has(eachValue)) {
-                    yield eachValue
-                    alreadyYielded.add(eachValue)
-                }
-            }
-        }
-    }
-    
-    // everything remaining in setA is not in "value"
-    yield* setA
-}
-
 export function subtract({value, from}) {
-    return new Set(subtractIter({value, from}))
+    let source = from
+    let detractor = value
+    // make sure source has a size (but do as little conversion as possible)
+    let sourceSize = source.size || source.length
+    if (!sourceSize) {
+        source = new Set(source)
+        sourceSize = source.size
+    }
+    // make sure detractor has a size (but do as little conversion as possible)
+    let detractorSize = detractor.size || detractor.length
+    if (!detractorSize) {
+        detractor = new Set(detractor)
+        detractorSize = detractor.size
+    }
+
+    // 
+    // source is smaller => iterate over it
+    // 
+    if (sourceSize < detractorSize) {
+        const outputSet = new Set() // required to avoid duplicates (if source is not a set)
+        !(detractor instanceof Set) && (detractor=new Set(detractor))
+        for (const each of source) {
+            // if the detractor wasn't going to remove it, then it belongs in the output
+            if (!detractor.has(each)) {
+                outputSet.add(each)
+            }
+        }
+        return outputSet
+    // 
+    // detractor is smaller => iterate over it
+    // 
+    } else {
+        // make sure source is a copy
+        !(source != from) && (source=new Set(source))
+        // remove all the ones in detractor
+        for (const eachValueBeingRemoved of detractor) {
+            source.delete(eachValueBeingRemoved)
+        }
+        return source
+    }
 }
 
 export function intersection(...sets) {
-    const sortedSets = sets.sort((a,b)=>(a.length - b.length))
+    const sortedSets = sets.sort((a,b)=>((a.size || a.length) - (b.size || b.length)))
     const smallestCopy = new Set(sortedSets.shift())
     // each of sortedSets (the first was removed)
     for (const eachSet of sortedSets) {
