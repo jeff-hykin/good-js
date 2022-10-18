@@ -5,7 +5,7 @@ My Generic Javascript Toolbox
 ```
 import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@0.7.7/array.js"
 import { intersection, subtract } from "https://deno.land/x/good@0.7.7/set.js"
-import { stats, sum, spread } from "https://deno.land/x/good@0.7.7/math.js"
+import { stats, sum, spread, normalizeZeroToOne } from "https://deno.land/x/good@0.7.7/math.js"
 import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, toRepresentation, toString } from "https://deno.land/x/good@0.7.7/string.js"
 import DateTime from "https://deno.land/x/good@0.7.7/date.js"
 import { generateKeys, encrypt, decrypt } from "https://deno.land/x/good@0.7.7/encryption.js"
