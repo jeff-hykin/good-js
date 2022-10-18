@@ -33,6 +33,15 @@ export const stats = (listOfNumbers) => {
 export const sum = (list) => list.reduce((a, b) => (a-0) + (b-0), 0)
 export const product = (list) => list.reduce((a, b) => (a-0) * (b-0), 1)
 
+export const normalizeZeroToOne = (values) => {
+    const { min, range } = stats(values)
+    // edgecase
+    if (range == 0) {
+        return values.map(each=>0)
+    }
+    return values.map(each=>(each-min)/range)
+}
+
 // 
 // spread
 // 
