@@ -27,6 +27,7 @@ export const stats = (listOfNumbers) => {
         average: sum/listOfNumbers.length,
         median: median,
         sum: sum,
+        count: listOfNumbers.length,
     }
 }
 

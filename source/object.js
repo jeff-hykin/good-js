@@ -95,7 +95,7 @@ export const set = ({ keyList, on, to }) => {
 }
 
 /**
- * Safely delete nested values
+ * Safely remove nested values
  *
  * @param {any} obj.from - what object/value you're extracting from
  * @param {string[]} obj.keyList - anObject.key1.key2 -> [ "key1", "key2" ]
@@ -104,7 +104,7 @@ export const set = ({ keyList, on, to }) => {
  * @example
  *     let obj = { key1: {} }
  *     // equivlent to obj.key1.subKey.subSubKey
- *     delete({
+ *     remove({
  *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
  *         from: obj,
  *     })

@@ -2,7 +2,7 @@
 
 My Generic Javascript Toolbox
 
-```
+```js
 import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@0.7.7/array.js"
 import { intersection, subtract } from "https://deno.land/x/good@0.7.7/set.js"
 import { stats, sum, spread, normalizeZeroToOne } from "https://deno.land/x/good@0.7.7/math.js"
