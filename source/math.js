@@ -33,6 +33,23 @@ export const stats = (listOfNumbers) => {
 
 export const sum = (list) => list.reduce((a, b) => (a-0) + (b-0), 0)
 export const product = (list) => list.reduce((a, b) => (a-0) * (b-0), 1)
+export const roundedUpToNearest = ({value, factor}) => {
+    factor = Math.abs(factor)
+    const remainder = (value % factor)
+    if (value > 0) {
+        return remainder ? value + (factor - remainder) : value
+    } else {
+        return remainder ? value - remainder : value
+    }
+}
+export const roundedDownToNearest = ({value, factor}) => {
+    factor = Math.abs(factor)
+    const remainder = (value % factor)
+    if (remainder == 0) {
+        return value
+    }
+    return roundedUpToNearest({ value: (value - factor), factor })
+}
 
 export const normalizeZeroToOne = (values) => {
     const { min, range } = stats(values)
