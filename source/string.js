@@ -1,7 +1,27 @@
 
 export const capitalize = (string) => string.replace(/\b\w/g, (chr) => chr.toUpperCase())
+
+/**
+ * indent
+ *
+ * @param arg1.string - the string to indent
+ * @param arg1.by - the string to use as a form of indentation (e.g. spaces or tabs)
+ * @param arg1.noLead - when true only newlines will be indented, not the first line
+ * @returns {String} output
+ *
+ * @example
+ *     indentedString = indent({string: "blah\n    blah\nblah", by: "\t", noLead: false })
+ */
 export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + string.replace(/\n/g, "\n" + by)
 
+/**
+ * More Reliable than .toString()
+ *
+ * @returns {String} 
+ * @example
+ *     `${Symbol("blah")}` // throws error
+ *     toString(Symbol("blah")) // '[Symbol("blah")]'
+ */
 export const toString = (value)=>{
     // no idea why `${Symbol("blah")}` throws an error (and is the only primitive that throws)
     if (typeof value == 'symbol') {
@@ -51,6 +71,10 @@ export const digitsToEnglishArray = (value)=>{
     }
 }
 
+/**
+ * python's repr() for JS
+ *
+ */
 export const toRepresentation = (item)=>{
     const alreadySeen = new Set()
     const recursionWrapper = (item)=>{
