@@ -1,5 +1,5 @@
 import { toRepresentation } from "./string.js"
-import { primitiveArrayClasses, stableStringify } from "./value.js"
+import { typedArrayClasses, stableStringify } from "./value.js"
 
 const RealMap = globalThis.Map
 
@@ -75,7 +75,7 @@ const isIntendedSelfReferenceableContainer = (item) => (
     && !(item instanceof Function)
     && !(item instanceof Promise)
     && !(item instanceof Error)
-    && primitiveArrayClasses.includes(item.constructor)
+    && typedArrayClasses.includes(item.constructor)
 )
 const numberToSelfReferenceSymbol = new DefaultMap(()=>Symbol())
 const numberToArrayIndexSymbol = new DefaultMap(()=>Symbol())
@@ -108,7 +108,7 @@ export const keyValueify = (item, itemToSelfReferenceSymbol=(new RealMap())) => 
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]
             return classSpecificHashToKeyValue.weaklySet(`${item.stack}`, [ Symbol(`${++symbolCount}`), item ])
         // Uint16Array, Uint32Array, Uint8Array, Uint8ClampedArray, Int16Array, Int32Array, Int8Array, Float32Array, Float64Array, BigInt64Array, BigUint64Array
-        } else if (primitiveArrayClasses.includes(item.constructor)) {
+        } else if (typedArrayClasses.includes(item.constructor)) {
             // this could be a really long string which is why were only saving the hash # and not the string itself
             const hash = hashJsonPrimitive(`${item}`)
             // if an equivlent object already existed, this will return [key, thatValue] instead of [key, item]

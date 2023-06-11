@@ -5,9 +5,9 @@ import {
 } from "./value.js"
 
 // annoying naming workaround so these can be re-exported while staying tree-shakeable-friendly
-export var allKeys=allKeys1
-export var ownKeyDescriptions=ownKeyDescriptions1
-export var allKeyDescriptions=allKeyDescriptions1
+export const allKeys=allKeys1
+export const ownKeyDescriptions=ownKeyDescriptions1
+export const allKeyDescriptions=allKeyDescriptions1
 
 /**
  * Safely get nested values

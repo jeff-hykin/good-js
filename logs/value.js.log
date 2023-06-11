@@ -1,7 +1,7 @@
 10
 {
   doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
-  constructor: { value: [Function: Thing], writable: true, enumerable: false, configurable: true },
+  constructor: { value: [Class: Thing], writable: true, enumerable: false, configurable: true },
   howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
 }
 {
@@ -60,7 +60,7 @@
     enumerable: false,
     configurable: true
   },
-  constructor: { value: [Function: Thing], writable: true, enumerable: false, configurable: true },
+  constructor: { value: [Class: Thing], writable: true, enumerable: false, configurable: true },
   doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
   howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
 }

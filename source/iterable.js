@@ -1,41 +1,306 @@
-import { deepCopySymbol } from "./value.js"
+import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, ArrayIterator, isSyncIterableObjectOrContainer } from "./value.js"
 
 // ideas
     // reduce
-    // flatten(array,depth=Infinity)
-    // subtract (different from set subtraction)
 
-export const makeIterable = function* (object) {
-    // if already iterable
-    if (object instanceof Array || object instanceof Set) {
-        yield* object
-    } else if (object instanceof Map) {
-        yield* object.entries()
-    } else if (object instanceof Object) {
-        // Array, Set, string, custom classes, etc
-        if (object[Symbol.iterator] instanceof Function) {
-            yield* object
-            // pure objects
+/**
+ * itertools object
+ *
+ * @example
+ *     let asyncGenerator = async function*() { yeild* [ 1,2,3,] }
+ *     let result = await Iterable(asyncGenerator).map(
+ *         async (each)=>readTextFile(`${each}.txt`)
+ *     ).map(
+ *         each=>each.startsWith("somePrefix")
+ *     ).toArray
+ *
+ */
+export function Iterable(value, options={length:null, _createEmpty:false}) {
+    // 
+    // constructor that doesnt need "new"
+    // 
+        const { length, _createEmpty } = {length:null, _createEmpty:false, ...options }
+        if (_createEmpty) {
+            return this
+        }
+        const self = (this === undefined || this === globalThis) ? new Iterable(null, { _createEmpty: true }) : this
+
+        if (value instanceof Array) {
+            self.length = value.length
+        } else if (value instanceof Set) {
+            self.length = value.size
         } else {
-            yield* Object.entries(object)
+            self.length = length
         }
+        self._source = makeIterable(value)
+        if (self._source[Symbol.iterator]) {
+            self[Symbol.iterator] = self._source[Symbol.iterator].bind(self._source)
+        }
+        if (self._source[Symbol.asyncIterator]) {
+            self[Symbol.asyncIterator] = self._source[Symbol.asyncIterator].bind(self._source)
+        }
+
+        self[Symbol.isConcatSpreadable] = true
+
+    // 
+    // map
+    // 
+    self.map = function(func) {
+        const output = {
+            ...self._source,
+            [Symbol.iterator]: ()=>{
+                const iterator = iter(self._source)
+                return {
+                    next() {
+                        const { value, done } = iterator.next()
+                        return {
+                            value: func(value),
+                            done,
+                        }
+                    },
+                }
+            },
+        }
+        const includeAsyncIterator = isAsyncIterable(self._source) || func instanceof AsyncFunction
+        if (includeAsyncIterator) {
+            output[Symbol.asyncIterator] = ()=>{
+                const iterator = iter(self._source)
+                return {
+                    async next() {
+                        const { value, done } = await iterator.next()
+                        return {
+                            value: await func(value),
+                            done,
+                        }
+                    },
+                }
+            }
+        }
+        return new Iterable(output)
+    }
+    
+    // 
+    // filter
+    // 
+    self.filter = function(func) {
+        const output = {
+            ...self._source,
+            [Symbol.iterator]: ()=>{
+                const iterator = iter(self._source)
+                return {
+                    next() {
+                        while (1) {
+                            const result = iterator.next()
+                            if (result.done || func(result.value)) {
+                                return result
+                            }
+                        } 
+                    },
+                }
+            },
+        }
+        const includeAsyncIterator = isAsyncIterable(self._source) || func instanceof AsyncFunction
+        if (includeAsyncIterator) {
+            output[Symbol.asyncIterator] = ()=>{
+                const iterator = iter(self._source)
+                return {
+                    async next() {
+                        while (1) {
+                            const result = await iterator.next()
+                            if (result.done || await func(result.value)) {
+                                return result
+                            }
+                        } 
+                    },
+                }
+            }
+        }
+        return new Iterable(output)
+    }
+    
+    // 
+    // toArray (iterator to array)
+    // 
+    Object.defineProperties(self, {
+        toArray: {
+            get() {
+                if (self[Symbol.asyncIterator]) {
+                    return ((async ()=>{
+                        const iterator = self[Symbol.asyncIterator]()
+                        const output = []
+                        while (1) {
+                            const { value, done } = await iterator.next()
+                            if (done) {
+                                break
+                            }
+                            output.push(value)
+                        }
+                        return output
+                    })())
+                } else {
+                    return [...self]
+                }
+            },
+        },
+        flattened: {
+            get() {
+                if (self[Symbol.asyncIterator]) {
+                    return new Iterable({
+                        name: "fromFlat",
+                        ...self,
+                        [Symbol.asyncIterator]() {
+                            const iterator = iter(self)
+                            let secondLevelIter = null
+                            return {
+                                ...iterator,
+                                async next() {
+                                    top: while(1) {
+                                        // 
+                                        // inner loop
+                                        // 
+                                        if (secondLevelIter) {
+                                            // secondLevelIter has already been flattened
+                                            const value = await next(secondLevelIter)
+                                            if (value === Stop) {
+                                                secondLevelIter = null
+                                            } else {
+                                                return {value}
+                                            }
+                                        }
+                                        
+                                        // 
+                                        // outer loop
+                                        // 
+                                        const value = await next(iterator)
+                                        if (value === Stop) {
+                                            // top level done
+                                            return {done: true}
+                                        }
+                                        
+                                        if (!(value instanceof Object)) {
+                                            return {value}
+                                        }
+
+                                        if (typeof value[Symbol.iterator] == 'function' || typeof value[Symbol.asyncIterator] == 'function') {
+                                            secondLevelIter = iter((new Iterable(value)).flattened)
+                                            continue top
+                                        }
+                                        return {value}
+                                    }
+                                }
+                            }
+                        },
+                    })
+                } else {
+                    return new Iterable({
+                        name: "fromFlat",
+                        ...self,
+                        [Symbol.asyncIterator]() {
+                            const iterator = iter(self)
+                            let secondLevelIter = null
+                            return {
+                                ...iterator,
+                                next() {
+                                    top: while(1) {
+                                        // 
+                                        // inner loop
+                                        // 
+                                        if (secondLevelIter) {
+                                            // secondLevelIter has already been flattened
+                                            const value = next(secondLevelIter)
+                                            if (value === Stop) {
+                                                secondLevelIter = null
+                                            } else {
+                                                return {value}
+                                            }
+                                        }
+                                        
+                                        // 
+                                        // outer loop
+                                        // 
+                                        const value = next(iterator)
+                                        if (value === Stop) {
+                                            // top level done
+                                            return {done: true}
+                                        }
+                                        
+                                        if (!(value instanceof Object)) {
+                                            return {value}
+                                        }
+
+                                        if (typeof value[Symbol.iterator] == 'function' || typeof value[Symbol.asyncIterator] == 'function') {
+                                            secondLevelIter = iter((new Iterable(value)).flattened)
+                                            continue top
+                                        }
+                                        return {value}
+                                    }
+                                }
+                            }
+                        },
+                    })
+                }
+            },
+        },
+    })
+    return self
+}
+
+export const emptyIterator = (function*(){})()
+export const makeIterable = (object)=>{
+    if (object == null) {
+        return emptyIterator
+    }
+    // Array, Set, Map, string, Uint8Array, etc
+    if (object[Symbol.iterator] instanceof Function || object[Symbol.asyncIterator] instanceof Function) {
+        return object
+    }
+    
+    // if pure object, iterate over entries
+    if (Object.getPrototypeOf(object).constructor == Object) {
+        return Object.entries(object)
+    }
+
+    // everything else (Date, RegExp, Boolean) becomes empty iterator
+    return emptyIterator
+}
+
+export const iter = (object)=>{
+    const iterable = makeIterable(object)
+    if (iterable[Symbol.asyncIterator]) {
+        return iterable[Symbol.asyncIterator]()
+    } else {
+        return iterable[Symbol.iterator]()
     }
 }
 
+export const Stop = Symbol("iterationStop")
+const handleResult = ({value, done})=>done?Stop:value
 
-export const map = function* (iterable, func) {
-    iterable = makeIterable(iterable)
-    for (const each of iterable) {
-        yield func(each)
-    }
-}
-
-export const filter = function* (iterable, func) {
-    iterable = makeIterable(iterable)
-    for (const each of iterable) {
-        if (func(each)) {
-            yield each
+/**
+ * next
+ *
+ * @param object - an iterator/generator (needs a next method)
+ * @returns {Stop|any} output - will either be the stop symbol or will be the next value
+ *
+ * @example
+ *     import { iter, next, Stop } from "https://deno.land/x/good/iterable.js"
+ *     // Note: works on async iterators, and returns promises in that case
+ *     const iterable = iter([1,2,3])
+ *     next(iterable) // 1
+ *     next(iterable) // 2
+ *     next(iterable) // 3
+ *     next(iterable) == Stop // true
+ */
+export const next = (object)=>{
+    if (object.next instanceof Function) {
+        const result = object.next()
+        if (result instanceof Promise) {
+            return result.then(handleResult)
+        } else {
+            return handleResult(result)
         }
+    } else {
+        throw Error(`can't call next(object) on ${object} as there is no object.next() method`, object)
     }
 }
 
@@ -49,7 +314,7 @@ export const filter = function* (iterable, func) {
  *     // [  [1,1], [2,2], [3,undefined]  ]
  */
 export const zip = function* (...iterables) {
-    iterables = iterables.map((each) => makeIterable(each))
+    iterables = iterables.map((each) => iter(each))
     while (true) {
         const nexts = iterables.map((each) => each.next())
         // if all are done then stop
@@ -88,11 +353,9 @@ export const count = function* ({ start = 0, end = Infinity, step = 1 }) {
 export const enumerate = function* (...iterables) {
     let index = 0
     for (const each of zip(...iterables)) {
-        yield [index, ...each]
+        yield [index++, ...each]
     }
 }
-
-// TODO: flatIterator
 
 /**
  * Permutations
