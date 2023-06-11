@@ -35,6 +35,7 @@ import { isAsyncIterable } from "./value.js"
  *     })
  * @param {String|Iterator|AsyncIterator} arg1.input - can be a string, array of lines (strings), iterator of lines, 
  * @param {String} arg1.seperator - splits rows by this seperator
+ * @param {String} arg1.endOfLinePattern - splits lines by this seperator
  * @param {Boolean} arg1.firstRowIsColumnNames - default=false
  * @param {Boolean} arg1.skipEmptyLines - default=true
  * @param {String|null} arg1.commentSymbol - default=null
@@ -47,6 +48,7 @@ import { isAsyncIterable } from "./value.js"
 export function parseCsv({
     input=null,
     seperator=",",
+    endOfLinePattern=/\r?\n/g,
     firstRowIsColumnNames=false,
     columnNames=null,
     skipEmptyLines=true,
@@ -59,7 +61,7 @@ export function parseCsv({
     
     function handleLine(eachLine) {
         // remove all weird whitespace as a precaution
-        eachLine = eachLine.replace(/\r|\n/g, "")
+        eachLine = eachLine.replace(endOfLinePattern, "")
         
         // 
         // comments
@@ -171,7 +173,7 @@ export function parseCsv({
         return { comments, columnNames, rows }
     }
     
-    const iterable = makeIterable(typeof input == "string" ? input.split(/\r?\n/g) : input)
+    const iterable = makeIterable(typeof input == "string" ? input.split(endOfLinePattern) : input)
     if (!isAsyncIterable(iterable)) {
         return afterLinesAreHandled()
     } else {
