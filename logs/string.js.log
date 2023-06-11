@@ -2,3 +2,5 @@ Howdy_howdy_howdy
 howdyHowdyHowdy
 HowdyHowdyHowdy
     howdy_howdy_howdy
+levenshteinDistanceOrdering({word: "howdee", otherWords:[ "bob", "heydo", "how", "howdy", "gigem" ]}) is: [ "howdy", "how", "heydo", "bob", "gigem" ]
+levenshteinDistanceBetween("howdy", "howdee") is: 2

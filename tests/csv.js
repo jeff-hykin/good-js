@@ -12,4 +12,14 @@ var csvOutput = createCsv({
     columnNames,
     rows,
 })
+
 console.debug(`csvOutput is:`,csvOutput)
+
+try {
+    var {comments, columnNames, rows} = await parseCsv({
+        input: FileSystem.readLinesIteratively("../README.md"),
+        seperator: "\t",
+    })
+} catch (error) {
+    console.error(error)
+}

@@ -1,6 +1,17 @@
 import { makeIterable } from "./iterable.js"
 import { isAsyncIterable } from "./value.js"
+import { levenshteinDistanceOrdering } from "./string.js"
 
+// this is mostly because I just can't remeber to spell seperator as separator
+const argumentNames = [
+    "input",
+    "separator",
+    "lineSeparator",
+    "firstRowIsColumnNames",
+    "columnNames",
+    "skipEmptyLines",
+    "commentSymbol",
+]
 /**
  * convert csv/tsv input to list-of-list/objects
  *
@@ -9,14 +20,14 @@ import { isAsyncIterable } from "./value.js"
  *     // tsv, first row is column names
  *     var { comments, columnNames, rows } = parseCsv({
  *         input: "col1\tcol2\n1\t1\n2\t2",
- *         seperator: "\t",
+ *         separator: "\t",
  *         firstRowIsColumnNames: true,
  *     })
  * 
  *     // csv, no column names (list of list output)
  *     var { comments, columnNames, rows } = parseCsv({
  *         input: "col1,col2\n1,1\n2,2",
- *         seperator: ",",
+ *         separator: ",",
  *     })
  *     
  *     // async iterator example
@@ -31,11 +42,11 @@ import { isAsyncIterable } from "./value.js"
  *             "1,1",
  *             "2,2",
  *         ],
- *         seperator: ",",
+ *         separator: ",",
  *     })
  * @param {String|Iterator|AsyncIterator} arg1.input - can be a string, array of lines (strings), iterator of lines, 
- * @param {String} arg1.seperator - splits rows by this seperator
- * @param {String} arg1.endOfLinePattern - splits lines by this seperator
+ * @param {String} arg1.separator - usually "," or "\t", its the 'comma' of 'comma separated values'
+ * @param {String} arg1.lineSeparator - usually is a newline, or \r\n
  * @param {Boolean} arg1.firstRowIsColumnNames - default=false
  * @param {Boolean} arg1.skipEmptyLines - default=true
  * @param {String|null} arg1.commentSymbol - default=null
@@ -47,13 +58,27 @@ import { isAsyncIterable } from "./value.js"
  */
 export function parseCsv({
     input=null,
-    seperator=",",
-    endOfLinePattern=/\r?\n/g,
+    separator=",",
+    lineSeparator=/\r?\n/g,
     firstRowIsColumnNames=false,
     columnNames=null,
     skipEmptyLines=true,
     commentSymbol=null,
+    ...other
 }) {
+    // arg checker
+    if (Object.keys(other).length > 0) {
+        const keys = Object.keys(other)
+        const spellingHelp = keys.map(
+            each=>`for ${JSON.stringify(each)} maybe you meant: ${levenshteinDistanceOrdering({word: each, otherWords: argumentNames})[0]}`
+        ).join("\n        ")
+        throw Error(`
+            When calling parseCsv() some unrecognized arguments were given
+            so I'm guessing you may have misspelled something:
+                ${spellingHelp}
+            
+        `.replace(/\n            /g,"\n"))
+    }
     let comments     = []
     let rows         = []
     let fileColumnNames = []
@@ -61,7 +86,7 @@ export function parseCsv({
     
     function handleLine(eachLine) {
         // remove all weird whitespace as a precaution
-        eachLine = eachLine.replace(endOfLinePattern, "")
+        eachLine = eachLine.replace(lineSeparator, "")
         
         // 
         // comments
@@ -85,7 +110,7 @@ export function parseCsv({
         // 
         // cell data
         //
-        let cells = eachLine.split(seperator)
+        let cells = eachLine.split(separator)
         let cellsWithTypes = []
         let skipTo = 0
         let index = -1
@@ -111,7 +136,7 @@ export function parseCsv({
                     }
                 } else {
                     // if firstChar == '"' or firstChar == '[' or firstChar == '{'
-                    // this gets complicated because strings/objects/lists could contain an escaped seperator
+                    // this gets complicated because strings/objects/lists could contain an escaped separator
                     const remainingEndIndicies = []
                     let remainingIndex = index
                     while (remainingIndex <= cells.length) {
@@ -123,7 +148,7 @@ export function parseCsv({
                         try {
                             cellsWithTypes.push(
                                 JSON.parse(
-                                    cells.slice(index,eachRemainingEndIndex).join(seperator)
+                                    cells.slice(index,eachRemainingEndIndex).join(separator)
                                 )
                             )
                             skipTo = eachRemainingEndIndex
@@ -173,7 +198,7 @@ export function parseCsv({
         return { comments, columnNames, rows }
     }
     
-    const iterable = makeIterable(typeof input == "string" ? input.split(endOfLinePattern) : input)
+    const iterable = makeIterable(typeof input == "string" ? input.split(lineSeparator) : input)
     if (!isAsyncIterable(iterable)) {
         return afterLinesAreHandled()
     } else {
@@ -194,7 +219,7 @@ export function parseCsv({
  *     var csvString = createCsv({
  *         columnNames: [ "column1", "column2", "column3", ],
  *         rows: [[1,2,3], [4,5,6]],
- *         seperator: ",",
+ *         separator: ",",
  *         alignColumns: false,
  *     })
  * 
@@ -206,7 +231,7 @@ export function parseCsv({
  *     // round-trip (almost) with createCsv(parseCsv())
  *     var { comments, columnNames, rows } = parseCsv({
  *         input: "col1\tcol2\n1\t1\n2\t2",
- *         seperator: "\t",
+ *         separator: "\t",
  *         firstRowIsColumnNames: true,
  *         commentSymbol: "#",
  *     })
@@ -220,7 +245,7 @@ export function parseCsv({
  * @returns {String} output - description
  *
  */
-export function createCsv({ columnNames, rows, seperator=",", eol="\n", commentSymbol=null, comments=[], alignColumns=true }) {
+export function createCsv({ columnNames, rows, separator=",", eol="\n", commentSymbol=null, comments=[], alignColumns=true }) {
     if (comments.length && !commentSymbol) {
         throw Error(`\n\ncsv.write() was given comments, but was not given a commentSymbol. Please provide a commentSymbol argument\nex:\n    csv.write({ commentSymbol: "#", })\n`)
     }
@@ -232,7 +257,7 @@ export function createCsv({ columnNames, rows, seperator=",", eol="\n", commentS
         }
     }
     const elementToString = (element) => {
-        // strings are checked for seperators, whitespace, etc
+        // strings are checked for separators, whitespace, etc
         if (typeof element == 'string') {
             // check for any reason that could mean the string needs to be quoted
             // if it passes all those checks, just use the unquoted string
@@ -240,7 +265,7 @@ export function createCsv({ columnNames, rows, seperator=",", eol="\n", commentS
                 ! (
                     containsCommentSymbol(element) ||
                     element.trim().length != element.length ||
-                    element.match(seperator) ||
+                    element.match(separator) ||
                     element.match(eol) ||
                     element.match('\n') ||
                     element.match('\r') ||
@@ -346,7 +371,7 @@ export function createCsv({ columnNames, rows, seperator=",", eol="\n", commentS
     // 
     for (const eachRow of simplifiedRows) {
         if (eachRow instanceof Array) {
-            output += eachRow.join(seperator) + eol
+            output += eachRow.join(separator) + eol
         } else {
             output += eachRow + eol
         }

@@ -216,3 +216,40 @@ export function escapeRegexMatch(string) {
 export function escapeRegexReplace(string) {
     return string.replace(/\$/g, '$$$$')
 }
+
+// https://stackoverflow.com/questions/2460177/edit-distance-in-python, translated to JS
+export function levenshteinDistanceBetween(s1, s2) {
+    if (s1.length > s2.length) {
+        ;[s1, s2] = [s2, s1]
+    }
+
+    let distances = Array.from({ length: s1.length + 1 }, (_, i) => i)
+    for (let i2 = 0; i2 < s2.length; i2++) {
+        let distances_ = [i2 + 1]
+        for (let i1 = 0; i1 < s1.length; i1++) {
+            let c1 = s1[i1]
+            let c2 = s2[i2]
+            if (c1 === c2) {
+                distances_.push(distances[i1])
+            } else {
+                distances_.push(1 + Math.min(distances[i1], distances[i1 + 1], distances_[distances_.length - 1]))
+            }
+        }
+        distances = distances_
+    }
+    return distances[distances.length - 1]
+}
+
+/**
+ * Sorts an array of words based on their Levenshtein distance to a target word.
+ *
+ * @param {Object} options - The options for sorting.
+ * @param {string} options.word - The target word for calculating Levenshtein distances.
+ * @param {string[]} options.otherWords - An array of words to be sorted.
+ * @returns {string[]} The sorted array of words based on their Levenshtein distance to the target word.
+ */
+export function levenshteinDistanceOrdering({ word, otherWords }) {
+    word = word.toLowerCase()
+    let prioritized = [...otherWords].sort((a, b) => levenshteinDistanceBetween(word, a) - levenshteinDistanceBetween(word, b))
+    return prioritized
+}
