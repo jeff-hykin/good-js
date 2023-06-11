@@ -24,6 +24,12 @@ const argumentNames = [
  *         firstRowIsColumnNames: true,
  *     })
  * 
+ *     // can also just get rows without other outputs
+ *     var rows = parseCsv({
+ *         input: "col1\tcol2\n1\t1\n2\t2",
+ *         separator: ",",
+ *     })
+ * 
  *     // csv, no column names (list of list output)
  *     var { comments, columnNames, rows } = parseCsv({
  *         input: "col1,col2\n1,1\n2,2",
@@ -194,8 +200,10 @@ export function parseCsv({
                 }
             }
         }
-        
-        return { comments, columnNames, rows }
+        rows.columnNames = columnNames
+        rows.comments = comments
+        rows.rows = rows
+        return rows
     }
     
     const iterable = makeIterable(typeof input == "string" ? input.split(lineSeparator) : input)
