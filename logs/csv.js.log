@@ -5,6 +5,7 @@
     [ "# good-js" ],
     [ "My Generic Javascript Toolbox" ],
     [ "```js" ],
+    [ 'import DateTime from "https://deno.land/x/good@1.0.0/date.js"' ],
     [
       "import { zip",
       "enumerate",
@@ -40,7 +41,6 @@
       "escapeRegexMatch",
       'escapeRegexReplace } from "https://deno.land/x/good@1.0.0/string.js"'
     ],
-    [ 'import DateTime from "https://deno.land/x/good@1.0.0/date.js"' ],
     [
       "import { generateKeys",
       "encrypt",
@@ -95,11 +95,11 @@
 csvOutput is: "# good-js"                                                  
 My Generic Javascript Toolbox                                
 ```js                                                        
+import DateTime from "https://deno.land/x/good@1.0.0/date.js"
 import { zip                                                 ,enumerate                                                           ,count         ,permute                                                           ,combinations      ,wrapAroundGet } from "https://deno.land/x/good@1.0.0/array.js"      
 import { intersection                                        ,subtract } from "https://deno.land/x/good@1.0.0/set.js"             
 import { stats                                               ,sum                                                                 ,spread        ,normalizeZeroToOne                                                ,roundedUpToNearest,roundedDownToNearest } from "https://deno.land/x/good@1.0.0/math.js"
 import { capitalize                                          ,indent                                                              ,toCamelCase   ,digitsToEnglishArray                                              ,toPascalCase      ,toKebabCase                                                         ,toSnakeCase,toScreamingtoKebabCase,toScreamingtoSnakeCase,toRepresentation,toString           ,escapeRegexMatch                                                         ,escapeRegexReplace } from "https://deno.land/x/good@1.0.0/string.js"
-import DateTime from "https://deno.land/x/good@1.0.0/date.js"
 import { generateKeys                                        ,encrypt                                                             ,decrypt       ,hashers } from "https://deno.land/x/good@1.0.0/encryption.js"     
 import { deferredPromise                                     ,recursivePromiseAll } from "https://deno.land/x/good@1.0.0/async.js"
 import { Event                                               ,trigger                                                             ,everyTime     ,once } from "https://deno.land/x/good@1.0.0/events.js"            
