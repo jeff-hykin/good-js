@@ -192,7 +192,7 @@ export function parseCsv({
         // if fileColumnNames
         columnNames = columnNames || fileColumnNames
         if (columnNames) {
-            for (const row of rows) {
+            for (const eachRow of rows) {
                 let columnIndex = -1
                 for (const eachColumnName of columnNames) {
                     columnIndex+=1
