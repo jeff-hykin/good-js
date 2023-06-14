@@ -196,7 +196,7 @@ export function parseCsv({
                 let columnIndex = -1
                 for (const eachColumnName of columnNames) {
                     columnIndex+=1
-                    row[eachColumnName] = eachRow[columnIndex]
+                    eachRow[eachColumnName] = eachRow[columnIndex]
                 }
             }
         }
