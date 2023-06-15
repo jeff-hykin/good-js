@@ -1,6 +1,44 @@
 #!/usr/bin/env -S deno run --allow-all
 import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter, flatten } from "../source/iterable.js"
 
+
+var basicArrayIterable = [
+    [
+        1.0,
+        [
+            '1.1.1',
+            '1.1.2',
+            '1.1.3',
+        ],
+        1.2,
+        [
+            '1.3.1',
+            '1.3.2',
+            '1.3.3',
+        ],
+    ],
+    [
+        2.0,
+        [
+            '2.1.1',
+            '2.1.2',
+            '2.1.3',
+        ],
+        2.2,
+        [
+            '2.3.1',
+            '2.3.2',
+            '2.3.3',
+        ],
+    ],
+]
+
+const asyncExampleGenerator = async function*() {
+    for (let each of basicArrayIterable) {
+        yield each
+    }
+}
+
 const listOfSubpaths = await concurrentlyTransform({
     iterator: Deno.readDir("../"),
     awaitAll: true,
@@ -56,36 +94,7 @@ console.log(odd      ) // 1,3,5
 console.log(divisBy3 ) // 3
 
 
-var basicArrayIterable = [
-    [
-        1.0,
-        [
-            '1.1.1',
-            '1.1.2',
-            '1.1.3',
-        ],
-        1.2,
-        [
-            '1.3.1',
-            '1.3.2',
-            '1.3.3',
-        ],
-    ],
-    [
-        2.0,
-        [
-            '2.1.1',
-            '2.1.2',
-            '2.1.3',
-        ],
-        2.2,
-        [
-            '2.3.1',
-            '2.3.2',
-            '2.3.3',
-        ],
-    ],
-]
+
 var flattened = flatten({
     depth: 0,
     iterable: basicArrayIterable,
@@ -101,3 +110,9 @@ var flattened = flatten({
     depth: 2,
 })
 console.debug(`flattened(depth=2) is:`,[...flattened])
+
+
+
+
+console.debug(`new Iterable(basicArrayIterable).flat() is:`,[...new Iterable(basicArrayIterable).flat()])
+console.debug(`new Iterable(async basicArrayIterable).flat() is:`,await asyncIteratorToList( new Iterable(asyncExampleGenerator()).flat() ))

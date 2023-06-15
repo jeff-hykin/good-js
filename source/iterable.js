@@ -119,6 +119,11 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
     }
 
     self.forkAndFilter = ({...args},...other)=>forkAndFilter({...args, data: self}, ...other)
+    self.flat = (depth=1, asyncsInsideSyncIterable=false)=>{
+        return new Iterable(
+            flatten({ iterable: self, depth, asyncsInsideSyncIterable  })
+        )
+    }
     
     // 
     // toArray (iterator to array)
