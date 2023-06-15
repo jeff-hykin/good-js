@@ -113,3 +113,21 @@ export const combinations = function (elements, maxLength, minLength) {
 export const slices = function* (elements) {
     return [...slicesIter(elements, maxLength, minLength)]
 }
+
+export class NamedArray extends Array {
+    toJSON() {
+        return {...this}
+    }
+    toString() {
+        return {...this}
+    }
+    [Symbol.for("customInspect")]() {
+        return {...this}
+    }
+    [Symbol.for("Deno.customInspect")]() {
+        return {...this}
+    }
+    [Symbol.for("nodejs.util.inspect.custom")]() {
+        return {...this}
+    }
+}

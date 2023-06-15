@@ -253,3 +253,8 @@ export function levenshteinDistanceOrdering({ word, otherWords }) {
     let prioritized = [...otherWords].sort((a, b) => levenshteinDistanceBetween(word, a) - levenshteinDistanceBetween(word, b))
     return prioritized
 }
+
+const textDecoder = new TextDecoder('utf-8')
+const textEncoder = new TextEncoder('utf-8')
+export const utf8BytesToString = textDecoder.decode.bind(textDecoder)
+export const stringToUtf8Bytes = textEncoder.encode.bind(textEncoder)

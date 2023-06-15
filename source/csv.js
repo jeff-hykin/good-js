@@ -1,6 +1,8 @@
-import { makeIterable } from "./iterable.js"
-import { isAsyncIterable } from "./value.js"
-import { levenshteinDistanceOrdering } from "./string.js"
+import { makeIterable, iter, next, Stop, asyncIteratorToList, forkAndFilter, enumerate, Iterable, } from "./iterable.js"
+import { isAsyncIterable, AsyncFunction, } from "./value.js"
+import { deferredPromise } from "./async.js"
+import { NamedArray } from "./array.js"
+import { levenshteinDistanceOrdering, utf8BytesToString } from "./string.js"
 
 // this is mostly because I just can't remeber to spell seperator as separator
 const argumentNames = [
@@ -12,6 +14,7 @@ const argumentNames = [
     "skipEmptyLines",
     "commentSymbol",
 ]
+
 /**
  * convert csv/tsv input to list-of-list/objects
  *
@@ -56,6 +59,7 @@ const argumentNames = [
  * @param {Boolean} arg1.firstRowIsColumnNames - default=false
  * @param {Boolean} arg1.skipEmptyLines - default=true
  * @param {String|null} arg1.commentSymbol - default=null
+ * @param {String|null} arg1.returnRowsAs - null, "array", "iterator", null means same as input
  * @returns {Object} output - 
  * @returns {[String]} output.comments - 
  * @returns {[String]} output.columnNames - 
@@ -70,6 +74,7 @@ export function parseCsv({
     columnNames=null,
     skipEmptyLines=true,
     commentSymbol=null,
+    returnRowsAs=null,
     ...other
 }) {
     // arg checker
@@ -85,39 +90,12 @@ export function parseCsv({
             
         `.replace(/\n            /g,"\n"))
     }
-    let comments     = []
-    let rows         = []
-    let fileColumnNames = []
-    let isFirstDataRow = true
     
-    function handleLine(eachLine) {
-        // remove all weird whitespace as a precaution
-        eachLine = eachLine.replace(lineSeparator, "")
-        
-        // 
-        // comments
-        // 
-        if (commentSymbol) {
-            if (eachLine.startsWith(commentSymbol)) {
-                comments.push(
-                    eachLine.slice(commentSymbol.length)
-                )
-                return
-            }
-        }
-        
-        // 
-        // empty lines
-        // 
-        if (skipEmptyLines && eachLine.trim().length == 0) {
-            return
-        }
-        
-        // 
-        // cell data
-        //
-        let cells = eachLine.split(separator)
-        let cellsWithTypes = []
+    let columnNamesForParsing = columnNames
+    const isAComment = (line)=>commentSymbol&&line.startsWith(commentSymbol)
+    const getCells = (eachLine,...args)=>{
+        const cells = eachLine.split(separator)
+        const cellsWithTypes = []
         let skipTo = 0
         let index = -1
         for (let eachCell of cells) {
@@ -173,50 +151,178 @@ export function parseCsv({
                 }
             }
         }
-        
-        // 
-        // fileColumnNames
-        // 
-        if (isFirstDataRow) {
-            isFirstDataRow = false
-            if (firstRowIsColumnNames) {
-                fileColumnNames = cellsWithTypes.map(each=>`${each}`.trim())
-                return
+
+        if (columnNamesForParsing) {
+            const namedArray = new NamedArray(cellsWithTypes.length)
+            for (const [eachIndex, eachName, eachValue] of enumerate(columnNames, cellsWithTypes)) {
+                namedArray[eachIndex] = eachValue
+                namedArray[eachName] = eachValue
             }
+            return namedArray
         }
-        
-        rows.push(cellsWithTypes)
+        return cellsWithTypes
     }
     
-    function afterLinesAreHandled() {
-        // if fileColumnNames
-        columnNames = columnNames || fileColumnNames
-        if (columnNames) {
-            for (const eachRow of rows) {
-                let columnIndex = -1
-                for (const eachColumnName of columnNames) {
-                    columnIndex+=1
-                    eachRow[eachColumnName] = eachRow[columnIndex]
+    const isNonEmptyLine = skipEmptyLines ? ()=>true : (line)=>line.trim().length != 0
+    var { comments, rows } = (
+        Iterable(
+            typeof input == "string" ? input.split(lineSeparator) : input
+        ).map(
+            eachLine=>{
+                if (typeof eachLine != 'string') {
+                    eachLine = utf8BytesToString(eachLine) // convert to string
                 }
+                return eachLine.replace(lineSeparator, "") // sanity (makes more sense if its an async iterable)
             }
-        }
-        rows.columnNames = columnNames
-        rows.comments = comments
-        rows.rows = rows
-        return rows
-    }
+        ).flat(
+            1
+        ).filter(
+            isNonEmptyLine
+        ).forkAndFilter({
+            filters: {
+                comments: isAComment,
+                rows: (line)=>!isAComment(line),
+            },
+        })
+    )
     
-    const iterable = makeIterable(typeof input == "string" ? input.split(lineSeparator) : input)
-    if (!isAsyncIterable(iterable)) {
-        return afterLinesAreHandled()
-    } else {
-        // return a promise because we have to in order to process the iterator
-        return ((async ()=>{
-            for await (const eachLine of iterable) {
-                handleLine(eachLine)
+    // 
+    // handle columnNames
+    // 
+    rows = rows.map(getCells)
+    if (!firstRowIsColumnNames) {
+        const shouldReturnArray = returnRowsAs=="array" || (returnRowsAs==null && input instanceof Array)
+        if (shouldReturnArray) {
+            if (!isAsyncIterable(input)) {
+                rows = [...rows]
+                rows.comments = [...comments]
+                rows.columnNames = columnNames||[]
+            } else {
+                return new Promise(async (resolve, reject)=>{
+                    try {
+                        const outputValue = []
+                        for await (const each of rows) {
+                            outputValue.push(each)
+                        }
+                        const outputComments = []
+                        for await (const each of comments) {
+                            outputComments.push(each)
+                        }
+                        outputValue.rows = rows
+                        outputValue.comments = outputComments
+                        outputValue.columnNames = columnNames||[]
+                    } catch (error) {
+                        reject(error)
+                    }
+                })
             }
-            return afterLinesAreHandled()
-        })())
+        } else {
+            rows.rows = rows
+            rows.comments = comments
+            rows.columnNames = columnNames||[]
+            return rows
+        }
+    // firstRowIsColumnNames
+    } else {
+        const shouldReturnArray = returnRowsAs=="array" || (returnRowsAs==null && input instanceof Array)
+        if (isAsyncIterable(input)) {
+            if (!shouldReturnArray) {
+                var { iteratorForFirst, rows } = rows.forkAndFilter({
+                    filters: {
+                        firstElement: (line,index)=>index===0,
+                        rows: (line,index)=>index!==0,
+                    },
+                })
+                const promiseOutput = new Promise(async (resolve, reject)=>{
+                    try {
+                        const firstValue = await next(iteratorForFirst)
+                        // no first value
+                        if (firstValue == Stop) {
+                            const output = []
+                            output.rows = output
+                            output.comments = comments
+                            output.columnNames = columnNames||[]
+                            return resolve(output)
+                        }
+                        const columnNamesFromInput = firstValue.map(each=>`${each}`)
+                        const columnNamesForReturning = columnNamesFromInput || columnNames
+                        columnNamesForParsing = columnNames || columnNamesFromInput
+                        rows.rows = rows
+                        rows.comments = comments
+                        rows.columnNames = columnNamesForReturning
+                        promiseOutput.columnNames.resolve(columnNamesForReturning)
+                        resolve(rows)
+                    } catch (error) {
+                        promiseOutput.columnNames.reject(error)
+                        reject(error)
+                    }
+                })
+                promiseOutput.rows = rows
+                promiseOutput.comments = comments
+                promiseOutput.columnNames = deferredPromise()
+                promiseOutput[Symbol.asyncIterator] = async function*(){
+                    for await (const each of rows) {
+                        yield each
+                    }
+                }
+                return promiseOutput
+            // should return array
+            } else {
+                return new Promise(async (resolve, reject)=>{
+                    try {
+                        const firstValue = await next(rows)
+                        const output = []
+                        // no first value
+                        if (firstValue == Stop) {
+                            output.rows = output
+                            output.comments = comments
+                            output.columnNames = columnNames||[]
+                            return resolve(output)
+                        }
+                        const columnNamesFromInput = firstValue.map(each=>`${each}`)
+                        const columnNamesForReturning = columnNamesFromInput || columnNames
+                        columnNamesForParsing = columnNames || columnNamesFromInput
+                        for await (const each of rows) {
+                            output.push(each)
+                        }
+                        output.rows = output
+                        output.comments = comments
+                        output.columnNames = columnNamesForReturning
+                        resolve(rows)
+                    } catch (error) {
+                        reject(error)
+                    }
+                })
+            }
+        // input is not an async iterator
+        } else {
+            var { iteratorForFirst, rows } = rows.forkAndFilter({
+                filters: {
+                    firstElement: (line,index)=>index===0,
+                    rows: (line,index)=>index!==0,
+                },
+            })
+            const firstValue = next(rows)
+            // no first value
+            if (firstValue == Stop) {
+                const output = []
+                output.rows = output
+                output.comments = comments
+                output.columnNames = columnNames||[]
+                return output
+            }
+            const columnNamesFromInput = firstValue.map(each=>`${each}`)
+            const columnNamesForReturning = columnNamesFromInput || columnNames
+            columnNamesForParsing = columnNames || columnNamesFromInput
+            
+            if (shouldReturnArray) {
+                rows = [...rows]
+            }
+            rows.rows = rows
+            rows.comments = comments
+            rows.columnNames = columnNamesForReturning
+            return rows
+        }
     }
 }
 
@@ -257,6 +363,18 @@ export function createCsv({ columnNames, rows, separator=",", eol="\n", commentS
     if (comments.length && !commentSymbol) {
         throw Error(`\n\ncsv.write() was given comments, but was not given a commentSymbol. Please provide a commentSymbol argument\nex:\n    csv.write({ commentSymbol: "#", })\n`)
     }
+    if (isAsyncIterable(comments) || comments instanceof Promise) {
+        // recursive, but now the comments are a list, and the output is a promise
+        return asyncIteratorToList(comments).then(
+            (comments)=>createCsv({columnNames,rows,separator,eol,commentSymbol,comments,alignColumns})
+        )
+    }
+    if (isAsyncIterable(rows) || rows instanceof Promise) {
+        return asyncIteratorToList(rows).then(
+            (rows)=>createCsv({columnNames,rows,separator,eol,commentSymbol,comments,alignColumns})
+        )
+    }
+
     const containsCommentSymbol = (string)=>{
         if (!commentSymbol) {
             return false 

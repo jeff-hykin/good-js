@@ -1,19 +1,23 @@
 #!/usr/bin/env -S deno run --allow-all
 import { parseCsv, createCsv } from "../source/csv.js"
-import { FileSystem, glob } from "https://deno.land/x/quickr@0.6.28/main/file_system.js"
+import { asyncIteratorToList } from "../source/iterable.js"
+import { FileSystem, glob } from "https://deno.land/x/quickr@0.6.29/main/file_system.js"
 
 var {comments, columnNames, rows} = await parseCsv({
     input: FileSystem.readLinesIteratively("../README.md"),
 })
 console.debug(`({comments, columnNames, rows}) is:`,({comments, columnNames, rows}))
-var csvOutput = createCsv({
+var csvOutput = await createCsv({
     commentSymbol: "#",
     comments,
     columnNames,
     rows,
 })
 
-console.debug(`csvOutput is:`,csvOutput)
+var rows = parseCsv({
+    input: FileSystem.readLinesIteratively("../README.md"),
+})
+console.debug(`asyncIteratorToList(rows.map(each=>each.length)):`,await asyncIteratorToList(rows.map(each=>each.length)))
 
 try {
     var {comments, columnNames, rows} = await parseCsv({
@@ -21,5 +25,6 @@ try {
         seperator: "\t",
     })
 } catch (error) {
-    console.error(error)
+    console.log("THE ERROR BELOW IS INTENTIONAL")
+    console.log(error)
 }
