@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter } from "../source/iterable.js"
+import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter, flatten } from "../source/iterable.js"
 
 const listOfSubpaths = await concurrentlyTransform({
     iterator: Deno.readDir("../"),
@@ -54,3 +54,50 @@ console.log("one is async output")
 console.log(even     ) // 2,4
 console.log(odd      ) // 1,3,5
 console.log(divisBy3 ) // 3
+
+
+var basicArrayIterable = [
+    [
+        1.0,
+        [
+            '1.1.1',
+            '1.1.2',
+            '1.1.3',
+        ],
+        1.2,
+        [
+            '1.3.1',
+            '1.3.2',
+            '1.3.3',
+        ],
+    ],
+    [
+        2.0,
+        [
+            '2.1.1',
+            '2.1.2',
+            '2.1.3',
+        ],
+        2.2,
+        [
+            '2.3.1',
+            '2.3.2',
+            '2.3.3',
+        ],
+    ],
+]
+var flattened = flatten({
+    depth: 0,
+    iterable: basicArrayIterable,
+})
+console.debug(`flattened(depth=0) is:`,flattened)
+var flattened = flatten({
+    iterable: basicArrayIterable,
+    depth: 1,
+})
+console.debug(`flattened(depth=1) is:`,[...flattened])
+var flattened = flatten({
+    iterable: basicArrayIterable,
+    depth: 2,
+})
+console.debug(`flattened(depth=2) is:`,[...flattened])

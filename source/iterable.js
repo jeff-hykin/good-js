@@ -117,6 +117,8 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         }
         return new Iterable(output)
     }
+
+    self.forkAndFilter = ({...args},...other)=>forkAndFilter({...args, data: self}, ...other)
     
     // 
     // toArray (iterator to array)
@@ -146,7 +148,6 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
             get() {
                 if (self[Symbol.asyncIterator]) {
                     return new Iterable({
-                        name: "fromFlat",
                         ...self,
                         [Symbol.asyncIterator]() {
                             const iterator = iter(self)
@@ -193,7 +194,6 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
                     })
                 } else {
                     return new Iterable({
-                        name: "fromFlat",
                         ...self,
                         [Symbol.asyncIterator]() {
                             const iterator = iter(self)
@@ -243,6 +243,48 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         },
     })
     return self
+}
+
+/**
+ * flattens iterables/async iterables
+ *
+ *
+ * @param arg1.iterable
+ * @param arg1.depth
+ * @param arg1.asyncsInsideSyncIterable - if the top level iterable is synchonous, but there are nested items that are async iterables, and you want to flatten those async iterables, then set this argument to true
+ * @returns {Object} output - an iterable or async iterable (based on input)
+ *
+ */
+export function flatten({iterable, depth=Infinity, asyncsInsideSyncIterable=false}) {
+    if (depth <= 0) {
+        return iterable
+    }
+    iterable = makeIterable(iterable)
+    if (asyncsInsideSyncIterable || iterable[Symbol.asyncIterator]) {
+        return (async function*(){
+            for await (const each of iterable) {
+                if (isAsyncIterable(each) || isSyncIterableObjectOrContainer(each)) {
+                    for await (const eachChild of flatten({ iterable: each, depth: depth-1, asyncsInsideSyncIterable })) {
+                        yield eachChild
+                    }
+                } else {
+                    yield each
+                }
+            }
+        })()
+    } else {
+        return (function*(){
+            for (const each of iterable) {
+                if (isSyncIterableObjectOrContainer(each)) {
+                    for (const eachChild of flatten({ iterable: each, depth: depth-1, })) {
+                        yield eachChild
+                    }
+                } else {
+                    yield each
+                }
+            }
+        })()
+    }
 }
 
 export const emptyIterator = (function*(){})()
@@ -456,9 +498,8 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
     const iterator = iter(data)
     for (const [key, check] of Object.entries(filters)) {
         const que = [] 
-        // wrap it so that `instanceof AsyncIterator` works
         if (isAsync || check instanceof AsyncFunction) {
-            conditionHandlers[key] = (async function*(){
+            conditionHandlers[key] = new Iterable((async function*(){
                 while (1) {
                     // because iterator A can push to the que of all iterators
                     // it can also find an error for iterator B's checker function
@@ -490,9 +531,9 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
                         yield que.shift()
                     }
                 }
-            })()
+            })())
         } else {
-            conditionHandlers[key] = (function*(){
+            conditionHandlers[key] = new Iterable((function*(){
                 while (1) {
                     // because iterator A can push to the que of all iterators
                     // it can also find an error for iterator B's checker function
@@ -524,7 +565,7 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
                         yield que.shift()
                     }
                 }
-            })()
+            })())
         }
         conditionHandlers[key].check = check
         conditionHandlers[key].hitError = false
