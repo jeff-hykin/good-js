@@ -55,7 +55,7 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
                     next() {
                         const { value, done } = iterator.next()
                         return {
-                            value: func(value, index++),
+                            value: done || func(value, index++),
                             done,
                         }
                     },
@@ -71,7 +71,7 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
                     async next() {
                         const { value, done } = await iterator.next()
                         return {
-                            value: await func(value, index++),
+                            value: done || await func(value, index++),
                             done,
                         }
                     },
@@ -155,99 +155,7 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         },
         flattened: {
             get() {
-                if (self[Symbol.asyncIterator]) {
-                    return new Iterable({
-                        ...self,
-                        [Symbol.asyncIterator]() {
-                            const iterator = iter(self)
-                            let secondLevelIter = null
-                            return {
-                                ...iterator,
-                                async next() {
-                                    top: while(1) {
-                                        // 
-                                        // inner loop
-                                        // 
-                                        if (secondLevelIter) {
-                                            // secondLevelIter has already been flattened
-                                            const value = await next(secondLevelIter)
-                                            if (value === Stop) {
-                                                secondLevelIter = null
-                                            } else {
-                                                return {value}
-                                            }
-                                        }
-                                        
-                                        // 
-                                        // outer loop
-                                        // 
-                                        const value = await next(iterator)
-                                        if (value === Stop) {
-                                            // top level done
-                                            return {done: true}
-                                        }
-                                        
-                                        if (!(value instanceof Object)) {
-                                            return {value}
-                                        }
-
-                                        if (typeof value[Symbol.iterator] == 'function' || typeof value[Symbol.asyncIterator] == 'function') {
-                                            secondLevelIter = iter((new Iterable(value)).flattened)
-                                            continue top
-                                        }
-                                        return {value}
-                                    }
-                                }
-                            }
-                        },
-                    })
-                } else {
-                    return new Iterable({
-                        ...self,
-                        [Symbol.asyncIterator]() {
-                            const iterator = iter(self)
-                            let secondLevelIter = null
-                            return {
-                                ...iterator,
-                                next() {
-                                    top: while(1) {
-                                        // 
-                                        // inner loop
-                                        // 
-                                        if (secondLevelIter) {
-                                            // secondLevelIter has already been flattened
-                                            const value = next(secondLevelIter)
-                                            if (value === Stop) {
-                                                secondLevelIter = null
-                                            } else {
-                                                return {value}
-                                            }
-                                        }
-                                        
-                                        // 
-                                        // outer loop
-                                        // 
-                                        const value = next(iterator)
-                                        if (value === Stop) {
-                                            // top level done
-                                            return {done: true}
-                                        }
-                                        
-                                        if (!(value instanceof Object)) {
-                                            return {value}
-                                        }
-
-                                        if (typeof value[Symbol.iterator] == 'function' || typeof value[Symbol.asyncIterator] == 'function') {
-                                            secondLevelIter = iter((new Iterable(value)).flattened)
-                                            continue top
-                                        }
-                                        return {value}
-                                    }
-                                }
-                            }
-                        },
-                    })
-                }
+                return self.flat(Infinity)
             },
         },
     })
@@ -538,6 +446,7 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
                     }
 
                     if (que.length != 0) {
+                        // TODO: use a proper que instead of just a list
                         yield que.shift()
                     }
                 }
