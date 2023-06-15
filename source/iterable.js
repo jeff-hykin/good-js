@@ -300,7 +300,7 @@ export const next = (object)=>{
             return handleResult(result)
         }
     } else {
-        throw Error(`can't call next(object) on ${object} as there is no object.next() method`, object)
+        throw Error(`can't call next(object) on the following object as there is no object.next() method`, object)
     }
 }
 
@@ -426,6 +426,120 @@ export const combinations = function* (elements, maxLength, minLength) {
             }
         }
     }
+}
+
+/**
+ * split one iterable into multiple
+ *
+ * @example
+ *     const { even, odd, divisBy3 } = forkAndFilter({
+ *         data: [1,2,3,4,5],
+ *         filters: {
+ *             even:     value=>value%2 == 0,
+ *             odd:      value=>value%2 != 0,
+ *             divisBy3: value=>value%3 == 0,
+ *         },
+ *     })
+ *     console.log([...even     ]) // 2,4
+ *     console.log([...odd      ]) // 1,3,5
+ *     console.log([...divisBy3 ]) // 3
+ *
+ * @param arg1.data - an iterable/async iterable 
+ * @param arg1.filters - an object of condition checkers
+ * @param arg1.outputArrays - will return arrays instead of iterators if true (default false)
+ * @returns {Object} output - an object with iterator attributes
+ *
+ */
+export function forkAndFilter({data, filters, outputArrays=false}) {
+    let isAsync = isAsyncIterable(data)
+    const conditionHandlers = {}
+    const iterator = iter(data)
+    for (const [key, check] of Object.entries(filters)) {
+        const que = [] 
+        // wrap it so that `instanceof AsyncIterator` works
+        if (isAsync || check instanceof AsyncFunction) {
+            conditionHandlers[key] = (async function*(){
+                while (1) {
+                    // because iterator A can push to the que of all iterators
+                    // it can also find an error for iterator B's checker function
+                    // it then tells iterator B that it should throw an error, rather than throwing the error from iterator A
+                    if (conditionHandlers[key].hitError) {
+                        throw conditionHandlers[key].hitError
+                    }
+                    // if this que is empty, pull from main iterator
+                    if (que.length == 0) {
+                        const nextValue = await next(iterator)
+                        if (nextValue == Stop) {
+                            break
+                        }
+                        for (const [key, generator] of Object.entries(conditionHandlers)) {
+                            let shouldPush = false
+                            try {
+                                shouldPush = await generator.check(nextValue)
+                            } catch (error) {
+                                generator.hitError = error
+                            }
+                            if (shouldPush) {
+                                generator.que.push(nextValue)
+                            }
+                        }
+                        // intentionally fall through to the next case
+                    }
+
+                    if (que.length != 0) {
+                        yield que.shift()
+                    }
+                }
+            })()
+        } else {
+            conditionHandlers[key] = (function*(){
+                while (1) {
+                    // because iterator A can push to the que of all iterators
+                    // it can also find an error for iterator B's checker function
+                    // it then tells iterator B that it should throw an error, rather than throwing the error from iterator A
+                    if (conditionHandlers[key].hitError) {
+                        throw conditionHandlers[key].hitError
+                    }
+                    // if this que is empty, pull from main iterator
+                    if (que.length == 0) {
+                        const nextValue = next(iterator)
+                        if (nextValue == Stop) {
+                            break
+                        }
+                        for (const [key, generator] of Object.entries(conditionHandlers)) {
+                            let shouldPush = false
+                            try {
+                                shouldPush = generator.check(nextValue)
+                            } catch (error) {
+                                generator.hitError = error
+                            }
+                            if (shouldPush) {
+                                generator.que.push(nextValue)
+                            }
+                        }
+                        // intentionally fall through to the next case
+                    }
+
+                    if (que.length != 0) {
+                        yield que.shift()
+                    }
+                }
+            })()
+        }
+        conditionHandlers[key].check = check
+        conditionHandlers[key].hitError = false
+        conditionHandlers[key].que = que
+    }
+    if (outputArrays) {
+        for (const [key, value] of Object.entries(conditionHandlers)) {
+            if (isAsyncIterable(value)) {
+                conditionHandlers[key] = asyncIteratorToList(value)
+            } else {
+                conditionHandlers[key] = [...value]
+            }
+        }
+    }
+    return conditionHandlers
 }
 
 /**

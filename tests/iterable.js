@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate } from "../source/iterable.js"
+import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter } from "../source/iterable.js"
 
 const listOfSubpaths = await concurrentlyTransform({
     iterator: Deno.readDir("../"),
@@ -26,3 +26,31 @@ for (const [index, eachResult, eachManualFlat] of enumerate(result, manualFlat))
         break
     }
 }
+
+var { even, odd, divisBy3 } = forkAndFilter({
+    data: [1,2,3,4,5],
+    filters: {
+        even:     value=>value%2 == 0,
+        odd:      value=>value%2 != 0,
+        divisBy3: value=>value%3 == 0,
+    },
+})
+console.log("normal output")
+console.log([...even     ]) // 2,4
+console.log([...odd      ]) // 1,3,5
+console.log([...divisBy3 ]) // 3
+
+var { even, odd, divisBy3 } = forkAndFilter({
+    data: [1,2,3,4,5],
+    outputArrays: true,
+    filters: {
+        even:     value=>value%2 == 0,
+        odd:      value=>value%2 != 0,
+        divisBy3: async (value)=>value%3 == 0,
+    },
+})
+
+console.log("one is async output")
+console.log(even     ) // 2,4
+console.log(odd      ) // 1,3,5
+console.log(divisBy3 ) // 3
