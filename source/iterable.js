@@ -50,11 +50,12 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
             ...self._source,
             [Symbol.iterator]: ()=>{
                 const iterator = iter(self._source)
+                let index = 0
                 return {
                     next() {
                         const { value, done } = iterator.next()
                         return {
-                            value: func(value),
+                            value: func(value, index++),
                             done,
                         }
                     },
@@ -65,11 +66,12 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         if (includeAsyncIterator) {
             output[Symbol.asyncIterator] = ()=>{
                 const iterator = iter(self._source)
+                let index = 0
                 return {
                     async next() {
                         const { value, done } = await iterator.next()
                         return {
-                            value: await func(value),
+                            value: await func(value, index++),
                             done,
                         }
                     },
@@ -87,11 +89,12 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
             ...self._source,
             [Symbol.iterator]: ()=>{
                 const iterator = iter(self._source)
+                let index = 0
                 return {
                     next() {
                         while (1) {
                             const result = iterator.next()
-                            if (result.done || func(result.value)) {
+                            if (result.done || func(result.value, index++)) {
                                 return result
                             }
                         } 
@@ -103,11 +106,12 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         if (includeAsyncIterator) {
             output[Symbol.asyncIterator] = ()=>{
                 const iterator = iter(self._source)
+                let index = 0
                 return {
                     async next() {
                         while (1) {
                             const result = await iterator.next()
-                            if (result.done || await func(result.value)) {
+                            if (result.done || await func(result.value, index++)) {
                                 return result
                             }
                         } 
@@ -503,6 +507,7 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
     const iterator = iter(data)
     for (const [key, check] of Object.entries(filters)) {
         const que = [] 
+        let index = 0
         if (isAsync || check instanceof AsyncFunction) {
             conditionHandlers[key] = new Iterable((async function*(){
                 while (1) {
@@ -521,7 +526,7 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
                         for (const [key, generator] of Object.entries(conditionHandlers)) {
                             let shouldPush = false
                             try {
-                                shouldPush = await generator.check(nextValue)
+                                shouldPush = await generator.check(nextValue, index++)
                             } catch (error) {
                                 generator.hitError = error
                             }
@@ -555,7 +560,7 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
                         for (const [key, generator] of Object.entries(conditionHandlers)) {
                             let shouldPush = false
                             try {
-                                shouldPush = generator.check(nextValue)
+                                shouldPush = generator.check(nextValue, index++)
                             } catch (error) {
                                 generator.hitError = error
                             }
