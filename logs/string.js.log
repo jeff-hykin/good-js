@@ -4,3 +4,34 @@ HowdyHowdyHowdy
     howdy_howdy_howdy
 levenshteinDistanceOrdering({word: "howdee", otherWords:[ "bob", "heydo", "how", "howdy", "gigem" ]}) is: [ "howdy", "how", "heydo", "bob", "gigem" ]
 levenshteinDistanceBetween("howdy", "howdee") is: 2
+true
+true
+({ preText, match, extraction, postText, remaining }) is: {
+  preText: "blah ",
+  match: [ "thing3: ", "3" ],
+  extraction: "thing3: ",
+  postText: "num8: 1",
+  remaining: "blah num8: 1"
+}
+regex is: /howdy\(parens\)(?:(captureGroup))/i
+/blah nameWithWeirdSymbols\\d\(1\)\$@\[\] blah (?:\d+\.\d+)/i
+combined is: /blah "nameWithWeirdSymbols\\d\(1\)\$@\[\]"@(?:\d+\.\d+\.\d+)/i
+should show warning
+Warning: flags inside of regex:
+    The RegExp trigging this warning is: /\d+\.\d+\.\d+/iu
+    When calling the regex interpolater (e.g. regex`something${stuff}`)
+    one of the ${} values (the one above) was a RegExp with a flag enabled
+    e.g. /stuff/i  <- i = ignoreCase flag enabled
+    When the /stuff/i gets interpolated, its going to loose its flags
+    (thats what I'm warning you about)
+    
+    To disable/ignore this warning do:
+        regex.stripFlags`something${/stuff/i}`
+    If you want to add flags to the output of regex`something${stuff}` do:
+        regex`something${stuff}`.i   // ignoreCase
+        regex`something${stuff}`.ig  // ignoreCase and global
+        regex`something${stuff}`.gi  // functionally equivlent
+
+regex`blah thing@${versionPattern}` is: /blah thing@(?:\d+\.\d+\.\d+)/
+should not show warning
+regex.stripFlags`blah thing@${versionPattern}` is: /blah thing@(?:\d+\.\d+\.\d+)/
