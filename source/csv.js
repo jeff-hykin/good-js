@@ -260,11 +260,7 @@ export function parseCsv({
                 promiseOutput.rows = rows
                 promiseOutput.comments = comments
                 promiseOutput.columnNames = deferredPromise()
-                promiseOutput[Symbol.asyncIterator] = async function*(){
-                    for await (const each of rows) {
-                        yield each
-                    }
-                }
+                Object.assign(promiseOutput, rows) // make the promise behave like new Iterable()
                 return promiseOutput
             // should return array
             } else {
