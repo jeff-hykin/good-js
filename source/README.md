@@ -3,19 +3,24 @@
 My Generic Javascript Toolbox
 
 ```js
-import DateTime from "https://deno.land/x/good@1.2.0.2/date.js"
-import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.2.0.2/array.js"
-import { intersection, subtract } from "https://deno.land/x/good@1.2.0.2/set.js"
-import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.2.0.2/math.js"
-import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, toRepresentation, toString, escapeRegexMatch, escapeRegexReplace } from "https://deno.land/x/good@1.2.0.2/string.js"
-import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.2.0.2/encryption.js"
-import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.2.0.2/async.js"
-import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.2.0.2/events.js"
-import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@1.2.0.2/object.js"
-import { deepCopy, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType } from "https://deno.land/x/good@1.2.0.2/value.js"
-import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkAndFilter } from "https://deno.land/x/good@1.2.0.2/iterable.js"
-import { parseCsv, createCsv } from "https://deno.land/x/good@1.2.0.2/csv.js"
+import DateTime from "https://deno.land/x/good@1.2.0.3/date.js"
+import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.2.0.3/array.js"
+import { intersection, subtract } from "https://deno.land/x/good@1.2.0.3/set.js"
+import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.2.0.3/math.js"
+import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, toRepresentation, toString, escapeRegexMatch, escapeRegexReplace } from "https://deno.land/x/good@1.2.0.3/string.js"
+import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.2.0.3/encryption.js"
+import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.2.0.3/async.js"
+import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.2.0.3/events.js"
+import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@1.2.0.3/object.js"
+import { deepCopy, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType } from "https://deno.land/x/good@1.2.0.3/value.js"
+import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkAndFilter } from "https://deno.land/x/good@1.2.0.3/iterable.js"
+import { parseCsv, createCsv } from "https://deno.land/x/good@1.2.0.3/csv.js"
 ```
+
+
+# How to use
+
+Use intellisense, view [the docs](https://deno.land/x/good?doc), or take a look at the [tests](https://github.com/jeff-hykin/good-js/tree/master/tests) for how to use
 
 ## Versioning
 
