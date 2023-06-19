@@ -1,3 +1,18 @@
+/**
+ * Description
+ *
+ * @example
+ *     // [1,2,3]
+ *     subtract({
+ *         value: [4,5,6],
+ *         from: [1,2,3,4,5,6],
+ *     })
+ *
+ * @param arg1.value 
+ * @param arg1.from 
+ * @returns {Set} output 
+ *
+ */
 export function subtract({value, from}) {
     let source = from
     let detractor = value
@@ -41,6 +56,14 @@ export function subtract({value, from}) {
     }
 }
 
+/**
+ * set intersection
+ *
+ * @example
+ *     // new Set([1])
+ *     intersection(new Set([1,2,3]), new Set([1,]), new Set([1,2,]))
+ *
+ */
 export function intersection(...sets) {
     const sortedSets = sets.sort((a,b)=>((a.size || a.length) - (b.size || b.length)))
     const smallestCopy = new Set(sortedSets.shift())
