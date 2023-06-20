@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex } from "../source/string.js"
+import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex, toRepresentation } from "../source/string.js"
 
 console.log(`${capitalize("howdy_howdy_howdy")}`)
 console.log(`${toCamelCase("howdy_howdy_howdy")}`)
@@ -49,3 +49,19 @@ console.debug(`regex\`blah thing@\${versionPattern}\` is:`,regex`blah thing@${ve
 // use this to intentionally strip flags
 console.log("should not show warning")
 console.debug(`regex.stripFlags\`blah thing@\${versionPattern}\` is:`,regex.stripFlags`blah thing@${versionPattern2}`)
+
+class A {}
+var a = new A
+a.thing = 10
+function blahFunc() {
+    return 10
+}
+console.debug(`toRepresentation(Symbol.for("howdy")) is:`,toRepresentation(Symbol.for("howdy")))
+console.debug(`toRepresentation(Symbol("howdy")) is:`,toRepresentation(Symbol("howdy")))
+console.debug(`toRepresentation(Symbol()) is:`,toRepresentation(Symbol()))
+console.debug(`toRepresentation(null) is:`,toRepresentation(null))
+console.debug(`toRepresentation(undefined) is:`,toRepresentation(undefined))
+console.debug(`toRepresentation(a) is:`,toRepresentation(a))
+console.debug(`toRepresentation(A) is:`,toRepresentation(A))
+console.debug(`toRepresentation(blahFunc) is:`,toRepresentation(blahFunc))
+console.debug(`toRepresentation(new Date(9999)) is:`,toRepresentation(new Date(9999)))

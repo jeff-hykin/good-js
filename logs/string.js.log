@@ -35,3 +35,16 @@ Warning: flags inside of regex:
 regex`blah thing@${versionPattern}` is: /blah thing@(?:\d+\.\d+\.\d+)/
 should not show warning
 regex.stripFlags`blah thing@${versionPattern}` is: /blah thing@(?:\d+\.\d+\.\d+)/
+toRepresentation(Symbol.for("howdy")) is: Symbol.for("howdy")
+toRepresentation(Symbol("howdy")) is: Symbol("howdy")
+toRepresentation(Symbol()) is: Symbol()
+toRepresentation(null) is: null
+toRepresentation(undefined) is: undefined
+toRepresentation(a) is: new A({
+  "thing": 10,
+})
+toRepresentation(A) is: class A {}
+toRepresentation(blahFunc) is: function blahFunc() {
+    return 10
+}
+toRepresentation(new Date(9999)) is: new Date(9999)
