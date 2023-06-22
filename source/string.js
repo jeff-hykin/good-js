@@ -333,7 +333,7 @@ export function escapeRegexReplace(string) {
     const regexProxyOptions = Object.freeze({
         get(original, key) {
             // if its flags, return a copy with those flags set
-            if (key.match(/^[igymu]+$/)) {
+            if (typeof key == 'string' && key.match(/^[igymu]+$/)) {
                 return proxyRegExp(original, key)
             }
             return original[key]
