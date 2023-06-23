@@ -339,7 +339,8 @@ export function escapeRegexReplace(string) {
             return original[key]
         },
         set(original, key, value) {
-            return original[key] = value
+            original[key] = value
+            return true
         },
     })
     proxyRegExp = (parent, flags)=> {
