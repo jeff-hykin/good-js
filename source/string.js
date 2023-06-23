@@ -115,7 +115,7 @@ export const toRepresentation = (item)=>{
             output = `new Set(${([...item]).map(each=>recursionWrapper(each)).join(",")})`
         // pure object
         } else if (item instanceof Object && item.constructor == Object) {
-            output = pureObjectRepr(string)
+            output = pureObjectRepr(item)
         // map
         } else if (item instanceof Map) {
             let string = "new Map("
