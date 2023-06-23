@@ -327,6 +327,15 @@ export function escapeRegexReplace(string) {
 // 
 // regex`pattern${/stuff/}${`stuff`}`.i
 // 
+    const regexpProxy = Symbol('regexpProxy')
+    const realExec = RegExp.prototype.exec
+    // patching is required but only effects things with this proxy
+    RegExp.prototype.exec = function (...args) {
+        if (this[regexpProxy]) {
+            return realExec.apply(this[regexpProxy], args)
+        }
+        return realExec.apply(this, args)
+    }
     // these are helpers for the .i part, which requires a proxy object
     // declaring it out here saves on memory so there aren't a million instances of expensive proxy objects
     let proxyRegExp
@@ -335,6 +344,9 @@ export function escapeRegexReplace(string) {
             // if its flags, return a copy with those flags set
             if (typeof key == 'string' && key.match(/^[igymu]+$/)) {
                 return proxyRegExp(original, key)
+            }
+            if (key == regexpProxy) {
+                return original
             }
             return original[key]
         },

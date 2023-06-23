@@ -3,18 +3,18 @@
 A standard library of tools missing from JavaScript. Works for any ECMA Script runtime (2016 or later).
 
 ```js
-import DateTime from "https://deno.land/x/good@1.3.0.3/date.js"
-import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.3.0.3/array.js"
-import { intersection, subtract } from "https://deno.land/x/good@1.3.0.3/set.js"
-import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.3.0.3/math.js"
-import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, toRepresentation, toString, regex, escapeRegexMatch, escapeRegexReplace, extractFirst, isValidIdentifier } from "https://deno.land/x/good@1.3.0.3/string.js"
-import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.3.0.3/encryption.js"
-import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.3.0.3/async.js"
-import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.3.0.3/events.js"
-import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@1.3.0.3/object.js"
-import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType,isAsyncIterable, isSyncIterable, isTechnicallyIterable, isSyncIterableObjectOrContainer } from "https://deno.land/x/good@1.3.0.3/value.js"
-import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkAndFilter } from "https://deno.land/x/good@1.3.0.3/iterable.js"
-import { parseCsv, createCsv } from "https://deno.land/x/good@1.3.0.3/csv.js"
+import DateTime from "https://deno.land/x/good@1.3.0.4/date.js"
+import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.3.0.4/array.js"
+import { intersection, subtract } from "https://deno.land/x/good@1.3.0.4/set.js"
+import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.3.0.4/math.js"
+import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, toRepresentation, toString, regex, escapeRegexMatch, escapeRegexReplace, extractFirst, isValidIdentifier } from "https://deno.land/x/good@1.3.0.4/string.js"
+import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.3.0.4/encryption.js"
+import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.3.0.4/async.js"
+import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.3.0.4/events.js"
+import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@1.3.0.4/object.js"
+import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType,isAsyncIterable, isSyncIterable, isTechnicallyIterable, isSyncIterableObjectOrContainer } from "https://deno.land/x/good@1.3.0.4/value.js"
+import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkAndFilter } from "https://deno.land/x/good@1.3.0.4/iterable.js"
+import { parseCsv, createCsv } from "https://deno.land/x/good@1.3.0.4/csv.js"
 ```
 
 
