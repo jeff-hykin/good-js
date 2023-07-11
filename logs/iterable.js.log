@@ -7,14 +7,13 @@ listOfSubpaths is: [
     { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "README.md", isFile: false, isDirectory: false, isSymlink: true },
+    { name: "README.md", isFile: true, isDirectory: false, isSymlink: false },
     { name: "tests.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "async.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "que.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "wip", isFile: false, isDirectory: true, isSymlink: false },
     { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -91,14 +90,13 @@ result is: [
   { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "README.md", isFile: false, isDirectory: false, isSymlink: true },
+  { name: "README.md", isFile: true, isDirectory: false, isSymlink: false },
   { name: "tests.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "async.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "que.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "wip", isFile: false, isDirectory: true, isSymlink: false },
   { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -153,7 +151,7 @@ result is: [
     isSymlink: false
   }
 ]
-manualFlat.length == result.length is: 67 == 62 is: false
+manualFlat.length == result.length is: 66 == 61 is: false
 eachResult is: { name: "events.js", isFile: true, isDirectory: false, isSymlink: false }
 eachManualFlat is: false
 index is: 0
@@ -187,6 +185,9 @@ flattened(depth=2) is: [
   2.2,     "2.3.1", "2.3.2",
   "2.3.3"
 ]
+reversed("howdy") is: Generator { length: 5 }
+reversed(new Set([..."howdy"])) is: Generator { length: 5 }
+reversed(([..."howdy"])) is: Generator { length: 5 }
 new Iterable(basicArrayIterable).flat() is: [
   1,
   [ "1.1.1", "1.1.2", "1.1.3" ],

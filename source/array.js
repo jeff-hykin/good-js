@@ -24,7 +24,12 @@ import {
  */
 export const wrapAroundGet = (number, list) => list[((number % list.length) + list.length) % list.length]
 
-export const reverse = function (object) {
+export const reversed = function (object) {
+    // efficient string reverse
+    if (typeof object == 'string') {
+        // https://stackoverflow.com/a/48256861/4367134
+        return object.split('').reduce((reversed, character) => character + reversed, '')
+    }
     // make a copy, then reverse it
     return [...makeIterable(object)].reverse()
 }

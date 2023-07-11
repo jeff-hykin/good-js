@@ -511,17 +511,11 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
 }
 
 export function reversed(data) {
-    // efficient string reverse
-    if (typeof data == 'string') {
-        // https://stackoverflow.com/a/48256861/4367134
-        return data.split('').reduce((reversed, character) => character + reversed, '')
-    }
-
     // efficient iterator when the length is known (and all values are accessible)
-    const isArray = data instanceof Array
+    const isArrayOrString = data instanceof Array || typeof data == 'string'
     const isSet = data instanceof Set
-    if (isArray || isSet) {
-        const length = isArray ? data.length : data.size
+    if (isArrayOrString || isSet) {
+        const length = isArrayOrString ? data.length : data.size
         let lastIndex = length
         const iterable = (function*(){
             while (lastIndex > 0) {
@@ -539,8 +533,6 @@ export function reversed(data) {
         return asyncIteratorToList(data).then(data=>reversed(data))
     }
 }
-
-
 
 /**
  * All Possible Slices

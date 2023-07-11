@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter, flatten } from "../source/iterable.js"
+import { reversed, asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter, flatten } from "../source/iterable.js"
 
 
 var basicArrayIterable = [
@@ -111,6 +111,10 @@ var flattened = flatten({
 })
 console.debug(`flattened(depth=2) is:`,[...flattened])
 
+
+console.debug(`reversed("howdy") is:`,reversed("howdy"))
+console.debug(`reversed(new Set([..."howdy"])) is:`,reversed(new Set([..."howdy"])))
+console.debug(`reversed(([..."howdy"])) is:`,reversed(([..."howdy"])))
 
 
 

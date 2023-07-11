@@ -114,3 +114,5 @@ combinations([1,2,3]) [
   [ "m", "g", "u", "y", "i" ],
   ... 20 more items
 ]
+reversed([1,2,3]) is: [ 3, 2, 1 ]
+reversed("[1,2,3]") is: ]3,2,1[
