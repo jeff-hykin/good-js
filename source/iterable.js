@@ -510,6 +510,31 @@ export function forkAndFilter({data, filters, outputArrays=false}) {
     return conditionHandlers
 }
 
+export function reversed(data) {
+    // efficient string reverse
+    if (typeof data == 'string') {
+        // https://stackoverflow.com/a/48256861/4367134
+        return data.split('').reduce((reversed, character) => character + reversed, '')
+    }
+
+    // efficient iterator when the length is known (and all values are accessible)
+    if (data instanceof Array) {
+        let lastIndex = data.length
+        return (function*(){
+            while (lastIndex > 0) {
+                lastIndex-=1
+                yield data[lastIndex]
+            }
+        })()
+    }
+    
+    // aggregate if necessary
+    if (!isAsyncIterable(data)) {
+        return [...data].reverse()
+    } else {
+        return asyncIteratorToList(data).then(data=>reversed(data))
+    }
+}
 /**
  * All Possible Slices
  *
