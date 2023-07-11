@@ -13,7 +13,7 @@ import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1
 import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.3.0.4/events.js"
 import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "https://deno.land/x/good@1.3.0.4/object.js"
 import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType,isAsyncIterable, isSyncIterable, isTechnicallyIterable, isSyncIterableObjectOrContainer } from "https://deno.land/x/good@1.3.0.4/value.js"
-import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkAndFilter } from "https://deno.land/x/good@1.3.0.4/iterable.js"
+import { iter, next, Stop, Iterable, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkBy } from "https://deno.land/x/good@1.3.0.4/iterable.js"
 import { parseCsv, createCsv } from "https://deno.land/x/good@1.3.0.4/csv.js"
 ```
 

@@ -72,8 +72,6 @@ export const enumerate = function (...iterables) {
     return [...enumerateIter(...iterables)]
 }
 
-// TODO: flatIterator
-
 /**
  * Permutations
  *

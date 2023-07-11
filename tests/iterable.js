@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { map, reversed, asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkAndFilter, flatten } from "../source/iterable.js"
+import { map, filter, reversed, asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkBy, flattened } from "../source/iterable.js"
 
 
 var basicArrayIterable = [
@@ -65,7 +65,7 @@ for (const [index, eachResult, eachManualFlat] of enumerate(result, manualFlat))
     }
 }
 
-var { even, odd, divisBy3 } = forkAndFilter({
+var { even, odd, divisBy3 } = forkBy({
     data: [1,2,3,4,5],
     filters: {
         even:     value=>value%2 == 0,
@@ -78,7 +78,7 @@ console.log([...even     ]) // 2,4
 console.log([...odd      ]) // 1,3,5
 console.log([...divisBy3 ]) // 3
 
-var { even, odd, divisBy3 } = forkAndFilter({
+var { even, odd, divisBy3 } = forkBy({
     data: [1,2,3,4,5],
     outputArrays: true,
     filters: {
@@ -95,21 +95,21 @@ console.log(divisBy3 ) // 3
 
 
 
-var flattened = flatten({
+var flattenedItems = flattened({
     depth: 0,
     iterable: basicArrayIterable,
 })
-console.debug(`flattened(depth=0) is:`,flattened)
-var flattened = flatten({
+console.debug(`flattened(depth=0) is:`,flattenedItems)
+var flattenedItems = flattened({
     iterable: basicArrayIterable,
     depth: 1,
 })
-console.debug(`flattened(depth=1) is:`,[...flattened])
-var flattened = flatten({
+console.debug(`flattenedItems(depth=1) is:`,[...flattenedItems])
+var flattenedItems = flattened({
     iterable: basicArrayIterable,
     depth: 2,
 })
-console.debug(`flattened(depth=2) is:`,[...flattened])
+console.debug(`flattenedItems(depth=2) is:`,[...flattenedItems])
 
 
 console.debug(`reversed("howdy") is:`,reversed("howdy"))

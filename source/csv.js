@@ -1,4 +1,4 @@
-import { makeIterable, iter, next, Stop, asyncIteratorToList, forkAndFilter, enumerate, Iterable, } from "./iterable.js"
+import { makeIterable, iter, next, Stop, asyncIteratorToList, forkBy, enumerate, Iterable, } from "./iterable.js"
 import { isAsyncIterable, AsyncFunction, } from "./value.js"
 import { deferredPromise } from "./async.js"
 import { NamedArray } from "./array.js"
@@ -178,7 +178,7 @@ export function parseCsv({
             1
         ).filter(
             isNonEmptyLine
-        ).forkAndFilter({
+        ).forkBy({
             filters: {
                 comments: isAComment,
                 rows: (line)=>!isAComment(line),
@@ -227,7 +227,7 @@ export function parseCsv({
         const shouldReturnArray = returnRowsAs=="array" || (returnRowsAs==null && input instanceof Array)
         if (isAsyncIterable(input)) {
             if (!shouldReturnArray) {
-                var { iteratorForFirst, rows } = rows.forkAndFilter({
+                var { iteratorForFirst, rows } = rows.forkBy({
                     filters: {
                         firstElement: (line,index)=>index===0,
                         rows: (line,index)=>index!==0,
@@ -292,7 +292,7 @@ export function parseCsv({
             }
         // input is not an async iterator
         } else {
-            var { iteratorForFirst, rows } = rows.forkAndFilter({
+            var { iteratorForFirst, rows } = rows.forkBy({
                 filters: {
                     firstElement: (line,index)=>index===0,
                     rows: (line,index)=>index!==0,
