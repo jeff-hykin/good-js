@@ -29,7 +29,7 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
             self.length = value.length
         } else if (value instanceof Set) {
             self.length = value.size
-        } else {
+        } else if (typeof length == 'number') {
             self.length = length
         }
         self._source = makeIterable(value)
@@ -42,6 +42,14 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
 
         self[Symbol.isConcatSpreadable] = true
 
+    // 
+    // length
+    // 
+    self.lengthIs = function(length) {
+        self.length = length
+        return self
+    }
+    
     // 
     // map
     // 
@@ -121,8 +129,15 @@ export function Iterable(value, options={length:null, _createEmpty:false}) {
         }
         return new Iterable(output)
     }
-
+    
+    // 
+    // fork
+    // 
     self.forkAndFilter = ({...args},...other)=>forkAndFilter({...args, data: self}, ...other)
+
+    // 
+    // flatten
+    // 
     self.flat = (depth=1, asyncsInsideSyncIterable=false)=>{
         return new Iterable(
             flatten({ iterable: self, depth, asyncsInsideSyncIterable  })
@@ -517,13 +532,13 @@ export function reversed(data) {
     if (isArrayOrString || isSet) {
         const length = isArrayOrString ? data.length : data.size
         let lastIndex = length
-        const iterable = (function*(){
+        const iterator = (function*(){
             while (lastIndex > 0) {
                 yield data[--lastIndex]
             }
         })()
-        iterable.length = length
-        return iterable
+        iterator.length = length
+        return iterator
     }
     
     // aggregate if necessary
@@ -532,6 +547,34 @@ export function reversed(data) {
     } else {
         return asyncIteratorToList(data).then(data=>reversed(data))
     }
+}
+
+export function map(data, func) {
+    data = makeIterable(data)
+    let iterator
+    if (isAsyncIterable(data) || func instanceof AsyncFunction) {
+        iterator = (async function*(){
+            let index = -1
+            for await (const each of data) {
+                yield await func(each, ++index)
+            }
+        })()
+    } else {
+        iterator = (function*(){
+            let index = -1
+            for (const each of data) {
+                yield func(each, ++index)
+            }
+        })()
+    }
+
+    if (typeof data.size == 'number') {
+        iterator.length = data.size
+    }
+    if (typeof data.length == 'number') {
+        iterator.length = data.length
+    }
+    return iterator
 }
 
 /**
