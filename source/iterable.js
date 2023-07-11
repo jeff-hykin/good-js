@@ -518,14 +518,18 @@ export function reversed(data) {
     }
 
     // efficient iterator when the length is known (and all values are accessible)
-    if (data instanceof Array) {
-        let lastIndex = data.length
-        return (function*(){
+    const isArray = data instanceof Array
+    const isSet = data instanceof Set
+    if (isArray || isSet) {
+        const length = isArray ? data.length : data.size
+        let lastIndex = length
+        const iterable = (function*(){
             while (lastIndex > 0) {
-                lastIndex-=1
-                yield data[lastIndex]
+                yield data[--lastIndex]
             }
         })()
+        iterable.length = length
+        return iterable
     }
     
     // aggregate if necessary
@@ -535,6 +539,9 @@ export function reversed(data) {
         return asyncIteratorToList(data).then(data=>reversed(data))
     }
 }
+
+
+
 /**
  * All Possible Slices
  *
