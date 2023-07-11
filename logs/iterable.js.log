@@ -209,3 +209,4 @@ new Iterable(async basicArrayIterable).flat() is: [
   [ "2.3.1", "2.3.2", "2.3.3" ]
 ]
 [...map([1,2,3], each=>each+1)] is: [ 2, 3, 4 ]
+frequencyCount([11,11,44,44,9,44,0,0,1,99]) is: Map { 11 => 2, 44 => 3, 9 => 1, 0 => 2, 1 => 1, 99 => 1 }

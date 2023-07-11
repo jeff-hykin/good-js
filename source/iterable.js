@@ -2,31 +2,34 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
 
 // desired interface
     // light weight core:
+        // emptyIterator
+        // makeIterable
         // iter
         // next
         // Stop
-        // makeIterable
         // map
         // filter
+        // reduce
         // flattened
         // forkBy
-        // reduce
-        // partitionBy
+        // partitionBy TODO
         // reversed
-        // sortedBy
-        // slice
+        // sortedBy TODO
+        // slice TODO
     // Iterable() class
         // lengthIs
         // map
         // filter
         // flattened
         // reduce
-        // paritionBy
+        // paritionBy TODO
         // forkBy
-        // reversed
-        // sortedBy
-        // splice
-        // slice
+        // reversed TODO
+        // sortedBy TODO
+        // splice TODO
+        // slice TODO
+        // append TODO
+        // prepend TODO
     // handy helpers
         // zip
         // count
@@ -41,7 +44,28 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
 // light weight
 // 
     export const emptyIterator = (function*(){})()
-    
+
+    /**
+     * ensure a value is iterable (e.g convert arg)
+     */
+    export const makeIterable = (object)=>{
+        if (object == null) {
+            return emptyIterator
+        }
+        // Array, Set, Map, string, Uint8Array, etc
+        if (object[Symbol.iterator] instanceof Function || object[Symbol.asyncIterator] instanceof Function) {
+            return object
+        }
+        
+        // if pure object, iterate over entries
+        if (Object.getPrototypeOf(object).constructor == Object) {
+            return Object.entries(object)
+        }
+
+        // everything else (Date, RegExp, Boolean) becomes empty iterator
+        return emptyIterator
+    }
+
     export const Stop = Symbol("iterationStop")
 
     export const iter = (object)=>{
@@ -83,27 +107,6 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
         }
     }
 
-    /**
-     * ensure a value is iterable (e.g convert arg)
-     */
-    export const makeIterable = (object)=>{
-        if (object == null) {
-            return emptyIterator
-        }
-        // Array, Set, Map, string, Uint8Array, etc
-        if (object[Symbol.iterator] instanceof Function || object[Symbol.asyncIterator] instanceof Function) {
-            return object
-        }
-        
-        // if pure object, iterate over entries
-        if (Object.getPrototypeOf(object).constructor == Object) {
-            return Object.entries(object)
-        }
-
-        // everything else (Date, RegExp, Boolean) becomes empty iterator
-        return emptyIterator
-    }
-    
     /**
      * lazy map
      *
@@ -168,6 +171,47 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
         }
 
         return iterator
+    }
+
+    /**
+     * reduce
+     *
+     * @example
+     *     const iterable = reduce(
+     *         [...Array(1000000)],
+     *         (each, index, returnValue=0)=>returnValue+index
+     *     )
+     */
+    export function reduce(data, func) {
+        data = makeIterable(data)
+        let iterator
+        if (isAsyncIterable(data) || func instanceof AsyncFunction) {
+            return (async function(){
+                let index = -1
+                let value
+                for await (const each of data) {
+                    index++
+                    if (index == -1) {
+                        value = await func(each, index)
+                    } else {
+                        value = await func(each, index, value)
+                    }
+                }
+                return value
+            })()
+        } else {
+            let index = -1
+            let value
+            for (const each of data) {
+                index++
+                if (index == -1) {
+                    value = func(each, index)
+                } else {
+                    value = func(each, index, value)
+                }
+            }
+            return value
+        }
     }
     
     /**
@@ -695,6 +739,41 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
                 prev = eachEndPoint
             }
             yield slices
+        }
+    }
+    
+    /**
+     * frequency 
+     *
+     * @example
+     *     const frequency = frequencyCount([11,11,44,44,9,44,0,0,1,99])
+     *     // Map {
+     *     //     11 => 2,
+     *     //     44 => 3,
+     *     //     9 => 1,
+     *     //     0 => 2,
+     *     //     1 => 1,
+     *     //     99 => 1
+     *     // }
+     * @returns {Map} output
+     *
+     */
+    export function frequencyCount(iterable) {
+        iterable = makeIterable(iterable)
+        if (isAsyncIterable(iterable)) {
+            return (async function(){
+                const counts = new Map()
+                for await (const element of iterable) {
+                    counts.set(element, (counts.get(element)||0)+1)
+                }
+                return counts
+            })()
+        } else {
+            const counts = new Map()
+            for (const element of iterable) {
+                counts.set(element, (counts.get(element)||0)+1)
+            }
+            return counts
         }
     }
 
