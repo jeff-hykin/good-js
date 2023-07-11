@@ -421,7 +421,7 @@ export function escapeRegexReplace(string) {
     const regexProxyOptions = Object.freeze({
         get(original, key) {
             // if its flags, return a copy with those flags set
-            if (typeof key == 'string' && key.match(/^[igymu]+$/)) {
+            if (typeof key == 'string' && key.match(/^[igmuyv]+$/)) {
                 return proxyRegExp(original, key)
             }
             if (key == regexpProxy) {
@@ -448,11 +448,11 @@ export function escapeRegexReplace(string) {
                 newRegexString += string
                 if (value instanceof RegExp) {
                     // ignore value.global since its common and wouldn't really mean anything in this context
-                    if (!shouldStrip && (value.ignoreCase||value.sticky||value.multiline||value.unicode)) {
+                    if (!shouldStrip && (value.flags.replace(/g/,"").length > 0)) {
                         console.warn(`Warning: flags inside of regex:\n    The RegExp trigging this warning is: ${value}\n    When calling the regex interpolater (e.g. regex\`something\${stuff}\`)\n    one of the \${} values (the one above) was a RegExp with a flag enabled\n    e.g. /stuff/i  <- i = ignoreCase flag enabled\n    When the /stuff/i gets interpolated, its going to loose its flags\n    (thats what I'm warning you about)\n    \n    To disable/ignore this warning do:\n        regex.stripFlags\`something\${/stuff/i}\`\n    If you want to add flags to the output of regex\`something\${stuff}\` do:\n        regex\`something\${stuff}\`.i   // ignoreCase\n        regex\`something\${stuff}\`.ig  // ignoreCase and global\n        regex\`something\${stuff}\`.gi  // functionally equivlent\n`)
                     }
                     // ex; `/blah/i` => `blah`
-                    const regexContent = `${value}`.slice(1,).replace(/\/.*$/,"")
+                    const regexContent = `${value}`.slice(1,value.flags.length+1)
                     
                     // the `(?: )` is a non-capture group to prevent alternation from becoming a problem
                     // for example: `a|b` + `c|d` becoming `a|bc|d` (bad/incorrect) instead of becoming `(?:a|b)(?:c|d)` (correct)
