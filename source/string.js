@@ -421,7 +421,7 @@ export function escapeRegexReplace(string) {
     const regexProxyOptions = Object.freeze({
         get(original, key) {
             // if its flags, return a copy with those flags set
-            if (typeof key == 'string' && key.match(/^[igmuyv]+$/)) {
+            if (typeof key == 'string' && key.match(/^[igmusyv]+$/)) {
                 return proxyRegExp(original, key)
             }
             if (key == regexpProxy) {
