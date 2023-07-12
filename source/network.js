@@ -1,33 +1,13 @@
-export const curl = (url) => {
-    return new Promise((resolve) =>
-        fetch(url)
-            .then((res) => res.text())
-            .then((body) => resolve(body))
-    )
-}
+export const curl = (url) => fetch(url).then(res=>res.text())
 
-export const getJson = (url) => {
-    return new Promise((resolve, reject) =>
-        fetch(url)
-            .then(function (response) {
-                return response.json()
-            })
-            .then(function (data) {
-                resolve(data)
-            })
-            .catch(function () {
-                reject()
-            })
-    )
-}
+export const getJson = (url) => fetch(url).then(res=>res.json())
 
-export const postJson = async ({ data = null, to = null }) => {
-    return (await fetch(to, {
+export const postJson = ({ data = null, to = null }) =>
+    fetch(to, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    })).json()
-}
+    }).then(res=>res.json())
