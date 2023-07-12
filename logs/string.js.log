@@ -14,8 +14,8 @@ true
   remaining: "blah num8: 1"
 }
 regex is: /howdy\(parens\)(?:(captureGroup))/i
-/blah nameWithWeirdSymbols\\d\(1\)\$@\[\] blah (?:\d+\.\d+)/i
-combined is: /blah "nameWithWeirdSymbols\\d\(1\)\$@\[\]"@(?:\d+\.\d+\.\d+)/i
+/blah nameWithWeirdSymbols\\d\(1\)\$\x40\[\] blah (?:\d+\.\d+)/i
+combined is: /blah "nameWithWeirdSymbols\\d\(1\)\$\x40\[\]"@(?:\d+\.\d+\.\d+)/i
 should show warning
 Warning: flags inside of regex:
     The RegExp trigging this warning is: /\d+\.\d+\.\d+/iu
@@ -48,3 +48,4 @@ toRepresentation(blahFunc) is: function blahFunc() {
     return 10
 }
 toRepresentation(new Date(9999)) is: new Date(9999)
+didYouMean({ givenWord: badArg, possibleWords }) is: [ "help", "size", "blah", "length" ]

@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex, toRepresentation } from "../source/string.js"
+import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex, toRepresentation, didYouMean } from "../source/string.js"
 
 console.log(`${capitalize("howdy_howdy_howdy")}`)
 console.log(`${toCamelCase("howdy_howdy_howdy")}`)
@@ -65,3 +65,7 @@ console.debug(`toRepresentation(a) is:`,toRepresentation(a))
 console.debug(`toRepresentation(A) is:`,toRepresentation(A))
 console.debug(`toRepresentation(blahFunc) is:`,toRepresentation(blahFunc))
 console.debug(`toRepresentation(new Date(9999)) is:`,toRepresentation(new Date(9999)))
+
+var possibleWords = [ "length", "size", "blah", "help", ]
+var badArg = "hep"
+console.debug(`didYouMean({ givenWord: badArg, possibleWords }) is:`,didYouMean({ givenWord: badArg, possibleWords }))

@@ -451,12 +451,9 @@ export function escapeRegexReplace(string) {
                     if (!shouldStrip && (value.flags.replace(/g/,"").length > 0)) {
                         console.warn(`Warning: flags inside of regex:\n    The RegExp trigging this warning is: ${value}\n    When calling the regex interpolater (e.g. regex\`something\${stuff}\`)\n    one of the \${} values (the one above) was a RegExp with a flag enabled\n    e.g. /stuff/i  <- i = ignoreCase flag enabled\n    When the /stuff/i gets interpolated, its going to loose its flags\n    (thats what I'm warning you about)\n    \n    To disable/ignore this warning do:\n        regex.stripFlags\`something\${/stuff/i}\`\n    If you want to add flags to the output of regex\`something\${stuff}\` do:\n        regex\`something\${stuff}\`.i   // ignoreCase\n        regex\`something\${stuff}\`.ig  // ignoreCase and global\n        regex\`something\${stuff}\`.gi  // functionally equivlent\n`)
                     }
-                    // ex; `/blah/i` => `blah`
-                    const regexContent = `${value}`.slice(1,value.flags.length+1)
-                    
                     // the `(?: )` is a non-capture group to prevent alternation from becoming a problem
                     // for example: `a|b` + `c|d` becoming `a|bc|d` (bad/incorrect) instead of becoming `(?:a|b)(?:c|d)` (correct)
-                    newRegexString += `(?:${regexContent})`
+                    newRegexString += `(?:${value.source})`
                 } else if (value != null) {
                     newRegexString += escapeRegexMatch(toString(value))
                 }
@@ -490,24 +487,31 @@ export function escapeRegexReplace(string) {
     regex.stripFlags = regexWithStripWarning(true)
 
 // https://stackoverflow.com/questions/2460177/edit-distance-in-python, translated to JS
-export function levenshteinDistanceBetween(s1, s2) {
-    if (s1.length > s2.length) {
-        ;[s1, s2] = [s2, s1]
+/**
+ * Calculates the Levenshtein distance between two strings.
+ *
+ * @param {string} str1 - The first string.
+ * @param {string} str2 - The second string.
+ * @returns {number} The Levenshtein distance between the two strings.
+ */
+export function levenshteinDistanceBetween(str1, str2) {
+    if (str1.length > str2.length) {
+        ;[str1, str2] = [str2, str1]
     }
 
-    let distances = Array.from({ length: s1.length + 1 }, (_, i) => i)
-    for (let i2 = 0; i2 < s2.length; i2++) {
-        let distances_ = [i2 + 1]
-        for (let i1 = 0; i1 < s1.length; i1++) {
-            let c1 = s1[i1]
-            let c2 = s2[i2]
-            if (c1 === c2) {
-                distances_.push(distances[i1])
+    let distances = Array.from({ length: str1.length + 1 }, (_, i) => +i)
+    for (let str2Index = 0; str2Index < str2.length; str2Index++) {
+        const tempDistances = [str2Index + 1]
+        for (let str1Index = 0; str1Index < str1.length; str1Index++) {
+            let char1 = str1[str1Index]
+            let char2 = str2[str2Index]
+            if (char1 === char2) {
+                tempDistances.push(distances[str1Index])
             } else {
-                distances_.push(1 + Math.min(distances[i1], distances[i1 + 1], distances_[distances_.length - 1]))
+                tempDistances.push(1 + Math.min(distances[str1Index], distances[str1Index + 1], tempDistances[tempDistances.length - 1]))
             }
         }
-        distances = distances_
+        distances = tempDistances
     }
     return distances[distances.length - 1]
 }
@@ -524,6 +528,60 @@ export function levenshteinDistanceOrdering({ word, otherWords }) {
     word = word.toLowerCase()
     let prioritized = [...otherWords].sort((a, b) => levenshteinDistanceBetween(word, a) - levenshteinDistanceBetween(word, b))
     return prioritized
+}
+
+/**
+ * Determines possible correct spellings for a given word based on a list of possible words.
+ *
+ * @example
+ * ```js
+ * const possibleWords = [ "length", "size", "blah", "help", ]
+ * const badArg = "hep"
+ *
+ * // manual check
+ * if (!possibleWords.includes(badArg)) {
+ *   const suggestions = didYouMean({ givenWord: badArg, possibleWords }).join(", ")
+ *   throw new Error(`${badArg} isn't a valid argument, did you mean one of ${suggestions}?`)
+ * }
+ *
+ * // auto-throw (performs case-insensitive check)
+ * didYouMean({ givenWord: badArg, possibleWords, autoThrow: true, suggestionLimit: 1 })
+ * // >>> Error(`For "hep" did you "help"?`)
+ *
+ * // no suggestionLimit
+ * didYouMean({ givenWord: badArg, possibleWords, autoThrow: true })
+ * // >>> Error(`For "hep" did you mean one of [ "help", "size", "blah", "length", ]?`)
+ *
+ * ```
+ *
+ * @param {Object} options - The options for spell checking.
+ * @param {string} options.givenWord - The word to be checked for possible corrections.
+ * @param {string[]} options.possibleWords - An array of possible words to compare against.
+ * @param {boolean} [options.caseSensitive=false] - Flag indicating whether the spell check should be case sensitive. Default is false.
+ * @param {boolean} [options.autoThrow=false] - Flag for throwing automatically if the word is not a direct match
+ * @param {number} [options.suggestionLimit=Infinity] - Number of results to return
+ * @returns {string[]} An array of possible correct spellings for the given word.
+ */
+export function didYouMean({ givenWord, possibleWords, caseSensitive = false, autoThrow = false, suggestionLimit = Infinity }) {
+    if (!caseSensitive) {
+        possibleWords = possibleWords.map((each) => each.toLowerCase())
+        givenWord = givenWord.toLowerCase()
+    }
+    if (!possibleWords.includes(givenWord) && autoThrow) {
+        let suggestions = didYouMean({
+            givenWord,
+            possibleWords,
+            caseSensitive,
+            suggestionLimit,
+        })
+        if (suggestionLimit == 1 && suggestions.length > 0) {
+            throw new Error(`For ${JSON.stringify(givenWord)}, did you mean ${JSON.stringify(suggestions[0])}?`)
+        } else {
+            throw new Error(`For ${JSON.stringify(givenWord)}, did you mean one of ${JSON.stringify(suggestions)}?`)
+        }
+    }
+    // this distance metric could be swapped/improved in the future
+    return [...possibleWords].sort((a, b) => levenshteinDistanceBetween(givenWord, a) - levenshteinDistanceBetween(givenWord, b)).slice(0, suggestionLimit)
 }
 
 const textDecoder = new TextDecoder('utf-8')
