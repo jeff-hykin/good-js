@@ -1,7 +1,7 @@
 ({comments, columnNames, rows}) is: {
   comments: Iterable {
-    length: null,
     _source: AsyncGenerator {},
+    lengthIs: [Function (anonymous)],
     map: [Function (anonymous)],
     filter: [Function (anonymous)],
     forkBy: [Function (anonymous)],
@@ -14,19 +14,19 @@
   },
   columnNames: [],
   rows: <ref *1> Iterable {
-    length: null,
     _source: {
       [Symbol(Symbol.iterator)]: [Function: [Symbol.iterator]],
       [Symbol(Symbol.asyncIterator)]: [Function (anonymous)]
     },
+    lengthIs: [Function (anonymous)],
     map: [Function (anonymous)],
     filter: [Function (anonymous)],
     forkBy: [Function (anonymous)],
     flat: [Function (anonymous)],
     rows: [Circular *1],
     comments: Iterable {
-      length: null,
       _source: AsyncGenerator {},
+      lengthIs: [Function (anonymous)],
       map: [Function (anonymous)],
       filter: [Function (anonymous)],
       forkBy: [Function (anonymous)],
@@ -44,10 +44,10 @@
   }
 }
 asyncIteratorToList(rows.map(each=>each.length)): [
-  1,  1, 1, 1, 1, 1, 6,  2,
-  6, 13, 4, 2, 4, 6, 5, 13,
-  2,  1, 1, 1, 1, 1, 1,  1,
-  1,  1
+   1, 1, 1, 1, 1,  1,  6, 2, 6,
+  16, 4, 2, 4, 6, 10, 17, 2, 1,
+   1, 1, 1, 1, 3,  1,  1, 1, 1,
+   1, 1, 1, 1
 ]
 THE ERROR BELOW IS INTENTIONAL
 Error: 

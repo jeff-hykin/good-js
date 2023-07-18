@@ -4,6 +4,7 @@ listOfSubpaths is: [
     { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
+    { name: "binary_heap.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -18,7 +19,8 @@ listOfSubpaths is: [
     { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
     { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false }
+    { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false },
+    { name: "circular_buffer.js", isFile: true, isDirectory: false, isSymlink: false }
   ],
   [
     { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -51,6 +53,7 @@ listOfSubpaths is: [
     { name: "debug.js.log", isFile: true, isDirectory: false, isSymlink: false },
     { name: "object.js.log", isFile: true, isDirectory: false, isSymlink: false }
   ],
+  false,
   false,
   false,
   false,
@@ -87,6 +90,7 @@ result is: [
   { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
+  { name: "binary_heap.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -102,6 +106,7 @@ result is: [
   { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false },
+  { name: "circular_buffer.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
   { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
@@ -151,7 +156,7 @@ result is: [
     isSymlink: false
   }
 ]
-manualFlat.length == result.length is: 66 == 61 is: false
+manualFlat.length == result.length is: 69 == 63 is: false
 eachResult is: { name: "events.js", isFile: true, isDirectory: false, isSymlink: false }
 eachManualFlat is: false
 index is: 0
@@ -210,3 +215,9 @@ new Iterable(async basicArrayIterable).flat() is: [
 ]
 [...map([1,2,3], each=>each+1)] is: [ 2, 3, 4 ]
 frequencyCount([11,11,44,44,9,44,0,0,1,99]) is: Map { 11 => 2, 44 => 3, 9 => 1, 0 => 2, 1 => 1, 99 => 1 }
+concat() is: [
+  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
+  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ],
+  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
+  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
+]

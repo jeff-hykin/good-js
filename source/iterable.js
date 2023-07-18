@@ -9,6 +9,7 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
         // Stop
         // map
         // filter
+        // concat
         // reduce
         // flattened
         // forkBy
@@ -168,6 +169,42 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
                     }
                 }
             })()
+        }
+
+        return iterator
+    }
+    
+    /**
+     * lazy concat
+     *
+     * @example
+     *     const iterable = concat([...Array(1000000)], [...Array(1000000)])
+     */
+    export function concat(...iterables) {
+        iterables = iterables.map(makeIterable)
+        let iterator
+        if (iterables.some(isAsyncIterable)) {
+            iterator = (async function*(){
+                for (const each of iterables) {
+                    for await (const eachItem of each) {
+                        yield eachItem
+                    }
+                }
+            })()
+        } else {
+            iterator = (function*(){
+                for (const each of iterables) {
+                    yield* each
+                }
+            })()
+        }
+        // has length
+        if (iterables.every(each=>typeof each.length == 'number' && each.length === each.length)) {
+            let totalLength = 0
+            for (const each of iterables) {
+                totalLength += each.length
+            }
+            iterator.length = totalLength
         }
 
         return iterator
