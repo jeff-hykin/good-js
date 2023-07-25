@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { map, filter, concat, reversed, frequencyCount, asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkBy, flattened } from "../source/iterable.js"
+import { map, filter, concat, reversed, after, frequencyCount, asyncIteratorToList, concurrentlyTransform, Iterable, iter, next, Stop, zip, enumerate, forkBy, flattened } from "../source/iterable.js"
 
 
 var basicArrayIterable = [
@@ -36,6 +36,12 @@ var basicArrayIterable = [
 const asyncExampleGenerator = async function*() {
     for (let each of basicArrayIterable) {
         yield each
+    }
+}
+const asyncExampleGeneratorWithThrow = async function*() {
+    let index = -1
+    for (let each of basicArrayIterable) {
+        throw Error(`Testing throw`)
     }
 }
 
@@ -128,3 +134,66 @@ console.debug(`frequencyCount([11,11,44,44,9,44,0,0,1,99]) is:`,frequencyCount([
 console.debug(`concat() is:`,await asyncIteratorToList( concat(asyncExampleGenerator(), asyncExampleGenerator())))
 
 console.debug(`Iterable(asyncExampleGenerator()).then() is:`,await Iterable(asyncExampleGenerator()).then((iterable, size)=>console.log(`howdy, size was: ${size}`)).toArray)
+
+
+// console.debug(
+//     `after() is:`, 
+//     await asyncIteratorToList(
+//         after(
+//             asyncExampleGenerator()
+//         ).then(
+//             ()=>console.log("finished")
+//         ) 
+//     )
+// )
+
+// try {
+//     console.debug(
+//         `after() is:`, 
+//         await asyncIteratorToList(
+//             after(
+//                 asyncExampleGeneratorWithThrow()
+//             ).then(
+//                 ()=>console.log("'then' before finally (uncaught error)")
+//             ).finally(
+//                 ()=>console.log("closing such and such (uncaught error)")
+//             )
+//         )
+//     )
+// } catch (error) {
+//     console.log(`expected error: ${error}`)
+// }
+
+console.debug(
+    `after() is:`, 
+    await asyncIteratorToList(
+        after(
+            asyncExampleGeneratorWithThrow()
+        ).catch(
+            (...args)=>console.debug(`There was an error: ${args}`)
+        ).finally(
+            ()=>console.log("closing such and such (caught error)")
+        ).then(
+            ()=>console.log("'then' after finally (caught error)")
+        ) 
+    )
+)
+// try {
+    
+//     console.debug(
+//         `after() is:`, 
+//         await asyncIteratorToList(
+//             after(
+//                 asyncExampleGenerator()
+//             ).catch(
+//                 (...args)=>console.debug(`There was an error: ${args}`)
+//             ).finally(
+//                 ()=>console.log("closing such (no error)")
+//             ).then(
+//                 ()=>console.log("'then' after (no error)")
+//             )  
+//         )
+//     )
+// } catch (error) {
+//     console.debug(`error is:`,error)
+// }

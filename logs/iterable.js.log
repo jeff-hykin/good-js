@@ -221,8 +221,12 @@ concat() is: [
   [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
   [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
 ]
-howdy, size was: 3
+howdy, size was: 2
 Iterable(asyncExampleGenerator()).then() is: [
   [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
   [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
 ]
+There was an error: Error: Testing throw,0
+closing such and such (caught error)
+'then' after finally (caught error)
+after() is: []
