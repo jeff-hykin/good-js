@@ -592,7 +592,7 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
                 ...self._source,
                 [Symbol.iterator]: ()=>{
                     const iterator = iter(self._source)
-                    let index = 0
+                    let index = -1
                     return {
                         next() {
                             const output = iterator.next()
@@ -609,7 +609,7 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
             if (includeAsyncIterator) {
                 output[Symbol.asyncIterator] = ()=>{
                     const iterator = iter(self._source)
-                    let index = 0
+                    let index = -1
                     return {
                         async next() {
                             const output = await iterator.next()
@@ -633,7 +633,7 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
                 ...self._source,
                 [Symbol.iterator]: ()=>{
                     const iterator = iter(self._source)
-                    let index = 0
+                    let index = -1
                     return {
                         next() {
                             let output = { value: null, done: true }
