@@ -447,7 +447,7 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
      * itertools object
      *
      * @example
-     *     let asyncGenerator = async function*() { yeild* [ 1,2,3,] }
+     *     let asyncGenerator = async function*() { yield* [ 1,2,3,] }
      *     let result = await Iterable(asyncGenerator).map(
      *         async (each)=>readTextFile(`${each}.txt`)
      *     ).map(
@@ -582,6 +582,94 @@ import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, Arra
             return new Iterable(
                 flattened({ iterable: self, depth, asyncsInsideSyncIterable  })
             )
+        }
+        
+        // 
+        // then
+        //
+        self.then = (func)=>{
+            const output = {
+                ...self._source,
+                [Symbol.iterator]: ()=>{
+                    const iterator = iter(self._source)
+                    let index = 0
+                    return {
+                        next() {
+                            const output = iterator.next()
+                            index++
+                            if (output.done) {
+                                func(self, index)
+                            }
+                            return output
+                        },
+                    }
+                },
+            }
+            const includeAsyncIterator = isAsyncIterable(self._source)
+            if (includeAsyncIterator) {
+                output[Symbol.asyncIterator] = ()=>{
+                    const iterator = iter(self._source)
+                    let index = 0
+                    return {
+                        async next() {
+                            const output = await iterator.next()
+                            index++
+                            if (output.done) {
+                                await func(self, index)
+                            }
+                            return output
+                        },
+                    }
+                }
+            }
+            return new Iterable(output)
+        }
+        
+        // 
+        // finally
+        // 
+        self.finally = (func)=>{
+            const output = {
+                ...self._source,
+                [Symbol.iterator]: ()=>{
+                    const iterator = iter(self._source)
+                    let index = 0
+                    return {
+                        next() {
+                            let output = { value: null, done: true }
+                            try {
+                                output = iterator.next()
+                                index++
+                            } finally {
+                                if (output.done) {
+                                    func(self, index)
+                                }
+                            }
+                        },
+                    }
+                },
+            }
+            const includeAsyncIterator = isAsyncIterable(self._source)
+            if (includeAsyncIterator) {
+                output[Symbol.asyncIterator] = ()=>{
+                    const iterator = iter(self._source)
+                    let index = 0
+                    return {
+                        async next() {
+                            let output = { value: null, done: true }
+                            try {
+                                output = await iterator.next()
+                                index++
+                            } finally {
+                                if (output.done) {
+                                    await func(self, index)
+                                }
+                            }
+                        },
+                    }
+                }
+            }
+            return new Iterable(output)
         }
         
         // 

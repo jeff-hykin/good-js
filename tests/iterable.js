@@ -126,3 +126,5 @@ console.debug(`[...map([1,2,3], each=>each+1)] is:`,[...map([1,2,3], each=>each+
 console.debug(`frequencyCount([11,11,44,44,9,44,0,0,1,99]) is:`,frequencyCount([11,11,44,44,9,44,0,0,1,99]))
 
 console.debug(`concat() is:`,await asyncIteratorToList( concat(asyncExampleGenerator(), asyncExampleGenerator())))
+
+console.debug(`Iterable(asyncExampleGenerator()).then() is:`,await Iterable(asyncExampleGenerator()).then((iterable, size)=>console.log(`howdy, size was: ${size}`)).toArray)
