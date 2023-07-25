@@ -307,6 +307,10 @@
     export const isSyncIterable = function(value) {
         return value && typeof value[Symbol.iterator] === 'function'
     }
+
+    export const isIterableObjectOrContainer = function(value) {
+        return value instanceof Object && (typeof value[Symbol.iterator] == 'function' || typeof value[Symbol.asyncIterator] === 'function')
+    }
     
     export const isTechnicallyIterable = function(value) {
         return value instanceof Object || typeof value == 'string'
