@@ -502,7 +502,7 @@ export const stableStringify = (value, ...args) => {
  * @return {String[]} all methods, getters, and keys
  *
  * @example
- *     deepKeys(5) // yes numbers have keys
+ *     allKeys(5) // yes numbers have keys
  *     // [
  *     //     "constructor",          "toExponential",
  *     //     "toFixed",              "toPrecision",

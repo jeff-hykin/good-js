@@ -37,8 +37,8 @@ export const allKeyDescriptions=allKeyDescriptions1
 export const get = ({ from, keyList, failValue }) => {
     // iterate over nested values
     try {
-        for (var each of keyList) {
-            if (from instanceof Object && each in from) {
+        for (const each of keyList) {
+            if (from != null && allKeys(from).includes(each)) {
                 from = from[each]
             } else {
                 return failValue
@@ -152,6 +152,7 @@ export const merge = ({ oldData, newData }) => {
     Object.assign(output, oldData)
     for (const key in newData) {
         // if no conflict, then assign as normal
+        // TODO: make sure this doesn't need allKeys(output).includes(key)
         if (!(key in output)) {
             output[key] = newData[key]
             // if there is a conflict, then be recursive
