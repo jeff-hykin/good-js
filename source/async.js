@@ -32,6 +32,31 @@ export function deferredPromise() {
     return Object.assign(promise, methods)
 }
 
+// classed version of defered promise 
+class DeferedPromise extends Promise {
+    constructor(...args) {
+        let methods
+        let state = "pending"
+        super((resolve, reject)=>{
+            methods = {
+                async resolve(value) {
+                    await value
+                    state = "fulfilled"
+                    resolve(value)
+                },
+                reject(reason) {
+                    state = "rejected"
+                    reject(reason)
+                },
+            }
+        })
+        Object.defineProperty(this, "state", {
+            get: () => state,
+        })
+        Object.assign(this, methods)
+    }
+}
+
 const objectPrototype = Object.getPrototypeOf({})
 
 /**
