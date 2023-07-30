@@ -1,23 +1,39 @@
 // bundled/formatted from the following import (MIT License)
 // import {  ascend, descend, BinaryHeap } from "https://deno.land/std@0.192.0/collections/binary_heap.ts"
 
-function ascend(a, b) {
+export function ascend(a, b) {
     return a < b ? -1 : a > b ? 1 : 0
 }
-function descend(a, b) {
+export function descend(a, b) {
     return a < b ? 1 : a > b ? -1 : 0
 }
-export { ascend as ascend }
-export { descend as descend }
+export const popReturnsSmallest = ascend
+export const popReturnsLargest = descend
+
 function swap(array, a, b) {
     const temp = array[a]
     array[a] = array[b]
     array[b] = temp
 }
+
 function getParentIndex(index) {
     return Math.floor((index + 1) / 2) - 1
 }
-class BinaryHeap {
+
+/**
+ * @example
+ *     import { BinaryHeap, popReturnsSmallest, popReturnsLargest } from "https://deno.land/x/good/binary_heap.js"
+ *     const priorityQueue = new BinaryHeap((a, b) => popReturnsSmallest(a.somethin, b.somethin))
+ *     const node1 = { somethin: 99 }
+ *     const node2 = { somethin: 88 }
+ *     priorityQueue.push(node1)
+ *     priorityQueue.push(node2)
+ *     priorityQueue.peek() // { somethin: 88 }
+ *     priorityQueue.pop()  // { somethin: 88 }
+ *     priorityQueue.pop()  // { somethin: 99 }
+ *
+ */
+export class BinaryHeap {
     compare
     #data
     constructor(compare = descend) {
@@ -98,4 +114,3 @@ class BinaryHeap {
         yield* this.drain()
     }
 }
-export { BinaryHeap as BinaryHeap }

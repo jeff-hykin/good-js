@@ -15,6 +15,7 @@ import { recursivelyAllKeysOf, get, set, remove, merge, compareProperty } from "
 import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType,isAsyncIterable, isSyncIterable, isTechnicallyIterable, isSyncIterableObjectOrContainer, allKeys } from "https://deno.land/x/good@1.4.4.1/value.js"
 import { iter, next, Stop, Iterable, map, filter, reduce, frequencyCount, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkBy } from "https://deno.land/x/good@1.4.4.1/iterable.js"
 import { parseCsv, createCsv } from "https://deno.land/x/good@1.4.4.1/csv.js"
+import { BinaryHeap } from "https://deno.land/x/good@1.4.4.1/binary_heap.js"
 ```
 
 
