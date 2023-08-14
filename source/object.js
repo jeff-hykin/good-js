@@ -18,6 +18,7 @@ export const allKeyDescriptions=allKeyDescriptions1
  * @return {any} either the failValue or the actual value
  *
  * @example
+ *     ```js
  *     let obj = { key1: {} }
  *     // equivlent to obj.key1.subKey.subSubKey
  *     get({
@@ -33,6 +34,7 @@ export const allKeyDescriptions=allKeyDescriptions1
  *         from: null,
  *         failValue: 0
  *     })
+ *     ```
  */
 export const get = ({ from, keyList, failValue }) => {
     // iterate over nested values
@@ -61,6 +63,7 @@ export const get = ({ from, keyList, failValue }) => {
  * only if the argument is not an object
  *
  * @example
+ *     ```js
  *     let obj = { key1: {} }
  *     // equivlent to obj.key1.subKey.subSubKey
  *     set({
@@ -73,6 +76,7 @@ export const get = ({ from, keyList, failValue }) => {
  *         to: 10,
  *         on: obj,
  *     })
+ *     ```
  */
 export const set = ({ keyList, on, to }) => {
     let originalKeyList = keyList
@@ -102,12 +106,14 @@ export const set = ({ keyList, on, to }) => {
  * @return {undefined}
  *
  * @example
+ *     ```js
  *     let obj = { key1: {} }
  *     // equivlent to obj.key1.subKey.subSubKey
  *     remove({
  *         keyList: [ 'key1', 'subKey', 'subSubKey' ],
  *         from: obj,
  *     })
+ *     ```
  */
 export const remove = ({ keyList, from }) => {
     if (keyList.length == 1) {
@@ -133,11 +139,13 @@ export const remove = ({ keyList, from }) => {
  * @return {Object} a new object
  *
  * @example
+ *     ```js
  *     const out = merge({
  *         oldData: {z:{a:1,b:1}     },
  *         newData: {z:{b:3,c:3}, f:1}
  *     })
  *     // >> { z:{a:1,b:3,c:3}, f:1 }
+ *     ```
  */
 export const merge = ({ oldData, newData }) => {
     // if its not an object, then it immediately overwrites the value
@@ -169,19 +177,21 @@ export const merge = ({ oldData, newData }) => {
  * @param {string[]} obj.keyList list of keys of which property to sort by
  * @param {Boolean} [obj.largestFirst=false] decending order
  * @example
- * let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
- * listOfObjects.sort(
- *     compareProperty({keyList:['a']})
- * )
- * //  [ { a: 1 }, { a: 2 }, { a: 3 } ]
- *
- * listOfObjects.sort(
- *   compareProperty({
- *     keyList:['a'],
- *     largestFirst:true
- *   })
- * )
- * //  [ { a: 3 }, { a: 2 }, { a: 1 } ]
+ *    ```js
+ *    let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
+ *    listOfObjects.sort(
+ *        compareProperty({keyList:['a']})
+ *    )
+ *    //  [ { a: 1 }, { a: 2 }, { a: 3 } ]
+ *    
+ *    listOfObjects.sort(
+ *      compareProperty({
+ *        keyList:['a'],
+ *        largestFirst:true
+ *      })
+ *    )
+ *    //  [ { a: 3 }, { a: 2 }, { a: 1 } ]
+ *    ```
  */
 export const compareProperty = ({ keyList, largestFirst = false }) => {
     let comparison = (a, b) => {
@@ -206,19 +216,21 @@ export const compareProperty = ({ keyList, largestFirst = false }) => {
  * @param {Function} obj.elementToNumber list of keys of which property to sort by
  * @param {Boolean} [obj.largestFirst=false] decending order
  * @example
- * let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
- * listOfObjects.sort(
- *     compare({elementToNumber:each=>each.a })
- * )
- * //  [ { a: 1 }, { a: 2 }, { a: 3 } ]
- *
- * listOfObjects.sort(
- *   compare({
- *     elementToNumber:each=>each.a,
- *     largestFirst:true
- *   })
- * )
- * //  [ { a: 3 }, { a: 2 }, { a: 1 } ]
+ *     ```js
+ *     let listOfObjects = [ { a:1 }, { a:3 }, { a:2 }, ]
+ *     listOfObjects.sort(
+ *         compare({elementToNumber:each=>each.a })
+ *     )
+ *     //  [ { a: 1 }, { a: 2 }, { a: 3 } ]
+ *    
+ *     listOfObjects.sort(
+ *       compare({
+ *         elementToNumber:each=>each.a,
+ *         largestFirst:true
+ *       })
+ *     )
+ *     //  [ { a: 3 }, { a: 2 }, { a: 1 } ]
+ *     ```
  */
 export const compare = ({ elementToNumber, largestFirst = false }) => {
     let comparison = (a, b) => {
@@ -244,12 +256,13 @@ export const compare = ({ elementToNumber, largestFirst = false }) => {
  * @return {string[][]} lists of key-lists
  *
  * @example
- *
+ *     ```js
  *     recursivelyAllKeysOf({ a: { b: 1} })
  *     >>> [
  *         [ 'a', ],
  *         [ 'a', 'b' ],
  *     ]
+ *     ```
  */
 export const recursivelyAllKeysOf = (obj) => {
     // if not an object then add no attributes
@@ -281,9 +294,11 @@ export const recursivelyAllKeysOf = (obj) => {
  * @return {Object} an object with all keys set
  *
  * @example
+ *     ```js
  *     const keys = ["thing1", "thing2"]
  *     const obj = arrayOfKeysToObject(keys)
  *     // obj == { "thing1": undefined, "thing2": undefined }
+ *     ```
  */
 export const arrayOfKeysToObject = (array, defaultValue)=>array.reduce((acc,curr)=> (acc[curr]=defaultValue,acc),{})
 
