@@ -365,12 +365,11 @@ export const merge = ({ oldData, newData }) => {
     Object.assign(output, oldData)
     for (const key in newData) {
         // if no conflict, then assign as normal
-        // TODO: make sure this doesn't need allKeys(output).includes(key)
-        if (!(key in output)) {
+        if (!(key in oldData)) {
             output[key] = newData[key]
             // if there is a conflict, then be recursive
         } else {
-            output[key] = merge(oldData[key], newData[key])
+            output[key] = merge({oldData: oldData[key], newData: newData[key]})
         }
     }
     return output
