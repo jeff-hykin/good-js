@@ -1,3 +1,4 @@
+allKeys(null) is: []
 allKeys(5) is: [
   "constructor",          "toExponential",
   "toFixed",              "toPrecision",
@@ -9,3 +10,53 @@ allKeys(5) is: [
   "propertyIsEnumerable", "toString",
   "valueOf",              "toLocaleString"
 ]
+allKeys({a:10, b:99}) is: [
+  "a",
+  "b",
+  "constructor",
+  "__defineGetter__",
+  "__defineSetter__",
+  "hasOwnProperty",
+  "__lookupGetter__",
+  "__lookupSetter__",
+  "isPrototypeOf",
+  "propertyIsEnumerable",
+  "toString",
+  "valueOf",
+  "toLocaleString"
+]
+recursivelyOwnKeysOf(null) is: []
+recursivelyOwnKeysOf(5) is: []
+recursivelyOwnKeysOf({a:10, b:99}) is: [ [ "a" ], [ "b" ] ]
+hasKeyList
+    hasKeyList(obj, [ 'key1', 'constructor' ]) true
+    hasKeyList(obj, [ 'key1', 'key2' ]) true
+    hasKeyList(obj, [ 'key1', 'blah' ]) false
+    hasKeyList(proxyObject, [ 'bob' ]) true
+hasDirectKeyList
+    hasDirectKeyList(obj, [ 'key1', 'constructor' ]): true
+    hasDirectKeyList(obj, [ 'key1', 'key2' ]): true
+    hasDirectKeyList(obj, [ 'key1', 'blah' ]): false
+    hasDirectKeyList(proxyObject, [ 'bob' ]): true
+get
+    undefined
+    undefined
+    0
+    2
+    { key2: 2 }
+set
+    obj is: { key1: {} }
+    obj is: { key1: { subKey: { subSubKey: 10 } } }
+setIfMissingDirectKey
+    obj is: { key1: {} }
+    obj.key1.subKey.subSubKey === 10 is: true
+    obj is: { key1: { subKey: { subSubKey: 10 } } }
+    obj.key1.subKey.subSubKey === 999 is: false
+    obj is: { key1: { subKey: { subSubKey: 10 } } }
+    obj.key1.subKey.subSubKey.toString is: [Function: toString]
+    obj.key1.subKey.subSubKey.toString is: 999
+remove
+    obj is: { key1: {} }
+    obj is: {}
+merge
+    out is: { z: { a: 1, b: 3, c: 3 }, f: 1 }
