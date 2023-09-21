@@ -17,7 +17,6 @@ var csvOutput = await createCsv({
 var rows = parseCsv({
     input: FileSystem.readLinesIteratively("../README.md"),
 })
-console.debug(`asyncIteratorToList(rows.map(each=>each.length)):`,await asyncIteratorToList(rows.map(each=>each.length)))
 
 try {
     var {comments, columnNames, rows} = await parseCsv({
