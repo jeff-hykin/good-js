@@ -60,3 +60,11 @@ remove
     obj is: {}
 merge
     out is: { z: { a: 1, b: 3, c: 3 }, f: 1 }
+isEmpty
+    isEmpty({}) is: true
+    isEmpty([]) is: true
+    isEmpty(null) is: true
+    isEmpty("") is: true
+    isEmpty("a") is: false
+    isEmpty([1]) is: false
+    isEmpty({a:1}) is: false

@@ -9,6 +9,17 @@ export const allKeys=allKeys1
 export const ownKeyDescriptions=ownKeyDescriptions1
 export const allKeyDescriptions=allKeyDescriptions1
 
+
+export const isEmpty = (object) => {
+    if (object == null) {
+        return true
+    }
+    for (const _ in object) {
+        return false
+    }
+    return true
+}
+
 /**
  * Safely check nested keys
  *

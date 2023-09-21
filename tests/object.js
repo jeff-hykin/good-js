@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMissingDirectKey, recursivelyOwnKeysOf } from "../source/object.js"
+import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMissingDirectKey, recursivelyOwnKeysOf, isEmpty } from "../source/object.js"
 
 // 
 // allKeys
@@ -180,4 +180,17 @@ import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMi
         newData: {z:{b:3,c:3}, f:1} 
     })
     console.debug(`out is:`,out)
+    console.groupEnd()
+
+// 
+// isEmpty
+// 
+    console.group("isEmpty")
+    console.debug(`isEmpty({}) is:`,isEmpty({}))
+    console.debug(`isEmpty([]) is:`,isEmpty([]))
+    console.debug(`isEmpty(null) is:`,isEmpty(null))
+    console.debug(`isEmpty("") is:`,isEmpty(""))
+    console.debug(`isEmpty("a") is:`,isEmpty("a"))
+    console.debug(`isEmpty([1]) is:`,isEmpty([1]))
+    console.debug(`isEmpty({a:1}) is:`,isEmpty({a:1}))
     console.groupEnd()
