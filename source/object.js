@@ -10,6 +10,134 @@ export const ownKeyDescriptions=ownKeyDescriptions1
 export const allKeyDescriptions=allKeyDescriptions1
 
 /**
+ * Safely check nested keys
+ *
+ * @param {any} object - what object/value you're extracting from
+ * @param {string[]} keyList - anObject.key1.key2 -> [ "key1", "key2" ]
+ * @return {Boolean} 
+ *
+ * @example
+ *     ```js
+ *     let obj = { key1: { key2: "inner"} }
+ *     
+ *     // true (constructor is a default key)
+ *     hasKeyList(obj, [ 'key1', 'constructor' ])
+ * 
+ *     // true
+ *     hasKeyList(obj, [ 'key1', 'key2' ])
+ *
+ *     // false
+ *     hasKeyList(obj, [ 'key1', 'blah' ])
+ *     
+ *     // true for dynamic keys
+ *     const proxyObject = new Proxy({}, {
+ *         get(original, key, ...args) {
+ *             if (key == "bob") {
+ *                 return "dynamically generated key"
+ *             }
+ *             return original[key]
+ *         },
+ *     })
+ *     // true
+ *     hasKeyList(proxyObject, [ 'bob' ])
+ *     ```
+ */
+export const hasKeyList = (object, keyList) => {
+    const lastKey = keyList.pop()
+    for (const each of keyList) {
+        // couldn't make it to the last key
+        if (object == null) {
+            return false
+        } else {
+            // try is required because of getter functions that can throw errors
+            try {
+                object = object[each]
+            } catch (error) {
+                return false
+            }
+        }
+    }
+    if (object == null) {
+        return false
+    }
+    try {
+        const lastValue = object[lastKey]
+        if (lastValue !== undefined) {
+            return true
+        }
+    } catch (error) {
+        return false
+    }
+    // (5).blahBlahBlah returns undefined, even though blahBlahBlah isnt a key
+    // so for the last one, we have to do a full check
+    return allKeys(object).includes(lastKey)
+}
+
+/**
+ * Safely check direct nested keys
+ *
+ * @param {any} object - what object/value you're extracting from
+ * @param {string[]} keyList - anObject.key1.key2 -> [ "key1", "key2" ]
+ * @return {Boolean} 
+ *
+ * @example
+ *     ```js
+ *     let obj = { key1: { key2: "inner"} }
+ *     
+ *     // false
+ *     hasDirectKeyList(obj, [ 'key1', 'constructor' ])
+ * 
+ *     // true
+ *     hasDirectKeyList(obj, [ 'key1', 'key2' ])
+ *
+ *     // false
+ *     hasDirectKeyList(obj, [ 'key1', 'blah' ])
+ *     
+ *     // true for dynamic keys
+ *     const proxyObject = new Proxy({}, {
+ *         get(original, key, ...args) {
+ *             if (key == "bob") {
+ *                 return "dynamically generated key"
+ *             }
+ *             return original[key]
+ *         },
+ *     })
+ *     // true
+ *     hasDirectKeyList(proxyObject, [ 'bob' ])
+ *     ```
+ */
+export const hasDirectKeyList = (object, keyList) => {
+    const lastKey = keyList.pop()
+    for (const each of keyList) {
+        // couldn't make it to the last key
+        if (object == null) {
+            return false
+        } else {
+            // try is required because of getter functions that can throw errors
+            try {
+                object = object[each]
+            } catch (error) {
+                return false
+            }
+        }
+    }
+    if (object == null) {
+        return false
+    }
+    try {
+        const lastValue = object[lastKey]
+        if (lastValue !== undefined) {
+            return true
+        }
+    } catch (error) {
+        return false
+    }
+    // (5).blahBlahBlah returns undefined, even though blahBlahBlah isnt a key
+    // so for the last one, we have to do a full check
+    return Object.keys(object).includes(lastKey)
+}
+
+/**
  * Safely get nested values
  *
  * @param {any} obj.from - what object/value you're extracting from
@@ -37,19 +165,37 @@ export const allKeyDescriptions=allKeyDescriptions1
  *     ```
  */
 export const get = ({ from, keyList, failValue }) => {
-    // iterate over nested values
-    try {
-        for (const each of keyList) {
-            if (from != null && allKeys(from).includes(each)) {
+    const lastKey = keyList.pop()
+    for (const each of keyList) {
+        // couldn't make it to the last key
+        if (from == null) {
+            return failValue
+        } else {
+            // try is required because of getter functions that can throw errors
+            try {
                 from = from[each]
-            } else {
+            } catch (error) {
                 return failValue
             }
+        }
+    }
+    if (from == null) {
+        return failValue
+    }
+    try {
+        const lastValue = from[lastKey]
+        if (lastValue !== undefined) {
+            return lastValue
         }
     } catch (error) {
         return failValue
     }
-    return from
+    const isAKey = allKeys(from).includes(lastKey)
+    if (isAKey) {
+        return lastValue
+    } else {
+        return failValue
+    }
 }
 
 /**
