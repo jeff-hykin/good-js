@@ -1,84 +1,394 @@
 listOfSubpaths is: [
   false,
   [
-    { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "binary_heap.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "README.md", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "tests.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "async.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "wip", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "circular_buffer.js", isFile: true, isDirectory: false, isSymlink: false }
+    [Object: null prototype] {
+      name: "events.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "iterable.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "object.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "binary_heap.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "encryption.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "set.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "array.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "README.md",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "tests.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "string.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "async.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "value.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "math.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "date.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "wip",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "map.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "network.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "csv.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "debug.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "circular_buffer.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
   ],
   [
-    { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false }
+    [Object: null prototype] {
+      name: "events.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "iterable.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "object.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "encryption.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "set.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "array.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "string.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "value.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "math.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "date.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "map.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "csv.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "debug.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
   ],
   false,
   [
-    { name: "value.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "set.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "iterable.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "encryption.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "date.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "math.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "csv.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "map.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "array.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "string.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "events.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "debug.js.log", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "object.js.log", isFile: true, isDirectory: false, isSymlink: false }
+    [Object: null prototype] {
+      name: "value.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "set.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "iterable.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "encryption.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "date.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "math.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "csv.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "map.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "array.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "string.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "events.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "debug.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "object.js.log",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
   ],
   false,
   false,
   false,
   false,
   [
-    { name: "tests", isFile: false, isDirectory: false, isSymlink: true },
-    { name: "tests.ps1", isFile: true, isDirectory: false, isSymlink: false }
+    [Object: null prototype] {
+      name: "tests",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "tests.ps1",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
   ],
   [
-    { name: "ORIG_HEAD", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "config", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "objects", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "HEAD", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "info", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "logs", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "description", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "hooks", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "refs", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "index", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "branches", isFile: false, isDirectory: true, isSymlink: false },
-    { name: "packed-refs", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "COMMIT_EDITMSG", isFile: true, isDirectory: false, isSymlink: false },
-    { name: "FETCH_HEAD", isFile: true, isDirectory: false, isSymlink: false }
+    [Object: null prototype] {
+      name: "ORIG_HEAD",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "config",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "objects",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "HEAD",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "info",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "logs",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "description",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "hooks",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "refs",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "index",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "branches",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "packed-refs",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "COMMIT_EDITMSG",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "FETCH_HEAD",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
   ],
   [
-    {
+    [Object: null prototype] {
       name: "all_builtin_classes.js",
       isFile: true,
       isDirectory: false,
@@ -87,69 +397,379 @@ listOfSubpaths is: [
   ]
 ]
 result is: [
-  { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "binary_heap.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "README.md", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "tests.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "async.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "wip", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "network.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "circular_buffer.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "events.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "iterable.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "object.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "encryption.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "set.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "array.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "string.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "value.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "math.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "date.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "map.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "csv.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "debug.js", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "value.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "set.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "iterable.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "encryption.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "date.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "math.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "csv.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "map.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "array.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "string.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "events.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "debug.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "object.js.log", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "tests", isFile: false, isDirectory: false, isSymlink: true },
-  { name: "tests.ps1", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "ORIG_HEAD", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "config", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "objects", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "HEAD", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "info", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "logs", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "description", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "hooks", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "refs", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "index", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "branches", isFile: false, isDirectory: true, isSymlink: false },
-  { name: "packed-refs", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "COMMIT_EDITMSG", isFile: true, isDirectory: false, isSymlink: false },
-  { name: "FETCH_HEAD", isFile: true, isDirectory: false, isSymlink: false },
-  {
+  [Object: null prototype] {
+    name: "events.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "iterable.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "object.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "binary_heap.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "encryption.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "set.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "array.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "README.md",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "tests.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "string.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "async.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "value.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "math.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "date.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "wip",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "map.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "network.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "csv.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "debug.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "circular_buffer.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "events.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "iterable.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "object.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "encryption.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "set.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "array.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "string.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "value.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "math.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "date.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "map.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "csv.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "debug.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "value.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "set.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "iterable.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "encryption.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "date.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "math.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "csv.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "map.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "array.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "string.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "events.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "debug.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "object.js.log",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "tests",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "tests.ps1",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "ORIG_HEAD",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "config",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "objects",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "HEAD",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "info",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "logs",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "description",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "hooks",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "refs",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "index",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "branches",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "packed-refs",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "COMMIT_EDITMSG",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "FETCH_HEAD",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "all_builtin_classes.js",
     isFile: true,
     isDirectory: false,
@@ -157,7 +777,12 @@ result is: [
   }
 ]
 manualFlat.length == result.length is: 69 == 63 is: false
-eachResult is: { name: "events.js", isFile: true, isDirectory: false, isSymlink: false }
+eachResult is: [Object: null prototype] {
+  name: "events.js",
+  isFile: true,
+  isDirectory: false,
+  isSymlink: false
+}
 eachManualFlat is: false
 index is: 0
 normal output
@@ -169,8 +794,18 @@ one is async output
 [ 1, 3, 5 ]
 Promise { <pending> }
 flattened(depth=0) is: [
-  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
-  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
+  [
+    1,
+    [ "1.1.1", "1.1.2", "1.1.3" ],
+    1.2,
+    [ "1.3.1", "1.3.2", "1.3.3" ]
+  ],
+  [
+    2,
+    [ "2.1.1", "2.1.2", "2.1.3" ],
+    2.2,
+    [ "2.3.1", "2.3.2", "2.3.3" ]
+  ]
 ]
 flattenedItems(depth=1) is: [
   1,
@@ -190,9 +825,9 @@ flattenedItems(depth=2) is: [
   2.2,     "2.3.1", "2.3.2",
   "2.3.3"
 ]
-reversed("howdy") is: Generator { length: 5 }
-reversed(new Set([..."howdy"])) is: Generator { length: 5 }
-reversed(([..."howdy"])) is: Generator { length: 5 }
+reversed("howdy") is: Object [Generator] { length: 5 }
+reversed(new Set([..."howdy"])) is: Object [Generator] { length: 5 }
+reversed(([..."howdy"])) is: Object [Generator] { length: 5 }
 new Iterable(basicArrayIterable).flat() is: [
   1,
   [ "1.1.1", "1.1.2", "1.1.3" ],
@@ -214,17 +849,47 @@ new Iterable(async basicArrayIterable).flat() is: [
   [ "2.3.1", "2.3.2", "2.3.3" ]
 ]
 [...map([1,2,3], each=>each+1)] is: [ 2, 3, 4 ]
-frequencyCount([11,11,44,44,9,44,0,0,1,99]) is: Map { 11 => 2, 44 => 3, 9 => 1, 0 => 2, 1 => 1, 99 => 1 }
+frequencyCount([11,11,44,44,9,44,0,0,1,99]) is: Map(6) { 11 => 2, 44 => 3, 9 => 1, 0 => 2, 1 => 1, 99 => 1 }
 concat() is: [
-  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
-  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ],
-  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
-  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
+  [
+    1,
+    [ "1.1.1", "1.1.2", "1.1.3" ],
+    1.2,
+    [ "1.3.1", "1.3.2", "1.3.3" ]
+  ],
+  [
+    2,
+    [ "2.1.1", "2.1.2", "2.1.3" ],
+    2.2,
+    [ "2.3.1", "2.3.2", "2.3.3" ]
+  ],
+  [
+    1,
+    [ "1.1.1", "1.1.2", "1.1.3" ],
+    1.2,
+    [ "1.3.1", "1.3.2", "1.3.3" ]
+  ],
+  [
+    2,
+    [ "2.1.1", "2.1.2", "2.1.3" ],
+    2.2,
+    [ "2.3.1", "2.3.2", "2.3.3" ]
+  ]
 ]
 howdy, size was: 2
 Iterable(asyncExampleGenerator()).then() is: [
-  [ 1, [ "1.1.1", "1.1.2", "1.1.3" ], 1.2, [ "1.3.1", "1.3.2", "1.3.3" ] ],
-  [ 2, [ "2.1.1", "2.1.2", "2.1.3" ], 2.2, [ "2.3.1", "2.3.2", "2.3.3" ] ]
+  [
+    1,
+    [ "1.1.1", "1.1.2", "1.1.3" ],
+    1.2,
+    [ "1.3.1", "1.3.2", "1.3.3" ]
+  ],
+  [
+    2,
+    [ "2.1.1", "2.1.2", "2.1.3" ],
+    2.2,
+    [ "2.3.1", "2.3.2", "2.3.3" ]
+  ]
 ]
 There was an error: Error: Testing throw,0
 closing such and such (caught error)

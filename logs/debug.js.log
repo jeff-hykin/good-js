@@ -2,7 +2,7 @@
   valueItself: 10,
   typeof: "number",
   constructorName: "Number",
-  prototype: Number {},
+  prototype: {},
   stringified: "10",
   instanceofObject: false,
   ifStatementTreatsAs: true,
@@ -58,6 +58,11 @@
       enumerable: false,
       configurable: true
     },
-    constructor: { value: [Function: Number], writable: true, enumerable: false, configurable: true }
+    constructor: {
+      value: [Function: Number],
+      writable: true,
+      enumerable: false,
+      configurable: true
+    }
   }
 }

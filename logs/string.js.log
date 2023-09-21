@@ -8,7 +8,13 @@ true
 true
 ({ preText, match, extraction, postText, remaining }) is: {
   preText: "blah ",
-  match: [ "thing3: ", "3" ],
+  match: [
+    "thing3: ",
+    "3",
+    index: 5,
+    input: "blah thing3: num8: 1",
+    groups: undefined
+  ],
   extraction: "thing3: ",
   postText: "num8: 1",
   remaining: "blah num8: 1"

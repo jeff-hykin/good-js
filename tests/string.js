@@ -27,28 +27,28 @@ console.debug(`({ preText, match, extraction, postText, remaining }) is:`,({ pre
 // remaining == "blah num8: 1"
 
 var output = regex`howdy${"(parens)"}${/(captureGroup)/}`.i
-console.debug(`regex is:`,output)
+console.log(`regex is:`,output.toString())
 
 var someName = "nameWithWeirdSymbols\\d(1)$@[]"
 var somePattern = /\d+\.\d+/
 var combined = regex`blah ${someName} blah ${somePattern}`.i
 // the string is regex-escaped, but the regex is kept as-is
-console.log(combined) 
+console.log(combined.toString()) 
 
 var someName = "nameWithWeirdSymbols\\d(1)$@[]"
 var versionPattern = /\d+\.\d+\.\d+/
 var combined = regex`blah "${someName}"@${versionPattern}`.i
 // the string is regex-escaped, but the regex is kept as-is:
-console.debug(`combined is:`,combined)
+console.log(`combined is:`,combined.toString())
 
 // NOTE: interpolating with flags will give a warning that they will be stripped:
 var versionPattern2 = /\d+\.\d+\.\d+/iu
 console.warn = console.log // to make it use stdout
 console.log("should show warning")
-console.debug(`regex\`blah thing@\${versionPattern}\` is:`,regex`blah thing@${versionPattern2}`)
+console.debug(`regex\`blah thing@\${versionPattern}\` is:`,regex`blah thing@${versionPattern2}`.toString())
 // use this to intentionally strip flags
 console.log("should not show warning")
-console.debug(`regex.stripFlags\`blah thing@\${versionPattern}\` is:`,regex.stripFlags`blah thing@${versionPattern2}`)
+console.debug(`regex.stripFlags\`blah thing@\${versionPattern}\` is:`,regex.stripFlags`blah thing@${versionPattern2}`.toString())
 
 class A {}
 var a = new A

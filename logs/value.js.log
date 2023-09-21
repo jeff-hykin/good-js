@@ -1,8 +1,23 @@
 10
 {
-  doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
-  constructor: { value: [Class: Thing], writable: true, enumerable: false, configurable: true },
-  howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
+  doStuff: {
+    value: [Function: doStuff],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  constructor: {
+    value: [class Thing],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  howdy: {
+    value: "HOWDY!",
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
 }
 {
   toLocaleString: {
@@ -11,7 +26,12 @@
     enumerable: false,
     configurable: true
   },
-  valueOf: { value: [Function: valueOf], writable: true, enumerable: false, configurable: true },
+  valueOf: {
+    value: [Function: valueOf],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
   toString: {
     value: [Function: toString],
     writable: true,
@@ -60,9 +80,24 @@
     enumerable: false,
     configurable: true
   },
-  constructor: { value: [Class: Thing], writable: true, enumerable: false, configurable: true },
-  doStuff: { value: [Function: doStuff], writable: true, enumerable: false, configurable: true },
-  howdy: { value: "HOWDY!", writable: true, enumerable: true, configurable: true }
+  constructor: {
+    value: [class Thing],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  doStuff: {
+    value: [Function: doStuff],
+    writable: true,
+    enumerable: false,
+    configurable: true
+  },
+  howdy: {
+    value: "HOWDY!",
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
 }
 object is: { b: 10, a: 11, c: [ "howdy", { d: 9999, aye: 1 } ] }
 deepSortObjectResult is: { a: 11, b: 10, c: [ "howdy", { aye: 1, d: 9999 } ] }
