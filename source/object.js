@@ -455,47 +455,69 @@ export const compare = ({ elementToNumber, largestFirst = false }) => {
 }
 
 /**
- * Deep iterate objects
+ * Deep iterate object children DFS-like
  *
  * @param {Object} obj - Any object
  * @return {string[][]} lists of key-lists
  *
  * @example
  *     ```js
- *     recursivelyAllKeysOf({ a: { b: 1} })
+ *     recursivelyOwnKeysOf({ a: { b: 1} })
  *     >>> [
  *         [ 'a', ],
  *         [ 'a', 'b' ],
  *     ]
  *     ```
  */
-export const recursivelyAllKeysOf = (obj) => {
+export function *recursivelyIterateOwnKeysOf(obj, recursionProtecion=new Set()) {
     // if not an object then add no attributes
     if (!(obj instanceof Object)) {
         return []
     }
+    recursionProtecion.add(obj)
     // else check all keys for sub-attributes
-    const output = []
-    for (let eachKey of Object.keys(obj)) {
+    for (const eachKey of Object.keys(obj)) {
         // add the key itself (alone)
-        output.push([eachKey])
-        // add all of its children
-        let newAttributes = recursivelyAllKeysOf(obj[eachKey])
-        // if nested
-        for (let eachNewAttributeList of newAttributes) {
+        yield [eachKey]
+        let value
+        // try-catch required for getters that throw errors
+        try {
+            value = obj[eachKey]
+        } catch (error) {
+            continue
+        }
+        if (recursionProtecion.has(value)) {
+            continue
+        }
+        for (const eachNewAttributeList of recursivelyOwnKeysOf(value, recursionProtecion)) {
             // add the parent key
             eachNewAttributeList.unshift(eachKey)
-            output.push(eachNewAttributeList)
+            yield eachNewAttributeList
         }
     }
-    return output
 }
 
 /**
- * Function that does something
+ * Deep iterate object children DFS-like
+ *
+ * @param {Object} obj - Any object
+ * @return {string[][]} lists of key-lists
+ *
+ * @example
+ *     ```js
+ *     recursivelyOwnKeysOf({ a: { b: 1} })
+ *     >>> [
+ *         [ 'a', ],
+ *         [ 'a', 'b' ],
+ *     ]
+ *     ```
+ */
+export const recursivelyOwnKeysOf = (obj, recursionProtecion=new Set()) => [...recursivelyIterateOwnKeysOf(obj, recursionProtecion)]
+
+/**
  *
  * @param {String[]} array - a list of strings
- * @param {String[]} defaultValue - the value in key-value
+ * @param {String[]} defaultValue - the "value" in key-value
  * @return {Object} an object with all keys set
  *
  * @example
