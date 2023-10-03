@@ -16,7 +16,7 @@ const argumentNames = [
  * convert csv/tsv input to list-of-list/objects
  *
  * @example
- *     
+ *     ```js    
  *     // tsv, first row is column names
  *     var { comments, columnNames, rows } = parseCsv({
  *         input: "col1\tcol2\n1\t1\n2\t2",
@@ -50,6 +50,7 @@ const argumentNames = [
  *         ],
  *         separator: ",",
  *     })
+ *     ```
  * @param {String|Iterator|AsyncIterator} arg1.input - can be a string, array of lines (strings), iterator of lines, 
  * @param {String} arg1.separator - usually "," or "\t", its the 'comma' of 'comma separated values'
  * @param {String} arg1.lineSeparator - usually is a newline, or \r\n
@@ -224,6 +225,7 @@ export function parseCsv({
  * array-of-arrays to CSV string
  *
  * @example
+ *     ```js
  *     var csvString = createCsv({
  *         columnNames: [ "column1", "column2", "column3", ],
  *         rows: [[1,2,3], [4,5,6]],
@@ -249,7 +251,7 @@ export function parseCsv({
  *         columnNames,
  *         commentSymbol: "#",
  *     })
- *     
+ *     ```
  * @returns {String} output - description
  *
  */
