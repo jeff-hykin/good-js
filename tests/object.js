@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMissingDirectKey, recursivelyOwnKeysOf, isEmpty } from "../source/object.js"
+import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMissingDirectKey, recursivelyOwnKeysOf, isEmpty, compareProperty } from "../source/object.js"
 
 // 
 // allKeys
@@ -194,3 +194,34 @@ import { allKeys, get, set, remove, merge, hasKeyList, hasDirectKeyList, setIfMi
     console.debug(`isEmpty([1]) is:`,isEmpty([1]))
     console.debug(`isEmpty({a:1}) is:`,isEmpty({a:1}))
     console.groupEnd()
+
+// 
+// compareProperty
+// 
+    var things = [
+        { basename: "gene_means",          },
+        { basename: "igv",                 },
+        { basename: "ttn_fitness",         },
+        { basename: "gi",                  },
+        { basename: "tpp",                 },
+        { basename: "pathway_enrichment",  },
+        { basename: "_version",            },
+        { basename: "resampling",          },
+        { basename: "normalize",           },
+        { basename: "corrplot",            },
+        { basename: "gumbel",              },
+        { basename: "create_combined_wig", },
+        { basename: "utest",               },
+        { basename: "scatterplot",         },
+        { basename: "tnseq_stats",         },
+        { basename: "zinb",                },
+        { basename: "|heatmap",            },
+        { basename: "hmm",                 },
+        { basename: "gff_to_prot_table",   },
+        { basename: "_help",               },
+        {                                  },
+        { basename: "anova",               },
+    ]
+    things.sort(compareProperty({keyList: ["basename"]}))
+    console.log(`Sorted things:`)
+    console.debug(`JSON.stringify(things,0,4) is:`,JSON.stringify(things,0,4))

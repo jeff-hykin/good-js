@@ -68,3 +68,70 @@ isEmpty
     isEmpty("a") is: false
     isEmpty([1]) is: false
     isEmpty({a:1}) is: false
+Sorted things:
+JSON.stringify(things,0,4) is: [
+    {
+        "basename": "_help"
+    },
+    {
+        "basename": "_version"
+    },
+    {
+        "basename": "|heatmap"
+    },
+    {
+        "basename": "anova"
+    },
+    {
+        "basename": "corrplot"
+    },
+    {
+        "basename": "create_combined_wig"
+    },
+    {
+        "basename": "gene_means"
+    },
+    {
+        "basename": "gff_to_prot_table"
+    },
+    {
+        "basename": "gi"
+    },
+    {
+        "basename": "gumbel"
+    },
+    {
+        "basename": "hmm"
+    },
+    {
+        "basename": "igv"
+    },
+    {
+        "basename": "normalize"
+    },
+    {
+        "basename": "pathway_enrichment"
+    },
+    {
+        "basename": "resampling"
+    },
+    {
+        "basename": "scatterplot"
+    },
+    {
+        "basename": "tnseq_stats"
+    },
+    {
+        "basename": "tpp"
+    },
+    {
+        "basename": "ttn_fitness"
+    },
+    {
+        "basename": "utest"
+    },
+    {
+        "basename": "zinb"
+    },
+    {}
+]

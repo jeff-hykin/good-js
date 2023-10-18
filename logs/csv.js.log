@@ -8,7 +8,7 @@
     ],
     [ "```js" ],
     [
-      'import DateTime from "https://deno.land/x/good@1.5.0.0/date.js"'
+      'import DateTime from "https://deno.land/x/good@1.5.0.1/date.js"'
     ],
     [
       "import { zip",
@@ -16,11 +16,11 @@
       "count",
       "permute",
       "combinations",
-      'wrapAroundGet } from "https://deno.land/x/good@1.5.0.0/array.js"'
+      'wrapAroundGet } from "https://deno.land/x/good@1.5.0.1/array.js"'
     ],
     [
       "import { intersection",
-      'subtract } from "https://deno.land/x/good@1.5.0.0/set.js"'
+      'subtract } from "https://deno.land/x/good@1.5.0.1/set.js"'
     ],
     [
       "import { stats",
@@ -28,7 +28,7 @@
       "spread",
       "normalizeZeroToOne",
       "roundedUpToNearest",
-      'roundedDownToNearest } from "https://deno.land/x/good@1.5.0.0/math.js"'
+      'roundedDownToNearest } from "https://deno.land/x/good@1.5.0.1/math.js"'
     ],
     [
       "import { capitalize",
@@ -43,26 +43,28 @@
       "toRepresentation",
       "toString",
       "regex",
+      "findAll",
+      "iterativelyFindAll",
       "escapeRegexMatch",
       "escapeRegexReplace",
       "extractFirst",
-      'isValidIdentifier } from "https://deno.land/x/good@1.5.0.0/string.js"'
+      'isValidIdentifier } from "https://deno.land/x/good@1.5.0.1/string.js"'
     ],
     [
       "import { generateKeys",
       "encrypt",
       "decrypt",
-      'hashers } from "https://deno.land/x/good@1.5.0.0/encryption.js"'
+      'hashers } from "https://deno.land/x/good@1.5.0.1/encryption.js"'
     ],
     [
       "import { deferredPromise",
-      'recursivePromiseAll } from "https://deno.land/x/good@1.5.0.0/async.js"'
+      'recursivePromiseAll } from "https://deno.land/x/good@1.5.0.1/async.js"'
     ],
     [
       "import { Event",
       "trigger",
       "everyTime",
-      'once } from "https://deno.land/x/good@1.5.0.0/events.js"'
+      'once } from "https://deno.land/x/good@1.5.0.1/events.js"'
     ],
     [
       "import { recursivelyOwnKeysOf",
@@ -73,7 +75,7 @@
       "remove",
       "merge",
       "compareProperty",
-      'recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.5.0.0/object.js"'
+      'recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.5.0.1/object.js"'
     ],
     [
       "import { deepCopy",
@@ -86,7 +88,7 @@
       "isSyncIterable",
       "isTechnicallyIterable",
       "isSyncIterableObjectOrContainer",
-      'allKeys } from "https://deno.land/x/good@1.5.0.0/value.js"'
+      'allKeys } from "https://deno.land/x/good@1.5.0.1/value.js"'
     ],
     [
       "import { iter",
@@ -105,14 +107,14 @@
       "slices",
       "asyncIteratorToList",
       "concurrentlyTransform",
-      'forkBy } from "https://deno.land/x/good@1.5.0.0/iterable.js"'
+      'forkBy } from "https://deno.land/x/good@1.5.0.1/iterable.js"'
     ],
     [
       "import { parseCsv",
-      'createCsv } from "https://deno.land/x/good@1.5.0.0/csv.js"'
+      'createCsv } from "https://deno.land/x/good@1.5.0.1/csv.js"'
     ],
     [
-      'import { BinaryHeap } from "https://deno.land/x/good@1.5.0.0/binary_heap.js"'
+      'import { BinaryHeap } from "https://deno.land/x/good@1.5.0.1/binary_heap.js"'
     ],
     [ "```" ],
     [ "# How to use" ],
@@ -139,6 +141,6 @@ so I'm guessing you may have misspelled something:
     for "seperator" maybe you meant: separator
 
         
-    at parseCsv (file:///Users/jeffhykin/repos/good-js/source/csv.js:81:15)
+    at parseCsv (file:///Users/jeffhykin/repos/good-js/source/csv.js:82:15)
     at file:///Users/jeffhykin/repos/good-js/tests/csv.js:22:47
     at eventLoopTick (ext:core/01_core.js:183:11)

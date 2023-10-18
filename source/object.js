@@ -176,8 +176,8 @@ export const hasDirectKeyList = (object, keyList) => {
  *     ```
  */
 export const get = ({ keyList, from, failValue }) => {
-    const lastKey = keyList.pop()
-    for (const each of keyList) {
+    const lastKey = keyList.slice(-1)[0]
+    for (const each of keyList.slice(0,-1)) {
         // couldn't make it to the last key
         if (from == null) {
             return failValue
@@ -193,8 +193,9 @@ export const get = ({ keyList, from, failValue }) => {
     if (from == null) {
         return failValue
     }
+    let lastValue
     try {
-        const lastValue = from[lastKey]
+        lastValue = from[lastKey]
         if (lastValue !== undefined) {
             return lastValue
         }
