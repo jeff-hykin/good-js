@@ -637,3 +637,46 @@ export function isValidIdentifier(value) {
         return true
     }
 }
+
+/**
+ * Removes the common prefix from a list of strings.
+ *
+ * @param {string[]} listOfStrings - An array of strings from which to remove the common prefix.
+ * @returns {string[]} - An array of strings with the common prefix removed.
+ *
+ * @example
+ *     ```js
+ *     // Test case:
+ *     const input = ["abcdef", "abcxyz", "abcmnop"]
+ *     const result = removeCommonPrefix(input)
+ *     // result is ["def", "xyz", "mnop"]
+ *     ```
+ */
+export function removeCommonPrefix(listOfStrings) {
+    function allEqual(aList) {
+        if (aList.length === 0) {
+            return true
+        }
+
+        let prev = aList[0]
+        for (let i = 0; i < aList.length; i++) {
+            if (prev !== aList[i]) {
+                return false
+            }
+            prev = aList[i]
+        }
+
+        return true
+    }
+
+    const shortestPathLength = Math.min(...listOfStrings.map((eachPath) => eachPath.length))
+    let longestCommonPathLength = shortestPathLength
+    while (longestCommonPathLength > 0) {
+        longestCommonPathLength--
+        if (allEqual(listOfStrings.map((each) => each.substring(0, longestCommonPathLength)))) {
+            break
+        }
+    }
+
+    return listOfStrings.map((each) => each.substring(longestCommonPathLength))
+}

@@ -55,3 +55,9 @@ toRepresentation(blahFunc) is: function blahFunc() {
 }
 toRepresentation(new Date(9999)) is: new Date(9999)
 didYouMean({ givenWord: badArg, possibleWords }) is: [ "help", "size", "blah", "length" ]
+[ "def", "xyz", "mnop" ]
+[ "apple", "banana", "cherry" ]
+[ "", "", "" ]
+[ "45", "456", "4" ]
+[ "z", "z", "z" ]
+[ "d123", "d456", "123" ]

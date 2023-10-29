@@ -1,5 +1,5 @@
 #!/usr/bin/env -S deno run --allow-all
-import { capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex, toRepresentation, didYouMean } from "../source/string.js"
+import { removeCommonPrefix, capitalize, indent, toCamelCase, toPascalCase, toKebabCase, toSnakeCase, toScreamingtoKebabCase, toScreamingtoSnakeCase, levenshteinDistanceOrdering, levenshteinDistanceBetween, extractFirst, regex, toRepresentation, didYouMean } from "../source/string.js"
 
 console.log(`${capitalize("howdy_howdy_howdy")}`)
 console.log(`${toCamelCase("howdy_howdy_howdy")}`)
@@ -69,3 +69,27 @@ console.debug(`toRepresentation(new Date(9999)) is:`,toRepresentation(new Date(9
 var possibleWords = [ "length", "size", "blah", "help", ]
 var badArg = "hep"
 console.debug(`didYouMean({ givenWord: badArg, possibleWords }) is:`,didYouMean({ givenWord: badArg, possibleWords }))
+
+// Test case 1: Common prefix "abc"
+const input1 = ["abcdef", "abcxyz", "abcmnop"];
+console.log(removeCommonPrefix(input1)); // ["def", "xyz", "mnop"]
+
+// Test case 2: No common prefix
+const input2 = ["apple", "banana", "cherry"];
+console.log(removeCommonPrefix(input2)); // ["apple", "banana", "cherry"]
+
+// Test case 3: Empty strings
+const input3 = ["", "", ""];
+console.log(removeCommonPrefix(input3)); // ["", "", ""]
+
+// Test case 4: Single-character common prefix
+const input4 = ["12345", "123456", "1234"];
+console.log(removeCommonPrefix(input4)); // ["5", "56", "4"]
+
+// Test case 5: Common prefix is the entire string
+const input5 = ["xyz", "xyz", "xyz"];
+console.log(removeCommonPrefix(input5)); // ["", "", ""]
+
+// Test case 6: Mix of common prefix and non-common prefix
+const input6 = ["abcd123", "abcd456", "abc123"];
+console.log(removeCommonPrefix(input6)); // ["123", "456", "123"]
