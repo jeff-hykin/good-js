@@ -10,7 +10,9 @@ export const capitalize = (string) => string.replace(/\b\w/g, (chr) => chr.toUpp
  * @returns {String} output
  *
  * @example
+ * ```js
  *     indentedString = indent({string: "blah\n    blah\nblah", by: "\t", noLead: false })
+ * ```
  */
 export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + string.replace(/\n/g, "\n" + by)
 
@@ -19,8 +21,10 @@ export const indent = ({ string, by="    ", noLead=false }) => (noLead?"":by) + 
  *
  * @returns {String} 
  * @example
+ * ```js
  *     `${Symbol("blah")}` // throws error
  *     toString(Symbol("blah")) // '[Symbol("blah")]'
+ * ```
  */
 export const toString = (value)=>{
     // no idea why `${Symbol("blah")}` throws an error (and is the only primitive that throws)
@@ -256,6 +260,7 @@ export const findAll = (regexPattern, sourceString) => {
  * extract a regex pattern and get the remaining data
  *
  * @example
+ * ```js
  *     // basic example
  *     var remaining = "blah thing3: num8: 1"
  *     var { remaining, extraction: thing, } = extractFirst({ pattern: /thing\d: /, from: remaining })
@@ -272,6 +277,7 @@ export const findAll = (regexPattern, sourceString) => {
  *     // extraction == "thing5: "
  *     // postText == "num8: 1"
  *     // remaining == "blah num8: 1"
+ * ```
  *     
  * @param {RegExp} arg1.pattern - note: using the global flag 
  * @param {String} arg1.from
@@ -467,6 +473,7 @@ export function escapeRegexReplace(string) {
      * interpolate strings/regex
      *
      * @example
+     * ```js
      *     const someName = "nameWithWeirdSymbols\\d(1)$@[]"
      *     const versionPattern = /\d+\.\d+\.\d+/
      *     const combined = regex`blah "${someName}"@${versionPattern}`.i
@@ -478,7 +485,7 @@ export function escapeRegexReplace(string) {
      *     regex`blah thing@${versionPattern2}` // >>> warning the "iu" flags will be stripped
      *     // use this to intentionally strip flags
      *     regex.stripFlags`blah thing@${versionPattern2}` // no warning
-     * 
+     * ```
      * @param arg1 - a template string
      * @returns {RegExp} output
      *

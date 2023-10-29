@@ -220,6 +220,7 @@
      *
      * @param value - any value
      * @example
+     * ```js
      *     // true
      *     isPrimitive(BigInt("1"))
      *     isPrimitive("1")        
@@ -231,6 +232,7 @@
      *     isPrimitive(new RegExp())
      *     isPrimitive(new Date())
      *     isPrimitive({})
+     * ```
      */
     export const isPrimitive = (value)=>!(value instanceof Object)
 
@@ -239,6 +241,7 @@
      *
      * @param value - any value
      * @example
+     * ```js
      *     // false
      *     isPureObject(new RegExp())
      *     isPureObject([])
@@ -247,6 +250,7 @@
      *     
      *     // true
      *     isPureObject({})
+     * ```
      */
     export const isPureObject = (value)=>(value instanceof Object)&&Object.getPrototypeOf(value).constructor == Object
     
@@ -256,6 +260,7 @@
      *
      * @param value - any value
      * @example
+     * ```js
      *     // false
      *     isPracticallyPrimitive({})
      *     isPracticallyPrimitive([])
@@ -267,6 +272,7 @@
      *     isPracticallyPrimitive(new RegExp())
      *     class D extends Date {}
      *     isPracticallyPrimitive(new D())
+     * ```
      */
     export const isPracticallyPrimitive = (value)=>isPrimitive(value) || value instanceof Date || value instanceof RegExp || value instanceof URL
 
@@ -277,6 +283,7 @@
      *     see isSyncIterableObjectOrContainer() for likely usecase
      * @param value - any value
      * @example
+     * ```js
      *     // false
      *     isBuiltInIterator(new Map())
      *     isBuiltInIterator([])
@@ -284,6 +291,7 @@
      *     // true
      *     isBuiltInIterator((new Map())[Symbol.iterator]())
      *     isBuiltInIterator((new Set())[Symbol.iterator]())
+     * ```
      */
     export const isBuiltInIterator = (value)=>IteratorPrototype.isPrototypeOf(value)
 
@@ -323,6 +331,7 @@
      * @returns {Boolean} output - whether or not people would call this object an iterable
      *
      * @example
+     * ```js
      *     // false
      *     isSyncIterableObjectOrContainer("adfsad")
      *     isSyncIterableObjectOrContainer({a:1})
@@ -334,6 +343,7 @@
      *     isSyncIterableObjectOrContainer(new Map())
      *     class A { *[Symbol.iterator]() { yield* [1,2,3] } }
      *     isSyncIterableObjectOrContainer(new A())
+     * ```
      */
     export const isSyncIterableObjectOrContainer = function(value) {
         return value instanceof Object && typeof value[Symbol.iterator] == 'function'
@@ -502,6 +512,7 @@ export const stableStringify = (value, ...args) => {
  * @return {String[]} all methods, getters, and keys
  *
  * @example
+ * ```js
  *     allKeys(5) // yes numbers have keys
  *     // [
  *     //     "constructor",          "toExponential",
@@ -514,6 +525,7 @@ export const stableStringify = (value, ...args) => {
  *     //     "propertyIsEnumerable", "toString",
  *     //     "valueOf",              "toLocaleString"
  *     // ]
+ * ```
  */
 export const allKeys = function(obj) {
     // from: https://stackoverflow.com/questions/8024149/is-it-possible-to-get-the-non-enumerable-inherited-property-names-of-an-object/70629468?noredirect=1#comment126513832_70629468

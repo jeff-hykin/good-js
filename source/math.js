@@ -6,7 +6,9 @@
  * @return {Object} {min,max,range,average,median,sum}
  *
  * @example
+ * ```js
  *     const { min,max,range,average,median,sum } = stats([1,50352,3,4,5555234])
+ * ```
  */
 export const stats = (listOfNumbers) => {
     const median = listOfNumbers[Math.floor(listOfNumbers.length/2)]
@@ -68,7 +70,9 @@ export const normalizeZeroToOne = (values) => {
  * @return {Array} values evenly distributed between min/max (length=quantity)
  *
  * @example
+ * ```js
  *     const values = spread({ quantity: 10, min: 1.37, max: 7.86 })
+ * ```
  */
 export const spread = ({quantity, min, max, decimals=5}) => {
     const range = max-min
@@ -105,7 +109,9 @@ export const createLinearMapper = (from={min:0, max:1}, to={min:0, max:100})=> {
  * @return {Boolean} the output is a
  *
  * @example
+ * ```js
  *     does something
+ * ```
  */
 // export const format = ({ value, base=10, notation="decimal", decimalPlaces=null, significantFigures=null, fillGapsWith=" ", expectedNumberOfDigits=null, align="right", }) => {
 //     const numberOrNan = value-0

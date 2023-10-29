@@ -4,11 +4,13 @@
  * deferredPromise
  *
  * @example
+ * ```js
  *    import { deferredPromise } from "https://deno.land/std@0.161.0/async/deferred.ts";
  *
  *    const aPromise = deferredPromise()
  *    aPromise.resolve(42)
  *    aPromise.reject(new Error(`error`)) // alternatively
+ * ```
  */
 export function deferredPromise() {
     let methods
@@ -33,7 +35,7 @@ export function deferredPromise() {
 }
 
 // classed version of defered promise 
-class DeferedPromise extends Promise {
+export class DeferedPromise extends Promise {
     constructor(...args) {
         let methods
         let state = "pending"
@@ -63,8 +65,10 @@ const objectPrototype = Object.getPrototypeOf({})
  * Promise.allRecursively
  *
  * @example
+ * * ```js
  *     await recursivePromiseAll({a:1, b: [ 1, 2, new Promise((resolve, reject)=>resolve(10))] })
  *     // >>> { a: 1, b: [ 1, 2, 10 ] }
+ * ```
  */
 export const recursivePromiseAll = (object, alreadySeen = new Map()) => {
     if (alreadySeen.has(object)) {

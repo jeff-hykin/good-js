@@ -22,6 +22,7 @@ function getParentIndex(index) {
 
 /**
  * @example
+ * ```js
  *     import { BinaryHeap, popReturnsSmallest, popReturnsLargest } from "https://deno.land/x/good/binary_heap.js"
  *     const priorityQueue = new BinaryHeap((a, b) => popReturnsSmallest(a.somethin, b.somethin))
  *     const node1 = { somethin: 99 }
@@ -31,7 +32,7 @@ function getParentIndex(index) {
  *     priorityQueue.peek() // { somethin: 88 }
  *     priorityQueue.pop()  // { somethin: 88 }
  *     priorityQueue.pop()  // { somethin: 99 }
- *
+ * ```
  */
 export class BinaryHeap {
     compare

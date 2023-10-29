@@ -49,6 +49,7 @@ import { deferredPromise } from "./async.js"
 
     /**
      * ensure a value is iterable (e.g convert arg)
+     * ```
      */
     export const makeIterable = (object)=>{
         if (object == null) {
@@ -88,6 +89,7 @@ import { deferredPromise } from "./async.js"
      * @returns {Stop|any} output - will either be the stop symbol or will be the next value
      *
      * @example
+     * ```js
      *     import { iter, next, Stop } from "https://deno.land/x/good/iterable.js"
      *     // Note: works on async iterators, and returns promises in that case
      *     const iterable = iter([1,2,3])
@@ -95,6 +97,7 @@ import { deferredPromise } from "./async.js"
      *     next(iterable) // 2
      *     next(iterable) // 3
      *     next(iterable) == Stop // true
+     * ```
      */
     export const next = (object)=>{
         if (object.next instanceof Function) {
@@ -113,7 +116,9 @@ import { deferredPromise } from "./async.js"
      * lazy map
      *
      * @example
+     * ```js
      *     const iterable = map([...Array(1000000)], each=>each**2)
+     * ```
      */
     export function map(data, func) {
         data = makeIterable(data)
@@ -147,7 +152,9 @@ import { deferredPromise } from "./async.js"
      * lazy filter
      *
      * @example
+     * ```js
      *     const iterable = filter([...Array(1000000)], each=>each%7==0)
+     * ```
      */
     export function filter(data, func) {
         data = makeIterable(data)
@@ -179,7 +186,9 @@ import { deferredPromise } from "./async.js"
      * lazy concat
      *
      * @example
+     * ```js
      *     const iterable = concat([...Array(1000000)], [...Array(1000000)])
+     * ```
      */
     export function concat(...iterables) {
         iterables = iterables.map(makeIterable)
@@ -215,10 +224,12 @@ import { deferredPromise } from "./async.js"
      * reduce
      *
      * @example
+     * ```js
      *     const iterable = reduce(
      *         [...Array(1000000)],
      *         (each, index, returnValue=0)=>returnValue+index
      *     )
+     * ```
      */
     export function reduce(data, func) {
         data = makeIterable(data)
@@ -257,12 +268,14 @@ import { deferredPromise } from "./async.js"
      *
      *
      * @example
+     * ```js
      *     var iterable = [ [1.1, 1.2], [2.1, 2.2], [[[[[3,4]]]]] ]
      *     // works even for indefinte-length iterables (generators)
      * 
      *     flattened({iterable: iterable})
      *     flattened({iterable: iterable, depth: 2})
      *     flattened({iterable: null }) // returns empty iterable 
+     * ```
      * 
      * @param arg1.iterable
      * @param arg1.depth
@@ -330,6 +343,7 @@ import { deferredPromise } from "./async.js"
      * split one iterable into multiple
      *
      * @example
+     * ```js
      *     const { even, odd, divisBy3 } = forkBy({
      *         data: [1,2,3,4,5],
      *         filters: {
@@ -341,6 +355,7 @@ import { deferredPromise } from "./async.js"
      *     console.log([...even     ]) // 2,4
      *     console.log([...odd      ]) // 1,3,5
      *     console.log([...divisBy3 ]) // 3
+     * ```
      *
      * @param arg1.data - an iterable/async iterable 
      * @param arg1.filters - an object of condition checkers
@@ -447,6 +462,7 @@ import { deferredPromise } from "./async.js"
      * @todo
      *     make sure chaining behavior matches promise chaining behavior
      * @example
+     * ```js
      *     let selfCleaningIterable = after(
      *             stream.bytes
      *         ).then(
@@ -456,6 +472,7 @@ import { deferredPromise } from "./async.js"
      *         ).finally(
      *             (size)=>stream.close()
      *         )
+     * ```
      *
      * @param iterable - async or sync iterable, or generator
      * @returns {AsyncIterable|SyncIterable|Promise} - effectively the same iterator but with hooks, sync iterators will simultaniously be iterators and promises to allow for sync handling of iteration but async handling of callbacks
@@ -765,12 +782,14 @@ import { deferredPromise } from "./async.js"
      * itertools object
      *
      * @example
+     * ```js
      *     let asyncGenerator = async function*() { yield* [ 1,2,3,] }
      *     let result = await Iterable(asyncGenerator).map(
      *         async (each)=>readTextFile(`${each}.txt`)
      *     ).map(
      *         each=>each.startsWith("somePrefix")
      *     ).toArray
+     * ```
      *
      */
     export function Iterable(value, options={length:null, _createEmpty:false}) {
@@ -1040,8 +1059,10 @@ import { deferredPromise } from "./async.js"
      * @return {Generator} an array of arrays
      *
      * @example
+     * ```js
      *     [...zip([1,2,3],[1,2])]
      *     // [  [1,1], [2,2], [3,undefined]  ]
+     * ```
      */
     export const zip = function* (...iterables) {
         iterables = iterables.map((each) => iter(each))
@@ -1061,7 +1082,9 @@ import { deferredPromise } from "./async.js"
      * @return {Generator} an iterator of numbers
      *
      * @example
+     * ```js
      *     count({start: 0, end: array.length-1, step: 1})
+     * ```
      */
     export const count = function* ({ start = 0, end = Infinity, step = 1 }) {
         let count = start
@@ -1077,8 +1100,10 @@ import { deferredPromise } from "./async.js"
      * @return {Generator} iterator of pairs
      *
      * @example
+     * ```js
      *     enumerate(['a','b'], ['A', 'B'])
      *     // [  [0,'a','A'],  [1,'b','B']  ]
+     * ```
      */
     export const enumerate = function* (...iterables) {
         let index = 0
@@ -1091,8 +1116,10 @@ import { deferredPromise } from "./async.js"
      * Permutations
      *
      * @example
+     * ```js
      *     [...permute([1,2,3])]
      *     // [[1,2,3],[2,1,3],[3,1,2],[1,3,2],[2,3,1],[3,2,1]]
+     * ```
      */
     export const permute = function* (elements) {
         yield elements.slice()
@@ -1122,6 +1149,7 @@ import { deferredPromise } from "./async.js"
      * Combinations
      *
      * @example
+     * ```js
      *     combinations([1,2,3])
      *     // [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]
      *
@@ -1130,6 +1158,7 @@ import { deferredPromise } from "./async.js"
      *
      *     combinations([1,2,3], 3, 2)
      *     // [[1,2],[1,3],[2,3],[1,2,3]]
+     * ```
      */
     export const combinations = function* (elements, maxLength, minLength) {
         // derived loosely from: https://lowrey.me/es6-javascript-combination-generator/
@@ -1162,6 +1191,7 @@ import { deferredPromise } from "./async.js"
      * All Possible Slices
      *
      * @example
+     * ```js
      *     slices([1,2,3])
      *     // [
      *     //   [[1],[2],[3]],
@@ -1170,6 +1200,7 @@ import { deferredPromise } from "./async.js"
      *     //   [[1,2,3]],
      *     // ]
      *     // note: doesnt contain [[1,3], [2]]
+     * ```
      */
     export const slices = function* (elements) {
         const slicePoints = count({ start: 1, end: numberOfPartitions.length - 1 })
@@ -1189,6 +1220,7 @@ import { deferredPromise } from "./async.js"
      * frequency 
      *
      * @example
+     * ```js
      *     const frequency = frequencyCount([11,11,44,44,9,44,0,0,1,99])
      *     // Map {
      *     //     11 => 2,
@@ -1198,6 +1230,7 @@ import { deferredPromise } from "./async.js"
      *     //     1 => 1,
      *     //     99 => 1
      *     // }
+     * ```
      * @returns {Map} output
      *
      */
@@ -1239,6 +1272,7 @@ import { deferredPromise } from "./async.js"
      * @param args.awaitAll Whether or not to await all at the end
      * @return {AsyncIterator} 
      * @example
+     * ```js
      *     for await (const subPaths of concurrentlyTransform({
      *        iterator: Deno.readDir("."), 
      *        transformFunction: (each, index)=>each.isDirectory&&[...Deno.readDirSync(each.name)],
@@ -1251,6 +1285,7 @@ import { deferredPromise } from "./async.js"
      *        awaitAll: true,
      *        transformFunction: (each, index)=>each.isDirectory&&[...Deno.readDirSync(each.name)],
      *     })
+     * ```
      */
 
     const ERROR_WHILE_MAPPING_MESSAGE = "Threw while mapping.";
