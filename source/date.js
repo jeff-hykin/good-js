@@ -44,7 +44,7 @@ const createDateArguments = (...args) => {
     }
 }
 
-const inspectSymbol = (typeof require !== 'undefined' && require('util').inspect.custom) || Symbol.for('inspect')
+const inspectSymbol = (typeof require !== 'undefined' && eval("require('util')").inspect.custom) || Symbol.for('inspect')
 
 class DateTimeError extends Error {
     constructor(message) {
