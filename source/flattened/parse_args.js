@@ -155,7 +155,7 @@ export function parseArgs({ rawArgs, fields, namesStopAfter="--", allowNameRepea
     const namedArgs = {}
     for (const eachEntry of new Set(nameToField.values())) {
         if (eachEntry.isRequired && eachEntry.value == undefined) {
-            throw Error(`The ${eachEntry.names.join(" ")} field is required but it was not provided`)
+            throw Error(`The ${eachEntry.names.map(each=>typeof each =="number"?`[Arg #${each}]`:each).join(" ")} field is required but it was not provided`)
         }
         if (eachEntry.isFlag) {
             eachEntry.value = !!eachEntry.value
