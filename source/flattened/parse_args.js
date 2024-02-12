@@ -2,6 +2,13 @@ import { toCamelCase } from "./to_camel_case.js"
 
 export const flag = Symbol("flagArg")
 export const required = Symbol("requiredArg")
+const unset = Symbol("unset")
+class Default {
+    constructor(val) {
+        this.val = val
+    }
+}
+export const initialValue = (value)=>new Default(value)
 const coerseValue = (value, transformer)=>{
     if (value instanceof Array) {
         try {
@@ -47,6 +54,7 @@ export function parseArgs({
     for (const [keys, ...kind] of fields) {
         const isFlag = kind.includes(flag)
         const isRequired = kind.includes(required)
+        const hasDefaultValue = kind.some(each=>each instanceof Default)
         const hasTransformer = kind.some(each=>each instanceof Function)
         const entry = {
             isRequired,
@@ -57,7 +65,9 @@ export function parseArgs({
             keys,
             kind,
             realIndices: [],
-            value: undefined,
+            value: unset,
+            hasDefaultValue,
+            default: hasDefaultValue? kind.filter(each=>each instanceof Default)[0].val : undefined,
         }
         for (const each of keys) {
             if (keyToField.has(each)) {
@@ -265,14 +275,18 @@ export function parseArgs({
         if (eachEntry.isFlag) {
             eachEntry.value = !!eachEntry.value
         }
-        if (eachEntry.hasTransformer) {
-            for (const eachTransformer of eachEntry.kind) {
-                if (eachTransformer instanceof Function) {
-                    eachEntry.value = eachTransformer(eachEntry.value)
+        if (eachEntry.hasDefaultValue && eachEntry.value == unset) {
+            eachEntry.value = eachEntry.default
+        } else {
+            if (eachEntry.hasTransformer) {
+                for (const eachTransformer of eachEntry.kind) {
+                    if (eachTransformer instanceof Function) {
+                        eachEntry.value = eachTransformer(eachEntry.value)
+                    }
                 }
+            } else if (valueTransformer && !eachEntry.isFlag) {
+                eachEntry.value = coerseValue(eachEntry.value, valueTransformer)
             }
-        } else if (valueTransformer && !eachEntry.isFlag) {
-            eachEntry.value = coerseValue(eachEntry.value, valueTransformer)
         }
         for (const eachName of eachEntry.keys) {
             if (typeof eachName == "number") {
@@ -293,6 +307,7 @@ export function parseArgs({
                 implicitArgsByNumber.push(value)
             } else {
                 implicitArgsByName[keys[0]] = value
+                implicitArgsByName[nameTransformer(keys[0])] = value
             }
         }
     }
