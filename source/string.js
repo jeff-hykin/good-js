@@ -202,7 +202,7 @@ export const toRepresentation = (item)=>{
 
 export const wordList = (str) => {
     const addedSeperator = str.replace(/([a-z0-9])([A-Z])/g, "$1_$2").replace(/[^a-zA-Z0-9 _.-]/,"_").toLowerCase()
-    const words = addedSeperator.split(/[ _.-]+/g)
+    const words = addedSeperator.split(/[ _.-]+/g).filter(each=>each)
     return words
 }
 
@@ -317,7 +317,6 @@ export function* iterativelyFindAll(regexPattern, sourceString) {
             regexPatternWithGlobal.lastIndex += 1
         }
     }
-    return output
 }
 
 // this escape code is extracted from Deno Std (MIT License): https://github.com/denoland/deno_std/blob/main/regexp/escape.ts
@@ -563,13 +562,22 @@ export function levenshteinDistanceOrdering({ word, otherWords }) {
  *
  * @param {Object} options - The options for spell checking.
  * @param {string} options.givenWord - The word to be checked for possible corrections.
+ * @param {string[]} options.givenWords - The words to be checked for possible corrections.
  * @param {string[]} options.possibleWords - An array of possible words to compare against.
  * @param {boolean} [options.caseSensitive=false] - Flag indicating whether the spell check should be case sensitive. Default is false.
  * @param {boolean} [options.autoThrow=false] - Flag for throwing automatically if the word is not a direct match
  * @param {number} [options.suggestionLimit=Infinity] - Number of results to return
  * @returns {string[]} An array of possible correct spellings for the given word.
  */
-export function didYouMean({ givenWord, possibleWords, caseSensitive = false, autoThrow = false, suggestionLimit = Infinity }) {
+export function didYouMean(arg) {
+    var { givenWord, givenWords, possibleWords, caseSensitive, autoThrow, suggestionLimit } = { suggestionLimit: Infinity, ...arg}
+    if (givenWords instanceof Array) {
+        let output = {}
+        for (const givenWord of givenWords) {
+            output[givenWord] = didYouMean({...arg, givenWord: givenWord, givenWords: undefined, })
+        }
+        return output
+    }
     if (!caseSensitive) {
         possibleWords = possibleWords.map((each) => each.toLowerCase())
         givenWord = givenWord.toLowerCase()
@@ -672,11 +680,77 @@ export function removeCommonPrefix(listOfStrings) {
     const shortestPathLength = Math.min(...listOfStrings.map((eachPath) => eachPath.length))
     let longestCommonPathLength = shortestPathLength
     while (longestCommonPathLength > 0) {
-        longestCommonPathLength--
         if (allEqual(listOfStrings.map((each) => each.substring(0, longestCommonPathLength)))) {
             break
         }
+        longestCommonPathLength--
     }
 
     return listOfStrings.map((each) => each.substring(longestCommonPathLength))
 }
+
+/**
+ * Removes the common prefix from a list of strings.
+ *
+ * @param {string[]} listOfStrings - An array of strings from which to remove the common prefix.
+ * @returns {string[]} - An array of strings with the common prefix removed.
+ *
+ * @example
+ *     ```js
+ *     // Test case:
+ *     const input = ["abcdef", "abcxyz", "abcmnop"]
+ *     const result = removeCommonSuffix(input)
+ *     // result is ["def", "xyz", "mnop"]
+ *     ```
+ */
+export function removeCommonSuffix(listOfStrings) {
+    function allEqual(aList) {
+        if (aList.length === 0) {
+            return true
+        }
+
+        let prev = aList[0]
+        for (let i = 0; i < aList.length; i++) {
+            if (prev !== aList[i]) {
+                return false
+            }
+            prev = aList[i]
+        }
+
+        return true
+    }
+
+    const shortestPathLength = Math.min(...listOfStrings.map((eachPath) => eachPath.length))
+    let longestCommonPathLength = shortestPathLength
+    while (longestCommonPathLength > 0) {
+        if (allEqual(listOfStrings.map((each) => each.substring(-longestCommonPathLength)))) {
+            break
+        }
+        longestCommonPathLength--
+    }
+
+    return listOfStrings.map((each) => each.substring(longestCommonPathLength))
+}
+
+/**
+ * Removes the common prefix from a list of strings.
+ *
+ * @param {string[]} listOfStrings - An array of strings from which to remove the common prefix.
+ * @returns {string[]} - An array of strings with the common prefix removed.
+ *
+ * @example
+ *     ```js
+ *     // Test case:
+ *     const input = ["abcdef", "abcxyz", "abcmnop"]
+ *     const result = removeCommonPrefix(input)
+ *     // result is ["def", "xyz", "mnop"]
+ *     ```
+ */
+// export function removeCommonSuffix(listOfStrings) {
+    
+//     return removeCommonPrefix(
+//         listOfStrings.map(each=>[...each].reverse().join(""))
+//     ).map(
+//         each=>[...each].reverse().join("")
+//     )
+// }
