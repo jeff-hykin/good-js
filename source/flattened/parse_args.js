@@ -24,7 +24,7 @@ const coerseValue = (value, transformer)=>{
             }
             return newValues
         }
-    } else if (value !== undefined) {
+    } else if (value !== undefined && value !== unset) {
         try {
             return transformer(value)
         } catch (error) {
@@ -269,8 +269,8 @@ export function parseArgs({
         }
     }
     for (const eachEntry of fieldSet) {
-        if (eachEntry.isRequired && eachEntry.value == undefined) {
-            throw Error(`The ${eachEntry.keys.map(each=>typeof each =="number"?`[Arg #${each}]`:each).join(" ")} field is required but it was not provided`)
+        if (eachEntry.isRequired && eachEntry.value == unset) {
+            throw Error(`\n\nThe ${eachEntry.keys.map(each=>typeof each =="number"?`[Arg #${each}]`:each).join(" ")} field is required but it was not provided\n`)
         }
         const usingDefaultValue = eachEntry.hasDefaultValue && eachEntry.value == unset
         if (usingDefaultValue) {
