@@ -2,7 +2,7 @@ import { parseArgs, flag, required, initialValue } from "../flattened/parse_args
 import { toCamelCase } from "../flattened/to_camel_case.js"
 import { didYouMean } from "../string.js"
 
-const output = parseArgs({
+var output = parseArgs({
     rawArgs: [ "1", "2", "--debug", "3", "--imImplicit", "howdy" ],
     fields: [
         [["--debug", "-o", ], flag, required, ],
@@ -48,3 +48,16 @@ console.log(didYouMean({ givenWords: invalidNames, possibleWords: validNames,}))
     }
     
 }
+
+
+var { from: source, to: target, absolute: isAbsolute } = output = parseArgs({
+    rawArgs: [ "--from", "a", "--to", "b" ],
+    fields: [
+        [["--from", ], required, ],
+        [["--to"], required, ],
+        [["--absolute", ], flag, initialValue(false), JSON.parse ],
+    ],
+    allowNameRepeats: false,
+    valueTransformer: (arg)=>arg, // as-is
+}).simplifiedNames
+console.debug(`output is:`,output) 

@@ -272,10 +272,8 @@ export function parseArgs({
         if (eachEntry.isRequired && eachEntry.value == undefined) {
             throw Error(`The ${eachEntry.keys.map(each=>typeof each =="number"?`[Arg #${each}]`:each).join(" ")} field is required but it was not provided`)
         }
-        if (eachEntry.isFlag) {
-            eachEntry.value = !!eachEntry.value
-        }
-        if (eachEntry.hasDefaultValue && eachEntry.value == unset) {
+        const usingDefaultValue = eachEntry.hasDefaultValue && eachEntry.value == unset
+        if (usingDefaultValue) {
             eachEntry.value = eachEntry.default
         } else {
             if (eachEntry.hasTransformer) {
@@ -287,6 +285,9 @@ export function parseArgs({
             } else if (valueTransformer && !eachEntry.isFlag) {
                 eachEntry.value = coerseValue(eachEntry.value, valueTransformer)
             }
+        }
+        if (eachEntry.isFlag) {
+            eachEntry.value = !!eachEntry.value
         }
         for (const eachName of eachEntry.keys) {
             if (typeof eachName == "number") {

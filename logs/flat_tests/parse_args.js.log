@@ -69,5 +69,6 @@ output.implicitArgsByName is: { "--imImplicit": "howdy", imImplicit: "howdy" }
 THERE SHOULD BE AN ERROR: TypeError: Cannot convert a Symbol value to a string
     at parseInt (<anonymous>)
     at parseArgs.fields (file:///Users/jeffhykin/repos/good-js/source/test/parse_args.js:40:41)
-    at parseArgs (file:///Users/jeffhykin/repos/good-js/source/flattened/parse_args.js:284:43)
+    at parseArgs (file:///Users/jeffhykin/repos/good-js/source/flattened/parse_args.js:282:43)
     at file:///Users/jeffhykin/repos/good-js/source/test/parse_args.js:35:24
+output is: { from: "a", to: "b", absolute: false }
