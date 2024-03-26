@@ -1,4 +1,4 @@
-// https://deno.land/std@0.161.0/async/deferred.ts
+// originally based on https://deno.land/std@0.208.0/async/deferred.ts?source=#L33
 export function deferredPromise() {
     let methods
     let state = "pending"
