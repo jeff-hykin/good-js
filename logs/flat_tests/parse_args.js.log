@@ -1,0 +1,73 @@
+output.argList is: [ 1, 2, 3 ]
+output.simplifiedNames is: { debug: true, version: true, explcitArg1: null, imImplicit: "howdy" }
+output.field.version is: undefined
+output.implicitArgsByNumber is: [ 1, 2, 3 ]
+output.directArgList is: [ 1, 2, 3 ]
+output.fields is: [
+  {
+    isRequired: true,
+    isFlag: true,
+    isExplicit: true,
+    hasTransformer: false,
+    wasNamed: false,
+    keys: [ "--debug", "-o", "debug", "o" ],
+    kind: [ Symbol(flagArg), Symbol(requiredArg) ],
+    realIndices: [ 2 ],
+    value: true,
+    hasDefaultValue: false,
+    default: undefined
+  },
+  {
+    isRequired: false,
+    isFlag: true,
+    isExplicit: true,
+    hasTransformer: false,
+    wasNamed: false,
+    keys: [ "--version", "version" ],
+    kind: [ Symbol(flagArg), Default { val: true } ],
+    realIndices: [],
+    value: true,
+    hasDefaultValue: true,
+    default: true
+  },
+  {
+    isRequired: false,
+    isFlag: false,
+    isExplicit: true,
+    hasTransformer: true,
+    wasNamed: false,
+    keys: [ "--explcit-arg1", "explcitArg1" ],
+    kind: [ Default { val: null }, [Function (anonymous)] ],
+    realIndices: [],
+    value: null,
+    hasDefaultValue: true,
+    default: null
+  },
+  {
+    wasNamed: true,
+    kind: [],
+    keys: [ "--imImplicit", "imImplicit" ],
+    realIndices: [ 5 ],
+    value: "howdy"
+  },
+  { kind: [], keys: [ 0 ], realIndices: [ 0 ], value: 1 },
+  { kind: [], keys: [ 1 ], realIndices: [ 1 ], value: 2 },
+  { kind: [], keys: [ 2 ], realIndices: [ 3 ], value: 3 }
+]
+output.explicitArgsByName is: {
+  "--debug": true,
+  "-o": true,
+  debug: true,
+  o: true,
+  "--version": true,
+  version: true,
+  "--explcit-arg1": null,
+  explcitArg1: null
+}
+output.implicitArgsByName is: { "--imImplicit": "howdy", imImplicit: "howdy" }
+{ "--imImplicit": [ "--version", "--debug", "--explcit-arg1", "-o" ] }
+THERE SHOULD BE AN ERROR: TypeError: Cannot convert a Symbol value to a string
+    at parseInt (<anonymous>)
+    at parseArgs.fields (file:///Users/jeffhykin/repos/good-js/source/test/parse_args.js:40:41)
+    at parseArgs (file:///Users/jeffhykin/repos/good-js/source/flattened/parse_args.js:284:43)
+    at file:///Users/jeffhykin/repos/good-js/source/test/parse_args.js:35:24

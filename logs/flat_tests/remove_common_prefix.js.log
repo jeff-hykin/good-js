@@ -1,0 +1,32 @@
+
+args before: [[]]
+[args were not changed]
+result: undefined
+
+args before: [["cdef","abcxyz","abcmnop"]]
+[args were not changed]
+result: undefined
+
+args before: [["cdef","cdef","cdef"]]
+args after: [["","",""]]
+result: undefined
+
+args before: [["abcdefnop","abcxyznop","abcmnop","abcdefnop"]]
+args after: [["defnop","xyznop","mnop","defnop"]]
+result: undefined
+
+args before: [["abcdef","abcxyz","aabcmnop","abcdef","abcxyz"]]
+args after: [["bcdef","bcxyz","abcmnop","bcdef","bcxyz"]]
+result: undefined
+
+args before: [["abcdef","abcxyzf","abcmnopf","abcdef","abcxyzf","abcmnopf"]]
+args after: [["def","xyzf","mnopf","def","xyzf","mnopf"]]
+result: undefined
+
+args before: [["abcdef","abcxyz","abcmnop","abcdef","abcxyz","abcmnop","dabcdef"]]
+[args were not changed]
+result: undefined
+
+args before: [["abcdef"]]
+[args were not changed]
+result: undefined

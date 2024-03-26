@@ -1,0 +1,21 @@
+args before: [[]]
+[args were not changed]
+result: ""
+args before: [["aac","adbc","abc"]]
+[args were not changed]
+result: "c"
+args before: [["ab","ab","abc"]]
+[args were not changed]
+result: ""
+args before: [["ab","ab","ab"]]
+[args were not changed]
+result: "ab"
+args before: [["aldjfaldkjaaa","abaaa","abcaaa"]]
+[args were not changed]
+result: "aaa"
+args before: [["adfadsc","abc","abc"]]
+[args were not changed]
+result: "c"
+args before: [["edfadsc","abc","abc"]]
+[args were not changed]
+result: "c"
