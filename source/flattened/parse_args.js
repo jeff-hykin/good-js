@@ -203,7 +203,7 @@ export function parseArgs({
             // console.debug(`- is in explicitFlagList: ${JSON.stringify(explicitFlagList)}`)
             const entry = keyToField.get(eachArg)
             // provided two values for one entry
-            if (entry.value != undefined) {
+            if (entry.value != unset) {
                 if (!allowNameRepeats) {
                     throw Error(`When calling parseArgs(), two values (ex: "--min 5 --minimum 5" or "--m 5 --m 5") were given to the same field. The second occurance was ${eachArg}, and the field was ${JSON.stringify(entry.keys)} `)
                 }
