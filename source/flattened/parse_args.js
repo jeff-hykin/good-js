@@ -169,7 +169,7 @@ export function parseArgs({
                 const entry = keyToField.get(name)
                 entry.wasNamed = true
                 // provided two values for one entry
-                if (entry.value != undefined) {
+                if (entry.value !== unset) {
                     if (allowNameRepeats) {
                         entry.value = [ entry.value, eachArg ]
                     } else {
