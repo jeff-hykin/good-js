@@ -74,6 +74,9 @@ class DateTime extends Date {
                 if (arg.length > 3) {
                     this.timeIncluded = true
                 }
+            } else if (arg instanceof Date) {
+                super(arg.getTime())
+                this.timeIncluded = true
             } else if (typeof arg == 'string') {
                 arg = arg.trim()
                 // formats:
@@ -81,15 +84,20 @@ class DateTime extends Date {
                 //     2011-09-24
                 //     2011-09-24T00:00:00
                 //     2011-09-24T00:00:00Z
-                let format1 = arg.match(/(\d\d?)\/(\d\d?)\/(\d\d\d\d)/)
-                let format2 = arg.match(/(\d\d\d\d)-(\d\d?)-(\d\d?)/)
-                let format3 = arg.match(/(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))/)
-                let format4 = arg.match(/(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))Z/)
+                let format1 = arg.match(/^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/)
+                let format2 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)$/)
+                let format3 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))$/)
+                let format4 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))Z$/)
+                let format5 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)-(\d\d?):(\d\d?)$/)
+                let format6 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)\+(\d\d?):(\d\d?)$/)
                 let years, months, days, hours, minutes, seconds, miliseconds
                 if (format4) {
                     // this makes it in UTC time rather than relative to the current time zone
                     super(format4)
                     this.timeIncluded = true
+                } else if (format4 || format5) {
+                    this.timeIncluded = true
+                    super(arg)
                 } else if (format3) {
                     years       = format3[1]
                     months      = format3[2]
