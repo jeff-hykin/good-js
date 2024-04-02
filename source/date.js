@@ -96,8 +96,8 @@ class DateTime extends Date {
                     super(format4)
                     this.timeIncluded = true
                 } else if (format4 || format5) {
-                    this.timeIncluded = true
                     super(arg)
+                    this.timeIncluded = true
                 } else if (format3) {
                     years       = format3[1]
                     months      = format3[2]
@@ -106,8 +106,8 @@ class DateTime extends Date {
                     minutes     = format3[5]
                     seconds     = format3[6]
                     miliseconds = format3[7]
-                    this.timeIncluded = true
                     super(...createDateArguments(years, months, hours, minutes, seconds, miliseconds))
+                    this.timeIncluded = true
                 } else if (format2) {
                     years       = format2[1]
                     months      = format2[2]
@@ -231,6 +231,20 @@ class DateTime extends Date {
             case 4: return 'Thursday'
             case 5: return 'Friday'
             case 6: return 'Saturday'
+        }
+        return weekDay
+    }
+    get weekDayShort() {
+        if (this.isInvalid) {return null}
+        let weekDay = super.getDay()
+        switch (weekDay) {
+            case 0: return 'Sun'
+            case 1: return 'Mon'
+            case 2: return 'Tue'
+            case 3: return 'Wed'
+            case 4: return 'Thu'
+            case 5: return 'Fri'
+            case 6: return 'Sat'
         }
         return weekDay
     }
