@@ -147,14 +147,14 @@ class DateTime extends Date {
     }
     get minute() {
         if (this.isInvalid) {return null}
-        return super.toLocaleTimeString().match(/(\d+):(\d+):(\d+) ([AP]M)/)[2]-0
+        return super.toLocaleTimeString("en-US").match(/(\d+):(\d+):(\d+) ([AP]M)/)[2]-0
     }
     get hour() {
         throw Error(`Please use .hour12 or .hour24 instead of .hour`)
     }
     get hour12() {
         if (this.isInvalid) {return null}
-        return super.toLocaleTimeString().match(/(\d+):(\d+):(\d+) ([AP]M)/)[1]-0
+        return super.toLocaleTimeString("en-US").match(/(\d+):(\d+):(\d+) ([AP]M)/)[1]-0
     }
     get amPm() {
         if (this.isInvalid) {return null}
@@ -162,7 +162,7 @@ class DateTime extends Date {
     }
     get hour24() {
         if (this.isInvalid) {return null}
-        let match = super.toLocaleTimeString().match(/(\d+):(\d+):(\d+) ([AP]M)/)
+        let match = super.toLocaleTimeString("en-US").match(/(\d+):(\d+):(\d+) ([AP]M)/)
         return DateTime.convertTime12to24(match[1], match[4])
     }
     get time() {
