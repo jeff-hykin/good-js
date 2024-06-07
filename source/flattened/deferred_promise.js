@@ -5,10 +5,10 @@ export function deferredPromise() {
     const promise = new Promise((resolve, reject) => {
         methods = {
             resolve(value) {
-                if (value.catch instanceof Function) {
+                if (value?.catch instanceof Function) {
                     value.catch(reject)
                 }
-                if (value.then instanceof Function) {
+                if (value?.then instanceof Function) {
                     value.then(methods.resolve)
                 } else {
                     state = "fulfilled"
