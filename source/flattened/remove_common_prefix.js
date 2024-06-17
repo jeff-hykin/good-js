@@ -19,7 +19,7 @@ import { commonPrefix } from "./common_prefix.js"
  *     // (wont reduce to empty string if only one element in the list)
  * 
  *     const input3 = ["abc", "abc", "abc"]
- *     removeCommonSuffix(input3)
+ *     removeCommonPrefix(input3)
  *     // input is ["", "", ""]
  *     ```
  */

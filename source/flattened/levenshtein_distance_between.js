@@ -1,3 +1,4 @@
+// https://stackoverflow.com/questions/2460177/edit-distance-in-python, translated to JS
 /**
  * Calculates the Levenshtein distance between two strings.
  *
