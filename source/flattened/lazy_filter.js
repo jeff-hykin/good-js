@@ -6,7 +6,8 @@ import { isAsyncIterable } from "./is_async_iterable.js"
  *
  * @example
  * ```js
- *     const iterable = filter([...Array(1000000)], each=>each%7==0)
+ * import { lazyFilter } from "https://deno.land/x/good/flattened/lazy_filter.js"
+ * const iterable = filter([...Array(1000000)], (each, index)=>each%7==0)
  * ```
  */
 export function lazyFilter(data, func) {

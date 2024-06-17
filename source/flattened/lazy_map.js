@@ -6,7 +6,8 @@ import { isAsyncIterable } from "./is_async_iterable.js"
  *
  * @example
  * ```js
- *     const iterable = map([...Array(1000000)], each=>each**2)
+ * import { lazyMap } from "https://deno.land/x/good/flattened/lazy_map.js"
+ * const iterable = lazyMap([...Array(1000000)], (each, index)=>each**2)
  * ```
  */
 export function lazyMap(data, func) {
