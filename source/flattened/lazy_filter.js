@@ -1,5 +1,6 @@
 import { makeIterable } from "./make_iterable.js"
 import { isAsyncIterable } from "./is_async_iterable.js"
+import { AsyncFunction } from "./async_function__class.js"
 
 /**
  * lazy filter
