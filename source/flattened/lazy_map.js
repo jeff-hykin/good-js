@@ -12,7 +12,7 @@ import { isAsyncIterable } from "./is_async_iterable.js"
 export function lazyMap(data, func) {
     data = makeIterable(data)
     let iterator
-    if (isAsyncIterable(data) || func instanceof AsyncFunction) {
+    if (isAsyncIterable(data)) {
         iterator = (async function*(){
             let index = -1
             for await (const each of data) {
