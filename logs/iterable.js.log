@@ -8,6 +8,12 @@ listOfSubpaths is: [
       isSymlink: false
     },
     [Object: null prototype] {
+      name: "test",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "iterable.js",
       isFile: true,
       isDirectory: false,
@@ -23,6 +29,12 @@ listOfSubpaths is: [
       name: "binary_heap.js",
       isFile: true,
       isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "flattened",
+      isFile: false,
+      isDirectory: true,
       isSymlink: false
     },
     [Object: null prototype] {
@@ -124,6 +136,188 @@ listOfSubpaths is: [
   ],
   [
     [Object: null prototype] {
+      name: "noop-process",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "ps-list",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "fkill",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "cli-truncate",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "ava",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "get-port",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "crc-32",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "process-exists",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "minimist",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "esc-exit",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "xo",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "chalk",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: ".deno",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "webpack-cli",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "jsdom",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "webpack",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "fuzzy-search",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "vite",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "inquirer-autocomplete-prompt",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "create-vite-extra",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "pid-port",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "plotly.js",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "num-sort",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "meow",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "inquirer",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "random",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "execa",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "terser",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "delay",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "string.prototype.matchall",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    }
+  ],
+  [
+    [Object: null prototype] {
       name: "events.js",
       isFile: true,
       isDirectory: false,
@@ -203,6 +397,7 @@ listOfSubpaths is: [
     }
   ],
   false,
+  false,
   [
     [Object: null prototype] {
       name: "value.js.log",
@@ -238,6 +433,12 @@ listOfSubpaths is: [
       name: "math.js.log",
       isFile: true,
       isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "flat_tests",
+      isFile: false,
+      isDirectory: true,
       isSymlink: false
     },
     [Object: null prototype] {
@@ -287,12 +488,25 @@ listOfSubpaths is: [
   false,
   false,
   false,
+  false,
   [
     [Object: null prototype] {
       name: "tests",
       isFile: false,
       isDirectory: false,
       isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "flat_tests",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "flat_tests.ps1",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
     },
     [Object: null prototype] {
       name: "tests.ps1",
@@ -389,6 +603,12 @@ listOfSubpaths is: [
   ],
   [
     [Object: null prototype] {
+      name: "time_zones.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "all_builtin_classes.js",
       isFile: true,
       isDirectory: false,
@@ -401,6 +621,12 @@ result is: [
     name: "events.js",
     isFile: true,
     isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "test",
+    isFile: false,
+    isDirectory: true,
     isSymlink: false
   },
   [Object: null prototype] {
@@ -419,6 +645,12 @@ result is: [
     name: "binary_heap.js",
     isFile: true,
     isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "flattened",
+    isFile: false,
+    isDirectory: true,
     isSymlink: false
   },
   [Object: null prototype] {
@@ -516,6 +748,186 @@ result is: [
     isFile: true,
     isDirectory: false,
     isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "noop-process",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "ps-list",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "fkill",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "cli-truncate",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "ava",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "get-port",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "crc-32",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "process-exists",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "minimist",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "esc-exit",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "xo",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "chalk",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: ".deno",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "webpack-cli",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "jsdom",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "webpack",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "fuzzy-search",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "vite",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "inquirer-autocomplete-prompt",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "create-vite-extra",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "pid-port",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "plotly.js",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "num-sort",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "meow",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "inquirer",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "random",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "execa",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "terser",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "delay",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "string.prototype.matchall",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
   },
   [Object: null prototype] {
     name: "events.js",
@@ -632,6 +1044,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "flat_tests",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "csv.js.log",
     isFile: true,
     isDirectory: false,
@@ -678,6 +1096,18 @@ result is: [
     isFile: false,
     isDirectory: false,
     isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "flat_tests",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "flat_tests.ps1",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
   },
   [Object: null prototype] {
     name: "tests.ps1",
@@ -770,13 +1200,19 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "time_zones.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "all_builtin_classes.js",
     isFile: true,
     isDirectory: false,
     isSymlink: false
   }
 ]
-manualFlat.length == result.length is: 69 == 63 is: false
+manualFlat.length == result.length is: 107 == 99 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,

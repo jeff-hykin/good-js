@@ -58,6 +58,6 @@ didYouMean({ givenWord: badArg, possibleWords }) is: [ "help", "size", "blah", "
 [ "def", "xyz", "mnop" ]
 [ "apple", "banana", "cherry" ]
 [ "", "", "" ]
-[ "45", "456", "4" ]
-[ "z", "z", "z" ]
+[ "5", "56", "" ]
+[ "", "", "" ]
 [ "d123", "d456", "123" ]
