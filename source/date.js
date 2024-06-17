@@ -105,7 +105,7 @@ class DateTime extends Date {
                     hours       = format3[4]
                     minutes     = format3[5]
                     seconds     = format3[6]
-                    miliseconds = format3[7]
+                    miliseconds = format3[7]||0
                     super(...createDateArguments(years, months, days, hours, minutes, seconds, miliseconds))
                     this.timeIncluded = true
                 } else if (format2) {
