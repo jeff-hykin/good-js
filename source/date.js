@@ -86,8 +86,8 @@ class DateTime extends Date {
                 //     2011-09-24T00:00:00Z
                 let format1 = arg.match(/^(\d\d?)\/(\d\d?)\/(\d\d\d\d)$/)
                 let format2 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)$/)
-                let format3 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))$/)
-                let format4 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+))Z$/)
+                let format3 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+)?)$/)
+                let format4 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+)?)Z$/)
                 let format5 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)-(\d\d?):(\d\d?)$/)
                 let format6 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)\+(\d\d?):(\d\d?)$/)
                 let years, months, days, hours, minutes, seconds, miliseconds
