@@ -1,5 +1,7 @@
-import { deepCopySymbol, typedArrayClasses, isAsyncIterable, AsyncFunction, ArrayIterator, isSyncIterableObjectOrContainer, isSyncIterable } from "./value.js"
-import { deferredPromise } from "./async.js"
+import { isAsyncIterable } from "./flattened/is_async_iterable.js"
+import { AsyncFunction } from "./flattened/async_function__class.js"
+import { isSyncIterableObjectOrContainer } from "./flattened/is_sync_iterable_object_or_container.js"
+import { deferredPromise } from "./flattened/deferred_promise.js"
 
 // desired interface
     // light weight core:
