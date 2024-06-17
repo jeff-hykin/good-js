@@ -1,6 +1,6 @@
 {
     "name": "good-js",
-    "version": "3.1.1",
+    "version": "4.0.0",
     "description": "A library of fixes for the giant mistake that is Javascript",
     "main": "index.js",
     "scripts": {
@@ -21,6 +21,5 @@
     },
     "homepage": "https://github.com/jeff-hykin/good-js#readme",
     "dependencies": {
-        "node-fetch": "^2.6.1"
     }
 }
