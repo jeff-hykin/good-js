@@ -1,0 +1,1 @@
+export const MapIterator = Object.getPrototypeOf((new Map())[Symbol.iterator])

@@ -1,0 +1,1 @@
+export const ArrayIterator = Object.getPrototypeOf([][Symbol.iterator])

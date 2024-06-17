@@ -1,0 +1,1 @@
+export let AsyncGeneratorFunction = class {}; try { AsyncGeneratorFunction = eval("(async function*(){}).constructor") } catch (err) {} // this is in a try-catch so that it plays nice with babel transpiling 

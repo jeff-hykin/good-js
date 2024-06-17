@@ -178,39 +178,17 @@
 // 
 // nail down built-in classes
 // 
-
-    export const typedArrayClasses = [
-        Uint16Array,
-        Uint32Array,
-        Uint8Array,
-        Uint8ClampedArray,
-        Int16Array,
-        Int32Array,
-        Int8Array,
-        Float32Array,
-        Float64Array,
-        globalThis.BigInt64Array,
-        globalThis.BigUint64Array,
-    ].filter(each=>each)
-    export const copyableClasses = new Set([ RegExp, Date, URL, ...typedArrayClasses, globalThis.ArrayBuffer, globalThis.DataView, ])
-
-    export const IteratorPrototype = Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()))
-    export const ArrayIterator = Object.getPrototypeOf([][Symbol.iterator])
-    export const MapIterator = Object.getPrototypeOf((new Map())[Symbol.iterator])
-    export const SetIterator = Object.getPrototypeOf((new Set())[Symbol.iterator])
-    export let AsyncFunction = class {}
-    export let GeneratorFunction = class {}
-    export let AsyncGeneratorFunction = class {}
-    export let SyncGenerator = class {}
-    export let AsyncGenerator = class {}
-    try {
-        AsyncFunction = eval("(async function(){}).constructor")
-        GeneratorFunction = eval("(function*(){}).constructor")
-        AsyncGeneratorFunction = eval("(async function*(){}).constructor")
-        // this is in a try-catch so that it plays nice with babel transpiling
-        SyncGenerator = eval("((function*(){})()).constructor")
-        AsyncGenerator = eval("((async function*(){})()).constructor")
-    } catch (error) {}
+    import { typedArrayClasses } from "./flattened/typed_array_classes.js"; export { typedArrayClasses as typedArrayClasses }
+    import { builtinCopyablePrimitiveClasses as copyableClasses } from "./flattened/builtin_copyable_primitive_classes.js"; export { copyableClasses as copyableClasses }
+    import { IteratorPrototype      } from "./flattened/iterator_prototype__class.js";        export { IteratorPrototype as iteratorPrototype }
+    import { ArrayIterator          } from "./flattened/array_iterator__class.js";            export { ArrayIterator as ArrayIterator }
+    import { MapIterator            } from "./flattened/map_iterator__class.js";              export { MapIterator as MapIterator }
+    import { SetIterator            } from "./flattened/set_iterator__class.js";              export { SetIterator as SetIterator }
+    import { AsyncFunction          } from "./flattened/async_function__class.js";            export { AsyncFunction as AsyncFunction }
+    import { GeneratorFunction      } from "./flattened/generator_function__class.js";        export { GeneratorFunction as GeneratorFunction }
+    import { AsyncGeneratorFunction } from "./flattened/async_generator_function__class.js";  export { AsyncGeneratorFunction as AsyncGeneratorFunction }
+    import { SyncGenerator          } from "./flattened/sync_generator__class.js";            export { SyncGenerator as SyncGenerator }
+    import { AsyncGenerator         } from "./flattened/async_generator__class.js";           export { AsyncGenerator as AsyncGenerator }
 
 // 
 // checker functions
@@ -546,7 +524,6 @@ export const allKeys = function(obj) {
 }
 
 export const ownKeyDescriptions = Object.getOwnPropertyDescriptors
-
 export const allKeyDescriptions = function(value, options={includingBuiltin:false}) {
     var { includingBuiltin } = {...options}
     // from: https://stackoverflow.com/questions/8024149/is-it-possible-to-get-the-non-enumerable-inherited-property-names-of-an-object/70629468?noredirect=1#comment126513832_70629468
