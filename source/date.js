@@ -88,8 +88,7 @@ class DateTime extends Date {
                 let format2 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)$/)
                 let format3 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+)?)$/)
                 let format4 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?(?:\.\d+)?)Z$/)
-                let format5 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)-(\d\d?):(\d\d?)$/)
-                let format6 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)\+(\d\d?):(\d\d?)$/)
+                let format5 = arg.match(/^(\d\d\d\d)-(\d\d?)-(\d\d?)T(\d\d?):(\d\d?):(\d\d?)(-|\+)(\d\d?):(\d\d?)$/)
                 let years, months, days, hours, minutes, seconds, miliseconds
                 if (format4) {
                     // this makes it in UTC time rather than relative to the current time zone
