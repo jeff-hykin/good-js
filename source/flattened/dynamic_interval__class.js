@@ -23,7 +23,7 @@ const defaultOnError = (err) => {
  */
 export class DynamicInterval {
     constructor() {
-        this.onError = defaultOnError
+        this.errorCallback = defaultOnError
         this.callback = () => {}
         this.rate = null
         this.accountForDuration = true
@@ -36,11 +36,11 @@ export class DynamicInterval {
             if (this.accountForDuration) {
                 await this.callback()
             } else {
-                this.callback().catch(this.onError)
+                this.callback().catch(this.errorCallback)
             }
         } catch (err) {
             try {
-                await this.onError(err)
+                await this.errorCallback(err)
             } catch (error) {
                 defaultOnError(error)
             }
@@ -58,8 +58,8 @@ export class DynamicInterval {
         return this
     }
 
-    onError(onError) {
-        this.onError = onError
+    onError(callback) {
+        this.errorCallback = callback
         return this
     }
 
