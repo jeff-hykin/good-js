@@ -45,7 +45,7 @@ export class DynamicInterval {
                 defaultOnError(error)
             }
         }
-        this._id = setTimeout(this._runCallback, this.rate)
+        this._id = setTimeout(()=>this._runCallback(), this.rate)
     }
     
     setRate(rate) {
@@ -77,7 +77,7 @@ export class DynamicInterval {
         if (!Number.isFinite(this.rate)) {
             throw Error(`DynamicInterval.start() called but no call-rate was set`)
         }
-        this._id = setTimeout(this._runCallback, delay)
+        this._id = setTimeout(()=>this._runCallback(), delay)
         return this
     }
 }
