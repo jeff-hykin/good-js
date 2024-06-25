@@ -287,7 +287,11 @@ export function parseArgs({
             }
         }
         if (eachEntry.isFlag) {
-            eachEntry.value = !!eachEntry.value
+            if (eachEntry.value == unset) {
+                eachEntry.value = false
+            } else {
+                eachEntry.value = !!eachEntry.value
+            }
         }
         for (const eachName of eachEntry.keys) {
             if (typeof eachName == "number") {
