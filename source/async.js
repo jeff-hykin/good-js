@@ -1,5 +1,7 @@
 // extracted from https://deno.land/std@0.161.0/async/mod.ts?s=deferred
 
+export { DynamicInterval } from "./flattened/dynamic_interval__class.js"
+
 /**
  * deferredPromise
  *

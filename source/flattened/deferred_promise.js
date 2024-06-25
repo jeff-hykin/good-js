@@ -1,5 +1,16 @@
-// originally based on https://deno.land/std@0.208.0/async/deferred.ts?source=#L33
+/**
+ * A promise that will be given a callback later
+ *
+ * @example
+ * ```js
+ * import { deferredPromise } from "https://deno.land/x/good/flattened/deferred_promise.js"
+ * const deferred = deferredPromise()
+ * deferred.resolve(1)
+ * deferred.then(x=>console.log(x))
+ * ```
+ */
 export function deferredPromise() {
+    // originally based on https://deno.land/std@0.208.0/async/deferred.ts?source=#L33
     let methods
     let state = "pending"
     const promise = new Promise((resolve, reject) => {
