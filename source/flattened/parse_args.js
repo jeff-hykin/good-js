@@ -127,7 +127,7 @@ export function parseArgs({
                 // console.debug(`- numbered arg was known`,)
                 const entry = keyToField.get(runningArgNumberIndex)
                 // provided two values for one entry
-                if (entry.value != undefined) {
+                if (entry.value != unset) {
                     if (argsByNameSatisfiesNumberedArg) {
                         // this number arg has already been satisfied
                         // so we pretend that it was never a number arg
