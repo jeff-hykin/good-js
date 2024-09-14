@@ -14,7 +14,7 @@ import { toString } from "./to_string.js"
  * @param {(string|RegExp)[]} values - An array of values to insert between the strings. Values can be either strings or regular expressions.
  * @returns {RegExp} - A regular expression created from the joined strings and values.
  */
-function regexJoin(strings, values) {
+export function regexJoin(strings, values) {
     let newRegexString = ""
     for (const [ string, value ] of zip(strings,values)) {
         newRegexString += string

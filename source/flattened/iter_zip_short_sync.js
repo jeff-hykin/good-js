@@ -28,7 +28,7 @@ const innerIterZipShortSync = function* (...iterables) {
  *     then the generator will have a length property
  *     (the shortest length of all the arguments)
  */
-export const iterZipLongSync = function(...iterables) {
+export const iterZipShortSync = function(...iterables) {
     const generatorObject = innerIterZipShortSync(...iterables)
     const finalLength = Math.min(...iterables.map((each) => typeof each != 'function' && (typeof each?.length == 'number' ? each?.length : each.size)))
     if (finalLength==finalLength) {
