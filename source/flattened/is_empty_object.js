@@ -1,9 +1,1 @@
-export const isEmptyObject = (object) => {
-    if (object == null) {
-        return true
-    }
-    for (const _ in object) {
-        return false
-    }
-    return true
-}
+export const isEmptyObject = (object) => object instanceof Object && Object.getOwnPropertyNames(object).length == 0

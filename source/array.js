@@ -1,55 +1,17 @@
-import {
-    makeIterable,
-    zip as zipIter,
-    count as countIter,
-    enumerate as enumerateIter,
-    permute as permuteIter,
-    combinations as combinationsIter,
-    slices as slicesIter,
-} from "./iterable.js"
+import { makeIterable } from "./flattened/make_iterable.js"
+import { count as countIter } from "./flattened/count.js"
+import { enumerate as enumerateIter } from "./flattened/enumerate.js"
+import { permute as permuteIter } from "./flattened/permute.js"
+import { combinations as combinationsIter } from "./flattened/combinations.js"
+import { slices as slicesIter } from "./flattened/slices.js"
 
 // ideas
-    // bundle (lodash chunk)
+    // bundle (aka "chunk" from lodash)
 
-/**
- * wrapAroundGet
- *
- * @example
- * ```js
- *     const items = [9,5,3]
- *     wrapAroundGet(0,items) // 9
- *     wrapAroundGet(1,items) // 5
- *     wrapAroundGet(2,items) // 3
- *     wrapAroundGet(3,items) // 9
- *     wrapAroundGet(4,items) // 5
- * ```
- */
-export const wrapAroundGet = (number, list) => list[((number % list.length) + list.length) % list.length]
-
-export const reversed = function (object) {
-    // efficient string reverse
-    if (typeof object == 'string') {
-        // https://stackoverflow.com/a/48256861/4367134
-        return object.split('').reduce((reversed, character) => character + reversed, '')
-    }
-    // make a copy, then reverse it
-    return [...makeIterable(object)].reverse()
-}
-
-/**
- * zip like python
- *
- * @return {Array[]} an array of arrays
- *
- * @example
- * ```js
- *     zip([1,2,3],[1,2])
- *     // [  [1,1], [2,2], [3,undefined]  ]
- * ```
- */
-export const zip = function (...iterables) {
-    return [...zipIter(...iterables)]
-}
+import { wrapAroundGet } from "./flattened/wrap_around_get.js"; export { wrapAroundGet as wrapAroundGet }
+import { reversed } from "./flattened/reversed.js"; export { reversed as reversed }
+import { stitch } from "./flattened/stitch.js"; export { stitch as stitch }
+import { iterZipLongSync } from "./flattened/iter_zip_long_sync.js"
 
 /**
  * Count
@@ -148,3 +110,5 @@ export class NamedArray extends Array {
         return {...this}
     }
 }
+
+export const zip = (...iterables)=>[...iterZipLongSync(...iterables)]

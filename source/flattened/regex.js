@@ -1,5 +1,5 @@
 import { escapeRegexMatch } from "./escape_regex_match.js"
-import { zip } from "./zip.js"
+import { zipLong as zip } from "./zip_long.js"
 import { toString } from "./to_string.js"
 
 // 

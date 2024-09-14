@@ -164,18 +164,24 @@ console.debug(`Iterable(asyncExampleGenerator()).then() is:`,await Iterable(asyn
 //     console.log(`expected error: ${error}`)
 // }
 
+var arg = asyncExampleGeneratorWithThrow()
+console.debug(`arg is:`,arg)
+var asyncArg = (
+    after(
+        arg
+    ).catch(
+        (...args)=>console.debug(`There was an error: ${args}`)
+    ).finally(
+        ()=>console.log("closing such and such (caught error)")
+    ).then(
+        ()=>console.log("'then' after finally (caught error)")
+    ) 
+)
+console.debug(`asyncArg is:`, asyncArg)
 console.debug(
     `after() is:`, 
     await asyncIteratorToList(
-        after(
-            asyncExampleGeneratorWithThrow()
-        ).catch(
-            (...args)=>console.debug(`There was an error: ${args}`)
-        ).finally(
-            ()=>console.log("closing such and such (caught error)")
-        ).then(
-            ()=>console.log("'then' after finally (caught error)")
-        ) 
+        asyncArg
     )
 )
 // try {

@@ -1,0 +1,1 @@
+export { iterZipShortSync as zipShort } from "./iter_zip_short_sync.js"

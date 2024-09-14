@@ -43,7 +43,7 @@ export class DefaultMap extends RealMap {
 const classesWithoutGlobalNames = {
     MapIterator: Object.getPrototypeOf((new RealMap()).keys()),
     SetIterator: Object.getPrototypeOf((new Set()).keys()),
-    GeneratorFunction: ((function*(){})()).constructor,
+    SyncGeneratorFunction: ((function*(){})()).constructor,
     AsyncGeneratorFunction: ((async function*(){})()).constructor,
 }
 const recursivelyDefaultFunction = ()=>new DefaultMap(recursivelyDefaultFunction)
@@ -64,7 +64,7 @@ const isDirectlyComparable = (item) => (
     !(item instanceof Object)   // if primitive
     || item instanceof Function // if unique (includes classes)
     || item instanceof Promise  // another class where are values are treated unique
-    || item.constructor == classesWithoutGlobalNames.GeneratorFunction
+    || item.constructor == classesWithoutGlobalNames.SyncGeneratorFunction
     || item.constructor == classesWithoutGlobalNames.AsyncGeneratorFunction
 )
 const technicallyIsContainer = (item) => item instanceof Object

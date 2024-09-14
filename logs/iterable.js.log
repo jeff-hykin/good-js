@@ -1,5 +1,7 @@
 listOfSubpaths is: [
   false,
+  false,
+  false,
   [
     [Object: null prototype] {
       name: "events.js",
@@ -136,6 +138,12 @@ listOfSubpaths is: [
   ],
   [
     [Object: null prototype] {
+      name: "@types",
+      isFile: false,
+      isDirectory: true,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "noop-process",
       isFile: false,
       isDirectory: false,
@@ -143,6 +151,18 @@ listOfSubpaths is: [
     },
     [Object: null prototype] {
       name: "ps-list",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "elliptic",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "ethereumjs-util",
       isFile: false,
       isDirectory: false,
       isSymlink: true
@@ -167,6 +187,12 @@ listOfSubpaths is: [
     },
     [Object: null prototype] {
       name: "get-port",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "jimp",
       isFile: false,
       isDirectory: false,
       isSymlink: true
@@ -239,6 +265,12 @@ listOfSubpaths is: [
     },
     [Object: null prototype] {
       name: "vite",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "csv",
       isFile: false,
       isDirectory: false,
       isSymlink: true
@@ -396,7 +428,6 @@ listOfSubpaths is: [
       isSymlink: false
     }
   ],
-  false,
   false,
   [
     [Object: null prototype] {
@@ -603,6 +634,14 @@ listOfSubpaths is: [
   ],
   [
     [Object: null prototype] {
+      name: "settings.json",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    }
+  ],
+  [
+    [Object: null prototype] {
       name: "time_zones.js",
       isFile: true,
       isDirectory: false,
@@ -750,6 +789,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "@types",
+    isFile: false,
+    isDirectory: true,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "noop-process",
     isFile: false,
     isDirectory: false,
@@ -757,6 +802,18 @@ result is: [
   },
   [Object: null prototype] {
     name: "ps-list",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "elliptic",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "ethereumjs-util",
     isFile: false,
     isDirectory: false,
     isSymlink: true
@@ -781,6 +838,12 @@ result is: [
   },
   [Object: null prototype] {
     name: "get-port",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "jimp",
     isFile: false,
     isDirectory: false,
     isSymlink: true
@@ -853,6 +916,12 @@ result is: [
   },
   [Object: null prototype] {
     name: "vite",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "csv",
     isFile: false,
     isDirectory: false,
     isSymlink: true
@@ -1187,32 +1256,9 @@ result is: [
     isDirectory: false,
     isSymlink: false
   },
-  [Object: null prototype] {
-    name: "COMMIT_EDITMSG",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "FETCH_HEAD",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "time_zones.js",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "all_builtin_classes.js",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  }
+  ... 5 more items
 ]
-manualFlat.length == result.length is: 107 == 99 is: false
+manualFlat.length == result.length is: 114 == 105 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,
@@ -1228,7 +1274,14 @@ normal output
 one is async output
 [ 2, 4 ]
 [ 1, 3, 5 ]
-Promise { <pending> }
+Promise {
+  <pending>,
+  resolve: [Function: resolve],
+  reject: [Function: reject],
+  results: [],
+  [Symbol(Symbol.iterator)]: [Function: [Symbol.iterator]],
+  [Symbol(Symbol.asyncIterator)]: [Function (anonymous)]
+}
 flattened(depth=0) is: [
   [
     1,
@@ -1327,6 +1380,16 @@ Iterable(asyncExampleGenerator()).then() is: [
     [ "2.3.1", "2.3.2", "2.3.3" ]
   ]
 ]
+arg is: Object [AsyncGenerator] {}
+asyncArg is: Promise {
+  <pending>,
+  resolve: [Function: resolve],
+  reject: [Function: reject],
+  then: [Function: then],
+  catch: [Function: catch],
+  finally: [Function: finally],
+  [Symbol(Symbol.asyncIterator)]: [Function (anonymous)]
+}
 There was an error: Error: Testing throw,0
 closing such and such (caught error)
 'then' after finally (caught error)

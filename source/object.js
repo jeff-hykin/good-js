@@ -1,7 +1,8 @@
 import { allKeys                     } from "./flattened/all_keys.js"                       ; export { allKeys as allKeys }
 import { ownKeyDescriptions          } from "./flattened/own_key_descriptions.js"           ; export { ownKeyDescriptions as ownKeyDescriptions }
 import { allKeyDescriptions          } from "./flattened/all_key_descriptions.js"           ; export { allKeyDescriptions as allKeyDescriptions }
-import { isEmptyObject as isEmpty    } from "./flattened/is_empty_object.js"                ; export { isEmpty as isEmpty }
+import { isEmpty                     } from "./flattened/is_empty.js"                       ; export { isEmpty as isEmpty } 
+import { isEmptyObject               } from "./flattened/is_empty_object.js"                ; export { isEmptyObject as isEmptyObject }
 import { hasKeyList                  } from "./flattened/has_key_list.js"                   ; export { hasKeyList as hasKeyList }
 import { hasDirectKeyList            } from "./flattened/has_direct_key_list.js"            ; export { hasDirectKeyList as hasDirectKeyList }
 import { get                         } from "./flattened/get.js"                            ; export { get as get }

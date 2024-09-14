@@ -32,7 +32,7 @@ import { deferredPromise } from "./flattened/deferred_promise.js"
 // 
 // light weight
 // 
-    import { emptyIterator } from "./flattened/empty_iterator.js"; export { emptyIterator as emptyIterator }
+    import { emptyGeneratorObject } from "./flattened/empty_generator_object.js"; export { emptyGeneratorObject as emptyGeneratorObject }
     import { makeIterable } from "./flattened/make_iterable.js"; export { makeIterable as makeIterable }
     import { stop } from "./flattened/stop_symbol.js"; export { stop as Stop, stop as stop } // uppercase one should be deprecated 
     import { iter } from "./flattened/iter.js"; export { iter as iter }
@@ -55,7 +55,7 @@ import { deferredPromise } from "./flattened/deferred_promise.js"
 // handy helpers
 // 
     import { asyncIteratorToList } from "./flattened/async_iterator_to_list.js"; export { asyncIteratorToList as asyncIteratorToList }
-    import { zip } from "./flattened/zip.js"; export { zip as zip }
+    import { zipLong as zip } from "./flattened/zip_long.js"; export { zip as zip }
     import { count } from "./flattened/count.js"; export { count as count }
     import { enumerate } from "./flattened/enumerate.js"; export { enumerate as enumerate }
     import { permute } from "./flattened/permute.js"; export { permute as permute }

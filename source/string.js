@@ -1,4 +1,4 @@
-import { zip } from "./flattened/zip.js"
+import { zipLong as zip } from "./flattened/zip_long.js"
 import { capitalize } from "./flattened/capitalize.js"; export { capitalize as capitalize }
 import { indent } from "./flattened/indent.js"; export { indent as indent }
 import { toRepresentation } from "./flattened/to_representation.js"; export { toRepresentation as toRepresentation }

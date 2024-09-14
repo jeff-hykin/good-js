@@ -31,6 +31,7 @@ export function afterIterable(iterable, options={ _prevPromise:null }) {
     iterable = makeIterable(iterable)
     const hooks = { then:null, catch:null, finally:null }
     let output = deferredPromise()
+    delete output[Symbol.iterator]
     if (isAsyncIterable(iterable)) {
         output[Symbol.asyncIterator] = ()=>{
             const iterator = iter(iterable)

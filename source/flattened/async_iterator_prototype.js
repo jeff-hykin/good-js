@@ -1,0 +1,2 @@
+import { hiddenEval } from "./hidden_eval.js"
+export let asyncIteratorPrototype = class {}; try { asyncIteratorPrototype = hiddenEval("Object.getPrototypeOf((async function*(){})())") } catch (err) {} // this is in a try-catch so that it plays nice with babel transpiling 

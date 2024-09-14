@@ -1,3 +1,3 @@
 export const isSyncIterable = function(value) {
-        return value && typeof value[Symbol.iterator] === 'function'
-    }
+    return value != null && typeof value[Symbol.iterator] === 'function'
+}

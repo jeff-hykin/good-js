@@ -1,0 +1,1 @@
+export { iterZipLongSync as zipLong } from "./iter_zip_long_sync.js"

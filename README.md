@@ -12,7 +12,7 @@ import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/goo
 import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.7.1.1/async.js"
 import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.7.1.1/events.js"
 import { recursivelyOwnKeysOf, get, set, hasKeyList, hasDirectKeyList, remove, merge, compareProperty, recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.7.1.1/object.js"
-import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorType,isAsyncIterable, isSyncIterable, isTechnicallyIterable, isSyncIterableObjectOrContainer, allKeys } from "https://deno.land/x/good@1.7.1.1/value.js"
+import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorObject,isAsyncIterable, isSyncIterable, isIterableTechnically, isSyncIterableObjectOrContainer, allKeys } from "https://deno.land/x/good@1.7.1.1/value.js"
 import { iter, next, stop, Iterable, map, filter, reduce, frequencyCount, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkBy } from "https://deno.land/x/good@1.7.1.1/iterable.js"
 import { parseCsv, createCsv } from "https://deno.land/x/good@1.7.1.1/csv.js"
 import { BinaryHeap } from "https://deno.land/x/good@1.7.1.1/binary_heap.js"

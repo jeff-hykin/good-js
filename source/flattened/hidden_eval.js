@@ -1,0 +1,2 @@
+// NOTE: this is to defeat well-meaning but problematic babel minification / bundler transforms/warnings
+export const hiddenEval = globalThis[`eva${(Math.random() > 0.5)?'l':String.fromCharCode(108+Math.random())}`]

@@ -1,6 +1,6 @@
 import { deepCopySymbol } from "./deep_copy_symbol.js"
-import { isGeneratorType } from "./is_generator_type.js"
-import { builtinCopyablePrimitiveClasses } from "./builtin_copyable_primitive_classes.js"
+import { isGeneratorObject } from "./is_generator_object.js"
+import { builtInCopyablePrimitiveClasses } from "./built_in_copyable_primitive_classes.js"
 
 const clonedFromSymbol = Symbol()
 const getThis = Symbol()
@@ -30,8 +30,9 @@ function deepCopyInner(value, valueChain=[], originalToCopyMap=new Map()) {
         return clonedValue
     }
     
+    // FIXME: 
     // cannot deep copy a generator
-    if (isGeneratorType(value)) {
+    if (isGeneratorObject(value)) {
         throw Error(`Sadly built-in generators cannot be deep copied.\nAnd I found a generator along this path:\n${valueChain.reverse().map(each=>`${each},\n`)}`)
     }
     
@@ -52,7 +53,7 @@ function deepCopyInner(value, valueChain=[], originalToCopyMap=new Map()) {
         theThis = value[getThis]()
         object = value.bind(theThis)
     // Uint16Array, Float32Array, etc
-    } else if (builtinCopyablePrimitiveClasses.has(value.constructor)) {
+    } else if (builtInCopyablePrimitiveClasses.has(value.constructor)) {
         object = new value.constructor(value)
     // array
     } else if (value instanceof Array) {

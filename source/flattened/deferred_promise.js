@@ -20,6 +20,7 @@ export function deferredPromise() {
                     value.catch(reject)
                 }
                 if (value?.then instanceof Function) {
+                    // recurse until the value is not a promise
                     value.then(methods.resolve)
                 } else {
                     state = "fulfilled"
@@ -29,6 +30,10 @@ export function deferredPromise() {
             reject(reason) {
                 state = "rejected"
                 reject(reason)
+            },
+            // give a more helpful error message
+            [Symbol.iterator]() {
+                throw Error(`You're trying to sync-iterate over a promise`)
             },
         }
     })

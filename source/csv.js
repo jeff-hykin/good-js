@@ -221,6 +221,37 @@ export function parseCsv({
     }
 }
 
+export const stringifyCell = (value)=>{
+    if (typeof value !== 'string') {
+        if (value == null) {
+            return ""
+        }
+        if (typeof value == 'number') {
+            return `${value}`
+        }
+        if (typeof value == 'boolean') {
+            return `${value}`
+        }
+        if (value instanceof Date) {
+            return value.toISOString()
+        }
+        // 
+        // need escaping
+        // 
+        if (value instanceof RegExp) {
+            value = value.toString()
+        } else if (value instanceof Set) {
+            value = JSON.stringify([...value])
+        } else if (value instanceof Array || value instanceof Object) {
+            value = JSON.stringify(value)
+        }
+    }
+    if (typeof value != 'string') {
+        throw Error(`\n\ncsv.stringifyCell() was given a value that is not a string, number, boolean, date, regex, set, array, or object.\nI don't know how to stringify that.\n\nI got:\n${value}\n\n${JSON.stringify(value)}\n`)
+    }
+    return `"${value.replace(/"/g, '""')}"`
+}
+
 /**
  * array-of-arrays to CSV string
  *

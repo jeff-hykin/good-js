@@ -1,4 +1,4 @@
-import { zip } from "./zip.js"
+import { iterZipLongSync } from "./iter_zip_long_sync.js"
 
 /**
  * Enumerate like python
@@ -13,7 +13,7 @@ import { zip } from "./zip.js"
  */
 export const enumerate = function* (...iterables) {
     let index = 0
-    for (const each of zip(...iterables)) {
+    for (const each of iterZipLongSync(...iterables)) {
         yield [index++, ...each]
     }
 }

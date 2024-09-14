@@ -1,10 +1,14 @@
-import { IteratorPrototype } from "./iterator_prototype__class.js"
+import { isBuiltInSyncIterator } from "./is_built_in_sync_iterator.js"
+import { isBuiltInAsyncIterator } from "./is_built_in_async_iterator.js"
 
 /**
  * isBuiltInIterator
  * @note
- *     it is excptionally rare that this should be used
- *     see isSyncIterableObjectOrContainer() for likely usecase
+ *     you probably dont want to use this
+ *     you probably want:
+ *     - isSyncIterableObjectOrContainer()
+ *     - isIterableObjectOrContainer()
+ *     - isAsyncIterableObjectOrContainer()
  * @param value - any value
  * @example
  * ```js
@@ -17,4 +21,4 @@ import { IteratorPrototype } from "./iterator_prototype__class.js"
  *     isBuiltInIterator((new Set())[Symbol.iterator]())
  * ```
  */
-export const isBuiltInIterator = (value)=>IteratorPrototype.isPrototypeOf(value)
+export const isBuiltInIterator = (item)=>isBuiltInSyncIterator(item)||isBuiltInAsyncIterator(item)

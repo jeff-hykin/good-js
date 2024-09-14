@@ -8,7 +8,7 @@
     ],
     [ "```js" ],
     [
-      'import DateTime from "https://deno.land/x/good@1.6.2.0/date.js"'
+      'import DateTime from "https://deno.land/x/good@1.7.1.1/date.js"'
     ],
     [
       "import { zip",
@@ -16,11 +16,11 @@
       "count",
       "permute",
       "combinations",
-      'wrapAroundGet } from "https://deno.land/x/good@1.6.2.0/array.js"'
+      'wrapAroundGet } from "https://deno.land/x/good@1.7.1.1/array.js"'
     ],
     [
       "import { intersection",
-      'subtract } from "https://deno.land/x/good@1.6.2.0/set.js"'
+      'subtract } from "https://deno.land/x/good@1.7.1.1/set.js"'
     ],
     [
       "import { stats",
@@ -28,7 +28,7 @@
       "spread",
       "normalizeZeroToOne",
       "roundedUpToNearest",
-      'roundedDownToNearest } from "https://deno.land/x/good@1.6.2.0/math.js"'
+      'roundedDownToNearest } from "https://deno.land/x/good@1.7.1.1/math.js"'
     ],
     [
       "import { capitalize",
@@ -50,23 +50,23 @@
       "extractFirst",
       "isValidIdentifier",
       "removeCommonPrefix",
-      'didYouMean } from "https://deno.land/x/good@1.6.2.0/string.js"'
+      'didYouMean } from "https://deno.land/x/good@1.7.1.1/string.js"'
     ],
     [
       "import { generateKeys",
       "encrypt",
       "decrypt",
-      'hashers } from "https://deno.land/x/good@1.6.2.0/encryption.js"'
+      'hashers } from "https://deno.land/x/good@1.7.1.1/encryption.js"'
     ],
     [
       "import { deferredPromise",
-      'recursivePromiseAll } from "https://deno.land/x/good@1.6.2.0/async.js"'
+      'recursivePromiseAll } from "https://deno.land/x/good@1.7.1.1/async.js"'
     ],
     [
       "import { Event",
       "trigger",
       "everyTime",
-      'once } from "https://deno.land/x/good@1.6.2.0/events.js"'
+      'once } from "https://deno.land/x/good@1.7.1.1/events.js"'
     ],
     [
       "import { recursivelyOwnKeysOf",
@@ -77,7 +77,7 @@
       "remove",
       "merge",
       "compareProperty",
-      'recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.6.2.0/object.js"'
+      'recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.7.1.1/object.js"'
     ],
     [
       "import { deepCopy",
@@ -85,17 +85,17 @@
       "allKeyDescriptions",
       "deepSortObject",
       "shallowSortObject",
-      "isGeneratorType",
+      "isGeneratorObject",
       "isAsyncIterable",
       "isSyncIterable",
-      "isTechnicallyIterable",
+      "isIterableTechnically",
       "isSyncIterableObjectOrContainer",
-      'allKeys } from "https://deno.land/x/good@1.6.2.0/value.js"'
+      'allKeys } from "https://deno.land/x/good@1.7.1.1/value.js"'
     ],
     [
       "import { iter",
       "next",
-      "Stop",
+      "stop",
       "Iterable",
       "map",
       "filter",
@@ -109,17 +109,17 @@
       "slices",
       "asyncIteratorToList",
       "concurrentlyTransform",
-      'forkBy } from "https://deno.land/x/good@1.6.2.0/iterable.js"'
+      'forkBy } from "https://deno.land/x/good@1.7.1.1/iterable.js"'
     ],
     [
       "import { parseCsv",
-      'createCsv } from "https://deno.land/x/good@1.6.2.0/csv.js"'
+      'createCsv } from "https://deno.land/x/good@1.7.1.1/csv.js"'
     ],
     [
-      'import { BinaryHeap } from "https://deno.land/x/good@1.6.2.0/binary_heap.js"'
+      'import { BinaryHeap } from "https://deno.land/x/good@1.7.1.1/binary_heap.js"'
     ],
     [
-      'import { parseArgs } from "https://deno.land/x/good@1.6.2.0/flattened/parse_args.js"'
+      'import { parseArgs } from "https://deno.land/x/good@1.7.1.1/flattened/parse_args.js"'
     ],
     [ "```" ],
     [ "# How to use" ],

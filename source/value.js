@@ -45,10 +45,10 @@
         // Function
         // Promise
         // AsyncFunction, Note: not globally defined
-        // GeneratorFunction, Note: not globally defined
+        // SyncGeneratorFunction, Note: not globally defined
         // AsyncGeneratorFunction, Note: not globally defined
-        // SyncGenerator, Note: not offically named or globally defined
-        // AsyncGenerator, Note: not offically named or globally defined
+        // SyncGeneratorObject, Note: not offically named or globally defined
+        // AsyncGeneratorObject, Note: not offically named or globally defined
     // extra containers:
         // Set
         // Map
@@ -179,16 +179,16 @@
 // nail down built-in classes
 // 
     import { typedArrayClasses } from "./flattened/typed_array_classes.js"; export { typedArrayClasses as typedArrayClasses }
-    import { builtinCopyablePrimitiveClasses as copyableClasses } from "./flattened/builtin_copyable_primitive_classes.js"; export { copyableClasses as copyableClasses }
-    import { IteratorPrototype      } from "./flattened/iterator_prototype__class.js";        export { IteratorPrototype as iteratorPrototype }
+    import { builtInCopyablePrimitiveClasses as copyableClasses } from "./flattened/built_in_copyable_primitive_classes.js"; export { copyableClasses as copyableClasses }
+    import { syncIteratorPrototype  } from "./flattened/sync_iterator_prototype.js";          export { syncIteratorPrototype as iteratorPrototype }
     import { ArrayIterator          } from "./flattened/array_iterator__class.js";            export { ArrayIterator as ArrayIterator }
     import { MapIterator            } from "./flattened/map_iterator__class.js";              export { MapIterator as MapIterator }
     import { SetIterator            } from "./flattened/set_iterator__class.js";              export { SetIterator as SetIterator }
     import { AsyncFunction          } from "./flattened/async_function__class.js";            export { AsyncFunction as AsyncFunction }
-    import { GeneratorFunction      } from "./flattened/generator_function__class.js";        export { GeneratorFunction as GeneratorFunction }
+    import { SyncGeneratorFunction      } from "./flattened/sync_generator_function__class.js";        export { SyncGeneratorFunction as SyncGeneratorFunction }
     import { AsyncGeneratorFunction } from "./flattened/async_generator_function__class.js";  export { AsyncGeneratorFunction as AsyncGeneratorFunction }
-    import { SyncGenerator          } from "./flattened/sync_generator__class.js";            export { SyncGenerator as SyncGenerator }
-    import { AsyncGenerator         } from "./flattened/async_generator__class.js";           export { AsyncGenerator as AsyncGenerator }
+    import { SyncGeneratorObject          } from "./flattened/sync_generator_object__class.js";            export { SyncGeneratorObject as SyncGeneratorObject }
+    import { AsyncGeneratorObject         } from "./flattened/async_generator_object__class.js";           export { AsyncGeneratorObject as AsyncGeneratorObject }
 
 // 
 // checker functions
@@ -196,12 +196,12 @@
     import { isPrimitive } from "./flattened/is_primitive.js"; export { isPrimitive as isPrimitive }
     import { isPureObject } from "./flattened/is_pure_object.js"; export { isPureObject as isPureObject }
     import { isPracticallyPrimitive } from "./flattened/is_practically_primitive.js"; export { isPracticallyPrimitive as isPracticallyPrimitive }
-    import { isBuiltInIterator } from "./flattened/is_built_in_iterator.js"; export { isBuiltInIterator as isBuiltInIterator }
-    import { isGeneratorType } from "./flattened/is_generator_type.js"; export { isGeneratorType as isGeneratorType }
+    import { isBuiltInSyncIterator } from "./flattened/is_built_in_sync_iterator.js"; export { isBuiltInSyncIterator as isBuiltInIterator }
+    import { isGeneratorObject } from "./flattened/is_generator_object.js"; export { isGeneratorObject as isGeneratorObject }
     import { isAsyncIterable } from "./flattened/is_async_iterable.js"; export { isAsyncIterable as isAsyncIterable }
     import { isSyncIterable } from "./flattened/is_sync_iterable.js"; export { isSyncIterable as isSyncIterable }
     import { isIterableObjectOrContainer } from "./flattened/is_iterable_object_or_container.js"; export { isIterableObjectOrContainer as isIterableObjectOrContainer }
-    import { isTechnicallyIterable } from "./flattened/is_technically_iterable.js"; export { isTechnicallyIterable as isTechnicallyIterable }
+    import { isIterableTechnically } from "./flattened/is_iterable_technically.js"; export { isIterableTechnically as isIterableTechnically }
     import { isSyncIterableObjectOrContainer } from "./flattened/is_sync_iterable_object_or_container.js"; export { isSyncIterableObjectOrContainer as isSyncIterableObjectOrContainer }
 
 // 

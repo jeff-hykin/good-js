@@ -1,3 +1,3 @@
 export const isAsyncIterable = function(value) {
-        return value && typeof value[Symbol.asyncIterator] === 'function'
-    }
+    return value != null && typeof value[Symbol.asyncIterator] === 'function'
+}
