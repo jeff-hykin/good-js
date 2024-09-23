@@ -1,0 +1,1104 @@
+
+--------------------------------------------------------------------------------
+args before: [
+    null
+]
+[args were not changed]
+result: []
+
+--------------------------------------------------------------------------------
+args before: [
+    true
+]
+[args were not changed]
+result: [
+    "constructor",
+    "toString",
+    "valueOf",
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    5
+]
+[args were not changed]
+result: [
+    "constructor",
+    "toExponential",
+    "toFixed",
+    "toPrecision",
+    "toString",
+    "valueOf",
+    "toLocaleString",
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "a": 1
+    }
+]
+[args were not changed]
+result: [
+    "a",
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "a": 1,
+        "b": 2
+    }
+]
+[args were not changed]
+result: [
+    "a",
+    "b",
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    "2024-09-23T21:10:48.740Z"
+]
+[args were not changed]
+result: [
+    "constructor",
+    "toString",
+    "toDateString",
+    "toTimeString",
+    "toISOString",
+    "toUTCString",
+    "toGMTString",
+    "getDate",
+    "setDate",
+    "getDay",
+    "getFullYear",
+    "setFullYear",
+    "getHours",
+    "setHours",
+    "getMilliseconds",
+    "setMilliseconds",
+    "getMinutes",
+    "setMinutes",
+    "getMonth",
+    "setMonth",
+    "getSeconds",
+    "setSeconds",
+    "getTime",
+    "setTime",
+    "getTimezoneOffset",
+    "getUTCDate",
+    "setUTCDate",
+    "getUTCDay",
+    "getUTCFullYear",
+    "setUTCFullYear",
+    "getUTCHours",
+    "setUTCHours",
+    "getUTCMilliseconds",
+    "setUTCMilliseconds",
+    "getUTCMinutes",
+    "setUTCMinutes",
+    "getUTCMonth",
+    "setUTCMonth",
+    "getUTCSeconds",
+    "setUTCSeconds",
+    "valueOf",
+    "getYear",
+    "setYear",
+    "toJSON",
+    "toLocaleString",
+    "toLocaleDateString",
+    "toLocaleTimeString",
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "stack",
+    "constructor",
+    "name",
+    "message",
+    "toString",
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "has",
+    "add",
+    "delete",
+    "clear",
+    "entries",
+    "forEach",
+    "size",
+    "values",
+    "keys",
+    "union",
+    "intersection",
+    "difference",
+    "symmetricDifference",
+    "isSubsetOf",
+    "isSupersetOf",
+    "isDisjointFrom",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "has",
+    "add",
+    "delete",
+    "clear",
+    "entries",
+    "forEach",
+    "size",
+    "values",
+    "keys",
+    "union",
+    "intersection",
+    "difference",
+    "symmetricDifference",
+    "isSubsetOf",
+    "isSupersetOf",
+    "isDisjointFrom",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "get",
+    "set",
+    "has",
+    "delete",
+    "clear",
+    "entries",
+    "forEach",
+    "keys",
+    "size",
+    "values",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "get",
+    "set",
+    "has",
+    "delete",
+    "clear",
+    "entries",
+    "forEach",
+    "keys",
+    "size",
+    "values",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "byteLength",
+    "slice",
+    "maxByteLength",
+    "resizable",
+    "resize",
+    "transfer",
+    "transferToFixedLength",
+    "detached",
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "byteLength",
+    "slice",
+    "maxByteLength",
+    "resizable",
+    "resize",
+    "transfer",
+    "transferToFixedLength",
+    "detached",
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "constructor",
+    "BYTES_PER_ELEMENT",
+    "constructor",
+    "buffer",
+    "byteLength",
+    "byteOffset",
+    "length",
+    "entries",
+    "keys",
+    "values",
+    "at",
+    "copyWithin",
+    "every",
+    "fill",
+    "filter",
+    "find",
+    "findIndex",
+    "findLast",
+    "findLastIndex",
+    "forEach",
+    "includes",
+    "indexOf",
+    "join",
+    "lastIndexOf",
+    "map",
+    "reverse",
+    "reduce",
+    "reduceRight",
+    "set",
+    "slice",
+    "some",
+    "sort",
+    "subarray",
+    "toReversed",
+    "toSorted",
+    "with",
+    "toLocaleString",
+    "toString",
+    null,
+    null,
+    "constructor",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "toString",
+    "valueOf",
+    "toLocaleString"
+]
