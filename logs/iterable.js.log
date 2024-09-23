@@ -1,10 +1,14 @@
 listOfSubpaths is: [
   false,
-  false,
-  false,
   [
     [Object: null prototype] {
       name: "events.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "all.js",
       isFile: true,
       isDirectory: false,
       isSymlink: false
@@ -663,6 +667,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "all.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "test",
     isFile: false,
     isDirectory: true,
@@ -1250,15 +1260,9 @@ result is: [
     isDirectory: true,
     isSymlink: false
   },
-  [Object: null prototype] {
-    name: "packed-refs",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  ... 5 more items
+  ... 6 more items
 ]
-manualFlat.length == result.length is: 114 == 105 is: false
+manualFlat.length == result.length is: 113 == 106 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,
