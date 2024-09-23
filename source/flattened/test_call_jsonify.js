@@ -1,6 +1,6 @@
 export function testCallJsonify(func, ...args) {
-    console.log()
-    const argsBefore = JSON.stringify(args)
+    console.log(`\n--------------------------------------------------------------------------------`)
+    const argsBefore = JSON.stringify(args,0,4)
     console.log(`args before: ${argsBefore}`)
     let err
     let result
@@ -18,24 +18,24 @@ export function testCallJsonify(func, ...args) {
             if (err) {
                 console.log(`error: ${err}`)
             }
-            const argsAfter = JSON.stringify(args)
+            const argsAfter = JSON.stringify(args,0,4)
             if (argsBefore !== argsAfter) {
                 console.log(`args after: ${argsAfter}`)
             } else {
                 console.log(`[args were not changed]`)
             }
-            console.log(`result: ${JSON.stringify(result)}`)
+            console.log(`result: ${JSON.stringify(result,0,4)}`)
         })
     } else {
         if (err) {
             console.log(`error: ${err}`)
         }
-        const argsAfter = JSON.stringify(args)
+        const argsAfter = JSON.stringify(args,0,4)
         if (argsBefore !== argsAfter) {
             console.log(`args after: ${argsAfter}`)
         } else {
             console.log(`[args were not changed]`)
         }
-        console.log(`result: ${JSON.stringify(result)}`)
+        console.log(`result: ${JSON.stringify(result,0,4)}`)
     }
 }

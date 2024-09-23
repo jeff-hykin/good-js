@@ -1,9 +1,38 @@
 
-args before: [{"givenWord":"hep","possibleWords":["help","size","blah","length"],"autoThrow":true}]
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "givenWord": "hep",
+        "possibleWords": [
+            "help",
+            "size",
+            "blah",
+            "length"
+        ],
+        "autoThrow": true
+    }
+]
 error: Error: For "hep", did you mean one of ["help","size","blah","length"]?
 [args were not changed]
 result: undefined
 
-args before: [{"givenWord":"help","possibleWords":["help","size","blah","length"],"autoThrow":true}]
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "givenWord": "help",
+        "possibleWords": [
+            "help",
+            "size",
+            "blah",
+            "length"
+        ],
+        "autoThrow": true
+    }
+]
 [args were not changed]
-result: ["help","size","blah","length"]
+result: [
+    "help",
+    "size",
+    "blah",
+    "length"
+]

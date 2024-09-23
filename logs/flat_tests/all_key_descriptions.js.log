@@ -1,0 +1,3057 @@
+
+--------------------------------------------------------------------------------
+args before: [
+    null
+]
+[args were not changed]
+result: {}
+
+--------------------------------------------------------------------------------
+args before: [
+    true
+]
+[args were not changed]
+result: {
+    "valueOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    5
+]
+[args were not changed]
+result: {
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "valueOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toPrecision": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toFixed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toExponential": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "a": 1
+    }
+]
+[args were not changed]
+result: {
+    "a": {
+        "value": 1,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "a": 1,
+        "b": 2
+    }
+]
+[args were not changed]
+result: {
+    "b": {
+        "value": 2,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "a": {
+        "value": 1,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    "2024-09-23T21:09:08.929Z"
+]
+[args were not changed]
+result: {
+    "toLocaleTimeString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleDateString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toJSON": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "valueOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCSeconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCSeconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCMonth": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCMonth": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCMinutes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCMinutes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCMilliseconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCMilliseconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCHours": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCHours": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCFullYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCFullYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCDay": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setUTCDate": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getUTCDate": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getTimezoneOffset": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setTime": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getTime": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setSeconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getSeconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setMonth": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getMonth": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setMinutes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getMinutes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setMilliseconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getMilliseconds": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setHours": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getHours": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setFullYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getFullYear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getDay": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "setDate": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "getDate": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toGMTString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toUTCString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toISOString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toTimeString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toDateString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "message": {
+        "value": "",
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "name": {
+        "value": "Error",
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "stack": {
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "isDisjointFrom": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "isSupersetOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "isSubsetOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "symmetricDifference": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "difference": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "intersection": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "union": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "size": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "clear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "delete": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "add": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "has": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "isDisjointFrom": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "isSupersetOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "isSubsetOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "symmetricDifference": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "difference": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "intersection": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "union": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "size": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "clear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "delete": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "add": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "has": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "size": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "clear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "delete": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "has": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "get": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "size": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "clear": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "delete": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "has": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "get": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "detached": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "transferToFixedLength": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "transfer": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "resize": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "resizable": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "maxByteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "detached": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "transferToFixedLength": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "transfer": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "resize": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "resizable": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "maxByteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: {
+    "0": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "1": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "2": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "3": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "4": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "5": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "6": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "7": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "8": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "9": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: {
+    "0": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "1": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "2": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "3": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "4": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "5": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "6": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "7": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "8": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "9": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: {
+    "0": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "1": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "2": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "3": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "4": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "5": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "6": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "7": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "8": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "9": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 1,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 2,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: {
+    "0": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "1": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "2": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "3": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "4": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "5": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "6": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "7": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "8": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "9": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 2,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: {
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 2,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}
+
+--------------------------------------------------------------------------------
+args before: [
+    {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    }
+]
+[args were not changed]
+result: {
+    "0": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "1": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "2": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "3": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "4": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "5": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "6": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "7": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "8": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "9": {
+        "value": 0,
+        "writable": true,
+        "enumerable": true,
+        "configurable": true
+    },
+    "toString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toLocaleString": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "with": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toSorted": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "toReversed": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "subarray": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "sort": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "some": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "slice": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "set": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduceRight": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reduce": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "reverse": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "map": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "lastIndexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "join": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "indexOf": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "includes": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "forEach": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLastIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findLast": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "findIndex": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "find": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "filter": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "fill": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "every": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "copyWithin": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "at": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "values": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "keys": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "entries": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "length": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteOffset": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "byteLength": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "buffer": {
+        "enumerable": false,
+        "configurable": true
+    },
+    "constructor": {
+        "writable": true,
+        "enumerable": false,
+        "configurable": true
+    },
+    "BYTES_PER_ELEMENT": {
+        "value": 2,
+        "writable": false,
+        "enumerable": false,
+        "configurable": false
+    }
+}

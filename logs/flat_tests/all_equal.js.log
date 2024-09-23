@@ -4,70 +4,80 @@ args before: [
     []
 ]
 [args were not changed]
-result: ""
+result: true
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "aac",
-        "adbc",
-        "abc"
+        1,
+        2,
+        3
     ]
 ]
 [args were not changed]
-result: "c"
+result: false
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "ab",
-        "ab",
-        "abc"
+        0,
+        []
     ]
 ]
 [args were not changed]
-result: ""
+result: false
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "ab",
-        "ab",
-        "ab"
+        0,
+        ""
     ]
 ]
 [args were not changed]
-result: "ab"
+result: false
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "aldjfaldkjaaa",
-        "abaaa",
-        "abcaaa"
+        0,
+        "",
+        0
     ]
 ]
 [args were not changed]
-result: "aaa"
+result: false
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "adfadsc",
-        "abc",
-        "abc"
+        "hi",
+        "something"
     ]
 ]
 [args were not changed]
-result: "c"
+result: false
 
 --------------------------------------------------------------------------------
 args before: [
     [
-        "edfadsc",
-        "abc",
-        "abc"
+        "hi",
+        "hi"
     ]
 ]
 [args were not changed]
-result: "c"
+result: true
+
+--------------------------------------------------------------------------------
+args before: [
+    [
+        1,
+        2,
+        3,
+        1,
+        2,
+        3
+    ]
+]
+[args were not changed]
+result: false

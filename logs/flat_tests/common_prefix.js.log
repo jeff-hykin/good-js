@@ -1,28 +1,73 @@
 
-args before: [[]]
+--------------------------------------------------------------------------------
+args before: [
+    []
+]
 [args were not changed]
 result: ""
 
-args before: [["aadfjlajf","aadfjlajf","aadfjlajf"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "aadfjlajf",
+        "aadfjlajf",
+        "aadfjlajf"
+    ]
+]
 [args were not changed]
 result: "aadfjlajf"
 
-args before: [["aa","ab","abc"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "aa",
+        "ab",
+        "abc"
+    ]
+]
 [args were not changed]
 result: "a"
 
-args before: [["ab","ab","abc"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "ab",
+        "ab",
+        "abc"
+    ]
+]
 [args were not changed]
 result: "ab"
 
-args before: [["","ab","abc"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "",
+        "ab",
+        "abc"
+    ]
+]
 [args were not changed]
 result: ""
 
-args before: [["adfads","ab","abc"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "adfads",
+        "ab",
+        "abc"
+    ]
+]
 [args were not changed]
 result: "a"
 
-args before: [["edfads","ab","abc"]]
+--------------------------------------------------------------------------------
+args before: [
+    [
+        "edfads",
+        "ab",
+        "abc"
+    ]
+]
 [args were not changed]
 result: ""
