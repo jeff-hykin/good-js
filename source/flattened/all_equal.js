@@ -15,7 +15,7 @@ export function allEqual(anIterable) {
     // its done this way to both be generic (any iterator) and optimal (no if(firstElement) check or .length check)
     for (let prev of anIterable) {
         for (const each of anIterable) {
-            if (each!=prev) {
+            if (each!==prev) {
                 return false
             }
             prev = each
