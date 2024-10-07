@@ -1,0 +1,27 @@
+version`1.2.3.5`.isGreaterThan(`1.2.3.4`) true
+version`2.0.0`.isGreaterThan(`1.9.9.9`) true
+!version`1.2.3`.isGreaterThan(`1.2.3.0`) true
+version`1.2.3`.isLessThan(`1.2.4`) true
+version`0.9.9`.isLessThan(`1.0.0`) true
+!version`2.0.0`.isLessThan(`1.9.9.9`) true
+version`1.2.3`.isEqualTo(`1.2.3`) true
+version`1.2.3.0`.isEqualTo(`1.2.3`) true
+!version`1.2.3`.isEqualTo(`1.2.3.1`) true
+version`2.0.0`.isGreaterThan(`1.9.9`) && !version`2.0.0`.isLessThan(`1.9.9`) true
+version`1.0.0`.isLessThan(`1.0.1`) && !version`1.0.0`.isGreaterThan(`1.0.1`) true
+version`3.3.3`.isEqualTo(`3.3.3`) && !version`3.3.3`.isGreaterThan(`3.3.3`) && !version`3.3.3`.isLessThan(`3.3.3`) true
+true
+false
+false
+true 1.2.3.4.5  greater than 1.2.3.4.4
+true 10.0.0.0.0  greater than 9.9.9.9.9
+true 1.2  less than 1.2.1
+true 2  greater than 1.9.9.9
+true v1.2.3  equal to 1.2.3
+true release-2.0.0  greater than 1.9.9
+true 1.2.3-alpha  less than 1.2.3
+true 2.0.0-rc.1  greater than 1.9.9
+false v1.2.3-beta  less than v1.2.3-rc
+true release-3.0.0-final  greater than release-2.9.9
+true v2.0  greater than 1.9.9.9 and less than 2.0.1
+false 1.0.0-rc.1  less than 1.0.0 and greater than 1.0.0-beta
