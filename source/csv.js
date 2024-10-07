@@ -37,7 +37,7 @@ const argumentNames = [
  *     })
  *     
  *     // async iterator example
- *     import { FileSystem } from "https://deno.land/x/quickr@0.6.28/main/file_system.js"
+ *     import { FileSystem } from "https://deno.land/x/quickr@0.6.72/main/file_system.js"
  *     var {comments, columnNames, rows} = await parseCsv({
  *         input: FileSystem.readLinesIteratively("../README.md"),
  *     })
