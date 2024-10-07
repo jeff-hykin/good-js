@@ -40,5 +40,17 @@ function patch() {
         }
     })
 }
+
+// this is the generic code
+function makeImport(codeString) {
+    function replaceNonAsciiWithUnicode(str) {
+        return str.replace(/[^\0-~](?<!\n|\r|\t|\0)/g, (char) => {
+            return '\\u' + ('0000' + char.charCodeAt(0).toString(16)).slice(-4);
+        })
+    }
+
+    return `import * as value from "data:text/javascript;base64,${btoa(replaceNonAsciiWithUnicode(codeString))}"`
+}
+
 var codeContent = patch.toString().slice("function patch() {\n".length, -2)
-console.log(`import "data:text/javascript;base64,${btoa(codeContent)}"`)
+console.log(makeImport(codeString))
