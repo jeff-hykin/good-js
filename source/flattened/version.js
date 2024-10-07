@@ -77,6 +77,9 @@ export class VersionClass extends Array {
         }
         return true
     }
+    compare(other) {
+        return this.largerThanCompare(other)
+    }
     largerThanCompare(other) {
         if (typeof other == "string") {
             other = new VersionClass(other)
