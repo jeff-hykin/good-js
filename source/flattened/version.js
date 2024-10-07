@@ -5,6 +5,14 @@ import { toRepresentation } from "./to_representation.js"
 export class VersionClass extends Array {
     constructor(version) {
         super()
+        if (version instanceof VersionClass) {
+            for (const each of version) {
+                this.push(each)
+            }
+            this.prefix = version.prefix
+            this.postFix = version.postFix
+            return
+        }
         if (typeof version != "string") {
             throw Error(`Version must be a string, not ${typeof version}`)
         }
@@ -127,5 +135,5 @@ export function version(maybeStrings, ...args) {
         chunks.push(maybeStrings[index+1])
         asStringArg = chunks.join("")
     }
-    return new VersionClass(asStringArg)
+    return new VersionClass(asStringArg||maybeStrings)
 }

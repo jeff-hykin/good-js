@@ -2,7 +2,12 @@ version`1.2.3.5`.isGreaterThan(`1.2.3.4`) true
 version`2.0.0`.isGreaterThan(`1.9.9.9`) true
 !version`1.2.3`.isGreaterThan(`1.2.3.0`) true
 version`1.2.3`.isLessThan(`1.2.4`) true
+version`1.${2}.3`.isLessThan(`1.2.4`) true
+version(`1.2.3`).isLessThan(`1.2.4`) true
+version(version(`1.2.3`)).isLessThan(`1.2.4`) true
 version`0.9.9`.isLessThan(`1.0.0`) true
+version`0.9.9`.isLessThan(`1.0.0`) true
+!version`2.0.0`.isLessThan(`1.9.9.9`) true
 !version`2.0.0`.isLessThan(`1.9.9.9`) true
 version`1.2.3`.isEqualTo(`1.2.3`) true
 version`1.2.3.0`.isEqualTo(`1.2.3`) true

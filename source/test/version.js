@@ -7,8 +7,13 @@ console.log("!version`1.2.3`.isGreaterThan(`1.2.3.0`)", !version`1.2.3`.isGreate
 
 // isLessThan tests
 console.log("version`1.2.3`.isLessThan(`1.2.4`)", version`1.2.3`.isLessThan(`1.2.4`))
+console.log("version`1.${2}.3`.isLessThan(`1.2.4`)", version`1.${2}.3`.isLessThan(`1.2.4`))
+console.log("version(`1.2.3`).isLessThan(`1.2.4`)", version(`1.2.3`).isLessThan(`1.2.4`))
+console.log("version(version(`1.2.3`)).isLessThan(`1.2.4`)", version(version(`1.2.3`)).isLessThan(`1.2.4`))
 console.log("version`0.9.9`.isLessThan(`1.0.0`)", version`0.9.9`.isLessThan(`1.0.0`))
+console.log("version`0.9.9`.isLessThan(`1.0.0`)", version(`0.9.9`).isLessThan(`1.0.0`))
 console.log("!version`2.0.0`.isLessThan(`1.9.9.9`)", !version`2.0.0`.isLessThan(`1.9.9.9`))
+console.log("!version`2.0.0`.isLessThan(`1.9.9.9`)", !version(`2.0.0`).isLessThan(`1.9.9.9`))
 
 // isEqualTo tests
 console.log("version`1.2.3`.isEqualTo(`1.2.3`)", version`1.2.3`.isEqualTo(`1.2.3`))
