@@ -8,7 +8,7 @@
  * ```
  */
 export function intersection(...sets) {
-    const sortedSets = sets.sort((a,b)=>((a.size || a.length) - (b.size || b.length)))
+    const sortedSets = sets.sort((a,b)=>((a.size || a.length || 0) - (b.size || b.length || 0)))
     const smallestCopy = new Set(sortedSets.shift())
     // each of sortedSets (the first was removed)
     for (const eachSet of sortedSets) {
