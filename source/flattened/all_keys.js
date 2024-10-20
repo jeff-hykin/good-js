@@ -22,18 +22,18 @@
  */
 export const allKeys = function(obj) {
     // from: https://stackoverflow.com/questions/8024149/is-it-possible-to-get-the-non-enumerable-inherited-property-names-of-an-object/70629468?noredirect=1#comment126513832_70629468
-    let keys = []
+    const listOfKeys = []
     // super-primitives have no attributes
     if (obj == null) {
         return []
     }
-    // normal primitives still have keys, just skip the first iteration
+    // normal primitives still have listOfKeys, just skip the first iteration
     if (!(obj instanceof Object)) {
         obj = Object.getPrototypeOf(obj)
     }
     while (obj) {
-        keys = keys.concat(Reflect.ownKeys(obj))
+        listOfKeys.push(Reflect.ownKeys(obj))
         obj = Object.getPrototypeOf(obj)
     }
-    return keys
+    return [...new Set(listOfKeys.flat(1))]
 }
