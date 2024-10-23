@@ -117,10 +117,23 @@ export const toRepresentation = (item, {alreadySeen=new Set()}={})=>{
     }
     const pureObjectRepr = (item)=>{
         let string = "{"
-        for (const [key, value] of Object.entries(item)) {
-            const stringKey = recursionWrapper(key)
-            const stringValue = recursionWrapper(value)
-            string += `\n  ${stringKey}: ${indent({string:stringValue, by:"  ", noLead:true})},`
+        let entries
+        try {
+            entries = Object.entries(item)
+        } catch (error) {
+            if (debug) {
+                console.error(`[toRepresentation] error getting Object.entries\n${error?.stack||error}`)
+            }
+            try {
+                return String(item)
+            } catch (error) {
+                return "undefined /*error: catestrophic representation failure*/"
+            }
+        }
+        for (const [key, value] of entries) {
+            const stringKey = recursionWrapper(key, options)
+            const stringValue = recursionWrapper(value, options)
+            string += `\n  ${stringKey}: ${indentFunc({string:stringValue, by:"  ", noLead:true})},`
         }
         if (entries.length == 0) {
             string += "}"
