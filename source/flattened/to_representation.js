@@ -142,6 +142,22 @@ export const toRepresentation = (item, {alreadySeen=new Set()}={})=>{
         }
         return string
     }
+    const arrayLikeRepr = (item, options)=>{
+        const chunks = []
+        let oneHasNewLine = false
+        for (const each of item) {
+            const repr = recursionWrapper(each, options)
+            chunks.push(repr)
+            if (!oneHasNewLine && repr.includes("\n")) {
+                oneHasNewLine = true
+            }
+        }
+        if (!oneHasNewLine) {
+            return `[${chunks.join(",")}]`
+        } else {
+            return `[\n${chunks.map(each=>indentFunc({string:each, by:options.indent, noLead:false})).join(",\n")}\n]`
+        }
+    }
     
     try {
         return recursionWrapper(item)
