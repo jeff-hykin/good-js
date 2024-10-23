@@ -122,7 +122,11 @@ export const toRepresentation = (item, {alreadySeen=new Set()}={})=>{
             const stringValue = recursionWrapper(value)
             string += `\n  ${stringKey}: ${indent({string:stringValue, by:"  ", noLead:true})},`
         }
-        string += "\n}"
+        if (entries.length == 0) {
+            string += "}"
+        } else {
+            string += "\n}"
+        }
         return string
     }
     
