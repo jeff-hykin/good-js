@@ -1,0 +1,1 @@
+export const TypedArray = typeof globalThis?.Uint8Array != 'function' ? (class {}) : Object.getPrototypeOf(Uint8Array.prototype).constructor
