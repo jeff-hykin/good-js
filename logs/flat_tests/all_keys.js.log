@@ -15,7 +15,6 @@ result: [
     "constructor",
     "toString",
     "valueOf",
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -23,8 +22,6 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
     "toLocaleString"
 ]
 
@@ -41,17 +38,13 @@ result: [
     "toString",
     "valueOf",
     "toLocaleString",
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
     "__lookupGetter__",
     "__lookupSetter__",
     "isPrototypeOf",
-    "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "propertyIsEnumerable"
 ]
 
 --------------------------------------------------------------------------------
@@ -121,7 +114,7 @@ result: [
 
 --------------------------------------------------------------------------------
 args before: [
-    "2024-09-23T21:10:48.740Z"
+    "2024-10-24T04:25:20.685Z"
 ]
 [args were not changed]
 result: [
@@ -173,17 +166,13 @@ result: [
     "toLocaleDateString",
     "toLocaleTimeString",
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
     "__lookupGetter__",
     "__lookupSetter__",
     "isPrototypeOf",
-    "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "propertyIsEnumerable"
 ]
 
 --------------------------------------------------------------------------------
@@ -197,7 +186,42 @@ result: [
     "name",
     "message",
     "toString",
+    "__defineGetter__",
+    "__defineSetter__",
+    "hasOwnProperty",
+    "__lookupGetter__",
+    "__lookupSetter__",
+    "isPrototypeOf",
+    "propertyIsEnumerable",
+    "valueOf",
+    "toLocaleString"
+]
+
+--------------------------------------------------------------------------------
+args before: [
+    {}
+]
+[args were not changed]
+result: [
     "constructor",
+    "has",
+    "add",
+    "delete",
+    "clear",
+    "entries",
+    "forEach",
+    "size",
+    "values",
+    "keys",
+    "union",
+    "intersection",
+    "difference",
+    "symmetricDifference",
+    "isSubsetOf",
+    "isSupersetOf",
+    "isDisjointFrom",
+    null,
+    null,
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -235,45 +259,6 @@ result: [
     "isDisjointFrom",
     null,
     null,
-    "constructor",
-    "__defineGetter__",
-    "__defineSetter__",
-    "hasOwnProperty",
-    "__lookupGetter__",
-    "__lookupSetter__",
-    "isPrototypeOf",
-    "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
-]
-
---------------------------------------------------------------------------------
-args before: [
-    {}
-]
-[args were not changed]
-result: [
-    "constructor",
-    "has",
-    "add",
-    "delete",
-    "clear",
-    "entries",
-    "forEach",
-    "size",
-    "values",
-    "keys",
-    "union",
-    "intersection",
-    "difference",
-    "symmetricDifference",
-    "isSubsetOf",
-    "isSupersetOf",
-    "isDisjointFrom",
-    null,
-    null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -305,7 +290,6 @@ result: [
     "values",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -337,7 +321,6 @@ result: [
     "values",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -366,7 +349,6 @@ result: [
     "transferToFixedLength",
     "detached",
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -395,7 +377,6 @@ result: [
     "transferToFixedLength",
     "detached",
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -416,7 +397,6 @@ args before: [
 result: [
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -454,7 +434,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -462,9 +441,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -496,7 +473,6 @@ result: [
     "9",
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -534,7 +510,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -542,9 +517,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -555,7 +528,6 @@ args before: [
 result: [
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -593,7 +565,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -601,9 +572,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -635,7 +604,6 @@ result: [
     "9",
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -673,7 +641,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -681,9 +648,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -694,7 +659,6 @@ args before: [
 result: [
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -732,7 +696,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -740,9 +703,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -774,7 +735,6 @@ result: [
     "9",
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -812,7 +772,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -820,9 +779,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -833,7 +790,6 @@ args before: [
 result: [
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -871,7 +827,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -879,9 +834,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -913,7 +866,6 @@ result: [
     "9",
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -951,7 +903,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -959,9 +910,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -972,7 +921,6 @@ args before: [
 result: [
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -1010,7 +958,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -1018,9 +965,7 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
 
 --------------------------------------------------------------------------------
@@ -1052,7 +997,6 @@ result: [
     "9",
     "constructor",
     "BYTES_PER_ELEMENT",
-    "constructor",
     "buffer",
     "byteLength",
     "byteOffset",
@@ -1090,7 +1034,6 @@ result: [
     "toString",
     null,
     null,
-    "constructor",
     "__defineGetter__",
     "__defineSetter__",
     "hasOwnProperty",
@@ -1098,7 +1041,5 @@ result: [
     "__lookupSetter__",
     "isPrototypeOf",
     "propertyIsEnumerable",
-    "toString",
-    "valueOf",
-    "toLocaleString"
+    "valueOf"
 ]
