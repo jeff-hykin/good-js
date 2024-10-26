@@ -345,3 +345,15 @@ console.log( "new Int16Array()", toRepresentation( new Int16Array() ))
 console.log( "new Int16Array(10)", toRepresentation( new Int16Array(10) ))
 console.log( "new Uint16Array()", toRepresentation( new Uint16Array() ))
 console.log( "new Uint16Array(10)", toRepresentation( new Uint16Array(10) ))
+
+
+const propertyDescriptorsMap = new Map()
+for (const eachObj of [...prototypeKeyMap.keys()].slice(0,50)) {
+    if (eachObj == null) {
+        continue
+    }
+    const descriptors = Object.getOwnPropertyDescriptors(eachObj)
+    propertyDescriptorsMap.set(eachObj, descriptors)
+}
+
+console.log(toRepresentation(propertyDescriptorsMap, { indent: "    " }))

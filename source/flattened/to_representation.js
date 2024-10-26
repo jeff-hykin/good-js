@@ -37,7 +37,7 @@ let globalValues
  * python's repr() for JS
  *
  */
-export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified=false, indent="  "}={})=>{
+export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified=false, indent="    "}={})=>{
     if (Number.isFinite(indent)) {
         indent = " ".repeat(indent)
     }
@@ -267,7 +267,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             if (get) {
                 string += `\n${indent}get ${stringKey}(){/*contents*/}`
             } else {
-                string += `\n${indent}${stringKey}: ${recursionWrapper(value, options)},`
+                string += `\n${indent}${stringKey}: ${indentFunc({string:recursionWrapper(value, options), by:options.indent, noLead:true})},`
             }
         }
         if (propertyDescriptors.length == 0) {
@@ -299,7 +299,12 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             const stringKey = recursionWrapper(key, {...options, simplified:true})
             const stringValue = recursionWrapper(value, options)
             if (!stringKey.includes("\n")) {
-                const formattedValue = indentFunc({string:stringValue, by:options.indent, noLead:true})
+                const formattedValue = (
+                    (stringValue.includes("\n")) ?
+                        indentFunc({string:stringValue, by:options.indent, noLead:true})
+                        :
+                        indentFunc({string:stringValue, by:options.indent, noLead:true})
+                ) 
                 string += `\n${options.indent}[${stringKey}, ${formattedValue}],`
             // multiline key
             } else {
