@@ -14,6 +14,9 @@ const regexImmutableProps = /^(?:NaN|Infinity|undefined)$/
 // Zero-width characters that are allowed in IdentifierPart as per ES5
 const regexZeroWidth = /\u200C|\u200D/
 export function isValidIdentifier(value) {
+    if (typeof value != 'string') {
+        return false
+    }
     // Both Unicode escapes and Unicode code point escapes are allowed.
     // Note: the replacement must happen in a single `replace` call.
     const tmp = value.replace(/\\u([a-fA-F0-9]{4})|\\u\{([0-9a-fA-F]{1,})\}/g, function ($0, $1, $2) {
