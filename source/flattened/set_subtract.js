@@ -14,7 +14,7 @@
  * @returns {Set} output 
  *
  */
-export function subtract({value, from}) {
+export function setSubtract({value, from}) {
     let source = from
     let detractor = value
     // make sure source has a size (but do as little conversion as possible)
