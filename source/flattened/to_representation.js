@@ -2,6 +2,7 @@ import { indent as indentFunc } from "./indent.js"
 import { TypedArray } from "./typed_array__class.js"
 import { typedArrayClasses } from "./typed_array_classes.js"
 import { allKeys } from "./all_keys.js"
+import { isValidIdentifier } from "./is_valid_identifier.js"
 
 const reprSymbol = Symbol.for("representation")
 const denoInspectSymbol = Symbol.for("Deno.customInspect")
@@ -162,11 +163,14 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             output = `Promise.resolve(/*unknown*/)`
         } else if (isGlobalValue(item)) {
             const key = globalValueMap.get(item)
-            // this is overly restrictive but it works for now
-            if (key.match(/^[a-zA-Z][a-zA-Z0-9_]*$/)) {
+            if (isValidIdentifier(key)) {
                 output = key
             } else {
-                output = `globalThis[${JSON.stringify(key)}]`
+                if (typeof key == 'string') {
+                    output = `globalThis[${JSON.stringify(key)}]`
+                } else { // symbol
+                    output = `globalThis[${recurursionWrapper(key, options)}]`
+                }
             }
         // probably a prototype
         } else if (isProbablyAPrototype(item) && item?.constructor?.name && typeof item?.constructor?.name == 'string') {
