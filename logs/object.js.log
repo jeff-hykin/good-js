@@ -1,14 +1,19 @@
 allKeys(null) is: []
 allKeys(5) is: [
-  "constructor",          "toExponential",
-  "toFixed",              "toPrecision",
-  "toString",             "valueOf",
-  "toLocaleString",       "constructor",
-  "__defineGetter__",     "__defineSetter__",
-  "hasOwnProperty",       "__lookupGetter__",
-  "__lookupSetter__",     "isPrototypeOf",
-  "propertyIsEnumerable", "toString",
-  "valueOf",              "toLocaleString"
+  "constructor",
+  "toExponential",
+  "toFixed",
+  "toPrecision",
+  "toString",
+  "valueOf",
+  "toLocaleString",
+  "__defineGetter__",
+  "__defineSetter__",
+  "hasOwnProperty",
+  "__lookupGetter__",
+  "__lookupSetter__",
+  "isPrototypeOf",
+  "propertyIsEnumerable"
 ]
 allKeys({a:10, b:99}) is: [
   "a",

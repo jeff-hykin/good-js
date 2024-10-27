@@ -74,6 +74,12 @@ listOfSubpaths is: [
       isSymlink: false
     },
     [Object: null prototype] {
+      name: "load.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "string.js",
       isFile: true,
       isDirectory: false,
@@ -155,6 +161,12 @@ listOfSubpaths is: [
     },
     [Object: null prototype] {
       name: "ps-list",
+      isFile: false,
+      isDirectory: false,
+      isSymlink: true
+    },
+    [Object: null prototype] {
+      name: "fs-monkey",
       isFile: false,
       isDirectory: false,
       isSymlink: true
@@ -432,6 +444,7 @@ listOfSubpaths is: [
       isSymlink: false
     }
   ],
+  false,
   false,
   [
     [Object: null prototype] {
@@ -733,6 +746,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "load.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "string.js",
     isFile: true,
     isDirectory: false,
@@ -812,6 +831,12 @@ result is: [
   },
   [Object: null prototype] {
     name: "ps-list",
+    isFile: false,
+    isDirectory: false,
+    isSymlink: true
+  },
+  [Object: null prototype] {
+    name: "fs-monkey",
     isFile: false,
     isDirectory: false,
     isSymlink: true
@@ -1248,21 +1273,9 @@ result is: [
     isDirectory: true,
     isSymlink: false
   },
-  [Object: null prototype] {
-    name: "index",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "branches",
-    isFile: false,
-    isDirectory: true,
-    isSymlink: false
-  },
-  ... 6 more items
+  ... 8 more items
 ]
-manualFlat.length == result.length is: 113 == 106 is: false
+manualFlat.length == result.length is: 116 == 108 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,
