@@ -1,4 +1,4 @@
-toRepresentation(objects) is: new Map(
+toRepresentation(objects) is: new Map([
     [structuredClone, "structuredClone"],
     [Function.prototype, "Object.getPrototypeOf(structuredClone)"],
     [structuredClone.prototype, "structuredClone.prototype"],
@@ -159,8 +159,8 @@ toRepresentation(objects) is: new Map(
     [TypeError.prototype, "TypeError.prototype"],
     [URIError, "URIError"],
     [URIError.prototype, "URIError.prototype"],
-)
-new Map(
+])
+new Map([
     [structuredClone, ["length","name","prototype"]],
     [Function.prototype, ["length","name","arguments","caller","constructor","apply","bind","call","toString",Symbol.hasInstance]],
     [structuredClone.prototype, ["constructor"]],
@@ -321,28 +321,159 @@ new Map(
     [TypeError.prototype, ["constructor","name","message"]],
     [URIError, ["length","name","prototype"]],
     [URIError.prototype, ["constructor","name","message"]],
-)
+])
+RegExp.length:  {
+    value: 2,
+    writable: false,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.name:  {
+    value: "RegExp",
+    writable: false,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.prototype:  {
+    value: RegExp.prototype,
+    writable: false,
+    enumerable: false,
+    configurable: false,
+}
+RegExp.input:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"input").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"input").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$_:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$_").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$_").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.lastMatch:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"lastMatch").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"lastMatch").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$&:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$&").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$&").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.lastParen:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"lastParen").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"lastParen").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$+:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$+").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$+").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.leftContext:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"leftContext").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"leftContext").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$`:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$`").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$`").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.rightContext:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"rightContext").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"rightContext").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$':  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$'").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$'").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$1:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$1").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$1").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$2:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$2").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$2").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$3:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$3").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$3").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$4:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$4").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$4").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$5:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$5").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$5").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$6:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$6").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$6").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$7:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$7").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$7").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$8:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$8").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$8").set,
+    enumerable: false,
+    configurable: true,
+}
+RegExp.$9:  {
+    get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$9").get,
+    set: Object.getOwnPropertyDescriptor({/*unknown obj*/},"$9").set,
+    enumerable: false,
+    configurable: true,
+}
 null null
 true true
 5 5
 {} {}
 {a:1} {
-    "a": 1,
+    a: 1,
 }
 {a:1, b:2} {
-    "a": 1,
-    "b": 2,
+    a: 1,
+    b: 2,
 }
-new Date() new Date(1729975608546)
+new Date() new Date(1730051728292)
 new Error() new Error("")
-new Set() new Set([[]])
-new Set([1,2,3]) new Set([[1,2,3]])
-new Map() new Map(
-)
-new Map([[1,2],[3,4]]) new Map(
+new Set() new Set([])
+new Set([1,2,3]) new Set([1,2,3])
+new Map() new Map()
+new Map([[1,2],[3,4]]) new Map([
     [1, 2],
     [3, 4],
-)
+])
 new ArrayBuffer() new ArrayBuffer({})
 new ArrayBuffer(10) new ArrayBuffer({})
 new Int8Array() new Int8Array([])
@@ -355,1434 +486,1462 @@ new Int16Array() new Int16Array([])
 new Int16Array(10) new Int16Array([0,0,0,0,0,0,0,0,0,0])
 new Uint16Array() new Uint16Array([])
 new Uint16Array(10) new Uint16Array([0,0,0,0,0,0,0,0,0,0])
-new Map(
+function: (function(){return "howdy_howdy_howdy".match(/howdy/)})
+arrow function: (()=>{return "howdy_howdy_howdy".match(/howdy/)})
+class: class P {}
+anonymous class: (class {})
+regex match: new MyArray({
+    "0": "howdy",
+    length: 1,
+    index: 0,
+    input: "howdy_howdy_howdy",
+    groups: undefined,
+})
+regex match: Object.assign(["howdy"], {
+    index: 0,
+    input: "howdy_howdy_howdy",
+    groups: undefined,
+})
+new Map([
+    [
+        Object.assign(["howdy"], {
+            index: 0,
+            input: "howdy_howdy_howdy",
+            groups: undefined,
+        }),
+        Object.assign(["howdy"], {
+            index: 0,
+            input: "howdy_howdy_howdy",
+            groups: undefined,
+        })
+    ],
     [structuredClone, {
-        "length": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "structuredClone",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "structuredClone",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": structuredClone.prototype,
-            "writable": true,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: structuredClone.prototype,
+            writable: true,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Function.prototype, {
-        "length": {
-            "value": 0,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 0,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "arguments": {
-            "get": (function () { [native code] }),
-            "set": (function () { [native code] }),
-            "enumerable": false,
-            "configurable": true,
+        arguments: {
+            get: (function () { [native code] }),
+            set: (function () { [native code] }),
+            enumerable: false,
+            configurable: true,
         },
-        "caller": {
-            "get": (function () { [native code] }),
-            "set": (function () { [native code] }),
-            "enumerable": false,
-            "configurable": true,
+        caller: {
+            get: (function () { [native code] }),
+            set: (function () { [native code] }),
+            enumerable: false,
+            configurable: true,
         },
-        "constructor": {
-            "value": Function,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Function,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "apply": {
-            "value": apply /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        apply: {
+            value: apply /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "bind": {
-            "value": bind /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        bind: {
+            value: bind /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "call": {
-            "value": call /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        call: {
+            value: call /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toString": {
-            "value": toString /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toString: {
+            value: toString /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [structuredClone.prototype, {
-        "constructor": {
-            "value": structuredClone,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: structuredClone,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Function, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Function",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Function",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Function.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Function.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [parseFloat, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "parseFloat",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "parseFloat",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Infinity, {}],
     [Number.prototype, {
-        "constructor": {
-            "value": Number,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Number,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toExponential": {
-            "value": toExponential /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toExponential: {
+            value: toExponential /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toFixed": {
-            "value": toFixed /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toFixed: {
+            value: toFixed /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toPrecision": {
-            "value": toPrecision /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toPrecision: {
+            value: toPrecision /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toString": {
-            "value": toString /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toString: {
+            value: toString /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "valueOf": {
-            "value": valueOf /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        valueOf: {
+            value: valueOf /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toLocaleString": {
-            "value": toLocaleString /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toLocaleString: {
+            value: toLocaleString /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Number, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Number",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Number",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Number.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Number.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "isFinite": {
-            "value": isFinite /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isFinite: {
+            value: isFinite /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isInteger": {
-            "value": isInteger /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isInteger: {
+            value: isInteger /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isNaN": {
-            "value": isNaN /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isNaN: {
+            value: isNaN /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isSafeInteger": {
-            "value": isSafeInteger /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isSafeInteger: {
+            value: isSafeInteger /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "parseFloat": {
-            "value": parseFloat,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        parseFloat: {
+            value: parseFloat,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "parseInt": {
-            "value": parseInt,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        parseInt: {
+            value: parseInt,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "MAX_VALUE": {
-            "value": 1.7976931348623157e+308,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        MAX_VALUE: {
+            value: 1.7976931348623157e+308,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "MIN_VALUE": {
-            "value": 5e-324,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        MIN_VALUE: {
+            value: 5e-324,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "NaN": {
-            "value": NaN,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        NaN: {
+            value: NaN,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "NEGATIVE_INFINITY": {
-            "value": -Infinity,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        NEGATIVE_INFINITY: {
+            value: -Infinity,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "POSITIVE_INFINITY": {
-            "value": Infinity,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        POSITIVE_INFINITY: {
+            value: Infinity,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "MAX_SAFE_INTEGER": {
-            "value": 9007199254740991,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        MAX_SAFE_INTEGER: {
+            value: 9007199254740991,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "MIN_SAFE_INTEGER": {
-            "value": -9007199254740991,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        MIN_SAFE_INTEGER: {
+            value: -9007199254740991,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "EPSILON": {
-            "value": 2.220446049250313e-16,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        EPSILON: {
+            value: 2.220446049250313e-16,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [NaN, {}],
     [ArrayBuffer, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "ArrayBuffer",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "ArrayBuffer",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": ArrayBuffer.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: ArrayBuffer.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "isView": {
-            "value": isView /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isView: {
+            value: isView /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [ArrayBuffer.prototype, {
-        "constructor": {
-            "value": ArrayBuffer,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: ArrayBuffer,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "byteLength": {
-            "get": get byteLength /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        byteLength: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"byteLength").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "slice": {
-            "value": slice /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        slice: {
+            value: slice /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "maxByteLength": {
-            "get": get maxByteLength /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        maxByteLength: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"maxByteLength").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "resizable": {
-            "get": get resizable /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        resizable: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"resizable").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "resize": {
-            "value": resize /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        resize: {
+            value: resize /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "transfer": {
-            "value": transfer /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        transfer: {
+            value: transfer /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "transferToFixedLength": {
-            "value": transferToFixedLength /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        transferToFixedLength: {
+            value: transferToFixedLength /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "detached": {
-            "get": get detached /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        detached: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"detached").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Uint8Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Uint8Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Uint8Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Uint8Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Uint8Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [TypedArray /*native function*/, {
-        "length": {
-            "value": 0,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 0,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "TypedArray",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "TypedArray",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": {
-                "constructor": TypedArray /*native function*/,
-                get "buffer"(){/*contents*/}
-                get "byteLength"(){/*contents*/}
-                get "byteOffset"(){/*contents*/}
-                get "length"(){/*contents*/}
-                "entries": entries /*native function*/,
-                "keys": keys /*native function*/,
-                "values": values /*native function*/,
-                "at": at /*native function*/,
-                "copyWithin": copyWithin /*native function*/,
-                "every": every /*native function*/,
-                "fill": fill /*native function*/,
-                "filter": filter /*native function*/,
-                "find": find /*native function*/,
-                "findIndex": findIndex /*native function*/,
-                "findLast": findLast /*native function*/,
-                "findLastIndex": findLastIndex /*native function*/,
-                "forEach": forEach /*native function*/,
-                "includes": includes /*native function*/,
-                "indexOf": indexOf /*native function*/,
-                "join": join /*native function*/,
-                "lastIndexOf": lastIndexOf /*native function*/,
-                "map": map /*native function*/,
-                "reverse": reverse /*native function*/,
-                "reduce": reduce /*native function*/,
-                "reduceRight": reduceRight /*native function*/,
-                "set": set /*native function*/,
-                "slice": slice /*native function*/,
-                "some": some /*native function*/,
-                "sort": sort /*native function*/,
-                "subarray": subarray /*native function*/,
-                "toReversed": toReversed /*native function*/,
-                "toSorted": toSorted /*native function*/,
-                "with": with /*native function*/,
-                "toLocaleString": toLocaleString /*native function*/,
-                "toString": toString /*native function*/,
+        prototype: {
+            value: /*prototype of TypedArray*/ {
+                constructor: TypedArray /*native function*/,
+                get buffer(){/*contents*/}
+                get byteLength(){/*contents*/}
+                get byteOffset(){/*contents*/}
+                get length(){/*contents*/}
+                entries: entries /*native function*/,
+                keys: keys /*native function*/,
+                values: values /*native function*/,
+                at: at /*native function*/,
+                copyWithin: copyWithin /*native function*/,
+                every: every /*native function*/,
+                fill: fill /*native function*/,
+                filter: filter /*native function*/,
+                find: find /*native function*/,
+                findIndex: findIndex /*native function*/,
+                findLast: findLast /*native function*/,
+                findLastIndex: findLastIndex /*native function*/,
+                forEach: forEach /*native function*/,
+                includes: includes /*native function*/,
+                indexOf: indexOf /*native function*/,
+                join: join /*native function*/,
+                lastIndexOf: lastIndexOf /*native function*/,
+                map: map /*native function*/,
+                reverse: reverse /*native function*/,
+                reduce: reduce /*native function*/,
+                reduceRight: reduceRight /*native function*/,
+                set: set /*native function*/,
+                slice: slice /*native function*/,
+                some: some /*native function*/,
+                sort: sort /*native function*/,
+                subarray: subarray /*native function*/,
+                toReversed: toReversed /*native function*/,
+                toSorted: toSorted /*native function*/,
+                with: /*name: "with"*/ (function with() { [native code] }),
+                toLocaleString: toLocaleString /*native function*/,
+                toString: toString /*native function*/,
             },
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "of": {
-            "value": of /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        of: {
+            value: of /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "from": {
-            "value": from /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        from: {
+            value: from /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Uint8Array.prototype, {
-        "constructor": {
-            "value": Uint8Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Uint8Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int8Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Int8Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Int8Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Int8Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Int8Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int8Array.prototype, {
-        "constructor": {
-            "value": Int8Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Int8Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint16Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Uint16Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Uint16Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Uint16Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Uint16Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint16Array.prototype, {
-        "constructor": {
-            "value": Uint16Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Uint16Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int16Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Int16Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Int16Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Int16Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Int16Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int16Array.prototype, {
-        "constructor": {
-            "value": Int16Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Int16Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint32Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Uint32Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Uint32Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Uint32Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Uint32Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint32Array.prototype, {
-        "constructor": {
-            "value": Uint32Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Uint32Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int32Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Int32Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Int32Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Int32Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Int32Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Int32Array.prototype, {
-        "constructor": {
-            "value": Int32Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Int32Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float16Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Float16Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Float16Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Float16Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Float16Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float16Array.prototype, {
-        "constructor": {
-            "value": Float16Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Float16Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 2,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 2,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float32Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Float32Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Float32Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Float32Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Float32Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float32Array.prototype, {
-        "constructor": {
-            "value": Float32Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Float32Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 4,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 4,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float64Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Float64Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Float64Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Float64Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Float64Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Float64Array.prototype, {
-        "constructor": {
-            "value": Float64Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Float64Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint8ClampedArray, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Uint8ClampedArray",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Uint8ClampedArray",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Uint8ClampedArray.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Uint8ClampedArray.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Uint8ClampedArray.prototype, {
-        "constructor": {
-            "value": Uint8ClampedArray,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Uint8ClampedArray,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [BigUint64Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "BigUint64Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "BigUint64Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": BigUint64Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: BigUint64Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [BigUint64Array.prototype, {
-        "constructor": {
-            "value": BigUint64Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: BigUint64Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [BigInt64Array, {
-        "length": {
-            "value": 3,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 3,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "BigInt64Array",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "BigInt64Array",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": BigInt64Array.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: BigInt64Array.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [BigInt64Array.prototype, {
-        "constructor": {
-            "value": BigInt64Array,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: BigInt64Array,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "BYTES_PER_ELEMENT": {
-            "value": 8,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        BYTES_PER_ELEMENT: {
+            value: 8,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [DataView, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "DataView",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "DataView",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": DataView.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: DataView.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [DataView.prototype, {
-        "constructor": {
-            "value": DataView,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: DataView,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "buffer": {
-            "get": get buffer /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        buffer: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"buffer").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "byteLength": {
-            "get": get byteLength /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        byteLength: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"byteLength").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "byteOffset": {
-            "get": get byteOffset /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        byteOffset: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"byteOffset").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "getInt8": {
-            "value": getInt8 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getInt8: {
+            value: getInt8 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setInt8": {
-            "value": setInt8 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setInt8: {
+            value: setInt8 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getUint8": {
-            "value": getUint8 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getUint8: {
+            value: getUint8 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setUint8": {
-            "value": setUint8 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setUint8: {
+            value: setUint8 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getInt16": {
-            "value": getInt16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getInt16: {
+            value: getInt16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setInt16": {
-            "value": setInt16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setInt16: {
+            value: setInt16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getUint16": {
-            "value": getUint16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getUint16: {
+            value: getUint16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setUint16": {
-            "value": setUint16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setUint16: {
+            value: setUint16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getInt32": {
-            "value": getInt32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getInt32: {
+            value: getInt32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setInt32": {
-            "value": setInt32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setInt32: {
+            value: setInt32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getUint32": {
-            "value": getUint32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getUint32: {
+            value: getUint32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setUint32": {
-            "value": setUint32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setUint32: {
+            value: setUint32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getFloat32": {
-            "value": getFloat32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getFloat32: {
+            value: getFloat32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setFloat32": {
-            "value": setFloat32 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setFloat32: {
+            value: setFloat32 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getFloat64": {
-            "value": getFloat64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getFloat64: {
+            value: getFloat64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setFloat64": {
-            "value": setFloat64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setFloat64: {
+            value: setFloat64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getBigInt64": {
-            "value": getBigInt64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getBigInt64: {
+            value: getBigInt64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setBigInt64": {
-            "value": setBigInt64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setBigInt64: {
+            value: setBigInt64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getBigUint64": {
-            "value": getBigUint64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getBigUint64: {
+            value: getBigUint64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setBigUint64": {
-            "value": setBigUint64 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setBigUint64: {
+            value: setBigUint64 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "getFloat16": {
-            "value": getFloat16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        getFloat16: {
+            value: getFloat16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "setFloat16": {
-            "value": setFloat16 /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        setFloat16: {
+            value: setFloat16 /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Map, {
-        "length": {
-            "value": 0,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 0,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Map",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Map",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Map.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Map.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "groupBy": {
-            "value": groupBy /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        groupBy: {
+            value: groupBy /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Map.prototype, {
-        "constructor": {
-            "value": Map,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Map,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "get": {
-            "value": get /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        get: {
+            value: get /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "set": {
-            "value": set /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        set: {
+            value: set /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "has": {
-            "value": has /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        has: {
+            value: has /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "delete": {
-            "value": delete /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        delete: {
+            value: /*name: "delete"*/ (function delete() { [native code] }),
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "clear": {
-            "value": clear /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        clear: {
+            value: clear /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "entries": {
-            "value": entries /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        entries: {
+            value: entries /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "forEach": {
-            "value": forEach /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        forEach: {
+            value: forEach /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "keys": {
-            "value": keys /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        keys: {
+            value: keys /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "size": {
-            "get": get size /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        size: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"size").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "values": {
-            "value": values /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        values: {
+            value: values /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [BigInt, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "BigInt",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "BigInt",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": BigInt.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: BigInt.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
-        "asUintN": {
-            "value": asUintN /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        asUintN: {
+            value: asUintN /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "asIntN": {
-            "value": asIntN /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        asIntN: {
+            value: asIntN /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [BigInt.prototype, {
-        "constructor": {
-            "value": BigInt,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: BigInt,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toLocaleString": {
-            "value": toLocaleString /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toLocaleString: {
+            value: toLocaleString /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "toString": {
-            "value": toString /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        toString: {
+            value: toString /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "valueOf": {
-            "value": valueOf /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        valueOf: {
+            value: valueOf /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [Set, {
-        "length": {
-            "value": 0,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 0,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "Set",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "Set",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": Set.prototype,
-            "writable": false,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: Set.prototype,
+            writable: false,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [Set.prototype, {
-        "constructor": {
-            "value": Set,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: Set,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "has": {
-            "value": has /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        has: {
+            value: has /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "add": {
-            "value": add /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        add: {
+            value: add /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "delete": {
-            "value": delete /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        delete: {
+            value: /*name: "delete"*/ (function delete() { [native code] }),
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "clear": {
-            "value": clear /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        clear: {
+            value: clear /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "entries": {
-            "value": entries /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        entries: {
+            value: entries /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "forEach": {
-            "value": forEach /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        forEach: {
+            value: forEach /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "size": {
-            "get": get size /*native function*/,
-            "set": undefined,
-            "enumerable": false,
-            "configurable": true,
+        size: {
+            get: Object.getOwnPropertyDescriptor({/*unknown obj*/},"size").get,
+            set: undefined,
+            enumerable: false,
+            configurable: true,
         },
-        "values": {
-            "value": values /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        values: {
+            value: values /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "keys": {
-            "value": values /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        keys: {
+            value: values /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "union": {
-            "value": union /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        union: {
+            value: union /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "intersection": {
-            "value": intersection /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        intersection: {
+            value: intersection /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "difference": {
-            "value": difference /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        difference: {
+            value: difference /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "symmetricDifference": {
-            "value": symmetricDifference /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        symmetricDifference: {
+            value: symmetricDifference /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isSubsetOf": {
-            "value": isSubsetOf /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isSubsetOf: {
+            value: isSubsetOf /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isSupersetOf": {
-            "value": isSupersetOf /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isSupersetOf: {
+            value: isSupersetOf /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
-        "isDisjointFrom": {
-            "value": isDisjointFrom /*native function*/,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        isDisjointFrom: {
+            value: isDisjointFrom /*native function*/,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [isFinite, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "isFinite",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "isFinite",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [isNaN, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "isNaN",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "isNaN",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [atob, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "atob",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "atob",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": atob.prototype,
-            "writable": true,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: atob.prototype,
+            writable: true,
+            enumerable: false,
+            configurable: false,
         },
     }],
     [atob.prototype, {
-        "constructor": {
-            "value": atob,
-            "writable": true,
-            "enumerable": false,
-            "configurable": true,
+        constructor: {
+            value: atob,
+            writable: true,
+            enumerable: false,
+            configurable: true,
         },
     }],
     [btoa, {
-        "length": {
-            "value": 1,
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        length: {
+            value: 1,
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "name": {
-            "value": "btoa",
-            "writable": false,
-            "enumerable": false,
-            "configurable": true,
+        name: {
+            value: "btoa",
+            writable: false,
+            enumerable: false,
+            configurable: true,
         },
-        "prototype": {
-            "value": btoa.prototype,
-            "writable": true,
-            "enumerable": false,
-            "configurable": false,
+        prototype: {
+            value: btoa.prototype,
+            writable: true,
+            enumerable: false,
+            configurable: false,
         },
     }],
-)
+])

@@ -3,6 +3,7 @@ import { TypedArray } from "./typed_array__class.js"
 import { typedArrayClasses } from "./typed_array_classes.js"
 import { allKeys } from "./all_keys.js"
 import { isValidIdentifier } from "./is_valid_identifier.js"
+import { isValidKeyLiteral } from "./is_valid_key_literal.js"
 
 const reprSymbol = Symbol.for("representation")
 const denoInspectSymbol = Symbol.for("Deno.customInspect")
@@ -24,12 +25,9 @@ const PromisePrototype = Promise.prototype
 //     }
 //     return Object.getPrototypeOf(Object.getPrototypeOf(item)).constructor
 // }
-const isProbablyAPrototype = (item)=>typeof item?.constructor == 'function' && item.constructor?.prototype == item
+const isProbablyAPrototype = (item)=>typeof item?.constructor == 'function' && item.constructor?.prototype == item && isValidIdentifier(item.constructor?.name)
 
-// TODO: isJsIdentifier
-// TODO: getter names that are not js identifiers
-// TODO: tell what parent is to correctly do things like getter values
-
+// TODO: extra properties on functions
 // TODO: iterables
 // TODO: ArrayBuffer
 // TODO: DataView
@@ -37,37 +35,40 @@ const isProbablyAPrototype = (item)=>typeof item?.constructor == 'function' && i
 // TODO: WeakRef
 // TODO: TypedArray (the class)
 
+const representSymbol = (item)=>{
+    if (!item.description) {
+        return "Symbol()"
+    } else {
+        const description = item.description
+        let globalVersion = Symbol.for(description)
+        if (globalVersion == item) {
+            return `Symbol.for(${JSON.stringify(description)})`
+        } else if (description.startsWith("Symbol.") && Symbol[description.slice(7)]) {
+            return description
+        } else {
+            return `Symbol(${JSON.stringify(description)})`
+        }
+    }
+}
+const reprKey = (key)=>{
+    if (typeof key == 'symbol') {
+        return `[${representSymbol(key)}]`
+    } else if (isValidKeyLiteral(key)) {
+        return key
+    } else {
+        return JSON.stringify(key)
+    }
+}
 const allGlobalKeysAtInit = Object.freeze(allKeys(globalThis))
 /**
  * python's repr() for JS
  *
  */
-export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified=false, indent="    ", globalValues}={})=>{
+export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified, indent="    ", globalValues}={})=>{
     if (Number.isFinite(indent)) {
         indent = " ".repeat(indent)
     }
     const options = {alreadySeen, debug, simplified, indent}
-    let globalValueMap
-    const isGlobalValue = (item)=>{
-        // lazy init to avoid unnecessary slowdown
-        // does create values each time toRepresentation is called to avoid weird behavior (if globals are being dynamically changed)
-        if (globalValueMap == null) {
-            globalValueMap = globalValueMap || new Map(allGlobalKeysAtInit.filter(each=>{
-                try {
-                    globalThis[each]
-                } catch (error) {
-                    // yes this actually happens (in the browser)
-                    return false
-                }
-                return true
-            }).map(each=>[globalThis[each], each]))
-            for (const [key, value] of Object.entries(globalValues||{})) {
-                globalValueMap.set(key, value)
-            }
-        }
-        return globalValueMap.has(item)
-    }
-    
     const recursionWrapper = (item, options)=>{
         // null is fast/special case
         if (item === undefined) {
@@ -133,27 +134,35 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
         } else if (typeof item == 'string') {
             output = JSON.stringify(item)
         } else if (typeof item == 'symbol') {
-            if (!item.description) {
-                output = "Symbol()"
-            } else {
-                const description = item.description
-                let globalVersion = Symbol.for(description)
-                if (globalVersion == item) {
-                    output = `Symbol.for(${JSON.stringify(description)})`
-                } else if (description.startsWith("Symbol.") && (globalVersion = Symbol[description.slice(7)])) {
-                    output = description
-                } else {
-                    output = `Symbol(${JSON.stringify(description)})`
-                }
-            }
+            output = representSymbol(item)
         } else if (prototype == BigIntPrototype) {
             output = `BigInt(${item.toString()})`
         } else if (prototype == DatePrototype) {
             output = `new Date(${item.getTime()})`
-            // vanilla errors
         // pure array
         } else if (prototype == ArrayPrototype) {
             output = arrayLikeRepr(item, options)
+            let nonIndexKeys 
+            try {
+                nonIndexKeys = Object.keys(item).filter(each=>!(Number.isInteger(each-0)&&each>=0))
+            } catch (error) {
+                if (debug) {
+                    console.error(`[toRepresentation] error checking nonIndexKeys\n${error?.stack||error}`)
+                }
+            }
+            if (nonIndexKeys.length > 0) {
+                let extraKeys = {}
+                for (const each of nonIndexKeys) {
+                    try {
+                        extraKeys[each] = item[each]
+                    } catch (error) {
+                        
+                    }
+                }
+                if (Object.keys(extraKeys).length > 0) {
+                    output = `Object.assign(${output}, ${pureObjectRepr(extraKeys)})`
+                }
+            }
         } else if (prototype == SetPrototype) {
             output = `new Set(${arrayLikeRepr(item, options)})`
         // map
@@ -163,26 +172,33 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             output = `Promise.resolve(/*unknown*/)`
         } else if (isGlobalValue(item)) {
             const key = globalValueMap.get(item)
-            if (isValidIdentifier(key)) {
+            // key will always end up being either a string or a symbol
+            if (isValidIdentifier(key) || key == "eval") { // eval is a very weird edgecase; "var eval;" is a sytax error
                 output = key
             } else {
-                if (typeof key == 'string') {
+                if (typeof key == 'symbol') {
+                    output = `globalThis[${representSymbol(key)}]`
+                } else if (isValidKeyLiteral(key)) {
+                    output = `globalThis.${key}`
+                } else {
                     output = `globalThis[${JSON.stringify(key)}]`
-                } else { // symbol
-                    output = `globalThis[${recurursionWrapper(key, options)}]`
                 }
             }
         // probably a prototype
-        } else if (isProbablyAPrototype(item) && item?.constructor?.name && typeof item?.constructor?.name == 'string') {
-            const name = item.constructor.name
-            if (simplified) {
+        } else if (isProbablyAPrototype(item)) {
+            const name = item.constructor.name // this is guarenteed to be a valid identifier because of isProbablyAPrototype
+            let isPrototypeOfGlobal
+            try {
+                isPrototypeOfGlobal = globalThis[name]?.prototype == item
+            } catch (error) {}
+
+            if (isPrototypeOfGlobal) {
                 output = `${name}.prototype`
             } else {
-                const isGlobalPrototype = eval(`globalThis[${JSON.stringify(name)}]?.prototype`) == item
-                if (isGlobalPrototype) {
-                    output = `${name}.prototype`
+                if (simplified) {
+                    output = `${name}.prototype /*${name} is local*/`
                 } else {
-                    output = customObjectRepr(item, options)
+                    output = `/*prototype of ${name}*/ ${customObjectRepr(item, options)}`
                 }
             }
         // vanilla errors 
@@ -199,11 +215,22 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             let asString
             let isClass
             const getAsString = ()=>{
+                // some possible outputs (comparision of weird/normal behavior):
+                    // name=="howDee",     toString()=="function howDee() {}"                   // from: function howDee() {}
+                    // name=="howDee",     toString()=="function() {}"                          // from: var howDee = function() {} // NOTE: behaves same for let/const and arrow functions
+                    // name=="get howDee", toString()=='"get howDee" () {}'                     // from: ({ "get howDee"() {} })["get howDee"].toString()
+                    // name=="get $`",     toString()=="function get $`() { [native code] }"    // from: Object.getOwnPropertyDescriptors(RegExp)["$`"].get.toString()
+                    // name=="get howDee", toString()=="get howDee() {}"                        // from: Object.getOwnPropertyDescriptors({ get howDee() {} }).howDee.get.toString()
+                    // name=="get ",       toString()=='get "" () {\n    return 10;\n  }'       // from: Object.getOwnPropertyDescriptors( { get ""() { return 10 } })[""].get.toString()
+                    // name=="",           toString()=="[s = Symbol()] () {}"                   // from: ({ [s = Symbol()]() {} })[s].toString()
+                    // name=="get",        toString()=="()=>1"                                  // from: var a;Object.defineProperty(a, "hi", { get:()=>1});Object.getOwnPropertyDescriptor(a,"hi").get.toString()
+                    // name=="",           toString()=="()=>1"                                  // from: (()=>1).toString()
                 if (asString != null) {
                     return asString
                 }
                 try {
-                    asString = item.toString()
+                    // ensures toString is not overridden
+                    asString = Function.prototype.toString.call(item)
                 } catch (error) {
                     
                 }
@@ -234,7 +261,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             
             // named classes/functions
             const name = item.name
-            if (name && typeof name == 'string') {
+            if (isValidIdentifier(name)) {
                 // native
                 if (getIsNativeCode()) {
                     output = `${name} /*native function*/`
@@ -242,7 +269,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
                     if (simplified) {
                         output = `${name} /*class*/`
                     } else {
-                        output = `class ${name} { /*...*/ }`
+                        output = getAsString()
                     }
                 } else {
                     if (simplified) {
@@ -251,9 +278,37 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
                         output = `(${getAsString()})`
                     }
                 }
+            // anonymous class
+            } else if (getIsClass()) {
+                if (typeof name == 'string') {
+                    output = `/*name: ${JSON.stringify(name)}*/ class { /*...*/ }`
+                } else if (simplified) {
+                    output = `class { /*...*/ }`
+                } else {
+                    output = getAsString()
+                }
+            // getter/setter literals
+            } else if (typeof name == 'string' && getAsString().match(/^(function )?(g|s)et\b/)) {
+                const realName = name.slice(4) // remove "get " 
+                if (name[0] == 'g') {
+                    output = `Object.getOwnPropertyDescriptor({/*unknown obj*/},${JSON.stringify(realName)}).get`
+                } else {
+                    output = `Object.getOwnPropertyDescriptor({/*unknown obj*/},${JSON.stringify(realName)}).set`
+                }
+            } else if (name) {
+                if (simplified) {
+                    output = `(function(){/*name: ${recursionWrapper(name, options)}*/}})`
+                } else {
+                    output = `/*name: ${recursionWrapper(name, options)}*/ (${getAsString()})`
+                }
             // anonymous
             } else {
-                output = `(${getAsString()})`
+                if (simplified) {
+                    output = `(function(){/*...*/}})`
+                } else {
+                    // ()'s because of stuff like "()=>0 + 1"  vs "(()=>0) + 1"
+                    output = `(${getAsString()})`
+                }
             }
         // 
         // non-function and (probably) non-prototype custom object
@@ -267,6 +322,26 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             console.groupEnd()
         }
         return output
+    }
+    let globalValueMap
+    const isGlobalValue = (item)=>{
+        // lazy init to avoid unnecessary slowdown
+        // does create values each time toRepresentation is called to avoid weird behavior (if globals are being dynamically changed)
+        if (globalValueMap == null) {
+            globalValueMap = globalValueMap || new Map(allGlobalKeysAtInit.filter(each=>{
+                try {
+                    globalThis[each]
+                } catch (error) {
+                    // yes this actually happens (in the browser)
+                    return false
+                }
+                return true
+            }).map(each=>[globalThis[each], each]))
+            for (const [key, value] of Object.entries(globalValues||{})) {
+                globalValueMap.set(key, value)
+            }
+        }
+        return globalValueMap.has(item)
     }
     const pureObjectRepr = (item)=>{
         let string = "{"
@@ -284,10 +359,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             }
         }
         for (const [ key, { value, writable, enumerable, configurable, get, set } ] of propertyDescriptors) {
-            let stringKey = recursionWrapper(key, options)
-            if (typeof key == 'symbol') {
-                stringKey = `[${stringKey}]`
-            }
+            const stringKey = reprKey(key)
             if (get) {
                 string += `\n${indent}get ${stringKey}(){/*contents*/}`
             } else {
@@ -320,6 +392,10 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
     const mapLikeObject = (entries, options)=>{
         let string = ""
         for (const [key, value] of entries) {
+            // if simplified=false, keep it false all the way down
+            if (simplified == null) {
+                simplified = true
+            }
             const stringKey = recursionWrapper(key, {...options, simplified:true})
             const stringValue = recursionWrapper(value, options)
             if (!stringKey.includes("\n")) {
@@ -336,10 +412,11 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
                 string += `\n${options.indent}[\n${indentFunc({string:stringKey, by:doubleIndent, noLead:false})},\n${indentFunc({string:stringValue, by:doubleIndent, noLead:false})}\n${options.indent}],`
             }
         }
-        if (entries.length != 0) {
-            return string+"\n"
+        if (string.length == 0) {
+            return ""
+        } else {
+            return `[${string}\n]`
         }
-        return string
     }
     const customObjectRepr = (item, options)=>{
         const prototype = Object.getPrototypeOf(item)

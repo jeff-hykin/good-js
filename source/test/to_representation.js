@@ -320,6 +320,10 @@ function testCallJsonify(func, ...args) {
     }
 }
 
+for (const [key, value] of Object.entries(Object.getOwnPropertyDescriptors(RegExp))) {
+    console.log(`RegExp.${key}: `, toRepresentation(value, { indent: "    " }))
+}
+
 
 console.log( "null", toRepresentation( null ))
 console.log( "true", toRepresentation( true ))
@@ -327,7 +331,7 @@ console.log( "5", toRepresentation( 5 ))
 console.log( "{}", toRepresentation( {} ))
 console.log( "{a:1}", toRepresentation( {a:1} ))
 console.log( "{a:1, b:2}", toRepresentation( {a:1, b:2} ))
-console.log( "new Date()", toRepresentation( new Date() ))
+console.log( "new Date()", toRepresentation( new Date(1730051728292) ))
 console.log( "new Error()", toRepresentation( new Error() ))
 console.log( "new Set()", toRepresentation( new Set() ))
 console.log( "new Set([1,2,3])", toRepresentation( new Set([1,2,3]) ))
@@ -345,9 +349,20 @@ console.log( "new Int16Array()", toRepresentation( new Int16Array() ))
 console.log( "new Int16Array(10)", toRepresentation( new Int16Array(10) ))
 console.log( "new Uint16Array()", toRepresentation( new Uint16Array() ))
 console.log( "new Uint16Array(10)", toRepresentation( new Uint16Array(10) ))
+console.log( "function:", toRepresentation( function(){return "howdy_howdy_howdy".match(/howdy/)} ) )
+console.log( "arrow function:", toRepresentation( ()=>{return "howdy_howdy_howdy".match(/howdy/)} ) )
+console.log( "class:", toRepresentation(class P {}))
+console.log( "anonymous class:", toRepresentation(class {}))
+var regexMatch ="howdy_howdy_howdy".match(/howdy/)
+class MyArray extends Array {}
+Object.setPrototypeOf(regexMatch, MyArray.prototype)
+console.log( "regex match:", toRepresentation( regexMatch ) )
+var regexMatch ="howdy_howdy_howdy".match(/howdy/)
+console.log( "regex match:", toRepresentation( regexMatch ) )
 
 
-const propertyDescriptorsMap = new Map()
+
+const propertyDescriptorsMap = new Map([ [regexMatch, regexMatch] ])
 for (const eachObj of [...prototypeKeyMap.keys()].slice(0,50)) {
     if (eachObj == null) {
         continue
@@ -357,3 +372,4 @@ for (const eachObj of [...prototypeKeyMap.keys()].slice(0,50)) {
 }
 
 console.log(toRepresentation(propertyDescriptorsMap, { indent: "    " }))
+

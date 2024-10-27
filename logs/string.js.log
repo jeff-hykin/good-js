@@ -47,12 +47,12 @@ toRepresentation(Symbol()) is: Symbol()
 toRepresentation(null) is: null
 toRepresentation(undefined) is: undefined
 toRepresentation(a) is: new A({
-  "thing": 10,
+    thing: 10,
 })
 toRepresentation(A) is: class A {}
-toRepresentation(blahFunc) is: function blahFunc() {
+toRepresentation(blahFunc) is: (function blahFunc() {
     return 10
-}
+})
 toRepresentation(new Date(9999)) is: new Date(9999)
 didYouMean({ givenWord: badArg, possibleWords }) is: [ "help", "size", "blah", "length" ]
 [ "def", "xyz", "mnop" ]
