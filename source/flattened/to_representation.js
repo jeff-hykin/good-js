@@ -25,6 +25,10 @@ const PromisePrototype = Promise.prototype
 // }
 const isProbablyAPrototype = (item)=>typeof item?.constructor == 'function' && item.constructor?.prototype == item
 
+// TODO: isJsIdentifier
+// TODO: getter names that are not js identifiers
+// TODO: tell what parent is to correctly do things like getter values
+
 // TODO: iterables
 // TODO: ArrayBuffer
 // TODO: DataView
@@ -32,16 +36,36 @@ const isProbablyAPrototype = (item)=>typeof item?.constructor == 'function' && i
 // TODO: WeakRef
 // TODO: TypedArray (the class)
 
-let globalValues
+const allGlobalKeysAtInit = Object.freeze(allKeys(globalThis))
 /**
  * python's repr() for JS
  *
  */
-export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified=false, indent="    "}={})=>{
+export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified=false, indent="    ", globalValues}={})=>{
     if (Number.isFinite(indent)) {
         indent = " ".repeat(indent)
     }
     const options = {alreadySeen, debug, simplified, indent}
+    let globalValueMap
+    const isGlobalValue = (item)=>{
+        // lazy init to avoid unnecessary slowdown
+        // does create values each time toRepresentation is called to avoid weird behavior (if globals are being dynamically changed)
+        if (globalValueMap == null) {
+            globalValueMap = globalValueMap || new Map(allGlobalKeysAtInit.filter(each=>{
+                try {
+                    globalThis[each]
+                } catch (error) {
+                    // yes this actually happens (in the browser)
+                    return false
+                }
+                return true
+            }).map(each=>[globalThis[each], each]))
+            for (const [key, value] of Object.entries(globalValues||{})) {
+                globalValueMap.set(key, value)
+            }
+        }
+        return globalValueMap.has(item)
+    }
     
     const recursionWrapper = (item, options)=>{
         // null is fast/special case
@@ -51,10 +75,6 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             return "null"
         }
         
-        // lazy init to avoid slowdown on import
-        globalValues = globalValues || new Map(
-            allKeys(globalThis).map(each=>[globalThis[each], each])
-        )
         const {alreadySeen, debug, simplified, indent} = options
         
         // prevent infinite recursion
@@ -140,8 +160,8 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
             output = `new Map(${mapLikeObject(item.entries(), options)})`
         } else if (prototype == PromisePrototype) {
             output = `Promise.resolve(/*unknown*/)`
-        } else if (globalValues.has(item)) {
-            const key = globalValues.get(item)
+        } else if (isGlobalValue(item)) {
+            const key = globalValueMap.get(item)
             // this is overly restrictive but it works for now
             if (key.match(/^[a-zA-Z][a-zA-Z0-9_]*$/)) {
                 output = key
