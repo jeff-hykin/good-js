@@ -154,7 +154,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
         } else if (prototype == ArrayPrototype) {
             output = arrayLikeRepr(item, options)
         } else if (prototype == SetPrototype) {
-            output = `new Set([${arrayLikeRepr(item, options)}])`
+            output = `new Set(${arrayLikeRepr(item, options)})`
         // map
         } else if (prototype == MapPrototype) {
             output = `new Map(${mapLikeObject(item.entries(), options)})`
