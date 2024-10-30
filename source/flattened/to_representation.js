@@ -17,6 +17,7 @@ const MapPrototype     = Map.prototype
 const ObjectPrototype  = Object.prototype
 const ErrorPrototype   = Error.prototype
 const PromisePrototype = Promise.prototype
+const UrlPrototype     = globalThis.URL?.prototype
 
 // NOTE: this can't be reliable. It is always possible to overwrite the constructor property of a prototype
 // const getExtendedClassOfObject = (item)=>{
@@ -174,6 +175,8 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
                 output = `new Map(${mapLikeObject(item.entries(), options)})`
             } else if (prototype == PromisePrototype) {
                 output = `Promise.resolve(/*unknown*/)`
+            } else if (prototype == UrlPrototype) {
+                output = `new URL(${JSON.stringify(item?.href)})`
             } else if (isGlobalValue(item)) {
                 const key = globalValueMap.get(item)
                 // key will always end up being either a string or a symbol
