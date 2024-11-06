@@ -1,9 +1,10 @@
 import { levenshteinDistanceBetween } from "./levenshtein_distance_between.js"
 
 export class DidYouMeanError extends Error {
-    constructor(arg, word, possibleWords) {
+    constructor(arg, {givenWord, givenWords, possibleWords}) {
         super(arg)
-        this.word = word
+        this.givenWord = givenWord
+        this.givenWords = givenWords
         this.possibleWords = possibleWords
     }
 }
@@ -62,9 +63,9 @@ export function didYouMean(arg) {
             suggestionLimit,
         })
         if (suggestionLimit == 1 && suggestions.length > 0) {
-            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean ${JSON.stringify(suggestions[0])}?`, word, suggestions)
+            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean ${JSON.stringify(suggestions[0])}?`, {givenWord, possibleWords: suggestions})
         } else {
-            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean one of ${JSON.stringify(suggestions)}?`, word, suggestions)
+            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean one of ${JSON.stringify(suggestions)}?`, { givenWords, possibleWords: suggestions})
         }
     }
     // this distance metric could be swapped/improved in the future
