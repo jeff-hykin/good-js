@@ -1,4 +1,5 @@
 import { toCamelCase } from "./to_camel_case.js"
+import { didYouMean } from "./did_you_mean.js"
 
 export const flag = Symbol("flagArg")
 export const required = Symbol("requiredArg")
@@ -33,6 +34,44 @@ const coerseValue = (value, transformer)=>{
     }
     return value
 }
+/**
+ * unopinionated argument parser
+ *
+ * @example
+ * ```js
+ * import { parseArgs, flag, required, initialValue } from "../flattened/parse_args.js"
+ * 
+ * var output = parseArgs({
+ *     fields: [
+ *         // if its mentioned here then its an "explicit" arg
+ *         [["--explcit-arg-1", ], required, initialValue([1,2,3]), (str)=>JSON.parse(str)],
+ *         [["--explcitArg2", ], required, initialValue(NaN), (str)=>parseInt(str)],
+ *         [[ 0, ], required, ], // explicit numbered arg (user MUST give 1 numbered arg) 
+ *         [[ "--new-name" 1, ], required, ], // user can EITHER do --new-name OR have a second (unnamed) argument
+ *         [["--version", "-v", ], flag, ], // no key-value, just a key
+ *         [["--debug", ], flag, ],
+ *     ],
+ *     // example args:
+ *     rawArgs: [
+ *         "--explicit-arg-1", '["arg1Value"]', 
+ *         "--explicitArg2", '99', 
+ *         "numberedArg1", 
+ *         "numberedArg2", 
+ *         "numberedArg3", // "implicit" because it wasn't defined above (but user can still provide it)
+ *         "--debug",
+ *        "--implicitNamedArg1", "howdy" // implicit because 
+ *     ],
+ *     nameTransformer: toCamelCase, // --explicit-arg-1 -> explicitArg1
+ *     namedArgsStopper: "--",
+ *     allowNameRepeats: true,
+ *     valueTransformer: JSON.parse,
+ *     isolateArgsAfterStopper: false,
+ *     argsByNameSatisfiesNumberedArg: true,
+ *     implicitNamePattern: /^(--|-)[a-zA-Z0-9\-_]+$/,
+ *     implictFlagPattern: null,
+ * })
+ * ```
+ */
 export function parseArgs({
     rawArgs,
     fields,
@@ -42,6 +81,7 @@ export function parseArgs({
     valueTransformer=JSON.parse,
     isolateArgsAfterStopper=false,
     argsByNameSatisfiesNumberedArg=true,
+    allowImplicitNamedArgs=true,
     implicitNamePattern=/^(--|-)[a-zA-Z0-9\-_]+$/,
     implictFlagPattern=null, 
 }) {
@@ -157,6 +197,9 @@ export function parseArgs({
             const name = argName
             argName = null
             if (!keyToField.has(name)) {
+                if (!allowImplicitNamedArgs) {
+                    didYouMean({ givenWord: name, possibleWords: [...keyToField.keys()], autoThrow: true, suggestionLimit: 3 })
+                }
                 nameWasImplicit.push(name)
                 keyToField.set(name, {
                     wasNamed: true,
