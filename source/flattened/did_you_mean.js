@@ -1,5 +1,13 @@
 import { levenshteinDistanceBetween } from "./levenshtein_distance_between.js"
 
+export class DidYouMeanError extends Error {
+    constructor(arg, word, possibleWords) {
+        super(arg)
+        this.word = word
+        this.possibleWords = possibleWords
+    }
+}
+
 /**
  * Determines possible correct spellings for a given word based on a list of possible words.
  *
@@ -54,9 +62,9 @@ export function didYouMean(arg) {
             suggestionLimit,
         })
         if (suggestionLimit == 1 && suggestions.length > 0) {
-            throw new Error(`For ${JSON.stringify(givenWord)}, did you mean ${JSON.stringify(suggestions[0])}?`)
+            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean ${JSON.stringify(suggestions[0])}?`, word, suggestions)
         } else {
-            throw new Error(`For ${JSON.stringify(givenWord)}, did you mean one of ${JSON.stringify(suggestions)}?`)
+            throw new DidYouMeanError(`For ${JSON.stringify(givenWord)}, did you mean one of ${JSON.stringify(suggestions)}?`, word, suggestions)
         }
     }
     // this distance metric could be swapped/improved in the future
