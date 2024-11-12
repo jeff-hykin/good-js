@@ -152,6 +152,7 @@ function join(...paths) {
   if (!joined) return ".";
   return normalize(joined);
 }
+function relative(from, to) {
   assertPath(from);
   assertPath(to);
   if (from === to) return "";
