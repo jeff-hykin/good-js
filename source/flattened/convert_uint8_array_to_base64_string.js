@@ -1,7 +1,7 @@
 import { _base64NumericCodes as base64codes } from "./_base64_numeric_codes.js"
 import { base64Letters as base64abc } from "./base64_letters.js"
 
-export function uint8ArrayToBase64String(bytes) {
+export function convertUint8ArrayToBase64String(bytes) {
     let result = "",
         i,
         l = bytes.length
