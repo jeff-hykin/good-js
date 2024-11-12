@@ -1,6 +1,8 @@
 import { toCamelCase } from "./to_camel_case.js"
-import { didYouMean } from "./did_you_mean.js"
+// import { zipTemplateArgs } from "./zip_template_args.js"
+import { didYouMean, DidYouMeanError } from "./did_you_mean.js"
 
+export { DidYouMeanError }
 export const flag = Symbol("flagArg")
 export const required = Symbol("requiredArg")
 const unset = Symbol("unset")
@@ -9,6 +11,14 @@ class Default {
         this.val = val
     }
 }
+
+export class ArgumentError extends Error {
+    constructor(message, extraInfo) {
+        super(message)
+        Object.assign(this, extraInfo)
+    }
+}
+
 export const initialValue = (value)=>new Default(value)
 const coerseValue = (value, transformer)=>{
     if (value instanceof Array) {
@@ -59,7 +69,7 @@ const coerseValue = (value, transformer)=>{
  *         "numberedArg2", 
  *         "numberedArg3", // "implicit" because it wasn't defined above (but user can still provide it)
  *         "--debug",
- *        "--implicitNamedArg1", "howdy" // implicit because 
+ *        "--implicitNamedArg1", "howdy" // implicit because it wasn't defined above (but user can still provide it)
  *     ],
  *     nameTransformer: toCamelCase, // --explicit-arg-1 -> explicitArg1
  *     namedArgsStopper: "--",
@@ -67,8 +77,9 @@ const coerseValue = (value, transformer)=>{
  *     valueTransformer: JSON.parse,
  *     isolateArgsAfterStopper: false,
  *     argsByNameSatisfiesNumberedArg: true,
- *     implicitNamePattern: /^(--|-)[a-zA-Z0-9\-_]+$/,
- *     implictFlagPattern: null,
+ *     implicitNamePattern: /^(--)[a-zA-Z0-9\-_]+$/, // --key value pattern
+ *     implictFlagPattern: /^(--|-)[a-zA-Z0-9\-_]+$/, // -flag (no value) pattern
+ *     allowImplicitNamedArgs: true, // if false, and the pattern matches, it throws a "did you mean" error
  * })
  * ```
  */
@@ -82,8 +93,9 @@ export function parseArgs({
     isolateArgsAfterStopper=false,
     argsByNameSatisfiesNumberedArg=true,
     allowImplicitNamedArgs=true,
+    allowImplicitNumberedArgs=true,
     implicitNamePattern=/^(--|-)[a-zA-Z0-9\-_]+$/,
-    implictFlagPattern=null, 
+    implictFlagPattern=null,
 }) {
     // 
     // organize the parameters
@@ -155,6 +167,18 @@ export function parseArgs({
         parse_next_numbered_arg: while (1) {
             runningArgNumberIndex += 1
             if (!keyToField.has(runningArgNumberIndex)) {
+                if (!allowImplicitNumberedArgs) {
+                    const numberOfArgsAllowed = Math.max(0, ...keyToField.keys().filter(each=>Number.isInteger(each)&&each>=0))
+                    let additionalInfo = ``
+                    if (index > 0) {
+                        additionalInfo = `\nThe previous argument was ${JSON.stringify(rawArgs[index-1])}`
+                    }
+                    if (numberOfArgsAllowed == 0) {
+                        throw new ArgumentError(`Sorry, numbered arguments are not allowed.\nThe bad argument was ${JSON.stringify(each)}${additionalInfo}`, { reason: "argNotAllowed", badArg: each, badArgRealIndex: index, })
+                    } else {
+                        throw new ArgumentError(`Sorry, only ${numberOfArgsAllowed} numbered arguments are allowed.\nThe bad argument was ${JSON.stringify(each)}${additionalInfo}`, { reason: "argNotAllowed", badArg: each, badArgRealIndex: index, })
+                    }
+                }
                 numberWasImplicit.push(runningArgNumberIndex)
                 // console.debug(`- numbered arg was unknown`,)
                 keyToField.set(runningArgNumberIndex, {
@@ -177,7 +201,9 @@ export function parseArgs({
                     } else if (allowNameRepeats) {
                         entry.value = [ entry.value, each ]
                     } else {
-                        throw Error(`When calling parseArgs(), two values were given for the same entry (ex: "count $thisVal 5 --min $thisVal" instead of "count --min $thisVal --max 5" or "count $thisVal 5"). The second occurance was ${argName}, and the field was ${JSON.stringify(entry.names)}`)
+                        const names = entry.keys.filter(each=>typeof each == "string")
+                        const longestName = names.reduce((a,b)=>a.length>b.length?a:b)
+                        throw new ArgumentError(`When calling parseArgs(), two values were given for the same entry (ex: "count $thisVal 5 --min $thisVal" instead of "count --min $thisVal --max 5" or "count $thisVal 5"). The second occurance was ${JSON.stringify(each)}, and the field was ${JSON.stringify(names)}`, { reason: "argNotAllowed", badArg: each, badArgRealIndex: index, badArgName: longestName, badArgNames: names, })
                     }
                 } else {
                     argsByNumber[runningArgNumberIndex] = each
@@ -198,7 +224,12 @@ export function parseArgs({
             argName = null
             if (!keyToField.has(name)) {
                 if (!allowImplicitNamedArgs) {
-                    didYouMean({ givenWord: name, possibleWords: [...keyToField.keys()], autoThrow: true, suggestionLimit: 3 })
+                    didYouMean({
+                        givenWord: name,
+                        possibleWords: [...keyToField.keys()].filter(each=>typeof each==="string"), 
+                        autoThrow: true,
+                        suggestionLimit: 3,
+                    })
                 }
                 nameWasImplicit.push(name)
                 keyToField.set(name, {

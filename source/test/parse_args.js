@@ -3,7 +3,7 @@ import { toCamelCase } from "../flattened/to_camel_case.js"
 import { didYouMean } from "../string.js"
 
 var output = parseArgs({
-    rawArgs: [ "1", "2", "--debug", "3", "--imImplicit", "howdy" ],
+    rawArgs: [ "numberedArg1", "numberedArg2", "--debug", "numberedArg3", "--imImplicit", "howdy" ],
     fields: [
         [["--debug", "-o", ], flag, required, ],
         [["--version"], flag, initialValue(true) ],

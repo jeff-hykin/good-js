@@ -1,8 +1,8 @@
-output.argList is: [ 1, 2, 3 ]
+output.argList is: [ "numberedArg1", "numberedArg2", "numberedArg3" ]
 output.simplifiedNames is: { debug: true, version: true, explcitArg1: null, imImplicit: "howdy" }
 output.field.version is: undefined
-output.implicitArgsByNumber is: [ 1, 2, 3 ]
-output.directArgList is: [ 1, 2, 3 ]
+output.implicitArgsByNumber is: [ "numberedArg1", "numberedArg2", "numberedArg3" ]
+output.directArgList is: [ "numberedArg1", "numberedArg2", "numberedArg3" ]
 output.fields is: [
   {
     isRequired: true,
@@ -50,9 +50,9 @@ output.fields is: [
     realIndices: [ 5 ],
     value: "howdy"
   },
-  { kind: [], keys: [ 0 ], realIndices: [ 0 ], value: 1 },
-  { kind: [], keys: [ 1 ], realIndices: [ 1 ], value: 2 },
-  { kind: [], keys: [ 2 ], realIndices: [ 3 ], value: 3 }
+  { kind: [], keys: [ 0 ], realIndices: [ 0 ], value: "numberedArg1" },
+  { kind: [], keys: [ 1 ], realIndices: [ 1 ], value: "numberedArg2" },
+  { kind: [], keys: [ 2 ], realIndices: [ 3 ], value: "numberedArg3" }
 ]
 output.explicitArgsByName is: {
   "--debug": true,
@@ -70,6 +70,6 @@ THERE SHOULD BE AN ERROR: Error:
 
 The -o --option o option field is required but it was not provided
 
-    at parseArgs (file:///Users/jeffhykin/repos/good-js/source/flattened/parse_args.js:273:19)
+    at parseArgs (file:///Users/jeffhykin/repos/good-js/source/flattened/parse_args.js:347:19)
     at file:///Users/jeffhykin/repos/good-js/source/test/parse_args.js:35:24
 output is: { from: "a", to: "b", absolute: false }
