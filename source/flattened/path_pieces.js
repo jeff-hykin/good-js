@@ -1,19 +1,12 @@
-import * as Path from "https://deno.land/std@0.128.0/path/mod.ts"
+import { pathPiecesPosix } from "./path_pieces_posix.js"
+import { pathPiecesWindows } from "./path_pieces_windows.js"
 
-export function pathPieces(path) {
-    // const [ folders, itemName, itemExtensionWithDot ] = FileSystem.pathPieces(path)
-    path = (path.path || path) // if given PathInfo object
-    const result = Path.parse(path)
-    const folderList = []
-    let dirname = result.dir
-    while (true) {
-        folderList.push(Path.basename(dirname))
-        // if at the top 
-        if (dirname == Path.dirname(dirname)) {
-            break
-        }
-        dirname = Path.dirname(dirname)
+export function pathPieces(path, { fsType="posix" } = {}) {
+    if (fsType == "posix") {
+        return pathPiecesPosix(path)
+    } else if (fsType == "windows") {
+        return pathPiecesWindows(path)
+    } else {
+        throw Error(`Unsupported fsType: ${fsType}, supported values are "posix" and "windows"`)
     }
-    folderList.reverse()
-    return [ folderList, result.name, result.ext ]
 }
