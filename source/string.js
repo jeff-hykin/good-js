@@ -13,6 +13,7 @@ import { toScreamingSnakeCase } from "./flattened/to_screaming_snake_case.js"; e
 import { findAll } from "./flattened/find_all.js"; export { findAll as findAll }
 import { extractFirst } from "./flattened/extract_first.js"; export { extractFirst as extractFirst }
 import { iterativelyFindAll } from "./flattened/iteratively_find_all.js"; export { iterativelyFindAll as iterativelyFindAll }
+import { escapeJsString } from "./flattened/escape_js_string.js"; export { escapeJsString as escapeJsString }
 
 // 
 // regex
