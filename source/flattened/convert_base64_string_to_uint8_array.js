@@ -2,6 +2,12 @@ import { _base64NumericCodes as base64codes } from "./_base64_numeric_codes.js"
 import { base64Letters as base64abc } from "./base64_letters.js"
 import { _getBase64Code as getBase64Code } from "./_get_base64_code.js"
 
+/**
+ * @example
+ * ```js
+ * console.log(convertBase64StringToUint8Array("ZWNobyBob3dkeQ=="))
+ * ```
+ */
 export function convertBase64StringToUint8Array(str) {
 	if (str.length % 4 !== 0) {
 		throw new Error("Unable to parse base64 string.");
