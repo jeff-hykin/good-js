@@ -1,4 +1,4 @@
-import { convertNormalStringToBase64String } from './flattened/convert_normal_string_to_base64_string.js'
+import { convertNormalStringToBase64String } from './convert_normal_string_to_base64_string.js'
 
 /**
  * @example
