@@ -18,5 +18,5 @@ const isInvalidSimple = path=>(typeof path != "string" || path.endsWith("/") || 
 export function isValidPathStringForFilePosix(path) {
     // technically this should include: path == "/dev" || path == "/tmp"
     // note: macos bans colon and this doesnt
-    return !(isInvalidSimple(path) || isInvalidSimple(normalizePathPosix(path))))
+    return !(isInvalidSimple(path) || isInvalidSimple(normalizePathPosix(path)))
 }
