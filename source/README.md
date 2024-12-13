@@ -3,20 +3,20 @@
 A standard library of tools missing from JavaScript. Works for any ECMA Script runtime (2016 or later).
 
 ```js
-import DateTime from "https://deno.land/x/good@1.13.4.3/date.js"
-import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.13.4.3/array.js"
-import { intersection, subtract } from "https://deno.land/x/good@1.13.4.3/set.js"
-import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.13.4.3/math.js"
-import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingKebabCase, toScreamingSnakeCase, toRepresentation, toString, regex, findAll, iterativelyFindAll, escapeRegexMatch, escapeRegexReplace, extractFirst, isValidIdentifier, removeCommonPrefix, didYouMean } from "https://deno.land/x/good@1.13.4.3/string.js"
-import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.13.4.3/encryption.js"
-import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.13.4.3/async.js"
-import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.13.4.3/events.js"
-import { recursivelyOwnKeysOf, get, set, hasKeyList, hasDirectKeyList, remove, merge, compareProperty, recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.13.4.3/object.js"
-import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorObject,isAsyncIterable, isSyncIterable, isIterableTechnically, isSyncIterableObjectOrContainer, allKeys } from "https://deno.land/x/good@1.13.4.3/value.js"
-import { iter, next, stop, Iterable, map, filter, reduce, frequencyCount, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkBy } from "https://deno.land/x/good@1.13.4.3/iterable.js"
-import { parseCsv, createCsv } from "https://deno.land/x/good@1.13.4.3/csv.js"
-import { BinaryHeap } from "https://deno.land/x/good@1.13.4.3/binary_heap.js"
-import { parseArgs } from "https://deno.land/x/good@1.13.4.3/flattened/parse_args.js"
+import DateTime from "https://deno.land/x/good@1.13.5.0/date.js"
+import { zip, enumerate, count, permute, combinations, wrapAroundGet } from "https://deno.land/x/good@1.13.5.0/array.js"
+import { intersection, subtract } from "https://deno.land/x/good@1.13.5.0/set.js"
+import { stats, sum, spread, normalizeZeroToOne, roundedUpToNearest, roundedDownToNearest } from "https://deno.land/x/good@1.13.5.0/math.js"
+import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingKebabCase, toScreamingSnakeCase, toRepresentation, toString, regex, findAll, iterativelyFindAll, escapeRegexMatch, escapeRegexReplace, extractFirst, isValidIdentifier, removeCommonPrefix, didYouMean } from "https://deno.land/x/good@1.13.5.0/string.js"
+import { generateKeys, encrypt, decrypt, hashers } from "https://deno.land/x/good@1.13.5.0/encryption.js"
+import { deferredPromise, recursivePromiseAll } from "https://deno.land/x/good@1.13.5.0/async.js"
+import { Event, trigger, everyTime, once } from "https://deno.land/x/good@1.13.5.0/events.js"
+import { recursivelyOwnKeysOf, get, set, hasKeyList, hasDirectKeyList, remove, merge, compareProperty, recursivelyIterateOwnKeysOf } from "https://deno.land/x/good@1.13.5.0/object.js"
+import { deepCopy, deepCopySymbol, allKeyDescriptions, deepSortObject, shallowSortObject, isGeneratorObject,isAsyncIterable, isSyncIterable, isIterableTechnically, isSyncIterableObjectOrContainer, allKeys } from "https://deno.land/x/good@1.13.5.0/value.js"
+import { iter, next, stop, Iterable, map, filter, reduce, frequencyCount, zip, count, enumerate, permute, combinations, slices, asyncIteratorToList, concurrentlyTransform, forkBy } from "https://deno.land/x/good@1.13.5.0/iterable.js"
+import { parseCsv, createCsv } from "https://deno.land/x/good@1.13.5.0/csv.js"
+import { BinaryHeap } from "https://deno.land/x/good@1.13.5.0/binary_heap.js"
+import { parseArgs } from "https://deno.land/x/good@1.13.5.0/flattened/parse_args.js"
 ```
 
 
