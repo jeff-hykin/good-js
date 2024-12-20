@@ -1,5 +1,12 @@
 import { parse, basename, dirname } from "../support/windows.js"
+const Path = {parse,basename,dirname}
 
+/**
+ * @example
+ * ```js
+ * const [ folders, itemName, itemExtensionWithDot ] = pathPiecesWindows(`C:\\Users\\me\\Documents\\myFolder\\myFile.txt`)
+ * ```
+ */
 export function pathPiecesWindows(path) {
     // const [ folders, itemName, itemExtensionWithDot ] = FileSystem.pathPieces(path)
     path = (path.path || path) // if given PathInfo object
