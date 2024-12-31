@@ -405,6 +405,9 @@ export function parseArgs({
     }
     for (const each of Object.keys(simplifiedNames)) {
         simplifiedNames[each] = argsByName[each]
+        if (simplifiedNames[each] === unset) {
+            simplifiedNames[each] = undefined
+        }
     }
     if (valueTransformer) {
         directArgList = directArgList.map(each=>coerseValue(each,valueTransformer))
@@ -425,7 +428,7 @@ export function parseArgs({
             }
         },
         fields: [...fieldSet],
-        field: keyToField.get,
+        field: (key)=>keyToField.get(key),
         explicitArgsByName,
         implicitArgsByName, 
         nameStopIndex,
