@@ -25,7 +25,7 @@ import { isAsyncIterable } from "./is_async_iterable.js"
  * @returns {Map} output
  *
  */
-export function frequencyCount(iterable, {valueToKey=null}={}) {
+export function frequencyCount(iterable, {valueToKey=null, sort=false}={}) {
     iterable = makeIterable(iterable)
     valueToKey = valueToKey || ((each)=>each)
     if (isAsyncIterable(iterable)) {
@@ -35,6 +35,12 @@ export function frequencyCount(iterable, {valueToKey=null}={}) {
                 element = valueToKey(element)
                 counts.set(element, (counts.get(element)||0)+1)
             }
+            if (sort) {
+                if (sort > 0) {
+                    return new Map([...counts.entries()].sort((a,b)=>b[1]-a[1]))
+                }
+                return new Map([...counts.entries()].sort((a,b)=>a[1]-b[1]))
+            }
             return counts
         })()
     } else {
@@ -42,6 +48,12 @@ export function frequencyCount(iterable, {valueToKey=null}={}) {
         for (let element of iterable) {
             element = valueToKey(element)
             counts.set(element, (counts.get(element)||0)+1)
+        }
+        if (sort) {
+            if (sort > 0) {
+                return new Map([...counts.entries()].sort((a,b)=>b[1]-a[1]))
+            }
+            return new Map([...counts.entries()].sort((a,b)=>a[1]-b[1]))
         }
         return counts
     }
