@@ -89,8 +89,7 @@ export function parseCsv({
     let comments     = []
     let rows         = []
     let fileColumnNames = []
-    let isFirstDataRow = true
-    
+    let isFirstNonCommentNonBlankRow = true
     function handleLine(eachLine) {
         // remove all weird whitespace as a precaution
         eachLine = eachLine.replace(lineSeparator, "")
@@ -178,8 +177,8 @@ export function parseCsv({
         // 
         // fileColumnNames
         // 
-        if (isFirstDataRow) {
-            isFirstDataRow = false
+        if (isFirstNonCommentNonBlankRow) {
+            isFirstNonCommentNonBlankRow = false
             if (firstRowIsColumnNames) {
                 fileColumnNames = cellsWithTypes.map(each=>`${each}`.trim())
                 return
@@ -188,7 +187,6 @@ export function parseCsv({
         
         rows.push(cellsWithTypes)
     }
-    
     function afterLinesAreHandled() {
         // if fileColumnNames
         columnNames = columnNames || fileColumnNames
@@ -206,9 +204,11 @@ export function parseCsv({
         rows.rows = rows
         return rows
     }
-    
     const iterable = makeIterable(typeof input == "string" ? input.split(lineSeparator) : input)
     if (!isAsyncIterable(iterable)) {
+        for (const eachLine of iterable) {
+            handleLine(eachLine)
+        }
         return afterLinesAreHandled()
     } else {
         // return a promise because we have to in order to process the iterator
