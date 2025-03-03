@@ -1,5 +1,3 @@
-import { isValidIdentifier } from './is_valid_identifier.js'
-
 /**
  * Backtick-escapes a string
  *
@@ -19,6 +17,12 @@ import { isValidIdentifier } from './is_valid_identifier.js'
  *         )
  *     )
  * )
+ * // handles edgecases of code points vs unicode characters
+ * console.log(
+ *     escapeJsString(
+ *         `olor: o },\n        u = null\n    return console.error(\"Error handled by React Router default ErrorBoundary:\", e), (u = x.createElement(x.Fragment, null, x.createElement(\"p\", null, \"💿 Hey developer 👋\"), x.createElement(\"p\", null, \"You can provide a way better UX than this when your app throws errors by providing your own \", \${test}`,
+ *     )
+ * )
  * // `hello\nworld`
  * ```
  * @note this implementation is focused on correctness, and minimizing output size, not performance
@@ -27,42 +31,42 @@ import { isValidIdentifier } from './is_valid_identifier.js'
  * @returns {string} - a backtick string representing a minimal javascript string
  */
 export const escapeJsString = (string, customEscaper) => {
-    let newString = "`"
-    let nextIndex = 0
-    for (const each of string) {
-        nextIndex++
+    let index = -1
+    const chars = [...string]
+    for (const each of chars) {
+        index++
         let nextOutput
-        if (customEscaper && typeof (nextOutput = customEscaper(each, nextIndex, string)) == "string") {
-            newString += nextOutput
+        if (customEscaper && typeof (nextOutput = customEscaper(each, index+1, string)) == "string") {
+            chars[index] = nextOutput
             continue
-        } 
+        }
         if (each == "\\") {
-            newString += "\\\\"
+            chars[index] = "\\\\"
         } else if (each == "`") {
-            newString += "\\`"
+            chars[index] = "\\`"
         } else if (each == "$") {
-            if (string[nextIndex] == "{") {
-                newString += "\\$"
+            if (chars[index+1] == "{") {
+                chars[index] = "\\$"
             } else {
-                newString += "$"
+                chars[index] = "$"
             }
         } else if (each == "\r") { // special because it screws up CRLF vs LF and makes the file look like a binary file
-            newString += "\\r"
+            chars[index] = "\\r"
         // sequences that dont need to be escaped
         } else if (each == "\b"||each == "\t"||each == "\n"||each == "\v"||each=="\f") { // note: \r is the only one missing, which is intentional because it causes problems: https://262.ecma-international.org/13.0/#sec-ecmascript-data-types-and-values
-            newString += each
+            chars[index] = each
         } else if (each.codePointAt(0) < 0x7F) {
-            newString += each
-        } else if (isValidIdentifier(`_${each}`)) {
-            newString += each
+            chars[index] = each
+        } else if (/\$|\p{ID_Continue}/u.test(each)) {
+            chars[index] = each
         } else {
             const stringified = JSON.stringify(each)
             if (stringified.length > 4) { // unicode escape needed, "\\n".length == 4
-                newString += stringified.slice(1,-1) // slices off the double quote, and the first of two backslashes
+                chars[index] = stringified.slice(1,-1) // slices off the double quote, and the first of two backslashes
             } else {
-                newString += each
+                chars[index] = each
             }
         }
     }
-    return newString +"`"
+    return "`"+chars.join("")+"`"
 }
