@@ -57,7 +57,7 @@ export const escapeJsString = (string, customEscaper) => {
             chars[index] = each
         } else if (each.codePointAt(0) < 0x7F) {
             chars[index] = each
-        } else if (/\$|\p{ID_Continue}/u.test(each)) {
+        } else if (/\p{ID_Continue}/u.test(each)) {
             chars[index] = each
         } else {
             const stringified = JSON.stringify(each)
