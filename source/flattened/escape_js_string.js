@@ -12,7 +12,7 @@
  *     escapeJsString(
  *         "hello\nworld",
  *         // custom char escaper (make newlines into \n instead of being actual newlines)
- *         (char, index, string)=>(
+ *         (char, nextIndex, string)=>(
  *             char == "\n" ? "\\n" : undefined
  *         )
  *     )
