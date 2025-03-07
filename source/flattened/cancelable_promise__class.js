@@ -81,7 +81,8 @@ export class CancelablePromise {
                 }
             }
         } else if (this.error !== unset) {
-            // this will
+            // when this is triggered by the await keyword, it needs special handling
+            // this block ends up handling that case
             if (reject) {
                 try {
                     // if this func is getting triggered by the await keyword, then this reject call will never throw
