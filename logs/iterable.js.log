@@ -50,6 +50,12 @@ listOfSubpaths is: [
       isSymlink: false
     },
     [Object: null prototype] {
+      name: "base64.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "set.js",
       isFile: true,
       isDirectory: false,
@@ -95,6 +101,12 @@ listOfSubpaths is: [
       name: "value.js",
       isFile: true,
       isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "support",
+      isFile: false,
+      isDirectory: true,
       isSymlink: false
     },
     [Object: null prototype] {
@@ -722,6 +734,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "base64.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "set.js",
     isFile: true,
     isDirectory: false,
@@ -767,6 +785,12 @@ result is: [
     name: "value.js",
     isFile: true,
     isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "support",
+    isFile: false,
+    isDirectory: true,
     isSymlink: false
   },
   [Object: null prototype] {
@@ -1261,21 +1285,9 @@ result is: [
     isDirectory: false,
     isSymlink: false
   },
-  [Object: null prototype] {
-    name: "hooks",
-    isFile: false,
-    isDirectory: true,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "refs",
-    isFile: false,
-    isDirectory: true,
-    isSymlink: false
-  },
-  ... 8 more items
+  ... 10 more items
 ]
-manualFlat.length == result.length is: 116 == 108 is: false
+manualFlat.length == result.length is: 118 == 110 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,

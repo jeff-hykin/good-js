@@ -1,7 +1,7 @@
 #!/usr/bin/env -S deno run --allow-all
 import { parseCsv, createCsv } from "../source/csv.js"
 import { asyncIteratorToList } from "../source/iterable.js"
-import { FileSystem, glob } from "https://deno.land/x/quickr@0.6.29/main/file_system.js"
+import { FileSystem, glob } from "https://deno.land/x/quickr@0.7.5/main/file_system.js"
 
 var {comments, columnNames, rows} = await parseCsv({
     input: FileSystem.readLinesIteratively("../README.md"),

@@ -1,6 +1,6 @@
-new Map(
+new Map([
     [1, 2],
     [Symbol("3"), 99],
     [Symbol("5"), [99]],
-)
+])
 b.get([1,2,3]) is: [ 99 ]
