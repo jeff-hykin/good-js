@@ -12,7 +12,7 @@
  * };
  *
  * // Wrap the greet function to log the greeting before returning it
- * monkeyPatchObject(obj, 'greet', (originalGreet) => {
+ * monkeyPatchMethod(obj, 'greet', (originalGreet) => {
  *     return function(...args) {
  *         console.log(`Calling greet with args: ${args}`);
  *         const result = originalGreet(...args);
@@ -35,7 +35,7 @@
  * @throws {Error} If the specified method does not exist in the object or its prototype chain.
  * 
  */ 
-export function monkeyPatchObject(object, attrName, createNewFunction) {
+export function monkeyPatchMethod(object, attrName, createNewFunction) {
     let prevObj = null
     while (!Object.getOwnPropertyNames(object).includes(attrName)) {
         prevObj = object
