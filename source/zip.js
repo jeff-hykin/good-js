@@ -111,7 +111,7 @@ export async function zipCreate(files) {
     }
 
     await zipWriter.close()
-    return zipFileWriter.getData().then((data) => new Uint8Array(data.arrayBuffer()))
+    return zipFileWriter.getData().then((data) => data.arrayBuffer()).then(array=>new Uint8Array(array))
 }
 
 /**
