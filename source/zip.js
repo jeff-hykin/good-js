@@ -39,7 +39,7 @@ function toReader(data) {
  * })
  * ```
  * @param {Object} files - An object where keys are file paths and values are either strings, Uint8Arrays, or empty arrays for directories.
- * @returns {Promise<ArrayBuffer>} A promise that resolves to the zip blob as an ArrayBuffer.
+ * @returns {Promise<Uint8Array>} A promise that resolves to the zip blob as an ArrayBuffer.
  */
 export async function zipCreate(files) {
     const zipFileWriter = new BlobWriter()
