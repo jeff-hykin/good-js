@@ -1,4 +1,5 @@
 import { BlobReader, BlobWriter, TextReader, TextWriter, ZipReader, ZipWriter } from "https://esm.sh/jsr/@zip-js/zip-js@2.7.57"
+import { setSubtract } from './flattened/set_subtract.js'
 
 function isValidDataType(data) {
     if (typeof data === "string") {
@@ -44,13 +45,42 @@ function toReader(data) {
 export async function zipCreate(files) {
     const zipFileWriter = new BlobWriter()
     const zipWriter = new ZipWriter(zipFileWriter)
-
-    for (const [filePath, content] of Object.entries(files)) {
+    
+    
+    // directories are a problem if they're listed but not empty
+    const wasDir = {}
+    for (const [path, content] of Object.entries(files)) {
+        if (Array.isArray(content) && content.length === 0) {
+            wasDir[path] = true
+        } else if (content instanceof Object && content.directory) {
+            wasDir[path] = true
+        }
+    }
+    const dirPaths = new Set(Object.keys(wasDir))
+    const allPaths = new Set(Object.keys(files))
+    const nonDirPaths =  setSubtract({value: dirPaths, from: allPaths})
+    const skip = new Set([])
+    if (dirPaths.size > 0) {
+        for (const eachNonDirPath of nonDirPaths) {
+            for (const eachDirPath of dirPaths) {
+                if (eachNonDirPath.startsWith(eachDirPath)) {
+                    skip.add(eachDirPath)
+                    dirPaths.delete(eachDirPath)
+                }
+            }
+        }
+    }
+    
+    for (const [path, content] of Object.entries(files)) {
+        if (skip.has(path)) {
+            continue
+        }
+        
         if (Array.isArray(content) && content.length === 0) {
             // Handle directory
-            await zipWriter.add(filePath, null, { directory: true })
+            await zipWriter.add(path, null, { directory: true })
         } else if (isValidDataType(content)) {
-            await zipWriter.add(filePath, toReader(content))
+            await zipWriter.add(path, toReader(content))
         } else if (content instanceof Object) {
             const {
                 content: contentObj,
@@ -81,7 +111,7 @@ export async function zipCreate(files) {
                 versionMadeBy,
                 zipCrypto,
             } = content
-            await zipWriter.add(filePath, directory? null : toReader(contentObj), {
+            await zipWriter.add(path, directory? null : toReader(contentObj), {
                 directory,
                 executable, 
                 filename,
