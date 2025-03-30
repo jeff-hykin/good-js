@@ -66,8 +66,8 @@ const allGlobalKeysAtInit = Object.freeze(allKeys(globalThis))
  *
  */
 export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simplified, indent="    ", globalValues}={})=>{
-    if (Number.isFinite(indent)) {
-        indent = " ".repeat(indent)
+    if (Number.isFinite(indent) && indent >= 0) {
+        indent = " ".repeat(Math.floor(indent))
     }
     const options = {alreadySeen, debug, simplified, indent}
     const recursionWrapper = (item, options)=>{
@@ -576,7 +576,11 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
         if (debug) {
             console.debug(`[toRepresentation] error is:`,error)
         }
-        return String(item)
+        try {
+            return String(item)
+        } catch (error) {
+            return typeof item
+        }
     }
 }
 // toRepresentation(new Map([["a", "b"]]))
