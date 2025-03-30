@@ -572,6 +572,8 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
     try {
         const output = recursionWrapper(item, options)
         return output
+    // this is a sanity check to make sure toRepresentation basically never throws
+    // it should basically never hit the error case
     } catch (error) {
         if (debug) {
             console.debug(`[toRepresentation] error is:`,error)
@@ -579,6 +581,7 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
         try {
             return String(item)
         } catch (error) {
+            // I don't think this ever happens, but for sanity/proviability
             return typeof item
         }
     }
