@@ -21,7 +21,7 @@
  * console.log('false, was:', isValidHttpURL("www.url-with-querystring.com/?url=has-querystring"),"www.url-with-querystring.com/?url=has-querystring")
  * ```
  */
-export function isValidHttpURL(string) {
+export function isValidHttpUrl(string) {
     // based on: https://github.com/validatorjs/validator.js
     // NOTE: 
     if (!string.startsWith("http")) {
