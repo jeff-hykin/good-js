@@ -37,6 +37,31 @@ function toReader(data) {
  *     'folder1/hello': { content: '#!/usr/bin/env sh\necho hi', executable: true },
  *     'folder2/data.bin': new Uint8Array([1, 2, 3, 4, 5]),
  *     'folder3/': [] // Represents a directory (must be empty)
+ *     'folder3/thing.txt': {
+ *           content: 'something',
+ *           // all fields are based on https://jsr.io/@zip-js/zip-js/doc/~/EntryMetaData
+ *           // executable, // boolean
+ *           // lastModDate, // Date object
+ *           // rawLastModDate, // Date object
+ *           // lastAccessDate, // Date object
+ *           // creationDate, // Date object
+ *           // directory, // boolean
+ *           // comment, // string
+ *           // rawComment, // bytes (Uint8Array)
+ *           // msDosCompatible, // boolean
+ *           // zip64, // boolean
+ *           // encrypted, // boolean
+ *           // zipCrypto, // boolean
+ *           // rawLastAccessDate, // number or bigint (presumably unix epoch in milliseconds)
+ *           // rawCreationDate, // number or bigint (presumably unix epoch in milliseconds)
+ *           // internalFileAttributes, // number
+ *           // externalFileAttributes, // number
+ *           // diskNumberStart, // number
+ *           // version, // number
+ *           // versionMadeBy, // number
+ *           // filename, // string
+ *           // rawFilename, // bytes (Uint8Array)
+ *     },
  * })
  * ```
  * @param {Object} files - An object where keys are file paths and values are either strings, Uint8Arrays, or empty arrays for directories.
