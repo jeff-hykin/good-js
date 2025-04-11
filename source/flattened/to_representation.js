@@ -471,8 +471,9 @@ export const toRepresentation = (item, {alreadySeen=new Map(), debug=false, simp
     }
     const customObjectRepr = (item, options)=>{
         const prototype = Object.getPrototypeOf(item)
+        const isModuleObject = prototype == null
         // pure object
-        if (prototype == ObjectPrototype) {
+        if (isModuleObject || prototype == ObjectPrototype) {
             return pureObjectRepr(item)
         }
         let className = prototype.constructor?.name

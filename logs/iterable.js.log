@@ -8,6 +8,12 @@ listOfSubpaths is: [
       isSymlink: false
     },
     [Object: null prototype] {
+      name: "zipjs.bundle.ignore",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "all.js",
       isFile: true,
       isDirectory: false,
@@ -116,7 +122,19 @@ listOfSubpaths is: [
       isSymlink: false
     },
     [Object: null prototype] {
+      name: "fetch_tools.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "date.js",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
+      name: "zip.js",
       isFile: true,
       isDirectory: false,
       isSymlink: false
@@ -557,6 +575,12 @@ listOfSubpaths is: [
       isSymlink: true
     },
     [Object: null prototype] {
+      name: "generate_snippets.ps1",
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false
+    },
+    [Object: null prototype] {
       name: "flat_tests",
       isFile: false,
       isDirectory: false,
@@ -692,6 +716,12 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "zipjs.bundle.ignore",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "all.js",
     isFile: true,
     isDirectory: false,
@@ -800,7 +830,19 @@ result is: [
     isSymlink: false
   },
   [Object: null prototype] {
+    name: "fetch_tools.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "date.js",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
+    name: "zip.js",
     isFile: true,
     isDirectory: false,
     isSymlink: false
@@ -1226,6 +1268,12 @@ result is: [
     isSymlink: true
   },
   [Object: null prototype] {
+    name: "generate_snippets.ps1",
+    isFile: true,
+    isDirectory: false,
+    isSymlink: false
+  },
+  [Object: null prototype] {
     name: "flat_tests",
     isFile: false,
     isDirectory: false,
@@ -1261,33 +1309,9 @@ result is: [
     isDirectory: true,
     isSymlink: false
   },
-  [Object: null prototype] {
-    name: "HEAD",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "info",
-    isFile: false,
-    isDirectory: true,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "logs",
-    isFile: false,
-    isDirectory: true,
-    isSymlink: false
-  },
-  [Object: null prototype] {
-    name: "description",
-    isFile: true,
-    isDirectory: false,
-    isSymlink: false
-  },
-  ... 10 more items
+  ... 14 more items
 ]
-manualFlat.length == result.length is: 118 == 110 is: false
+manualFlat.length == result.length is: 122 == 114 is: false
 eachResult is: [Object: null prototype] {
   name: "events.js",
   isFile: true,

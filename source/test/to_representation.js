@@ -1,5 +1,6 @@
+#!/usr/bin/env -S deno run --allow-all
 import { toRepresentation } from "../flattened/to_representation.js"
-
+let exampleOfModuleObject = await import("../date.js")
 var conservativeGlobals = [
     "structuredClone",
     "parseFloat",
@@ -373,3 +374,4 @@ for (const eachObj of [...prototypeKeyMap.keys()].slice(0,50)) {
 
 console.log(toRepresentation(propertyDescriptorsMap, { indent: "    " }))
 
+console.debug(`toRepresentation(exampleOfModuleObject) is:`,toRepresentation(exampleOfModuleObject))
