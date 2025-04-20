@@ -11,7 +11,7 @@ const $$ = (...args)=>$(...args).noThrow()
 // await $$`false`
 // await $$`false`.text("stderr")
 
-const version = (await $$`git tag --sort=-committerdate`.text("stdout")).split("\n").slice(-1)[0]
+const version = (await $$`git tag --sort=-committerdate`.text("stdout")).split("\n")[0]
 
 function alignStrings(strings, pattern) {
     if (pattern instanceof Array) {
