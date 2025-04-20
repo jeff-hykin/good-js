@@ -22,5 +22,8 @@ export function pathPiecesWindows(path) {
         dirname = Path.dirname(dirname)
     }
     folderList.reverse()
+    if (folderList[0]=="") {
+        folderList[0] = "C:\\"
+    }
     return [ folderList, result.name, result.ext ]
 }
