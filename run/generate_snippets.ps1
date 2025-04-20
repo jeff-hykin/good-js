@@ -6,16 +6,60 @@ import { FileSystem } from "https://deno.land/x/quickr@0.6.54/main/file_system.j
 import { Console, bold, lightRed, yellow, gray } from "https://deno.land/x/quickr@0.6.54/main/console.js"
 import { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, throwIfFails, returnAsString, zipInto, mergeInto } from "https://deno.land/x/quickr@0.6.54/main/run.js"
 import { toCamelCase } from 'https://esm.sh/gh/jeff-hykin/good-js@5542f18/source/flattened/to_camel_case.js'
+import $ from "https://esm.sh/jsr/@david/dax@0.42.0/mod.ts"
+const $$ = (...args)=>$(...args).noThrow()
+// await $$`false`
+// await $$`false`.text("stderr")
 
-const version = "1.14.6.0"
+const version = (await $$`git tag --sort=-committerdate`.text("stdout")).split("\n").slice(-1)[0]
+
+function alignStrings(strings, pattern) {
+    if (pattern instanceof Array) {
+        for (let each of pattern) {
+            strings = alignStrings(strings, each)
+        }
+        return strings
+    }
+
+    // Find all pattern matches and get their positions
+    const positions = strings.map(str => {
+        // console.debug(`pattern is:`,pattern)
+        // console.debug(`str is:`,str)
+        const match = str.match(pattern)
+        return match ? match.index : -1
+    })
+
+    // Find the maximum position (to know how much padding needed)
+    const maxPosition = Math.max(...positions)
+
+    // If no matches found or invalid position, return original strings
+    if (maxPosition === -1) {
+        return strings
+    }
+
+    // Align each string by adding spaces
+    return strings.map((str, index) => {
+        if (positions[index] === -1) return str
+        
+        const spacesToAdd = maxPosition - positions[index]
+        const beforeMatch = str.slice(0, positions[index])
+        const afterMatch = str.slice(positions[index])
+        
+        return beforeMatch + " ".repeat(spacesToAdd) + afterMatch
+    })
+}
+
 
 const folder = `${FileSystem.thisFolder}/../source/flattened/`
 
+let strings = []
 for (const each of await FileSystem.listItemsIn(folder)) {
     if (each.isFile) {
         if (!each.name.includes("__")&&!each.name.startsWith("_")) {
-            console.log(`"import_${toCamelCase(each.name)}":                   { "prefix": "import_${toCamelCase(each.name)}"                  , "body": [ "import { ${toCamelCase(each.name)} } from 'https://esm.sh/gh/jeff-hykin/good-js@${version}/source/flattened/${each.basename}'"                                        , ] },`)
+            strings.push(`        "import_${toCamelCase(each.name)}":                   { "prefix": "import_${toCamelCase(each.name)}"                  , "body": [ "import { ${toCamelCase(each.name)} } from 'https://esm.sh/gh/jeff-hykin/good-js@${version}/source/flattened/${each.basename}'"                                        , ] },`)
         }
     }
 }
+
+console.log(alignStrings(strings, [/{ "prefix":/, /, "body": \[/, /, \] \},/]).join("\n"))
 // (this comment is part of deno-guillotine, dont remove) #>
