@@ -282,3 +282,39 @@ export const hashers = {
         return hashHex
     },
 }
+
+export const simpleSymmetric = {
+    async decrypt({message, password}) {
+        const key = await _deriveKey(password, salt)
+        const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, message)
+
+        return new Uint8Array(decrypted)
+    },
+    async encrypt({message, password}) {
+        const key = await _deriveKey(password, salt)
+        const encrypted = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, message)
+        return new Uint8Array(encrypted)
+    },
+}
+
+// defaults
+const salt = new Uint8Array([41, 166, 202, 34, 87, 235, 125, 136, 255, 90, 19, 151, 33, 120, 100, 99])
+const iv = new Uint8Array([86, 96, 239, 192, 166, 40, 115, 135, 79, 242, 172, 58]) // AES-GCM IV
+
+// Derive a crypto key from a password using PBKDF2
+async function _deriveKey(password, salt) {
+    const passwordKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"])
+
+    return crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: salt,
+            iterations: 100000,
+            hash: "SHA-256",
+        },
+        passwordKey,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+    )
+}
