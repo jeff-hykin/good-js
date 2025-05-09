@@ -391,7 +391,7 @@ export function createCsv({ columnNames, rows, separator=",", eol="\n", commentS
                     cellIndex += 1
                     columnSizes[cellIndex] = Math.max(
                         (columnSizes[cellIndex] || 0),
-                        eachCell.length,
+                        `${eachCell}`.length,
                     )
                 }
             }
@@ -402,7 +402,7 @@ export function createCsv({ columnNames, rows, separator=",", eol="\n", commentS
             rowIndex += 1
             if (eachRow instanceof Array) {
                 // add padding to create alignment
-                simplifiedRows[rowIndex] = eachRow.map((eachCell, cellIndex)=>eachCell.padEnd(columnSizes[cellIndex]))
+                simplifiedRows[rowIndex] = eachRow.map((eachCell, cellIndex)=>`${eachCell}`.padEnd(columnSizes[cellIndex]))
             }
         }
     }
