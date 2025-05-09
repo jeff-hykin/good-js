@@ -29,10 +29,9 @@ export const allKeys = function(obj) {
     if (obj == null) {
         return []
     }
-    // normal primitives still have listOfKeys, just skip the first iteration
-    if (!(obj instanceof Object)) {
-        obj = Object.getPrototypeOf(obj)
-    }
+    
+    // handle edgecase of numbers, symbols, etc convert them into proper objects
+    obj = Object(obj)
     while (obj) {
         listOfKeys.push(Reflect.ownKeys(obj))
         obj = Object.getPrototypeOf(obj)
