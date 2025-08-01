@@ -20,7 +20,7 @@ export class ArgumentError extends Error {
 }
 
 export const initialValue = (value)=>new Default(value)
-const coerseValue = (value, transformer)=>{
+const coerceValue = (value, transformer)=>{
     if (value instanceof Array) {
         try {
             return transformer(value)
@@ -73,7 +73,7 @@ const coerseValue = (value, transformer)=>{
  *     ],
  *     nameTransformer: toCamelCase, // --explicit-arg-1 -> explicitArg1
  *     namedArgsStopper: "--",
- *     allowNameRepeats: true,
+ *     namedRepeats: "useLast", // or "createList" or null (error on repeated names)
  *     valueTransformer: JSON.parse,
  *     isolateArgsAfterStopper: false,
  *     argsByNameSatisfiesNumberedArg: true,
@@ -87,7 +87,7 @@ export function parseArgs({
     rawArgs,
     fields,
     namedArgsStopper="--",
-    allowNameRepeats=true,
+    namedRepeats="useLast",
     nameTransformer=toCamelCase,
     valueTransformer=JSON.parse,
     isolateArgsAfterStopper=false,
@@ -198,8 +198,14 @@ export function parseArgs({
                         // and just immediately process the next numbered arg
                         // (providing a named arg for a numbered value removes it from the numbered-arg list)
                         continue parse_next_numbered_arg
-                    } else if (allowNameRepeats) {
-                        entry.value = [ entry.value, each ]
+                    } else if (namedRepeats == "useLast") {
+                        entry.value = each
+                    } else if (namedRepeats == "createList") {
+                        if (entry.value instanceof Array) {
+                            entry.value.push(each)
+                        } else {
+                            entry.value = [ entry.value, each ]
+                        }
                     } else {
                         const names = entry.keys.filter(each=>typeof each == "string")
                         const longestName = names.reduce((a,b)=>a.length>b.length?a:b)
@@ -244,8 +250,10 @@ export function parseArgs({
                 entry.wasNamed = true
                 // provided two values for one entry
                 if (entry.value !== unset) {
-                    if (allowNameRepeats) {
-                        entry.value = [ entry.value, eachArg ]
+                    if (namedRepeats == "useLast") {
+                        entry.value = eachArg
+                    } else if (namedRepeats == "createList") {
+                        entry.value = eachArg
                     } else {
                         throw Error(`When calling parseArgs(), two values (ex: "--min 5 --minimum 5" or "--m 5 --m 5") were given to the same field. The second occurance was ${name}, and the field was ${JSON.stringify(entry.keys)} `)
                     }
@@ -278,8 +286,8 @@ export function parseArgs({
             const entry = keyToField.get(eachArg)
             // provided two values for one entry
             if (entry.value != unset) {
-                if (!allowNameRepeats) {
-                    throw Error(`When calling parseArgs(), two values (ex: "--min 5 --minimum 5" or "--m 5 --m 5") were given to the same field. The second occurance was ${eachArg}, and the field was ${JSON.stringify(entry.keys)} `)
+                if (!namedRepeats) {
+                    throw Error(`When calling parseArgs(), two values (ex: "--flag1 --flag1") were given to the same field. The second one was ${eachArg}, and the field was ${JSON.stringify(entry.keys)} `)
                 }
             } else {
                 entry.value = true
@@ -305,7 +313,7 @@ export function parseArgs({
                     value: true,
                 })
             } else {
-                // NOTE: its a design choice allowNameRepeats doesn't apply to implicit flags
+                // NOTE: its a design choice namedRepeats doesn't apply to implicit flags
                 //       hopefully its a good choice
                 keyToField.get(eachArg).realIndices.push(index)
             }
@@ -357,7 +365,7 @@ export function parseArgs({
                     }
                 }
             } else if (valueTransformer && !eachEntry.isFlag) {
-                eachEntry.value = coerseValue(eachEntry.value, valueTransformer)
+                eachEntry.value = coerceValue(eachEntry.value, valueTransformer)
             }
         }
         if (eachEntry.isFlag) {
@@ -410,7 +418,7 @@ export function parseArgs({
         }
     }
     if (valueTransformer) {
-        directArgList = directArgList.map(each=>coerseValue(each,valueTransformer))
+        directArgList = directArgList.map(each=>coerceValue(each,valueTransformer))
     }
     
     return {
