@@ -2,7 +2,6 @@ import { isAsyncIterable } from "./is_async_iterable.js"
 import { iter } from "./iter.js"
 import { deferredPromise } from "./deferred_promise.js"
 import { makeIterable } from "./make_iterable.js"
-import { afterIterable as after } from "./after_iterable.js"
 
 /**
  * add "finally", "then", and "catch" to iterables
@@ -11,7 +10,7 @@ import { afterIterable as after } from "./after_iterable.js"
  *     make sure chaining behavior matches promise chaining behavior
  * @example
  * ```js
- *     let selfCleaningIterable = after(
+ *     let selfCleaningIterable = afterIterable(
  *             stream.bytes
  *         ).then(
  *             (size)=>console.log(`Performed ${size} iterations`)
@@ -171,15 +170,15 @@ export function afterIterable(iterable, options={ _prevPromise:null }) {
     Object.assign(output, {
         then(callback) {
             hooks.then = callback
-            return after(output, { _prevPromise: output })
+            return afterIterable(output, { _prevPromise: output })
         },
         catch(callback) {
             hooks.catch = callback
-            return after(output, { _prevPromise: output })
+            return afterIterable(output, { _prevPromise: output })
         },
         finally(callback) {
             hooks.finally = callback
-            return after(output, { _prevPromise: output })
+            return afterIterable(output, { _prevPromise: output })
         },
     })
     // carry over length if it exists
