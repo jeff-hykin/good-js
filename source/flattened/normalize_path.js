@@ -1,18 +1,35 @@
 
 import { normalizePathPosix } from "./normalize_path_posix.js"
 import { normalizePathWindows } from "./normalize_path_windows.js"
+import { isAbsolute as isAbsoluteWindows } from "../support/windows.js"
 
-export function normalizePath(path, { fsType="posix", keepTrailingSlash=false, }={}) {
+export function normalizePath(path, { fsType="posix", keepTrailingSlash=false, forcePrefix=false }={}) {
+    let output
     if (fsType == "posix") {
-        const output = normalizePathPosix(path)
+        output = normalizePathPosix(path)
+        // e.g. not: absolute path or "./" "../" "." ".."
+        if (forcePrefix&&!output.match(/^(\/|\.\.?(?:\/|$))/)) {
+            output = `./${output}`
+        }
         if (keepTrailingSlash) {
             return output
         }
         // remove trailing slash
-        return output[output.length-1] == "/" ? output.slice(0, -1) : output
+        output = output[output.length-1] == "/" ? output.slice(0, -1) : output
     } else if (fsType == "windows") {
-        return normalizePathWindows(path)
+        output = normalizePathWindows(path)
+        // e.g. not: absolute path or stuff like "./" "../" "..\" "." ".."
+        if (forcePrefix&&!isAbsoluteWindows(path)&&!output.match(/^\.\.?(?:\/|\\|$)/)) {
+            output = `./${output}`
+        }
+        if (keepTrailingSlash) {
+            return output
+        }
+        // remove trailing slash
+        const lastChar = output[output.length-1]
+        output = lastChar == "/" || lastChar == "\\" ? output.slice(0, -1) : output
     } else {
         throw Error(`Unsupported fsType: ${fsType}, supported values are "posix" and "windows"`)
     }
+    return output
 }
