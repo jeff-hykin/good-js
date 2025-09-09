@@ -1,7 +1,9 @@
 import { _base64NumericCodes as base64codes } from "./_base64_numeric_codes.js"
 import { base64Letters as base64abc } from "./base64_letters.js"
 
-export function convertUint8ArrayToBase64String(bytes) {
+const builtin = globalThis.Uint8Array?.prototype?.toBase64 && (array)=>array.toBase64()
+
+export const convertUint8ArrayToBase64String = builtin || function(bytes) {
     let result = "",
         i,
         l = bytes.length
