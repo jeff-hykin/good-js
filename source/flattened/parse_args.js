@@ -322,6 +322,19 @@ export function parseArgs({
             numberedArgBuffer.push([index, eachArg])
         }
     }
+    // if the last arg matched implicitNamePattern but had no value following it,
+    // it can't actually be a key-value pair, so treat it as an implicit flag instead
+    if (argName != null) {
+        nameWasImplicit.push(argName)
+        keyToField.set(argName, {
+            isFlag: false,
+            kind: [],
+            keys: [ argName ],
+            realIndices: [index],
+            value: null,
+        })
+        argName = null
+    }
     // must handle numbered after named field inputs since name can substitute numbers
     for (const [index, each] of numberedArgBuffer) {
         handleNumberedArg(index, each)

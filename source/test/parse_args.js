@@ -1,6 +1,9 @@
+#!/usr/bin/env -S deno run --allow-all
+
 import { parseArgs, flag, required, initialValue } from "../flattened/parse_args.js"
 import { toCamelCase } from "../flattened/to_camel_case.js"
 import { didYouMean } from "../string.js"
+import Yaml from 'https://esm.sh/yaml@2.4.3'
 
 var output = parseArgs({
     rawArgs: [ "numberedArg1", "numberedArg2", "--debug", "numberedArg3", "--imImplicit", "howdy" ],
@@ -30,6 +33,33 @@ const validNames = Object.keys(output.explicitArgsByName).filter(each=>each.star
 const invalidNames = Object.keys(output.implicitArgsByName).filter(each=>each.startsWith(`-`))
 console.log(didYouMean({ givenWords: invalidNames, possibleWords: validNames,}))
 
+const cliParsedArgs = parseArgs({
+    rawArgs: [ "--imImplicit2" ],
+    fields: [
+        [["--resume"], flag],
+        [["--claude"], flag],
+        [["--only"], initialValue([])],
+        [["--tests"], initialValue([])],
+        [["--print-cli-commands"], flag],
+    ],
+    valueTransformer: Yaml.parse,
+    nameTransformer: toCamelCase,
+    nameRepeats: "useLast",
+    namedArgsStopper: "--",
+})
+
+console.debug(`cliParsedArgs is:`,cliParsedArgs)
+
+try {
+    didYouMean({
+        givenWords: Object.keys(cliParsedArgs.implicitArgsByName).filter(each => each.startsWith(`-`)),
+        possibleWords: Object.keys(cliParsedArgs.explicitArgsByName).filter(each => each.startsWith(`-`)),
+        autoThrow: true,
+    })
+} catch (error) {
+    console.debug(`EXPECTED ERROR:`, error.message)
+}
+
 {
     try {
         const output = parseArgs({
@@ -45,6 +75,7 @@ console.log(didYouMean({ givenWords: invalidNames, possibleWords: validNames,}))
         console.debug(`output.numberedArgs is:`,output.numberedArgs)
     } catch (error) {
         console.debug(`THERE SHOULD BE AN ERROR:`,error)
+        console.debug(`END OF "THERE SHOULD BE AN ERROR"`)
     }
     
 }
