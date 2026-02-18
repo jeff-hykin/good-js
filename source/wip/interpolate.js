@@ -1,3 +1,14 @@
+/**
+ * @example
+ * ```js
+ * var a = splineInterpolation([[1,1],[2,3]])
+ * console.log(a(0)) // -1
+ * console.log(a(1)) // 1
+ * console.log(a(2)) // 3
+ * console.log(a(3)) // 5
+ * console.log(a(4)) // 7
+ * ```
+ */
 export function splineInterpolation(points) {
     if (points.length < 2) {
         throw new Error("At least two points are required")

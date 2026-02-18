@@ -1,5 +1,5 @@
 {
-  "version": "4",
+  "version": "5",
   "redirects": {
     "https://deno.land/x/ensure/mod.ts": "https://deno.land/x/ensure@v1.2.0/mod.ts",
     "https://deno.land/x/good/flattened/deferred_promise.js": "https://deno.land/x/good@1.14.3.3/flattened/deferred_promise.js",
@@ -502,6 +502,32 @@
     "https://esm.sh/jsr/@std/path@1.0.8/to-file-url?target=denonext": "aa629f594c85936390d77e162a67bb971fd18cdcc96d2837c56dcbd219a44151",
     "https://esm.sh/jsr/@std/path@1.0.8?target=denonext": "dbc47494ea7bffb1165a0247cbc829fad1674cfe2c43dd2149de91b03b352cce",
     "https://esm.sh/jsr/@std/streams@0.221.0/reader-from-stream-reader?target=denonext": "110432324cce27e26fe4d272922a59570becbeca34774fc249a16372fb7ebb9f",
-    "https://esm.sh/jsr/@std/streams@0.221.0/writer-from-stream-writer?target=denonext": "addae337e01613a9fc95727329641c5545ea79bddac2ce574aaaaabaf25ab45b"
+    "https://esm.sh/jsr/@std/streams@0.221.0/writer-from-stream-writer?target=denonext": "addae337e01613a9fc95727329641c5545ea79bddac2ce574aaaaabaf25ab45b",
+    "https://esm.sh/yaml@2.4.3": "6fcfe712b2baa74a253e22e8b3993a725ec621f043a437cdfa63d0a9e696f710",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/doc/anchors.mjs": "19272b3c0439e8d8ce988807d913028eb9907187b0840106a3e697080c33492c",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/doc/applyReviver.mjs": "834011fe9503f59532b21f7bbfed1fb2b5bcf1d177d84728654c7c629ca7d898",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/doc/createNode.mjs": "6f806bea94ddde2982f0a907a36c7bf5c9f236c9e2560e44eeec7e8b019e15f7",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/log.mjs": "88ff3bc075b45ff8a2ac3c49d67804bdbb26d548f30e192791cc55ffbb65406a",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/Alias.mjs": "07e9af4b0092b9db16a1fc630df5da94e9474fe5c7fb678810bf7eb8fd9876c1",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/Collection.mjs": "d70f5f1997e87261f5c8f0b5f63bc07c5c5d5be2023c5de546522f67ee5543c5",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/Node.mjs": "70696f3ab950a7d36073cffb312424191e6e8afdfd3f334ec92110e716ea7bf7",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/Pair.mjs": "885d44d6c7d360de5f13fa847204b0e7dbe1f6c320f5972f56d68d67f2d0cd45",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/Scalar.mjs": "f9db1f978ca8337f36e4e7375b58d8741b45100a8705f4a98ed439efaacf89c9",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/YAMLMap.mjs": "3555cbfc5e1ec970b0b6a47b40c4a59137300207d76aaebee09c3216545ec4d2",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/YAMLSeq.mjs": "8a99ef36e84d119db181f8ca8fe8f95916447cb02c82f0bccb54ae3cdf5bcca7",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/addPairToJSMap.mjs": "0527f5754229ad58c97685c601da4258c59a33e3ff344d2141db94cf009352b4",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/identity.mjs": "f1089dcbac2d5cb196991dc1d532b9576bd24c5db1aa4012ab75f6665abcb9d5",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/nodes/toJS.mjs": "0ff821aed1087a23d4732fae43f4f2827b24d050ee7209deafe08a312d0fdd59",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/schema/common/map.mjs": "6855b7cd5fd5e3d8b8fc98e07250cc1ff78f2606fcb7bfcd7ce010ce876cf7d6",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/schema/common/seq.mjs": "7aaf9f978adaa27c5d8f47fe7906839ff9f0039f0f8b973a103a67665cba073f",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/schema/common/string.mjs": "e969f1e4cd675c95988a09048a6edb1327c0becd40b40ff7cdb8dafae2e645f5",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/foldFlowLines.mjs": "a22636042255e1d33d313fa5f57fedaaa25858a21df1650ebe3772871ab721e9",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/stringify.mjs": "106e492aaee1b443ca51a834be5eefda483d64bcde22a3710ba83a0dc6ae0304",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/stringifyCollection.mjs": "c83a8561152743d6a273a8e017d3fde73d41913613c72939e10171585aa0a537",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/stringifyComment.mjs": "23fa5fdd6686826f7243235d1666559f08f7bab3fca3f88edf4be68ab18df3d1",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/stringifyNumber.mjs": "dd27e1a3807db13877df48a2ab05627b08e7c76fc391c72bd4f9dd079a9255ce",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/stringify/stringifyString.mjs": "c9ba5f5ede40defd66922415416f6983fc13040faa02b62317e2834c06ca44af",
+    "https://esm.sh/yaml@2.4.3/denonext/browser/dist/visit.mjs": "50a584c721d0527e9482563201f53ee862408dd2222cb14663d3b52e1b318cab",
+    "https://esm.sh/yaml@2.4.3/denonext/yaml.mjs": "051d5701f0f4356158a629d6c53608843af011dac1e7f14f4d7adf61da64b4f9"
   }
 }

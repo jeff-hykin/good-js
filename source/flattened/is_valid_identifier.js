@@ -13,6 +13,7 @@ const regexES3ReservedWordExclusive = /^(?:int|byte|char|goto|long|final|float|s
 const regexImmutableProps = /^(?:NaN|Infinity|undefined)$/
 // Zero-width characters that are allowed in IdentifierPart as per ES5
 const regexZeroWidth = /\u200C|\u200D/
+
 export function isValidIdentifier(value) {
     if (typeof value != 'string') {
         return false
